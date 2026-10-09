@@ -1,5 +1,7 @@
 import { Course, Project } from '../../types';
 import { createStructuredLesson } from './courseUtils';
+import { showcaseProjects } from '../projects-showcase';
+import { ladderProjects } from '../projects-ladder';
 import {
   jsIntroContent,
   jsVariablesContent,
@@ -404,7 +406,7 @@ export const javascriptCourse: Course = {
     { id: 'js-m7', title: 'Arrays and Objects', description: 'Array methods (map, filter, reduce), object keys, values, and nesting.', order: 7, lessons: module7Lessons },
     { id: 'js-m8', title: 'DOM', description: 'Selecting elements, changing HTML/CSS, creating, appending, and removing nodes.', order: 8, lessons: module8Lessons },
     { id: 'js-m9', title: 'Events and Forms', description: 'Event listeners, click, input, submit, mouse, keyboard events, and validation.', order: 9, lessons: module9Lessons },
-    { id: 'js-m10', title: 'JavaScript Projects', description: 'Build 11 interactive real-world projects to become job-ready.', order: 10, lessons: [] },
+    { id: 'js-m10', title: 'JavaScript Projects', description: 'Build 24 interactive real-world projects to become job-ready.', order: 10, lessons: [] },
   ],
-  projects: javascriptProjects
+  projects: [...javascriptProjects, ...showcaseProjects, ...ladderProjects.filter(p => p.category === 'javascript' || p.category === 'fullstack')]
 };

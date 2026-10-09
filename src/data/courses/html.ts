@@ -1,4 +1,5 @@
 import { Course, CourseModule, Project } from '../../types';
+import { ladderProjects } from '../projects-ladder';
 import { createStructuredLesson } from './courseUtils';
 import {
   htmlLesson1Content,
@@ -450,5 +451,5 @@ export const htmlCourse: Course = {
     { id: 'html-m9', title: 'Advanced HTML', description: 'Explore iframes, character entities, metadata, favicons, accessibility (a11y), and SEO.', order: 9, lessons: module9Lessons },
     { id: 'html-m10', title: 'HTML Projects', description: 'Build real-world projects to solidify your semantic markup skills.', order: 10, lessons: [] },
   ],
-  projects: htmlProjects
+  projects: [...htmlProjects, ...ladderProjects.filter(p => p.category === 'html')]
 };
