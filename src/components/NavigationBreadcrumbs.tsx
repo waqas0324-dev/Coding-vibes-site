@@ -63,8 +63,15 @@ export const NavigationBreadcrumbs: React.FC = () => {
       crumbs.push({ label: 'Search Results', onClick: () => {} });
     } else if (currentRoute === 'profile' || currentRoute === 'dashboard') {
       crumbs.push({ label: 'Student Dashboard & Badges', onClick: () => {} });
+    } else if (currentRoute === 'roadmaps') {
+      crumbs.push({ label: 'Learning Roadmaps', onClick: () => navigateTo('roadmaps') });
+    } else if (currentRoute === 'roadmap-detail') {
+      crumbs.push({ label: 'Learning Roadmaps', onClick: () => navigateTo('roadmaps') });
+      crumbs.push({ label: 'Roadmap Details', onClick: () => {} });
     } else if (currentRoute === 'settings') {
       crumbs.push({ label: 'Settings', onClick: () => {} });
+    } else if (currentRoute === 'setup-guide') {
+      crumbs.push({ label: 'VS Code Setup Guide', onClick: () => {} });
     }
 
     return crumbs;

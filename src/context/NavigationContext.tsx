@@ -16,7 +16,10 @@ export type AppRoute =
   | 'settings'
   | 'tag-reference'
   | 'tryit'
-  | 'studio';
+  | 'studio'
+  | 'setup-guide'
+  | 'roadmaps'
+  | 'roadmap-detail';
 
 interface NavigationParams {
   courseSlug?: string;
@@ -24,6 +27,7 @@ interface NavigationParams {
   lessonSlug?: string;
   tagSlug?: string;
   projectId?: string;
+  roadmapId?: string;
   searchQuery?: string;
   categoryFilter?: string;
   editorCode?: string;
@@ -223,6 +227,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         }
       } else if (section === 'studio') {
         setCurrentRoute('studio');
+      } else if (section === 'setup-guide') {
+        setCurrentRoute('setup-guide');
       } else {
         setCurrentRoute('home');
       }

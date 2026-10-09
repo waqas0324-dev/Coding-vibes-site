@@ -33,6 +33,22 @@ export const Footer: React.FC = () => {
           </button>
           <span className="hidden sm:inline text-gray-700">•</span>
           <button
+            onClick={() => navigateTo('setup-guide')}
+            className="inline-flex items-center space-x-1 text-gray-400 hover:text-white transition cursor-pointer"
+            title="VS Code Setup Guide — install, configure, first project"
+          >
+            <span>Setup Guide</span>
+          </button>
+          <span className="hidden sm:inline text-gray-700">•</span>
+          <button
+            onClick={() => navigateTo('roadmaps')}
+            className="inline-flex items-center space-x-1 text-gray-400 hover:text-white transition cursor-pointer"
+            title="Learning Roadmaps — step-by-step paths"
+          >
+            <span>Roadmaps</span>
+          </button>
+          <span className="hidden sm:inline text-gray-700">•</span>
+          <button
             onClick={openKeyboardShortcuts}
             className="inline-flex items-center space-x-1.5 text-gray-400 hover:text-white transition cursor-pointer"
             title="Open Keyboard Shortcuts"

@@ -91,7 +91,8 @@ export const Navbar: React.FC = () => {
     { label: 'DJANGO', courseSlug: 'python', lessonSlug: 'introduction-to-python' },
     { label: 'NUMPY', courseSlug: 'python', lessonSlug: 'introduction-to-python' },
     { label: 'PANDAS', courseSlug: 'python', lessonSlug: 'introduction-to-python' },
-    { label: 'NODEJS', courseSlug: 'node-js' }
+    { label: 'NODEJS', courseSlug: 'node-js' },
+    { label: 'ROADMAPS', route: 'roadmaps' }
   ];
 
   const handleSubNavClick = (item: typeof subNavLanguages[0]) => {
@@ -440,6 +441,20 @@ export const Navbar: React.FC = () => {
                   </h4>
                 </div>
                 <div className="space-y-1">
+                  <button
+                    onClick={() => {
+                      setIsW3MenuOpen(false);
+                      navigateTo('roadmaps');
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-emerald-50 dark:hover:bg-[#062419] transition flex items-center justify-between group"
+                  >
+                    <span className="text-xs font-bold text-gray-800 dark:text-gray-200 group-hover:text-[#04AA6D]">
+                      Learning Roadmaps
+                    </span>
+                    <span className="text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-1.5 py-0.5 rounded font-mono font-bold">
+                      Step-by-Step
+                    </span>
+                  </button>
                   <button
                     onClick={() => {
                       setIsW3MenuOpen(false);

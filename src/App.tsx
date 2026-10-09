@@ -35,6 +35,9 @@ import { SettingsPage } from './pages/SettingsPage';
 import { TryitPage } from './pages/TryitPage';
 import { TagReferencePage } from './pages/TagReferencePage';
 import { StudioPage } from './pages/StudioPage';
+import { RoadmapsPage } from './pages/RoadmapsPage';
+import { RoadmapDetailPage } from './pages/RoadmapDetailPage';
+import { SetupGuidePage } from './pages/SetupGuidePage';
 
 const MainAppContent: React.FC = () => {
   const {
@@ -100,6 +103,12 @@ const MainAppContent: React.FC = () => {
         return <TagReferencePage />;
       case 'studio':
         return <StudioPage />;
+      case 'setup-guide':
+        return <SetupGuidePage />;
+      case 'roadmaps':
+        return <RoadmapsPage />;
+      case 'roadmap-detail':
+        return <RoadmapDetailPage />;
       default:
         return <HomePage />;
     }

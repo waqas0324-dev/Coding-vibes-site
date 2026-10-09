@@ -16,7 +16,8 @@ import {
   ChevronDown,
   ChevronRight,
   Sparkles,
-  X
+  X,
+  Rocket
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -232,6 +233,18 @@ export const Sidebar: React.FC = () => {
               >
                 <Terminal className="w-4 h-4 text-yellow-400" />
                 <span>Snippets</span>
+              </button>
+
+              <button
+                onClick={() => navigateTo('setup-guide')}
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-xs font-medium transition ${
+                  currentRoute === 'setup-guide'
+                    ? 'bg-[#141d2e] text-[#22c55e]'
+                    : 'text-gray-300 hover:bg-[#0f172a] hover:text-white'
+                }`}
+              >
+                <Rocket className="w-4 h-4 text-emerald-400" />
+                <span>Setup Guide</span>
               </button>
             </div>
           </div>
