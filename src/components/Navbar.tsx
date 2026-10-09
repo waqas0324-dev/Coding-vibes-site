@@ -453,6 +453,18 @@ export const Navbar: React.FC = () => {
                       Essential
                     </span>
                   </button>
+                  <button
+                    onClick={() => {
+                      setIsW3MenuOpen(false);
+                      navigateTo('tag-reference');
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#141d2e] transition flex items-center justify-between group"
+                  >
+                    <span className="text-xs font-bold text-gray-800 dark:text-gray-200 group-hover:text-[#04AA6D]">
+                      HTML Tag Reference
+                    </span>
+                    <span className="text-[10px] text-gray-500 font-mono">A–Z</span>
+                  </button>
 
                   <button
                     onClick={() => {

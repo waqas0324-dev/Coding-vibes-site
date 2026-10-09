@@ -14,12 +14,14 @@ export type AppRoute =
   | 'profile'
   | 'dashboard'
   | 'settings'
+  | 'tag-reference'
   | 'tryit';
 
 interface NavigationParams {
   courseSlug?: string;
   moduleIndex?: number;
   lessonSlug?: string;
+  tagSlug?: string;
   projectId?: string;
   searchQuery?: string;
   categoryFilter?: string;
@@ -213,6 +215,11 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         setCurrentRoute('profile');
       } else if (section === 'settings') {
         setCurrentRoute('settings');
+      } else if (section === 'tag-reference') {
+        setCurrentRoute('tag-reference');
+        if (parts[1]) {
+          setParams({ tagSlug: parts[1] });
+        }
       } else {
         setCurrentRoute('home');
       }
@@ -264,6 +271,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       window.location.hash = `/projects/${newParams.projectId}`;
     } else if (route === 'search' && newParams.searchQuery) {
       window.location.hash = `/search/${encodeURIComponent(newParams.searchQuery)}`;
+    } else if (route === 'tag-reference') {
+      window.location.hash = newParams.tagSlug ? `/tag-reference/${newParams.tagSlug}` : '/tag-reference';
     } else {
       window.location.hash = `/${route}`;
     }

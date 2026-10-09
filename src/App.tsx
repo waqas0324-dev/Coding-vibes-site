@@ -33,6 +33,7 @@ import { SearchPage } from './pages/SearchPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { TryitPage } from './pages/TryitPage';
+import { TagReferencePage } from './pages/TagReferencePage';
 
 const MainAppContent: React.FC = () => {
   const {
@@ -95,6 +96,8 @@ const MainAppContent: React.FC = () => {
         return <ProfilePage />;
       case 'settings':
         return <SettingsPage />;
+      case 'tag-reference':
+        return <TagReferencePage />;
       default:
         return <HomePage />;
     }
