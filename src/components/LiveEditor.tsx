@@ -440,6 +440,18 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
   const [isFormatting, setIsFormatting] = useState(false);
   const [formatToast, setFormatToast] = useState(false);
   const [layoutMode, setLayoutMode] = useState<'split' | 'vertical'>('split');
+  // Mobile detection: on narrow screens (<sm breakpoint) side-by-side split
+  // would cause overlapping panels, so we force vertical stacking instead.
+  const [isNarrow, setIsNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    const update = () => setIsNarrow(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+  // True side-by-side only on wide screens; narrow screens always stack vertically
+  const isSideBySide = layoutMode === 'split' && !isNarrow;
   const {
     theme: activeTheme,
     themeId,
@@ -617,7 +629,7 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging || !containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      if (layoutMode === 'split') {
+      if (isSideBySide) {
         const offsetX = e.clientX - rect.left;
         const pct = (offsetX / rect.width) * 100;
         if (pct >= 20 && pct <= 80) {
@@ -636,7 +648,7 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
       if (!isDragging || !containerRef.current || e.touches.length === 0) return;
       const touch = e.touches[0];
       const rect = containerRef.current.getBoundingClientRect();
-      if (layoutMode === 'split') {
+      if (isSideBySide) {
         const offsetX = touch.clientX - rect.left;
         const pct = (offsetX / rect.width) * 100;
         if (pct >= 20 && pct <= 80) {
@@ -668,7 +680,7 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleMouseUp);
     };
-  }, [isDragging, layoutMode]);
+  }, [isDragging, isSideBySide]);
 
   // Measure output dimensions dynamically
   useEffect(() => {
@@ -1315,19 +1327,19 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
 
       {/* Transparent overlay during dragging to prevent iframe from intercepting mouse events */}
       {isDragging && (
-        <div className={`fixed inset-0 z-50 select-none ${layoutMode === 'split' ? 'cursor-col-resize' : 'cursor-row-resize'}`} />
+        <div className={`fixed inset-0 z-50 select-none ${isSideBySide ? 'cursor-col-resize' : 'cursor-row-resize'}`} />
       )}
 
       {/* 2. SPLIT SCREEN: LEFT SIDE CODE EDITOR, DRAGGABLE RESIZER, RIGHT SIDE PRE-RENDERED OUTPUT */}
       <div
         ref={containerRef}
-        className={`flex-1 min-h-0 flex ${layoutMode === 'split' ? 'flex-col sm:flex-row' : 'flex-col'} overflow-hidden relative`}
+        className={`flex-1 min-h-0 flex ${isSideBySide ? 'flex-row' : 'flex-col'} overflow-hidden relative`}
       >
         {/* LEFT / TOP PANE: SOURCE CODE EDITOR */}
         <div
           id={editorInstanceId}
           style={{
-            ...(layoutMode === 'split' ? { width: `${splitRatio}%` } : { height: `${splitRatio}%` }),
+            ...(isSideBySide ? { width: `${splitRatio}%` } : { height: `${splitRatio}%` }),
             backgroundColor: activeTheme.colors.bg,
             color: activeTheme.colors.fg,
           }}
@@ -1482,13 +1494,13 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
           onTouchStart={() => setIsDragging(true)}
           onDoubleClick={() => setSplitRatio(50)}
           className={`flex items-center justify-center select-none shrink-0 transition-colors z-10 group ${
-            layoutMode === 'split'
+            isSideBySide
               ? 'w-2.5 sm:w-3 cursor-col-resize bg-gray-200 dark:bg-[#1a2234] hover:bg-[#04AA6D] active:bg-[#04AA6D]'
               : 'h-2.5 sm:h-3 cursor-row-resize bg-gray-200 dark:bg-[#1a2234] hover:bg-[#04AA6D] active:bg-[#04AA6D]'
           }`}
           title="Drag to resize panels (Double click to reset to 50%)"
         >
-          {layoutMode === 'split' ? (
+          {isSideBySide ? (
             <GripVertical className="w-3 h-3 text-gray-400 group-hover:text-white transition" />
           ) : (
             <GripHorizontal className="w-3 h-3 text-gray-400 group-hover:text-white transition" />
@@ -1497,7 +1509,7 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
 
         {/* RIGHT / BOTTOM PANE: PRE-RENDERED RESULT / OUTPUT */}
         <div
-          style={layoutMode === 'split' ? { width: `${100 - splitRatio}%` } : { height: `${100 - splitRatio}%` }}
+          style={isSideBySide ? { width: `${100 - splitRatio}%` } : { height: `${100 - splitRatio}%` }}
           className="flex flex-col flex-1 min-h-0 bg-white dark:bg-[#0c121e] overflow-hidden shrink-0 transition-[width,height] duration-75"
         >
           {/* Result Sub-Header (Screenshot 1: RESULT: eye icon and Console pill) */}
