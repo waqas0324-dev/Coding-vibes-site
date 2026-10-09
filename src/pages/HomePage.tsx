@@ -27,8 +27,11 @@ import {
   Palette,
   Sliders,
   Maximize2,
-  Eye
+  Eye,
+  Rocket
 } from 'lucide-react';
+
+import { roadmaps } from '../data/roadmaps';
 
 export const HomePage: React.FC = () => {
   const { navigateTo, openTryit } = useNavigation();
@@ -208,13 +211,85 @@ public class Main {
 
           <div className="pt-3">
             <button
-              onClick={() => navigateTo('courses')}
+              onClick={() => navigateTo('roadmaps')}
               className="text-sm font-bold text-white hover:text-[#04AA6D] underline underline-offset-4 transition inline-flex items-center space-x-1"
             >
-              <span>Not Sure Where To Begin? Explore All Learning Paths</span>
+              <span>Not Sure Where To Begin? Follow a Step-by-Step Roadmap</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Learning Roadmaps CTA */}
+      <section className="bg-[#0d131f] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1e293b]">
+        <div className="max-w-6xl mx-auto text-center space-y-8">
+          <div className="space-y-3">
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+              Pick Your <span className="text-[#22c55e]">Roadmap</span>
+            </h2>
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+              A clear, ordered path from zero to job-ready. Every step tells you what to learn,
+              why it matters, and links you straight to the course.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3 text-left">
+            {roadmaps.map(roadmap => (
+              <button
+                key={roadmap.id}
+                onClick={() => navigateTo('roadmap-detail', { roadmapId: roadmap.id })}
+                className="rounded-2xl border border-[#1e293b] bg-[#141d2e] p-5 hover:border-[#22c55e]/60 hover:-translate-y-1 transition-all group"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">
+                    {roadmap.steps.length} steps
+                  </span>
+                  <span className="text-xs font-semibold text-gray-500">{roadmap.totalTime}</span>
+                </div>
+                <h3 className="mt-3 text-lg font-extrabold text-white">{roadmap.title}</h3>
+                <p className="mt-1.5 text-sm text-gray-400 leading-relaxed line-clamp-3">
+                  {roadmap.description}
+                </p>
+                <span className="mt-4 inline-flex items-center text-sm font-bold text-[#22c55e] group-hover:gap-2.5 gap-2 transition-all">
+                  Start the path <ArrowRight className="w-4 h-4" />
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => navigateTo('roadmaps')}
+            className="text-sm font-bold text-gray-300 hover:text-[#22c55e] underline underline-offset-4 transition"
+          >
+            View all roadmaps with progress tracking
+          </button>
+        </div>
+      </section>
+
+      {/* 1.5 GETTING STARTED BANNER — VS Code setup guide */}
+      <section className="bg-white dark:bg-[#0c121e] px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => navigateTo('setup-guide')}
+            className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#062419] to-[#0d131f] border-2 border-[#04AA6D]/50 hover:border-[#04AA6D] transition group text-left shadow-sm"
+          >
+            <div className="flex items-start space-x-4">
+              <span className="w-11 h-11 rounded-xl bg-[#04AA6D] flex items-center justify-center text-white shrink-0">
+                <Rocket className="w-5 h-5" />
+              </span>
+              <div className="space-y-1">
+                <p className="text-sm sm:text-base font-extrabold text-[#282A35] dark:text-white">
+                  New here? Start with the Setup Guide
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Install VS Code, set it up in minutes, and open your first project — step by step.
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center space-x-2 bg-[#04AA6D] group-hover:bg-[#03945f] text-white font-extrabold text-xs px-5 py-2.5 rounded-full transition shrink-0">
+              <span>Open Guide</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </span>
+          </button>
         </div>
       </section>
 
