@@ -7,18 +7,18 @@ import { LessonContent } from '../../types';
 
 export const htmlFormElementContent: LessonContent = {
   heroTagline: "The container that collects user input.",
-  introduction: "The <form> tag wraps all the inputs a user fills in — text fields, checkboxes, buttons. When submitted, the browser sends the data to the address in the action attribute.",
+  introduction: "Logins, signups, checkouts, contact pages — every interactive moment on the web runs on one humble tag: `<form>`. It wraps all your inputs into a team and, on submit, **ships the data** to the address in its `action` attribute.",
   definition: {
     term: "<form> Element",
-    explanation: "A container for interactive controls that collects user input and submits it to a server."
+    explanation: "A **container** for interactive controls that collects user input and **submits** it to a server."
   },
-  whyItMatters: "Logins, signups, checkouts, and contact pages all run on forms. No form, no interactivity.",
+  whyItMatters: "Logins, signups, checkouts, and contact pages all run on forms. **No form, no interactivity** — it is that simple.",
   realWorldAnalogy: {
     title: "A Paper Application Form",
-    story: "You fill the boxes on a job application and hand it to the office.",
+    story: "You fill the boxes on a **job application** and hand it to the office. The `<form>` is that paper form; the server in `action` is the office receiving it.",
     comparison: [
-      { item: "Paper form", meaning: "The <form> — collects all the answers" },
-      { item: "The office", meaning: "The server in action — receives the data" }
+      { item: "The paper form", meaning: "The **`<form>`** — collects all the answers" },
+      { item: "The office", meaning: "The **server** in `action` — receives the data" }
     ]
   },
   syntaxStructure: `<form action="/signup" method="post">
@@ -34,37 +34,37 @@ export const htmlFormElementContent: LessonContent = {
     { lineOrToken: "method=\"post\"", description: "How it's sent — post hides sensitive data in the request." }
   ],
   commonMistakes: [
-    { wrong: `<input type="text" name="email">\n<button>Subscribe</button>`, correct: `<form action="/subscribe" method="post">\n  <input type="text" name="email">\n  <button type="submit">Subscribe</button>\n</form>`, reason: "Inputs floating outside a form can't be submitted together — the submit button won't collect them." }
+    { wrong: `<input type="text" name="email">\n<button>Subscribe</button>`, correct: `<form action="/subscribe" method="post">\n  <input type="text" name="email">\n  <button type="submit">Subscribe</button>\n</form>`, reason: "**Inputs floating outside a form** cannot be submitted together — the submit button will not collect them. Wrap them up!" }
   ],
   tryItYourself: {
     html: `<label for="n">Name:</label>\n<input id="n" type="text" name="name">`,
     instructions: "Wrap the label and input in a <form> with action=\"/hello\" and method=\"post\"."
   },
   takeaways: [
-    "<form> wraps all inputs that submit together.",
-    "action sets the destination; method sets how data travels.",
-    "Inputs outside a form can't be submitted."
+    "`<form>` wraps all inputs that **submit together**.",
+    "`action` sets the **destination**; `method` sets how data travels.",
+    "Inputs **outside** a form cannot be submitted."
   ],
   quizQuestions: [
-    { id: "html-form-el-1", question: "What does the <form> element do?", options: ["Styles text", "Collects inputs and submits them to a server", "Plays videos", "Creates tables"], correctAnswerIndex: 1, explanation: "<form> groups interactive controls and submits their data together." },
-    { id: "html-form-el-2", question: "What does the action attribute specify?", options: ["The form's color", "Where the form data is sent", "The submit button text", "The page title"], correctAnswerIndex: 1, explanation: "action holds the URL that receives the submitted form data." }
+    { id: "html-form-el-1", question: "What does the <form> element do?", options: ["Styles text", "Collects inputs and submits them to a server", "Plays videos", "Creates tables"], correctAnswerIndex: 1, explanation: "Correct — `<form>` groups interactive controls and **submits their data** together." },
+    { id: "html-form-el-2", question: "What does the action attribute specify?", options: ["The form's color", "Where the form data is sent", "The submit button text", "The page title"], correctAnswerIndex: 1, explanation: "Right! `action` holds the **URL** that receives the submitted form data." }
   ]
 };
 
 export const htmlInputElementContent: LessonContent = {
   heroTagline: "One tag, many kinds of input.",
-  introduction: "The <input> tag creates interactive fields. Its type attribute decides what it becomes — text box, checkbox, date picker, and twenty more. It's a void element with no closing tag.",
+  introduction: "What if one tag could become a **text box**, a **checkbox**, a **date picker**, and twenty other controls? Meet `<input>` — the **shapeshifter** of HTML. Its `type` attribute decides what it becomes. Oh, and it never needs a closing tag.",
   definition: {
     term: "<input> Element",
-    explanation: "A void element that creates an interactive input field; the type attribute sets its behavior."
+    explanation: "A **void element** creating an interactive input field; the `type` attribute sets its behavior."
   },
-  whyItMatters: "Almost every form control is an <input> with a different type. Learn this one tag and you unlock dozens of controls.",
+  whyItMatters: "Almost every form control is an `<input>` with a different `type`. Learn **this one tag** and you unlock dozens of controls.",
   realWorldAnalogy: {
     title: "A Multi-Tool",
-    story: "One tool with flip-out attachments: knife, screwdriver, bottle opener.",
+    story: "One tool with flip-out attachments: **knife, screwdriver, bottle opener**. The `type` attribute is the attachment you flip out; `<input>` is the handle.",
     comparison: [
-      { item: "Flip-out attachment", meaning: "The type attribute — changes what the tool becomes" },
-      { item: "The tool handle", meaning: "The <input> tag — the base everything builds on" }
+      { item: "The flip-out attachment", meaning: "The **`type`** attribute — changes what the tool becomes" },
+      { item: "The tool handle", meaning: "The **`<input>`** tag — the base everything builds on" }
     ]
   },
   syntaxStructure: `<input type="text" name="username">`,
@@ -76,37 +76,37 @@ export const htmlInputElementContent: LessonContent = {
     { lineOrToken: "name", description: "Labels the data so the server knows what each value is." }
   ],
   commonMistakes: [
-    { wrong: `<input type="text" name="city"></input>`, correct: `<input type="text" name="city">`, reason: "<input> is a void element — a closing tag is invalid HTML." }
+    { wrong: `<input type="text" name="city"></input>`, correct: `<input type="text" name="city">`, reason: "`<input>` is a **void element** — a closing tag is invalid HTML. It stands alone!" }
   ],
   tryItYourself: {
     html: `<form action="/go" method="post">\n</form>`,
     instructions: "Add an <input type=\"text\" name=\"city\"> inside the form."
   },
   takeaways: [
-    "<input> is a void element — no closing tag.",
-    "The type attribute transforms it into many controls.",
-    "name labels the submitted data."
+    "`<input>` is a **void element** — no closing tag.",
+    "The `type` attribute **transforms** it into many controls.",
+    "`name` labels the **submitted data**."
   ],
   quizQuestions: [
-    { id: "html-input-el-1", question: "Does <input> need a closing tag?", options: ["Yes, always", "No — it is a void element", "Only for type=\"text\"", "Only in forms"], correctAnswerIndex: 1, explanation: "<input> is a void element and never takes a closing tag." },
-    { id: "html-input-el-2", question: "What does the type attribute do?", options: ["Sets the text color", "Chooses which kind of control the input becomes", "Sets the field width", "Makes it required"], correctAnswerIndex: 1, explanation: "type transforms <input> into text fields, checkboxes, date pickers, and more." }
+    { id: "html-input-el-1", question: "Does <input> need a closing tag?", options: ["Yes, always", "No — it is a void element", "Only for type=\"text\"", "Only in forms"], correctAnswerIndex: 1, explanation: "Correct — `<input>` is a **void element** and never takes a closing tag." },
+    { id: "html-input-el-2", question: "What does the type attribute do?", options: ["Sets the text color", "Chooses which kind of control the input becomes", "Sets the field width", "Makes it required"], correctAnswerIndex: 1, explanation: "Right! `type` transforms `<input>` into **text fields, checkboxes, date pickers**, and more." }
   ]
 };
 
 export const htmlTextInputContent: LessonContent = {
   heroTagline: "The classic single-line text box.",
-  introduction: "type=\"text\" creates a single-line text field for short answers — names, cities, usernames. It's the default input type.",
+  introduction: "Names, cities, usernames, search boxes — the web runs on **short answers**. `type=\"text\"` creates the classic **single-line text field** for them. It is also the default: forget the `type` attribute and you get this one.",
   definition: {
     term: "Text Input (type=\"text\")",
-    explanation: "A single-line field accepting short free-form text."
+    explanation: "A **single-line field** accepting short free-form text."
   },
-  whyItMatters: "Names and search boxes are the most common inputs on the web. This is the field you'll use most.",
+  whyItMatters: "Names and search boxes are the **most common inputs** on the web. This is the field you will use most.",
   realWorldAnalogy: {
     title: "One Line on a Form",
-    story: "Paper forms give you one ruled line for writing your name.",
+    story: "Paper forms give you **one ruled line** for writing your name — not a whole page. A text input is that ruled line: short, focused, single-line.",
     comparison: [
-      { item: "Ruled line", meaning: "A text input — one line for a short answer" },
-      { item: "The whole page", meaning: "A <textarea> — room for paragraphs" }
+      { item: "The ruled line", meaning: "A **text input** — one line for a short answer" },
+      { item: "The whole page", meaning: "A **`<textarea>`** — room for paragraphs" }
     ]
   },
   syntaxStructure: `<input type="text" name="firstname">`,
@@ -116,37 +116,37 @@ export const htmlTextInputContent: LessonContent = {
     { lineOrToken: "maxlength=\"50\"", description: "Caps the number of characters the user can type." }
   ],
   commonMistakes: [
-    { wrong: `<input type="text" name="message" style="height: 200px;">`, correct: `<textarea name="message" rows="6"></textarea>`, reason: "Text inputs are single-line by design — stretching one tall doesn't make it multi-line. Long messages need a <textarea>." }
+    { wrong: `<input type="text" name="message" style="height: 200px;">`, correct: `<textarea name="message" rows="6"></textarea>`, reason: "**Text inputs are single-line by design** — stretching one tall does not make it multi-line. Long messages need a `<textarea>`." }
   ],
   tryItYourself: {
     html: `<form action="/search" method="get">\n</form>`,
     instructions: "Add a text input named \"q\" with placeholder \"Search...\" inside the form."
   },
   takeaways: [
-    "type=\"text\" is a single-line field for short answers.",
-    "It's the default input type.",
-    "Use maxlength to limit characters; use <textarea> for paragraphs."
+    "`type=\"text\"` is a **single-line** field for short answers.",
+    "It is the **default** input type.",
+    "Use `maxlength` to limit characters; use `<textarea>` for paragraphs."
   ],
   quizQuestions: [
-    { id: "html-textinput-1", question: "What is type=\"text\" for?", options: ["Multi-line essays", "Short single-line answers like names", "Passwords", "File uploads"], correctAnswerIndex: 1, explanation: "Text inputs accept short free-form answers on a single line." },
-    { id: "html-textinput-2", question: "What does maxlength do?", options: ["Sets the visual width", "Limits how many characters can be typed", "Makes the field required", "Hides the text"], correctAnswerIndex: 1, explanation: "maxlength caps the characters a user can enter in the field." }
+    { id: "html-textinput-1", question: "What is type=\"text\" for?", options: ["Multi-line essays", "Short single-line answers like names", "Passwords", "File uploads"], correctAnswerIndex: 1, explanation: "Correct — text inputs accept **short free-form answers** on a single line." },
+    { id: "html-textinput-2", question: "What does maxlength do?", options: ["Sets the visual width", "Limits how many characters can be typed", "Makes the field required", "Hides the text"], correctAnswerIndex: 1, explanation: "Right! `maxlength` **caps** the characters a user can enter in the field." }
   ]
 };
 
 export const htmlPasswordInputContent: LessonContent = {
   heroTagline: "Hide secrets behind dots.",
-  introduction: "type=\"password\" masks typed characters as dots or asterisks. It behaves like a text field but keeps passwords private from shoulder-surfers.",
+  introduction: "Typing your password while someone **peeks over your shoulder** is a nightmare. `type=\"password\"` masks every character as dots or asterisks — the simplest privacy shield on the web. But do not confuse masking with real security!",
   definition: {
     term: "Password Input (type=\"password\")",
-    explanation: "A text field that masks entered characters for privacy."
+    explanation: "A **text field** that masks entered characters for privacy."
   },
-  whyItMatters: "Passwords typed in plain view are a security disaster. Masking is the bare minimum of login safety.",
+  whyItMatters: "Passwords typed in **plain view** are a security disaster. Masking is the bare minimum of login safety.",
   realWorldAnalogy: {
     title: "A Sealed Envelope",
-    story: "You seal a letter so only the recipient can read it — not everyone nearby.",
+    story: "You **seal a letter** so only the recipient can read it — not everyone nearby. Password masking is that seal; a plain text field is a postcard anyone can read.",
     comparison: [
-      { item: "Sealed envelope", meaning: "Password masking — hidden from onlookers" },
-      { item: "Postcard", meaning: "A plain text field — visible to everyone" }
+      { item: "The sealed envelope", meaning: "**Password masking** — hidden from onlookers" },
+      { item: "The postcard", meaning: "A **plain text field** — visible to everyone" }
     ]
   },
   syntaxStructure: `<input type="password" name="pwd">`,
@@ -157,37 +157,37 @@ export const htmlPasswordInputContent: LessonContent = {
     { lineOrToken: "minlength=\"8\"", description: "Requires at least 8 characters before submission." }
   ],
   commonMistakes: [
-    { wrong: `<!-- believing dots = encryption -->\n<input type="password" name="pw">`, correct: `<!-- dots hide from eyes; HTTPS encrypts in transit -->\n<form action="https://site.com/login" method="post">\n  <input type="password" name="pw">\n</form>`, reason: "Masking only hides text on screen — it doesn't encrypt anything. Always submit passwords over HTTPS." }
+    { wrong: `<!-- believing dots = encryption -->\n<input type="password" name="pw">`, correct: `<!-- dots hide from eyes; HTTPS encrypts in transit -->\n<form action="https://site.com/login" method="post">\n  <input type="password" name="pw">\n</form>`, reason: "**Masking only hides text on screen** — it does not encrypt anything. Always submit passwords over HTTPS." }
   ],
   tryItYourself: {
     html: `<label for="pw">Choose a password:</label>`,
     instructions: "Add a password input with id=\"pw\" and name=\"pw\" below the label."
   },
   takeaways: [
-    "type=\"password\" masks typed characters.",
-    "Masking hides from onlookers — it is not encryption.",
-    "Always submit passwords over HTTPS with method=\"post\"."
+    "`type=\"password\"` **masks** typed characters.",
+    "Masking hides from onlookers — it is **not encryption**.",
+    "Always submit passwords over **HTTPS** with `method=\"post\"`."
   ],
   quizQuestions: [
-    { id: "html-password-1", question: "What does type=\"password\" do?", options: ["Encrypts the password", "Masks typed characters as dots", "Generates a password", "Hides the whole form"], correctAnswerIndex: 1, explanation: "It visually masks characters so onlookers can't read them." },
-    { id: "html-password-2", question: "Does password masking encrypt the data?", options: ["Yes, fully", "No — it only hides it on screen; HTTPS encrypts in transit", "Only on mobile", "Only with JavaScript"], correctAnswerIndex: 1, explanation: "Dots stop shoulder-surfing, not interception — encryption comes from HTTPS." }
+    { id: "html-password-1", question: "What does type=\"password\" do?", options: ["Encrypts the password", "Masks typed characters as dots", "Generates a password", "Hides the whole form"], correctAnswerIndex: 1, explanation: "Correct — it **visually masks** characters so onlookers cannot read them." },
+    { id: "html-password-2", question: "Does password masking encrypt the data?", options: ["Yes, fully", "No — it only hides it on screen; HTTPS encrypts in transit", "Only on mobile", "Only with JavaScript"], correctAnswerIndex: 1, explanation: "Right! Dots stop **shoulder-surfing**, not interception — encryption comes from **HTTPS**." }
   ]
 };
 
 export const htmlEmailInputContent: LessonContent = {
   heroTagline: "A text field that checks for an @ sign.",
-  introduction: "type=\"email\" looks like a text field but validates the format — it rejects entries without an @ and a domain. Mobile keyboards also show a handy @ key.",
+  introduction: "How many signups die because of '**user@gmial**.com'? The `type=\"email\"` field is your free proofreader: it **validates the format** automatically and even summons a handy **@ key** on mobile keyboards. Zero JavaScript required.",
   definition: {
     term: "Email Input (type=\"email\")",
-    explanation: "A text field with built-in email-format validation."
+    explanation: "A **text field** with built-in email-format validation."
   },
-  whyItMatters: "Typos like 'user@gmial' break signups. Built-in validation catches them before submission — no JavaScript needed.",
+  whyItMatters: "Typos like 'user@gmial' **break signups**. Built-in validation catches them before submission — no JavaScript needed.",
   realWorldAnalogy: {
     title: "A Bouncer Checking Invitations",
-    story: "The bouncer glances at each invitation's format before letting guests in.",
+    story: "The **bouncer** glances at each invitation's format before letting guests in. Browser validation is that bouncer — quick format check at the door.",
     comparison: [
-      { item: "Bouncer", meaning: "Browser validation — checks the format" },
-      { item: "Invitation", meaning: "The typed email — must look right" }
+      { item: "The bouncer", meaning: "**Browser validation** — checks the format" },
+      { item: "The invitation", meaning: "The **typed email** — must look right" }
     ]
   },
   syntaxStructure: `<input type="email" name="email">`,
@@ -198,36 +198,36 @@ export const htmlEmailInputContent: LessonContent = {
     { lineOrToken: "required", description: "Blocks submission until a valid email is entered." }
   ],
   commonMistakes: [
-    { wrong: `<input type="email" name="email"> <!-- assumes address is real -->`, correct: `<input type="email" name="email" required>\n<!-- then send a confirmation email -->`, reason: "The browser only checks format — 'test@test' passes but may not be a real inbox. Real verification needs a confirmation email." }
+    { wrong: `<input type="email" name="email"> <!-- assumes address is real -->`, correct: `<input type="email" name="email" required>\n<!-- then send a confirmation email -->`, reason: "The browser only checks **format** — 'test@test' passes but may not be a real inbox. Real verification needs a confirmation email." }
   ],
   tryItYourself: {
     html: `<label for="e">Email:</label>`,
     instructions: "Add an email input with id=\"e\" and the required attribute."
   },
   takeaways: [
-    "type=\"email\" validates email format automatically.",
-    "Mobile keyboards show a convenient @ key.",
-    "It checks format only — confirm real addresses by email."
+    "`type=\"email\"` **validates** email format automatically.",
+    "Mobile keyboards show a convenient **`@`** key.",
+    "It checks **format only** — confirm real addresses by email."
   ],
   quizQuestions: [
-    { id: "html-emailinput-1", question: "What does type=\"email\" validate?", options: ["That the inbox exists", "That the format looks like an email", "The password strength", "Nothing"], correctAnswerIndex: 1, explanation: "It checks the format (something@domain) — not whether the address is real." },
-    { id: "html-emailinput-2", question: "How do you verify an email address is real?", options: ["type=\"email\" is enough", "Send a confirmation email", "Use maxlength", "Check the color"], correctAnswerIndex: 1, explanation: "Only a confirmation email to that inbox proves it's real and accessible." }
+    { id: "html-emailinput-1", question: "What does type=\"email\" validate?", options: ["That the inbox exists", "That the format looks like an email", "The password strength", "Nothing"], correctAnswerIndex: 1, explanation: "Correct — it checks the **format** (`something@domain`), not whether the address is real." },
+    { id: "html-emailinput-2", question: "How do you verify an email address is real?", options: ["type=\"email\" is enough", "Send a confirmation email", "Use maxlength", "Check the color"], correctAnswerIndex: 1, explanation: "Right! Only a **confirmation email** to that inbox proves it is real and accessible." }
   ]
 };
 export const htmlNumberInputContent: LessonContent = {
   heroTagline: "Accept only numbers — with spinner buttons.",
-  introduction: "type=\"number\" accepts only numeric input and shows little up/down spinner buttons. The min, max, and step attributes set the allowed range.",
+  introduction: "Need an age or a quantity? A text field lets users type '**twelve**' or '**abc**' — chaos! `type=\"number\"` accepts **digits only**, shows handy up/down spinners, and lets you set the allowed range with `min` and `max`.",
   definition: {
     term: "Number Input (type=\"number\")",
-    explanation: "A field restricted to numeric values, with optional min/max limits and spinners."
+    explanation: "A field **restricted to numeric values**, with optional min/max limits and spinners."
   },
-  whyItMatters: "Quantities and ages must be numbers. This field rejects letters automatically and works great on mobile keyboards.",
+  whyItMatters: "**Quantities and ages** must be numbers. This field rejects letters automatically and works great on mobile keyboards.",
   realWorldAnalogy: {
     title: "A Combination Lock",
-    story: "The lock's dials only turn through digits — letters simply can't fit.",
+    story: "The lock's **dials** only turn through digits — letters simply cannot fit. A number input is those dials: digits only, no exceptions.",
     comparison: [
-      { item: "Lock dials", meaning: "A number input — digits only" },
-      { item: "A free-text box", meaning: "type=\"text\" — anything goes" }
+      { item: "The lock dials", meaning: "A **number input** — digits only" },
+      { item: "A free-text box", meaning: "`type=\"text\"` — anything goes" }
     ]
   },
   syntaxStructure: `<input type="number" name="qty" min="1" max="10">`,
@@ -238,37 +238,37 @@ export const htmlNumberInputContent: LessonContent = {
     { lineOrToken: "value=\"2\"", description: "The starting number shown in the field." }
   ],
   commonMistakes: [
-    { wrong: `<label>Phone: <input type="number" name="phone"></label>`, correct: `<label>Phone: <input type="tel" name="phone"></label>`, reason: "Phone numbers aren't quantities — leading zeros get stripped and spinners make no sense. Use type=\"tel\" instead." }
+    { wrong: `<label>Phone: <input type="number" name="phone"></label>`, correct: `<label>Phone: <input type="tel" name="phone"></label>`, reason: "**Phone numbers are not quantities** — leading zeros get stripped and spinners make no sense. Use `type=\"tel\"` instead." }
   ],
   tryItYourself: {
     html: `<label for="age">Age:</label>`,
     instructions: "Add a number input with id=\"age\", min=\"1\" and max=\"120\"."
   },
   takeaways: [
-    "type=\"number\" accepts digits only, with spinners.",
-    "min and max set the allowed range.",
-    "Don't use it for phone numbers or zip codes."
+    "`type=\"number\"` accepts **digits only**, with spinners.",
+    "`min` and `max` set the **allowed range**.",
+    "Do not use it for **phone numbers** or zip codes."
   ],
   quizQuestions: [
-    { id: "html-number-1", question: "What do min and max do on a number input?", options: ["Set the visual size", "Limit the allowed numeric range", "Set the default color", "Make it required"], correctAnswerIndex: 1, explanation: "min and max define the acceptable range; out-of-range values are rejected." },
-    { id: "html-number-2", question: "Why is type=\"number\" wrong for phone numbers?", options: ["Phones aren't numeric", "Leading zeros get stripped and spinners are meaningless", "It looks bad", "It can't be styled"], correctAnswerIndex: 1, explanation: "Phone numbers are identifiers, not quantities — type=\"tel\" is the right choice." }
+    { id: "html-number-1", question: "What do min and max do on a number input?", options: ["Set the visual size", "Limit the allowed numeric range", "Set the default color", "Make it required"], correctAnswerIndex: 1, explanation: "Correct — `min` and `max` define the **acceptable range**; out-of-range values are rejected." },
+    { id: "html-number-2", question: "Why is type=\"number\" wrong for phone numbers?", options: ["Phones aren't numeric", "Leading zeros get stripped and spinners are meaningless", "It looks bad", "It can't be styled"], correctAnswerIndex: 1, explanation: "Right! Phone numbers are **identifiers**, not quantities — `type=\"tel\"` is the right choice." }
   ]
 };
 
 export const htmlRadioButtonsContent: LessonContent = {
   heroTagline: "Pick exactly one option from a group.",
-  introduction: "type=\"radio\" creates circular buttons where only one choice per group can be selected. Give all buttons in a group the same name to link them together.",
+  introduction: "Pizza size: small, medium, **or** large — pick **exactly one**. That is the law of `type=\"radio\"`: circular buttons where selecting one **deselects** the others. The secret glue? Give every button in the group the same `name`.",
   definition: {
     term: "Radio Button (type=\"radio\")",
-    explanation: "A circular option button; only one selection is allowed per same-named group."
+    explanation: "A **circular option button**; only one selection is allowed per same-named group."
   },
-  whyItMatters: "Payment methods, shipping speeds, and sizes need exactly one choice. Radios enforce that rule visually.",
+  whyItMatters: "**Payment methods**, shipping speeds, and sizes need exactly one choice. Radios enforce that rule visually.",
   realWorldAnalogy: {
     title: "Old Car Radio Presets",
-    story: "Pushing one preset button pops the others out — only one station plays at a time.",
+    story: "Pushing one **preset button** pops the others out — only one station plays at a time. Radio buttons work exactly like those presets.",
     comparison: [
-      { item: "Preset buttons", meaning: "A radio group — one selection max" },
-      { item: "The playing station", meaning: "The checked option — the current choice" }
+      { item: "The preset buttons", meaning: "A **radio group** — one selection max" },
+      { item: "The playing station", meaning: "The **checked option** — the current choice" }
     ]
   },
   syntaxStructure: `<input type="radio" name="size" value="m">`,
@@ -284,37 +284,37 @@ export const htmlRadioButtonsContent: LessonContent = {
     { lineOrToken: "checked", description: "Pre-selects the Medium option." }
   ],
   commonMistakes: [
-    { wrong: `<input type="radio" name="size-s" value="small">\n<input type="radio" name="size-m" value="medium">`, correct: `<input type="radio" name="size" value="small">\n<input type="radio" name="size" value="medium">`, reason: "Different names create independent groups — users could select every option at once. One group, one name." }
+    { wrong: `<input type="radio" name="size-s" value="small">\n<input type="radio" name="size-m" value="medium">`, correct: `<input type="radio" name="size" value="small">\n<input type="radio" name="size" value="medium">`, reason: "**Different names** create independent groups — users could select every option at once. One group, one name!" }
   ],
   tryItYourself: {
     html: `<p>Payment method:</p>`,
     instructions: "Add two radio buttons named \"pay\" — one for 'Card' and one for 'Cash' — each with a label."
   },
   takeaways: [
-    "Radio buttons allow exactly one choice per group.",
-    "Link a group with the same name attribute.",
-    "checked pre-selects an option."
+    "Radio buttons allow **exactly one** choice per group.",
+    "Link a group with the same **`name`** attribute.",
+    "`checked` **pre-selects** an option."
   ],
   quizQuestions: [
-    { id: "html-radio-1", question: "What links radio buttons into one group?", options: ["The id attribute", "The shared name attribute", "The value attribute", "Being on the same line"], correctAnswerIndex: 1, explanation: "Buttons with the same name form one group where only one can be selected." },
-    { id: "html-radio-2", question: "How many options can be selected in a radio group?", options: ["All of them", "Exactly one", "At least two", "None ever"], correctAnswerIndex: 1, explanation: "Selecting one radio deselects the others in its group — that's their defining behavior." }
+    { id: "html-radio-1", question: "What links radio buttons into one group?", options: ["The id attribute", "The shared name attribute", "The value attribute", "Being on the same line"], correctAnswerIndex: 1, explanation: "Correct — buttons with the **same `name`** form one group where only one can be selected." },
+    { id: "html-radio-2", question: "How many options can be selected in a radio group?", options: ["All of them", "Exactly one", "At least two", "None ever"], correctAnswerIndex: 1, explanation: "Right! Selecting one radio **deselects** the others in its group — that is their defining behavior." }
   ]
 };
 
 export const htmlCheckboxesContent: LessonContent = {
   heroTagline: "Tick as many options as you like.",
-  introduction: "type=\"checkbox\" creates square boxes users can tick independently. Unlike radios, any number — including zero — can be checked.",
+  introduction: "Pizza toppings are the opposite of pizza size: you want **cheese AND olives AND mushrooms** — all of them! `type=\"checkbox\"` creates square boxes that toggle **independently**. Check any number, including zero.",
   definition: {
     term: "Checkbox (type=\"checkbox\")",
-    explanation: "A square toggle that can be checked or unchecked independently of others."
+    explanation: "A **square toggle** that can be checked or unchecked independently of others."
   },
-  whyItMatters: "Newsletter opt-ins, pizza toppings, and terms agreements all need independent yes/no choices.",
+  whyItMatters: "**Newsletter opt-ins**, pizza toppings, and terms agreements all need independent yes/no choices.",
   realWorldAnalogy: {
     title: "A Toppings List",
-    story: "You tick every topping you want — cheese, olives, mushrooms, all of them.",
+    story: "You tick **every topping** you want — cheese, olives, mushrooms, all of them. Each checkbox is one topping tick: independent on/off.",
     comparison: [
-      { item: "Each topping tick", meaning: "A checkbox — independent on/off choice" },
-      { item: "The whole pizza order", meaning: "The form — collects all the ticks" }
+      { item: "Each topping tick", meaning: "A **checkbox** — independent on/off choice" },
+      { item: "The whole pizza order", meaning: "The **form** — collects all the ticks" }
     ]
   },
   syntaxStructure: `<input type="checkbox" name="topping" value="cheese">`,
@@ -327,37 +327,37 @@ export const htmlCheckboxesContent: LessonContent = {
     { lineOrToken: "type=\"checkbox\"", description: "A square box — each one toggles independently." }
   ],
   commonMistakes: [
-    { wrong: `<p>Choose one:</p>\n<input type="checkbox" name="a"> Yes\n<input type="checkbox" name="b"> No`, correct: `<p>Choose one:</p>\n<input type="radio" name="yn" value="yes"> Yes\n<input type="radio" name="yn" value="no"> No`, reason: "Checkboxes allow multiple picks — for exactly-one choices, radios communicate the rule." }
+    { wrong: `<p>Choose one:</p>\n<input type="checkbox" name="a"> Yes\n<input type="checkbox" name="b"> No`, correct: `<p>Choose one:</p>\n<input type="radio" name="yn" value="yes"> Yes\n<input type="radio" name="yn" value="no"> No`, reason: "**Checkboxes allow multiple picks** — for exactly-one choices, radios communicate the rule better." }
   ],
   tryItYourself: {
     html: `<p>Subscribe to:</p>`,
     instructions: "Add two checkboxes named \"news\" — 'Weekly digest' and 'New courses' — each with a label."
   },
   takeaways: [
-    "Checkboxes toggle independently — check any number.",
-    "Square boxes signal 'pick many'; round radios signal 'pick one'.",
-    "Use them for opt-ins, toppings, and agreements."
+    "Checkboxes toggle **independently** — check any number.",
+    "**Square** boxes signal 'pick many'; **round** radios signal 'pick one'.",
+    "Use them for **opt-ins**, toppings, and agreements."
   ],
   quizQuestions: [
-    { id: "html-checkbox-1", question: "How do checkboxes differ from radio buttons?", options: ["Checkboxes allow multiple independent selections", "There is no difference", "Checkboxes are round", "Radios allow multiple picks"], correctAnswerIndex: 0, explanation: "Each checkbox toggles on its own; radios enforce one-choice-per-group." },
-    { id: "html-checkbox-2", question: "When should you use checkboxes?", options: ["Choose exactly one shipping method", "Pick any number of pizza toppings", "Select your country", "Enter your name"], correctAnswerIndex: 1, explanation: "Toppings are independent yes/no choices — the classic checkbox scenario." }
+    { id: "html-checkbox-1", question: "How do checkboxes differ from radio buttons?", options: ["Checkboxes allow multiple independent selections", "There is no difference", "Checkboxes are round", "Radios allow multiple picks"], correctAnswerIndex: 0, explanation: "Correct — each checkbox **toggles on its own**; radios enforce one-choice-per-group." },
+    { id: "html-checkbox-2", question: "When should you use checkboxes?", options: ["Choose exactly one shipping method", "Pick any number of pizza toppings", "Select your country", "Enter your name"], correctAnswerIndex: 1, explanation: "Right! **Toppings** are independent yes/no choices — the classic checkbox scenario." }
   ]
 };
 
 export const htmlSelectContent: LessonContent = {
   heroTagline: "A compact dropdown for long option lists.",
-  introduction: "The <select> tag creates a dropdown menu. It saves space when you have many choices — like a country list — showing only the selected one until opened.",
+  introduction: "A **200-country list** as radio buttons would fill ten screens. The `<select>` tag compresses it into a tidy **dropdown**: one line showing the current choice, the full list revealed on click. Space saved, sanity kept.",
   definition: {
     term: "<select> Element",
-    explanation: "A dropdown control that shows one selected option and reveals the full list when opened."
+    explanation: "A **dropdown control** showing one selected option and revealing the full list when opened."
   },
-  whyItMatters: "A 200-country list as radio buttons would fill screens. A dropdown fits it in one line.",
+  whyItMatters: "A 200-country list as radio buttons would **fill screens**. A dropdown fits it in one line.",
   realWorldAnalogy: {
     title: "A Rolodex",
-    story: "You flip through a stack of cards but only see the top one at a time.",
+    story: "You **flip through** a stack of cards but only see the top one at a time. `<select>` is that card stack; the selected option is the top card.",
     comparison: [
-      { item: "Card stack", meaning: "The <select> — all options hidden inside" },
-      { item: "Top card", meaning: "The selected option — the visible one" }
+      { item: "The card stack", meaning: "The **`<select>`** — all options hidden inside" },
+      { item: "The top card", meaning: "The **selected option** — the visible one" }
     ]
   },
   syntaxStructure: `<select name="country">
@@ -373,37 +373,37 @@ export const htmlSelectContent: LessonContent = {
     { lineOrToken: "<select>", description: "The dropdown container — name labels the submitted data." }
   ],
   commonMistakes: [
-    { wrong: `<select name="yn">\n  <option>Yes</option>\n  <option>No</option>\n</select>`, correct: `<input type="radio" name="yn" value="yes"> Yes\n<input type="radio" name="yn" value="no"> No`, reason: "Hiding just 2 options behind a click adds friction for no space savings — radios are clearer for tiny lists. Dropdowns suit 5+ options." }
+    { wrong: `<select name="yn">\n  <option>Yes</option>\n  <option>No</option>\n</select>`, correct: `<input type="radio" name="yn" value="yes"> Yes\n<input type="radio" name="yn" value="no"> No`, reason: "Hiding just **2 options** behind a click adds friction for no space savings — radios are clearer for tiny lists. Dropdowns suit 5+ options." }
   ],
   tryItYourself: {
     html: `<label for="color">Favorite color:</label>\n<select id="color" name="color">\n</select>`,
     instructions: "Add three <option> elements: Red, Green, Blue."
   },
   takeaways: [
-    "<select> creates a space-saving dropdown.",
-    "Best for 5 or more options.",
-    "Pair it with a <label> like any other field."
+    "`<select>` creates a **space-saving** dropdown.",
+    "Best for **5 or more** options.",
+    "Pair it with a **`<label>`** like any other field."
   ],
   quizQuestions: [
-    { id: "html-select-1", question: "When is <select> the right choice?", options: ["For 2 options", "For long lists like countries", "For passwords", "For headings"], correctAnswerIndex: 1, explanation: "Dropdowns compress long option lists into a single line." },
-    { id: "html-select-2", question: "What does the name attribute on <select> do?", options: ["Styles the dropdown", "Labels the submitted data", "Sets the first option", "Makes it required"], correctAnswerIndex: 1, explanation: "name identifies the chosen value when the form is submitted." }
+    { id: "html-select-1", question: "When is <select> the right choice?", options: ["For 2 options", "For long lists like countries", "For passwords", "For headings"], correctAnswerIndex: 1, explanation: "Correct — dropdowns **compress** long option lists into a single line." },
+    { id: "html-select-2", question: "What does the name attribute on <select> do?", options: ["Styles the dropdown", "Labels the submitted data", "Sets the first option", "Makes it required"], correctAnswerIndex: 1, explanation: "Right! `name` **identifies** the chosen value when the form is submitted." }
   ]
 };
 
 export const htmlOptionContent: LessonContent = {
   heroTagline: "One choice inside a dropdown.",
-  introduction: "The <option> tag defines one choice inside a <select>. The text shows to the user; the value attribute is what gets submitted.",
+  introduction: "The menu says '**Margherita**' but the kitchen ticket prints '**PZ-12**.' The `<option>` tag works the same split: the **text** charms the user while the `value` attribute sends clean data to the server.",
   definition: {
     term: "<option> Element",
-    explanation: "One selectable choice in a dropdown; the value is submitted while the text is displayed."
+    explanation: "One **selectable choice** in a dropdown; the `value` is submitted while the text is displayed."
   },
-  whyItMatters: "Displayed text ('Pakistan') and submitted data ('pk') often differ. <option> keeps both cleanly separated.",
+  whyItMatters: "Displayed text ('Pakistan') and submitted data ('pk') often differ. `<option>` keeps both **cleanly separated**.",
   realWorldAnalogy: {
     title: "Menu Items with Kitchen Codes",
-    story: "The menu says 'Margherita' but the kitchen ticket prints 'PZ-12'.",
+    story: "The menu says '**Margherita**' but the kitchen ticket prints '**PZ-12**' — pretty for guests, precise for the kitchen. Option text is the menu; `value` is the ticket.",
     comparison: [
-      { item: "Menu name", meaning: "The option text — what the user sees" },
-      { item: "Kitchen code", meaning: "The value attribute — what gets submitted" }
+      { item: "The menu name", meaning: "The **option text** — what the user sees" },
+      { item: "The kitchen code", meaning: "The **`value`** attribute — what gets submitted" }
     ]
   },
   syntaxStructure: `<option value="pk">Pakistan</option>`,
@@ -418,36 +418,36 @@ export const htmlOptionContent: LessonContent = {
     { lineOrToken: "selected", description: "Pre-selects Lahore as the default choice." }
   ],
   commonMistakes: [
-    { wrong: `<option>New York</option>`, correct: `<option value="nyc">New York</option>`, reason: "Without value, the display text gets submitted — 'New York' with spaces and capitals is messy data. Short codes ('nyc') are cleaner." }
+    { wrong: `<option>New York</option>`, correct: `<option value="nyc">New York</option>`, reason: "Without `value`, the **display text** gets submitted — 'New York' with spaces and capitals is messy data. Short codes ('nyc') are cleaner." }
   ],
   tryItYourself: {
     html: `<select name="pet">\n</select>`,
     instructions: "Add options for Cat (value \"cat\") and Dog (value \"dog\"), with Dog selected."
   },
   takeaways: [
-    "<option> defines one dropdown choice.",
-    "Text displays to users; value gets submitted.",
-    "Always set value — don't submit display text."
+    "`<option>` defines **one dropdown choice**.",
+    "**Text** displays to users; **`value`** gets submitted.",
+    "Always set `value` — do not submit display text."
   ],
   quizQuestions: [
-    { id: "html-option-1", question: "What is the difference between option text and value?", options: ["No difference", "Text displays to users; value is submitted", "Value displays; text is submitted", "Value is the color"], correctAnswerIndex: 1, explanation: "Users see the text; the form submits the value — keeping both separate gives clean data." },
-    { id: "html-option-2", question: "What does the selected attribute do?", options: ["Deletes the option", "Pre-selects that option", "Hides the option", "Makes it required"], correctAnswerIndex: 1, explanation: "selected marks the default choice shown when the dropdown first appears." }
+    { id: "html-option-1", question: "What is the difference between option text and value?", options: ["No difference", "Text displays to users; value is submitted", "Value displays; text is submitted", "Value is the color"], correctAnswerIndex: 1, explanation: "Correct — users see the **text**; the form submits the **value**. Keeping both separate gives clean data." },
+    { id: "html-option-2", question: "What does the selected attribute do?", options: ["Deletes the option", "Pre-selects that option", "Hides the option", "Makes it required"], correctAnswerIndex: 1, explanation: "Right! `selected` marks the **default choice** shown when the dropdown first appears." }
   ]
 };
 export const htmlTextareaContent: LessonContent = {
   heroTagline: "A big box for multi-line messages.",
-  introduction: "The <textarea> tag creates a resizable multi-line text box for paragraphs — comments, reviews, messages. Unlike <input>, it has an opening and closing tag with default text between them.",
+  introduction: "A **postcard** fits a sentence; a **letter** needs a full page. When users must write paragraphs — comments, reviews, messages — the single-line text input is a straitjacket. `<textarea>` gives them room to breathe.",
   definition: {
     term: "<textarea> Element",
-    explanation: "A multi-line text input for longer free-form content."
+    explanation: "A **multi-line text input** for longer free-form content."
   },
-  whyItMatters: "Reviews and messages don't fit on one line. <textarea> gives users room to write properly.",
+  whyItMatters: "**Reviews and messages** do not fit on one line. `<textarea>` gives users room to write properly.",
   realWorldAnalogy: {
     title: "A Full Page vs. One Line",
-    story: "A postcard fits a sentence; a letter needs a full page.",
+    story: "A **postcard** fits a sentence; a **letter** needs a full page. `<textarea>` is the full page; a text input is the postcard line.",
     comparison: [
-      { item: "Full page", meaning: "A <textarea> — room for paragraphs" },
-      { item: "Postcard line", meaning: "A text input — one short line" }
+      { item: "The full page", meaning: "A **`<textarea>`** — room for paragraphs" },
+      { item: "The postcard line", meaning: "A **text input** — one short line" }
     ]
   },
   syntaxStructure: `<textarea name="message" rows="4" cols="40"></textarea>`,
@@ -458,37 +458,37 @@ export const htmlTextareaContent: LessonContent = {
     { lineOrToken: "rows=\"5\" cols=\"40\"", description: "Sets the visible size — 5 text rows tall, 40 characters wide." }
   ],
   commonMistakes: [
-    { wrong: `<textarea name="msg" value="Hello"></textarea>`, correct: `<textarea name="msg">Hello</textarea>`, reason: "<textarea> has no value attribute — its default content is the text between the opening and closing tags." }
+    { wrong: `<textarea name="msg" value="Hello"></textarea>`, correct: `<textarea name="msg">Hello</textarea>`, reason: "`<textarea>` has **no** `value` attribute — its default content is the text between the opening and closing tags." }
   ],
   tryItYourself: {
     html: `<label for="bio">Bio:</label>`,
     instructions: "Add a <textarea> with id=\"bio\", rows=\"4\" and cols=\"30\"."
   },
   takeaways: [
-    "<textarea> is for multi-line text.",
-    "It needs both opening and closing tags.",
-    "Default text goes between the tags — there is no value attribute."
+    "`<textarea>` is for **multi-line** text.",
+    "It needs both **opening and closing** tags.",
+    "Default text goes **between the tags** — there is no `value` attribute."
   ],
   quizQuestions: [
-    { id: "html-textarea-1", question: "When should you use <textarea> instead of a text input?", options: ["For passwords", "For multi-line content like messages", "For numbers", "Never"], correctAnswerIndex: 1, explanation: "<textarea> handles paragraphs and multi-line content; text inputs are single-line." },
-    { id: "html-textarea-2", question: "How do you set default text in a <textarea>?", options: ["With the value attribute", "Between the opening and closing tags", "With the text attribute", "You cannot"], correctAnswerIndex: 1, explanation: "<textarea> has no value attribute — content between the tags is the default text." }
+    { id: "html-textarea-1", question: "When should you use <textarea> instead of a text input?", options: ["For passwords", "For multi-line content like messages", "For numbers", "Never"], correctAnswerIndex: 1, explanation: "Correct — `<textarea>` handles **paragraphs** and multi-line content; text inputs are single-line." },
+    { id: "html-textarea-2", question: "How do you set default text in a <textarea>?", options: ["With the value attribute", "Between the opening and closing tags", "With the text attribute", "You cannot"], correctAnswerIndex: 1, explanation: "Right! `<textarea>` has **no** `value` attribute — content between the tags is the default text." }
   ]
 };
 
 export const htmlButtonsContent: LessonContent = {
   heroTagline: "Clickable buttons that do things.",
-  introduction: "The <button> tag creates a clickable button. Its type decides the job: submit sends the form, reset clears it, and button does nothing until JavaScript steps in.",
+  introduction: "Not all buttons are born equal. `<button type=\"submit\">` **sends** the form, `type=\"reset\"` **clears** it, and `type=\"button\"` does **nothing** until JavaScript steps in. And here is the trap: inside a form, a button with no `type` secretly defaults to **submit**!",
   definition: {
     term: "<button> Element",
-    explanation: "A clickable button; the type attribute (submit/reset/button) sets its behavior."
+    explanation: "A **clickable button**; the `type` attribute (`submit`/`reset`/`button`) sets its behavior."
   },
-  whyItMatters: "Every form needs a way to finish. The submit button is the door the data walks through.",
+  whyItMatters: "Every form needs a way to **finish**. The submit button is the door the data walks through.",
   realWorldAnalogy: {
     title: "Elevator Buttons",
-    story: "Each elevator button has one job: the door-close button closes doors, floor buttons pick floors.",
+    story: "Each **elevator button** has one job: the door-close button closes doors, floor buttons pick floors. `<button>` types are those labeled buttons — each with its own job.",
     comparison: [
-      { item: "Door-close button", meaning: "type=\"submit\" — sends the form" },
-      { item: "Floor buttons", meaning: "type=\"button\" — custom actions via JavaScript" }
+      { item: "The door-close button", meaning: "`type=\"submit\"` — **sends** the form" },
+      { item: "The floor buttons", meaning: "`type=\"button\"` — **custom actions** via JavaScript" }
     ]
   },
   syntaxStructure: `<button type="submit">Send</button>`,
@@ -503,37 +503,37 @@ export const htmlButtonsContent: LessonContent = {
     { lineOrToken: "type=\"reset\"", description: "Clears all fields back to their defaults." }
   ],
   commonMistakes: [
-    { wrong: `<form>\n  <button>Cancel</button>\n</form>`, correct: `<form>\n  <button type="button">Cancel</button>\n</form>`, reason: "A button without type defaults to submit inside forms — clicking 'Cancel' would submit the form instead. Set type=\"button\" explicitly." }
+    { wrong: `<form>\n  <button>Cancel</button>\n</form>`, correct: `<form>\n  <button type="button">Cancel</button>\n</form>`, reason: "A button without `type` defaults to **submit** inside forms — clicking 'Cancel' would submit the form instead! Set `type=\"button\"` explicitly." }
   ],
   tryItYourself: {
     html: `<form action="/go" method="post">\n</form>`,
     instructions: "Add a submit button with the text 'Send Message'."
   },
   takeaways: [
-    "<button> types: submit, reset, button.",
-    "Inside forms, the default type is submit.",
-    "Always set type explicitly to avoid surprises."
+    "`<button>` types: **`submit`**, **`reset`**, **`button`**.",
+    "Inside forms, the **default** type is `submit`.",
+    "Always set `type` **explicitly** to avoid surprises."
   ],
   quizQuestions: [
-    { id: "html-button-1", question: "What does <button type=\"submit\"> do?", options: ["Clears the form", "Submits the form data", "Closes the page", "Nothing"], correctAnswerIndex: 1, explanation: "type=\"submit\" sends the form's data to the action URL." },
-    { id: "html-button-2", question: "What happens with <button> (no type) inside a form?", options: ["It does nothing", "It submits the form", "It resets the form", "It causes an error"], correctAnswerIndex: 1, explanation: "The default button type inside a form is submit — always set type explicitly." }
+    { id: "html-button-1", question: "What does <button type=\"submit\"> do?", options: ["Clears the form", "Submits the form data", "Closes the page", "Nothing"], correctAnswerIndex: 1, explanation: "Correct — `type=\"submit\"` **sends** the form's data to the `action` URL." },
+    { id: "html-button-2", question: "What happens with <button> (no type) inside a form?", options: ["It does nothing", "It submits the form", "It resets the form", "It causes an error"], correctAnswerIndex: 1, explanation: "Right! The default button type inside a form is **submit** — always set `type` explicitly." }
   ]
 };
 
 export const htmlLabelsContent: LessonContent = {
   heroTagline: "Name every field so everyone can use it.",
-  introduction: "The <label> tag names a form control. The for attribute must match the input's id — clicking the label then focuses the field, and screen readers announce the name.",
+  introduction: "A form field with **no label** is a mystery box — type what? where? why? The `<label>` tag names each control, and when its `for` matches the input's `id`, clicking the label **focuses the field**. Bigger click target, happier users.",
   definition: {
     term: "<label> Element",
-    explanation: "An accessible name for a form control, linked via matching for and id values."
+    explanation: "An **accessible name** for a form control, linked via matching `for` and `id` values."
   },
-  whyItMatters: "A field without a label is a mystery box. Labels make forms usable for screen readers and easier for mouse users too.",
+  whyItMatters: "A field without a label is a **mystery box**. Labels make forms usable for screen readers — and easier for mouse users too.",
   realWorldAnalogy: {
     title: "Name Tags at a Conference",
-    story: "Name tags tell you who's who without any guessing.",
+    story: "**Name tags** tell you who is who without any guessing. A `<label>` is that name tag — it identifies the field instantly.",
     comparison: [
-      { item: "Name tag", meaning: "A <label> — identifies the field" },
-      { item: "The person", meaning: "The input — the thing being identified" }
+      { item: "The name tag", meaning: "A **`<label>`** — identifies the field" },
+      { item: "The person", meaning: "The **input** — the thing being identified" }
     ]
   },
   syntaxStructure: `<label for="email">Email:</label>
@@ -549,37 +549,37 @@ export const htmlLabelsContent: LessonContent = {
     { lineOrToken: "wrapping <label>", description: "Wrapping the input inside <label> also works — no for needed." }
   ],
   commonMistakes: [
-    { wrong: `<input type="email" placeholder="Email address">`, correct: `<label for="e">Email address:</label>\n<input type="email" id="e" placeholder="you@example.com">`, reason: "Placeholders vanish when typing and aren't reliably announced — they're hints, not labels. Every field needs a real <label>." }
+    { wrong: `<input type="email" placeholder="Email address">`, correct: `<label for="e">Email address:</label>\n<input type="email" id="e" placeholder="you@example.com">`, reason: "**Placeholders vanish** when typing and are not reliably announced — they are hints, not labels. Every field needs a real `<label>`." }
   ],
   tryItYourself: {
     html: `<input type="text" id="city" name="city">`,
     instructions: "Add a <label> for the input with the text 'City:'."
   },
   takeaways: [
-    "Every form control needs a <label>.",
-    "for must match the input's id exactly.",
-    "Clicking a label focuses its field — a bigger click target."
+    "Every form control needs a **`<label>`**.",
+    "`for` must **match** the input's `id` exactly.",
+    "Clicking a label **focuses** its field — a bigger click target."
   ],
   quizQuestions: [
-    { id: "html-label-1", question: "How does a <label> connect to its input?", options: ["By being nearby", "The for attribute matches the input's id", "By the class name", "Automatically"], correctAnswerIndex: 1, explanation: "for=\"email\" pairs with id=\"email\" — the values must match exactly." },
-    { id: "html-label-2", question: "Can a placeholder replace a <label>?", options: ["Yes, fully", "No — placeholders vanish and aren't reliably announced", "Only on mobile", "Only for passwords"], correctAnswerIndex: 1, explanation: "Placeholders are hints, not labels — every field still needs a real <label>." }
+    { id: "html-label-1", question: "How does a <label> connect to its input?", options: ["By being nearby", "The for attribute matches the input's id", "By the class name", "Automatically"], correctAnswerIndex: 1, explanation: "Correct — `for=\"email\"` pairs with `id=\"email\"`. The values must **match exactly**." },
+    { id: "html-label-2", question: "Can a placeholder replace a <label>?", options: ["Yes, fully", "No — placeholders vanish and aren't reliably announced", "Only on mobile", "Only for passwords"], correctAnswerIndex: 1, explanation: "Right! **Placeholders** are hints, not labels — every field still needs a real `<label>`." }
   ]
 };
 
 export const htmlPlaceholderContent: LessonContent = {
   heroTagline: "Show a hint inside an empty field.",
-  introduction: "The placeholder attribute shows light-gray hint text inside an empty field — like 'you@example.com'. It disappears the moment the user types.",
+  introduction: "A field asking for a date — but **which format**? MM/DD/YYYY? DD-MM-YY? The `placeholder` attribute shows a **faint hint** inside the empty field, like a whisper of an example. It vanishes the moment you type.",
   definition: {
     term: "placeholder Attribute",
-    explanation: "Hint text displayed inside an empty input, disappearing on input."
+    explanation: "**Hint text** displayed inside an empty input, disappearing on input."
   },
-  whyItMatters: "A short example format ('MM/DD/YYYY') prevents thousands of wrongly-formatted submissions.",
+  whyItMatters: "A short example format ('MM/DD/YYYY') prevents **thousands** of wrongly-formatted submissions.",
   realWorldAnalogy: {
     title: "Faint Pencil Guide Lines",
-    story: "Coloring books print faint guide lines that vanish under your crayon.",
+    story: "Coloring books print **faint guide lines** that vanish under your crayon. The placeholder is those guide lines; your typed text is the coloring.",
     comparison: [
-      { item: "Guide lines", meaning: "The placeholder — a hint that disappears" },
-      { item: "Your coloring", meaning: "The typed text — replaces the hint" }
+      { item: "The guide lines", meaning: "The **placeholder** — a hint that disappears" },
+      { item: "Your coloring", meaning: "The **typed text** — replaces the hint" }
     ]
   },
   syntaxStructure: `<input type="email" placeholder="you@example.com">`,
@@ -589,37 +589,37 @@ export const htmlPlaceholderContent: LessonContent = {
     { lineOrToken: "placeholder", description: "Shows an example format in light gray until the user types." }
   ],
   commonMistakes: [
-    { wrong: `<input type="text" name="card" placeholder="Card number">`, correct: `<label for="card">Card number</label>\n<input type="text" id="card" name="card" placeholder="1234 5678 9012 3456">`, reason: "Placeholder text disappears and has poor contrast — it can't replace a real <label>. Use both: label names it, placeholder hints at format." }
+    { wrong: `<input type="text" name="card" placeholder="Card number">`, correct: `<label for="card">Card number</label>\n<input type="text" id="card" name="card" placeholder="1234 5678 9012 3456">`, reason: "**Placeholder text disappears** and has poor contrast — it cannot replace a real `<label>`. Use both: the label names it, the placeholder hints at format." }
   ],
   tryItYourself: {
     html: `<input type="text" name="zip">`,
     instructions: "Add a placeholder showing an example zip code: '75000'."
   },
   takeaways: [
-    "placeholder shows hint text inside empty fields.",
-    "It disappears when the user types.",
-    "It's a hint, not a label — use both."
+    "`placeholder` shows **hint text** inside empty fields.",
+    "It **disappears** when the user types.",
+    "It is a **hint, not a label** — use both."
   ],
   quizQuestions: [
-    { id: "html-placeholder-1", question: "What happens to placeholder text when the user types?", options: ["It stays visible", "It disappears", "It turns red", "It moves above the field"], correctAnswerIndex: 1, explanation: "Placeholder hints show only in empty fields and vanish on input." },
-    { id: "html-placeholder-2", question: "What is placeholder best used for?", options: ["Replacing labels", "Showing an example format like DD/MM/YYYY", "Storing passwords", "Page titles"], correctAnswerIndex: 1, explanation: "Placeholders excel at demonstrating the expected format — labels still do the naming." }
+    { id: "html-placeholder-1", question: "What happens to placeholder text when the user types?", options: ["It stays visible", "It disappears", "It turns red", "It moves above the field"], correctAnswerIndex: 1, explanation: "Correct — placeholder hints show **only in empty fields** and vanish on input." },
+    { id: "html-placeholder-2", question: "What is placeholder best used for?", options: ["Replacing labels", "Showing an example format like DD/MM/YYYY", "Storing passwords", "Page titles"], correctAnswerIndex: 1, explanation: "Right! Placeholders excel at **demonstrating the expected format** — labels still do the naming." }
   ]
 };
 
 export const htmlRequiredFieldsContent: LessonContent = {
   heroTagline: "Make important fields mandatory.",
-  introduction: "The required attribute blocks form submission until the field is filled. The browser shows its own error message — no JavaScript needed.",
+  introduction: "An order with **no address** ships nowhere. The `required` attribute is your bouncer: it **blocks submission** until the field is filled — and the browser shows its own error message. Zero JavaScript needed.",
   definition: {
     term: "required Attribute",
-    explanation: "A boolean attribute that makes a field mandatory before submission."
+    explanation: "A **boolean attribute** making a field mandatory before submission."
   },
-  whyItMatters: "An order without an address ships nowhere. required catches empty critical fields instantly.",
+  whyItMatters: "An order without an address **ships nowhere**. `required` catches empty critical fields instantly.",
   realWorldAnalogy: {
     title: "Starred Questions on an Exam",
-    story: "Starred questions must be answered, or the whole paper is rejected.",
+    story: "**Starred questions** must be answered, or the whole paper is rejected. A `required` field is that starred question — skip it and the form will not submit.",
     comparison: [
-      { item: "Starred question", meaning: "A required field — submission blocked without it" },
-      { item: "Optional question", meaning: "A normal field — may be left empty" }
+      { item: "The starred question", meaning: "A **required field** — submission blocked without it" },
+      { item: "An optional question", meaning: "A **normal field** — may be left empty" }
     ]
   },
   syntaxStructure: `<input type="email" name="email" required>`,
@@ -634,36 +634,36 @@ export const htmlRequiredFieldsContent: LessonContent = {
     { lineOrToken: "required", description: "No value needed — its presence alone enforces the rule." }
   ],
   commonMistakes: [
-    { wrong: `<!-- every single field required -->`, correct: `<!-- only truly essential fields required -->`, reason: "Over-required forms drive users away — every extra mandatory field costs you completions. Require only what's essential." }
+    { wrong: `<!-- every single field required -->`, correct: `<!-- only truly essential fields required -->`, reason: "**Over-required** forms drive users away — every extra mandatory field costs you completions. Require only what is essential." }
   ],
   tryItYourself: {
     html: `<label for="n">Name:</label>\n<input type="text" id="n" name="name">`,
     instructions: "Add the required attribute to the input."
   },
   takeaways: [
-    "required blocks submission until the field is filled.",
-    "The browser shows its own error message.",
-    "Require only essential fields — not everything."
+    "`required` **blocks submission** until the field is filled.",
+    "The browser shows its **own error** message.",
+    "Require only **essential** fields — not everything."
   ],
   quizQuestions: [
-    { id: "html-required-1", question: "What does the required attribute do?", options: ["Styles the field red", "Blocks submission until the field is filled", "Hides the field", "Disables the field"], correctAnswerIndex: 1, explanation: "required makes the field mandatory — the browser stops empty submissions." },
-    { id: "html-required-2", question: "Should every form field be required?", options: ["Yes, always", "No — only truly essential fields", "Only text fields", "Only on mobile"], correctAnswerIndex: 1, explanation: "Excessive required fields frustrate users and reduce form completions." }
+    { id: "html-required-1", question: "What does the required attribute do?", options: ["Styles the field red", "Blocks submission until the field is filled", "Hides the field", "Disables the field"], correctAnswerIndex: 1, explanation: "Correct — `required` makes the field **mandatory**; the browser stops empty submissions." },
+    { id: "html-required-2", question: "Should every form field be required?", options: ["Yes, always", "No — only truly essential fields", "Only text fields", "Only on mobile"], correctAnswerIndex: 1, explanation: "Right! **Excessive** required fields frustrate users and reduce form completions." }
   ]
 };
 export const htmlFormAttributesContent: LessonContent = {
   heroTagline: "Control where and how your form sends data.",
-  introduction: "The <form> tag's attributes steer submissions: action sets the destination URL, method chooses GET or POST, and other attributes fine-tune behavior.",
+  introduction: "A form with **no `action`** submits to the same page — fine for demos, wrong for real apps. The `<form>` tag's attributes are the **steering wheel**: `action` sets the destination URL, `method` chooses **GET** or **POST**.",
   definition: {
     term: "Form Attributes (action, method)",
-    explanation: "Settings on <form> controlling the submission destination and HTTP method."
+    explanation: "**Settings** on `<form>` controlling the submission destination and HTTP method."
   },
-  whyItMatters: "A form with no action submits to the same page — fine for demos, wrong for real apps. Attributes aim the data correctly.",
+  whyItMatters: "A form with no `action` submits to the **same page** — fine for demos, wrong for real apps. Attributes aim the data correctly.",
   realWorldAnalogy: {
     title: "Addressing and Stamping a Letter",
-    story: "The address says where the letter goes; the stamp class says how fast it travels.",
+    story: "The **address** says where the letter goes; the **stamp class** says how fast it travels. `action` is the address; `method` is the mail class.",
     comparison: [
-      { item: "Envelope address", meaning: "The action attribute — the destination" },
-      { item: "Mail class", meaning: "The method attribute — how it travels" }
+      { item: "The envelope address", meaning: "The **`action`** attribute — the destination" },
+      { item: "The mail class", meaning: "The **`method`** attribute — how it travels" }
     ]
   },
   syntaxStructure: `<form action="/search" method="get">`,
@@ -683,37 +683,37 @@ export const htmlFormAttributesContent: LessonContent = {
     { lineOrToken: "method=\"post\"", description: "Hides data in the request body — good for passwords and personal info." }
   ],
   commonMistakes: [
-    { wrong: `<form action="/login" method="get">\n  <input type="password" name="pw">\n</form>`, correct: `<form action="/login" method="post">\n  <input type="password" name="pw">\n</form>`, reason: "GET puts the password in the URL — visible in history, logs, and shared links. Sensitive data always uses POST." }
+    { wrong: `<form action="/login" method="get">\n  <input type="password" name="pw">\n</form>`, correct: `<form action="/login" method="post">\n  <input type="password" name="pw">\n</form>`, reason: "**GET** puts the password in the URL — visible in history, logs, and shared links. Sensitive data always uses POST." }
   ],
   tryItYourself: {
     html: `<form>\n  <input type="text" name="q">\n</form>`,
     instructions: "Add action=\"/search\" and method=\"get\" to the form."
   },
   takeaways: [
-    "action sets where form data is sent.",
-    "method=\"get\" puts data in the URL; \"post\" hides it.",
-    "Use POST for sensitive data like passwords."
+    "`action` sets **where** form data is sent.",
+    "`method=\"get\"` puts data in the **URL**; `\"post\"` hides it.",
+    "Use **POST** for sensitive data like passwords."
   ],
   quizQuestions: [
-    { id: "html-formattr-1", question: "What is the difference between GET and POST?", options: ["No difference", "GET puts data in the URL; POST hides it in the request body", "POST is faster", "GET is more secure"], correctAnswerIndex: 1, explanation: "GET appends data visibly to the URL; POST sends it hidden in the request body." },
-    { id: "html-formattr-2", question: "Which method should a login form use?", options: ["GET", "POST", "Either is fine", "Neither"], correctAnswerIndex: 1, explanation: "Passwords must not appear in URLs — POST keeps them out of history and logs." }
+    { id: "html-formattr-1", question: "What is the difference between GET and POST?", options: ["No difference", "GET puts data in the URL; POST hides it in the request body", "POST is faster", "GET is more secure"], correctAnswerIndex: 1, explanation: "Correct — **GET** appends data visibly to the URL; **POST** sends it hidden in the request body." },
+    { id: "html-formattr-2", question: "Which method should a login form use?", options: ["GET", "POST", "Either is fine", "Neither"], correctAnswerIndex: 1, explanation: "Right! **Passwords** must not appear in URLs — POST keeps them out of history and logs." }
   ]
 };
 
 export const htmlInputTypesContent: LessonContent = {
   heroTagline: "A tour of HTML's built-in input controls.",
-  introduction: "The type attribute offers 20+ specialized inputs: date pickers, color wells, file uploads, range sliders, and search fields. Each brings its own keyboard and validation for free.",
+  introduction: "Why build a **calendar picker** with JavaScript when the browser gives you one free? The `type` attribute offers **20+ specialized inputs** — date pickers, color wells, file uploads, range sliders — each with its own keyboard and validation, totally free.",
   definition: {
     term: "Input type Attribute",
-    explanation: "The setting that transforms <input> into specialized controls like date, color, file, and range."
+    explanation: "The **setting** transforming `<input>` into specialized controls like date, color, file, and range."
   },
-  whyItMatters: "Using the right type gives you mobile keyboards, pickers, and validation with zero JavaScript.",
+  whyItMatters: "Using the right `type` gives you **mobile keyboards**, pickers, and validation with zero JavaScript.",
   realWorldAnalogy: {
     title: "A Toolbox of Screwdrivers",
-    story: "Each screw head needs its matching driver — the right tool fits perfectly.",
+    story: "Each **screw head** needs its matching driver — the right tool fits perfectly. Each kind of data needs its matching input type.",
     comparison: [
-      { item: "Screwdriver set", meaning: "The input types — a specialized tool for each job" },
-      { item: "The screw", meaning: "The data you need — matched to its tool" }
+      { item: "The screwdriver set", meaning: "The **input types** — a specialized tool for each job" },
+      { item: "The screw", meaning: "The **data** you need — matched to its tool" }
     ]
   },
   syntaxStructure: `<input type="date"> <input type="color"> <input type="file">`,
@@ -727,37 +727,37 @@ export const htmlInputTypesContent: LessonContent = {
     { lineOrToken: "type=\"range\"", description: "A slider between min and max values." }
   ],
   commonMistakes: [
-    { wrong: `<input type="text" name="dob" placeholder="Pick a date"> <!-- + custom JS picker -->`, correct: `<input type="date" name="dob">`, reason: "Native pickers are accessible, localized, and free — hand-built ones rarely match that quality." }
+    { wrong: `<input type="text" name="dob" placeholder="Pick a date"> <!-- + custom JS picker -->`, correct: `<input type="date" name="dob">`, reason: "**Native pickers** are accessible, localized, and free — hand-built ones rarely match that quality. Do not reinvent the wheel!" }
   ],
   tryItYourself: {
     html: `<form action="/go" method="post">\n</form>`,
     instructions: "Add a date input named \"bday\" and a color input named \"favcolor\"."
   },
   takeaways: [
-    "20+ input types exist: date, color, file, range, search, and more.",
-    "Native types bring free pickers and mobile keyboards.",
-    "Prefer native types over custom JavaScript controls."
+    "**20+ input types** exist: date, color, file, range, search, and more.",
+    "Native types bring **free pickers** and mobile keyboards.",
+    "Prefer **native types** over custom JavaScript controls."
   ],
   quizQuestions: [
-    { id: "html-inputtypes-1", question: "Which input type opens a calendar picker?", options: ["type=\"text\"", "type=\"date\"", "type=\"calendar\"", "type=\"pick\""], correctAnswerIndex: 1, explanation: "type=\"date\" renders a native calendar picker in supporting browsers." },
-    { id: "html-inputtypes-2", question: "Why prefer native input types over custom JavaScript ones?", options: ["They are prettier", "They are accessible, localized, and free", "They load slower", "No reason"], correctAnswerIndex: 1, explanation: "Native controls work with screen readers and adapt to the user's language automatically." }
+    { id: "html-inputtypes-1", question: "Which input type opens a calendar picker?", options: ["type=\"text\"", "type=\"date\"", "type=\"calendar\"", "type=\"pick\""], correctAnswerIndex: 1, explanation: "Correct — `type=\"date\"` renders a **native calendar picker** in supporting browsers." },
+    { id: "html-inputtypes-2", question: "Why prefer native input types over custom JavaScript ones?", options: ["They are prettier", "They are accessible, localized, and free", "They load slower", "No reason"], correctAnswerIndex: 1, explanation: "Right! Native controls work with **screen readers** and adapt to the user's language automatically." }
   ]
 };
 
 export const htmlCompleteFormContent: LessonContent = {
   heroTagline: "Assemble everything into a real registration form.",
-  introduction: "A complete form combines labels, varied inputs, validation, and buttons into one working unit. This lesson puts every form piece together in a signup form.",
+  introduction: "You have met every player — labels, inputs, validation, buttons. Now watch the **full team** play together. A **complete form** unites them all into one working signup form: the pattern you will copy for every project.",
   definition: {
     term: "Complete HTML Form",
-    explanation: "A full form uniting structure, inputs, labels, validation, and submission."
+    explanation: "A **full form** uniting structure, inputs, labels, validation, and submission."
   },
-  whyItMatters: "Real projects need whole forms, not isolated fields. This is the pattern you'll copy for every signup, checkout, and contact page.",
+  whyItMatters: "Real projects need **whole forms**, not isolated fields. This is the pattern you will copy for every signup, checkout, and contact page.",
   realWorldAnalogy: {
     title: "A Finished Jigsaw Puzzle",
-    story: "Each piece made sense alone, but together they reveal the full picture.",
+    story: "Each **piece** made sense alone, but together they reveal the full picture. Labels, inputs, and buttons are the pieces; the complete form is the finished puzzle.",
     comparison: [
-      { item: "Puzzle pieces", meaning: "The individual form lessons — labels, inputs, buttons" },
-      { item: "Finished puzzle", meaning: "The complete form — everything working together" }
+      { item: "The puzzle pieces", meaning: "The **individual form lessons** — labels, inputs, buttons" },
+      { item: "The finished puzzle", meaning: "The **complete form** — everything working together" }
     ]
   },
   syntaxStructure: `<form action="/signup" method="post">
@@ -780,37 +780,37 @@ export const htmlCompleteFormContent: LessonContent = {
     { lineOrToken: "for/id pairs", description: "Each label is linked to its input for accessibility." }
   ],
   commonMistakes: [
-    { wrong: `<div>\n  <input type="text" placeholder="Name">\n  <input type="text" placeholder="Email">\n  <div onclick="send()">Go</div>\n</div>`, correct: `<form action="/signup" method="post">\n  <label for="n">Name:</label>\n  <input type="text" id="n" name="name" required>\n  <button type="submit">Go</button>\n</form>`, reason: "A form without labels, validation, and real semantics is unusable for many users and fragile for all." }
+    { wrong: `<div>\n  <input type="text" placeholder="Name">\n  <input type="text" placeholder="Email">\n  <div onclick="send()">Go</div>\n</div>`, correct: `<form action="/signup" method="post">\n  <label for="n">Name:</label>\n  <input type="text" id="n" name="name" required>\n  <button type="submit">Go</button>\n</form>`, reason: "A form without **labels, validation, and real semantics** is unusable for many users and fragile for all. Build the whole package!" }
   ],
   tryItYourself: {
     html: `<form action="/join" method="post">\n</form>`,
     instructions: "Build a mini signup: labeled email + password inputs (both required) and a submit button."
   },
   takeaways: [
-    "Complete forms combine labels, inputs, validation, and buttons.",
-    "Every field gets a label; key fields get validation.",
-    "This pattern powers signups, checkouts, and contact pages."
+    "Complete forms combine **labels, inputs, validation**, and buttons.",
+    "Every field gets a **label**; key fields get **validation**.",
+    "This pattern powers **signups**, checkouts, and contact pages."
   ],
   quizQuestions: [
-    { id: "html-completeform-1", question: "What are the essential parts of a complete form?", options: ["Only inputs", "Labels, inputs, validation, and a submit button", "Only buttons", "Images and videos"], correctAnswerIndex: 1, explanation: "A working form needs labeled inputs, validation rules, and a way to submit." },
-    { id: "html-completeform-2", question: "Why wrap everything in a real <form> element?", options: ["It looks nicer", "Inputs submit together and semantics work for everyone", "It is optional", "CSS requires it"], correctAnswerIndex: 1, explanation: "The form element groups inputs for submission and gives assistive tech proper structure." }
+    { id: "html-completeform-1", question: "What are the essential parts of a complete form?", options: ["Only inputs", "Labels, inputs, validation, and a submit button", "Only buttons", "Images and videos"], correctAnswerIndex: 1, explanation: "Correct — a working form needs **labeled inputs**, validation rules, and a way to submit." },
+    { id: "html-completeform-2", question: "Why wrap everything in a real <form> element?", options: ["It looks nicer", "Inputs submit together and semantics work for everyone", "It is optional", "CSS requires it"], correctAnswerIndex: 1, explanation: "Right! The form element **groups inputs** for submission and gives assistive tech proper structure." }
   ]
 };
 
 export const htmlIframesContent: LessonContent = {
   heroTagline: "Embed entire webpages inside yours.",
-  introduction: "The <iframe> tag (inline frame) embeds a whole external page — a map, a video, a document — inside a box on your page. The embedded page runs independently.",
+  introduction: "Want a **map**, a **video**, or a **document** on your page — without building any of them? The `<iframe>` tag (inline frame) embeds a **whole external page** inside a box on yours. The embedded page runs independently, like a TV inside your wall.",
   definition: {
     term: "<iframe> Element",
-    explanation: "An inline frame embedding a complete external document inside your page."
+    explanation: "An **inline frame** embedding a complete external document inside your page."
   },
-  whyItMatters: "Maps, videos, and widgets would take months to build. Iframes let you embed the experts' versions in minutes.",
+  whyItMatters: "Maps, videos, and widgets would take **months** to build. Iframes let you embed the experts' versions in minutes.",
   realWorldAnalogy: {
     title: "A Picture-in-Picture TV",
-    story: "The small corner screen shows another channel while the main one plays.",
+    story: "The **small corner screen** shows another channel while the main one plays. The `<iframe>` is that corner screen — another page living inside yours.",
     comparison: [
-      { item: "Corner screen", meaning: "The <iframe> — another page inside yours" },
-      { item: "Main channel", meaning: "Your page — the frame around it" }
+      { item: "The corner screen", meaning: "The **`<iframe>`** — another page inside yours" },
+      { item: "The main channel", meaning: "**Your page** — the frame around it" }
     ]
   },
   syntaxStructure: `<iframe src="https://example.com" width="600" height="400" title="..."></iframe>`,
@@ -824,37 +824,37 @@ export const htmlIframesContent: LessonContent = {
     { lineOrToken: "width / height", description: "Sets the visible size of the embedded box." }
   ],
   commonMistakes: [
-    { wrong: `<iframe src="https://example.com/map"></iframe>`, correct: `<iframe src="https://example.com/map" title="Map of Lahore" width="600" height="400"></iframe>`, reason: "Screen readers announce untitled frames as just 'frame' — users have no idea what's inside without a title." }
+    { wrong: `<iframe src="https://example.com/map"></iframe>`, correct: `<iframe src="https://example.com/map" title="Map of Lahore" width="600" height="400"></iframe>`, reason: "**Screen readers** announce untitled frames as just 'frame' — users have no idea what is inside without a `title`." }
   ],
   tryItYourself: {
     html: `<iframe src="https://example.com"></iframe>`,
     instructions: "Add a title (\"Example page\"), width=\"500\" and height=\"300\"."
   },
   takeaways: [
-    "<iframe> embeds a complete external page.",
-    "Always include a descriptive title.",
-    "Set width and height for the frame size."
+    "`<iframe>` embeds a **complete external** page.",
+    "Always include a descriptive **`title`**.",
+    "Set **width and height** for the frame size."
   ],
   quizQuestions: [
-    { id: "html-iframes-1", question: "What does <iframe> embed?", options: ["Only images", "A complete external webpage", "Only text files", "Nothing — deprecated"], correctAnswerIndex: 1, explanation: "<iframe> embeds a full external document that runs independently inside the box." },
-    { id: "html-iframes-2", question: "Why must <iframe> have a title?", options: ["For styling", "So screen readers can describe the embedded content", "For SEO ranking", "It is optional"], correctAnswerIndex: 1, explanation: "Without a title, assistive technology announces only 'frame' with no useful context." }
+    { id: "html-iframes-1", question: "What does <iframe> embed?", options: ["Only images", "A complete external webpage", "Only text files", "Nothing — deprecated"], correctAnswerIndex: 1, explanation: "Correct — `<iframe>` embeds a **full external document** that runs independently inside the box." },
+    { id: "html-iframes-2", question: "Why must <iframe> have a title?", options: ["For styling", "So screen readers can describe the embedded content", "For SEO ranking", "It is optional"], correctAnswerIndex: 1, explanation: "Right! Without a `title`, assistive technology announces only '**frame**' — with no useful context." }
   ]
 };
 
 export const htmlEntitiesContent: LessonContent = {
   heroTagline: "Write special characters without breaking your code.",
-  introduction: "HTML entities are codes like &lt; that display reserved characters. Since < starts a tag, you write &lt; to actually show a less-than sign as text.",
+  introduction: "Try typing a literal **<** into your HTML and the browser panics — 'is this a tag?!' **HTML entities** are the escape codes: write `&lt;` and the browser calmly displays a less-than sign as text. Secret handshakes for reserved characters.",
   definition: {
     term: "HTML Entity",
-    explanation: "A code starting with & and ending with ; that displays a reserved or special character."
+    explanation: "A **code** starting with `&` and ending with `;` that displays a reserved or special character."
   },
-  whyItMatters: "Tutorials about HTML must show <p> as text. Without entities, the browser would treat it as a real tag.",
+  whyItMatters: "Tutorials about HTML must **show** `<p>` as text. Without entities, the browser would treat it as a real tag.",
   realWorldAnalogy: {
     title: "A Secret Knock",
-    story: "Spies use a special knock pattern to say 'it's me' without using words.",
+    story: "Spies use a **special knock pattern** to say 'it is me' without using words. `&lt;` is that knock — a stand-in signal that produces the `<` character.",
     comparison: [
-      { item: "Secret knock", meaning: "The &lt; code — a stand-in signal" },
-      { item: "The door opening", meaning: "The < character appearing as text" }
+      { item: "The secret knock", meaning: "The **`&lt;`** code — a stand-in signal" },
+      { item: "The door opening", meaning: "The **`<`** character appearing as text" }
     ]
   },
   syntaxStructure: `&lt; &gt; &amp; &nbsp; &quot;`,
@@ -866,36 +866,36 @@ export const htmlEntitiesContent: LessonContent = {
     { lineOrToken: "&nbsp;", description: "A space that never breaks onto a new line." }
   ],
   commonMistakes: [
-    { wrong: `<p>Use <p> tags for paragraphs</p>`, correct: `<p>Use &lt;p&gt; tags for paragraphs</p>`, reason: "A raw < starts tag parsing — the browser eats your text as markup instead of showing it." }
+    { wrong: `<p>Use <p> tags for paragraphs</p>`, correct: `<p>Use &lt;p&gt; tags for paragraphs</p>`, reason: "A raw `<` starts **tag parsing** — the browser eats your text as markup instead of showing it. Entities keep it visible." }
   ],
   tryItYourself: {
     html: `<p>5 > 3 and 2 < 4</p>`,
     instructions: "Replace > with &gt; and < with &lt; so the symbols display correctly."
   },
   takeaways: [
-    "Entities start with & and end with ;.",
-    "&lt; &gt; &amp; display reserved characters as text.",
-    "&nbsp; creates a non-breaking space."
+    "Entities start with **`&`** and end with **`;`**.",
+    "`&lt;` `&gt;` `&amp;` display **reserved characters** as text.",
+    "`&nbsp;` creates a **non-breaking space**."
   ],
   quizQuestions: [
-    { id: "html-entities-1", question: "How do you display a literal < character as text?", options: ["Just type <", "Write &lt;", "Write <lt>", "Use the <text> tag"], correctAnswerIndex: 1, explanation: "&lt; is the entity for the less-than sign — a raw < would start a tag." },
-    { id: "html-entities-2", question: "What does &nbsp; create?", options: ["A new paragraph", "A space that won't break across lines", "Bold text", "A line break"], correctAnswerIndex: 1, explanation: "&nbsp; is a non-breaking space — it keeps words glued together on one line." }
+    { id: "html-entities-1", question: "How do you display a literal < character as text?", options: ["Just type <", "Write &lt;", "Write <lt>", "Use the <text> tag"], correctAnswerIndex: 1, explanation: "Correct — `&lt;` is the entity for the **less-than** sign. A raw `<` would start a tag!" },
+    { id: "html-entities-2", question: "What does &nbsp; create?", options: ["A new paragraph", "A space that won't break across lines", "Bold text", "A line break"], correctAnswerIndex: 1, explanation: "Right! `&nbsp;` is a **non-breaking space** — it keeps words glued together on one line." }
   ]
 };
 export const htmlSymbolsContent: LessonContent = {
   heroTagline: "Add ©, €, and ★ without hunting for keys.",
-  introduction: "HTML entities also produce symbols your keyboard lacks — © (&copy;), € (&euro;), ★ (&star;), ™ (&trade;). They render crisply at any size, unlike pasted images.",
+  introduction: "Your keyboard has no **©** key, no **€** key, no **★** key — but your pages still need them. **Symbol entities** like `&copy;` and `&euro;` conjure crisp typographic symbols at any size. No images, no hacks.",
   definition: {
     term: "HTML Symbol Entities",
-    explanation: "Entity codes that render typographic symbols like ©, ®, €, and stars."
+    explanation: "**Entity codes** rendering typographic symbols like ©, ®, €, and stars."
   },
-  whyItMatters: "Copyright lines, currencies, and star ratings need proper symbols. Entities guarantee they display everywhere.",
+  whyItMatters: "**Copyright lines**, currencies, and star ratings need proper symbols. Entities guarantee they display everywhere.",
   realWorldAnalogy: {
     title: "A Symbol Drawer",
-    story: "A printer's drawer holds every special character, ready to stamp onto the page.",
+    story: "A printer's **drawer** holds every special character, ready to stamp onto the page. Entity codes are that drawer — symbols on demand.",
     comparison: [
-      { item: "The drawer", meaning: "Entity codes — symbols on demand" },
-      { item: "Stamped symbol", meaning: "The rendered character — crisp at any size" }
+      { item: "The drawer", meaning: "**Entity codes** — symbols on demand" },
+      { item: "The stamped symbol", meaning: "The **rendered character** — crisp at any size" }
     ]
   },
   syntaxStructure: `&copy; &reg; &trade; &euro; &star;`,
@@ -907,37 +907,37 @@ export const htmlSymbolsContent: LessonContent = {
     { lineOrToken: "&star;", description: "★ — perfect for star ratings." }
   ],
   commonMistakes: [
-    { wrong: `<p>(c) 2026 My Site</p>`, correct: `<p>&copy; 2026 My Site</p>`, reason: "(c) looks amateur — © is the proper typographic symbol and renders correctly everywhere." }
+    { wrong: `<p>(c) 2026 My Site</p>`, correct: `<p>&copy; 2026 My Site</p>`, reason: "**(c)** looks amateur — **©** is the proper typographic symbol and renders correctly everywhere." }
   ],
   tryItYourself: {
     html: `<p>My Store. All rights reserved.</p>`,
     instructions: "Add &copy; 2026 at the start of the paragraph."
   },
   takeaways: [
-    "Symbol entities render ©, €, ★, ™ and more.",
-    "They scale crisply at any text size.",
-    "Use proper symbols instead of typed approximations like (c)."
+    "Symbol entities render **©, €, ★, ™** and more.",
+    "They scale **crisply** at any text size.",
+    "Use proper symbols instead of typed approximations like `(c)`."
   ],
   quizQuestions: [
-    { id: "html-symbols-1", question: "Which entity renders the copyright symbol ©?", options: ["&(c);", "&copy;", "&cr;", "(c)"], correctAnswerIndex: 1, explanation: "&copy; is the HTML entity for the © symbol." },
-    { id: "html-symbols-2", question: "Why use &euro; instead of typing EUR?", options: ["No reason", "€ is the proper typographic symbol and renders everywhere", "It loads faster", "EUR is deprecated"], correctAnswerIndex: 1, explanation: "Proper symbols look professional and display consistently across devices." }
+    { id: "html-symbols-1", question: "Which entity renders the copyright symbol ©?", options: ["&(c);", "&copy;", "&cr;", "(c)"], correctAnswerIndex: 1, explanation: "Correct — `&copy;` is the HTML entity for the **©** symbol." },
+    { id: "html-symbols-2", question: "Why use &euro; instead of typing EUR?", options: ["No reason", "€ is the proper typographic symbol and renders everywhere", "It loads faster", "EUR is deprecated"], correctAnswerIndex: 1, explanation: "Right! Proper symbols look **professional** and display consistently across devices." }
   ]
 };
 
 export const htmlMetadataContent: LessonContent = {
   heroTagline: "Invisible tags that describe your page.",
-  introduction: "The <meta> tags in your <head> describe the page to browsers and search engines — its description, author, and viewport settings. Visitors never see them, but machines read them all.",
+  introduction: "Visitors never see them, but **Google** reads them obsessively. `<meta>` tags live in your `<head>` and describe your page to machines — its **description**, author, and viewport settings. Invisible to humans, priceless to search engines.",
   definition: {
     term: "<meta> Tags",
-    explanation: "Head-section tags carrying machine-readable information about the page."
+    explanation: "**Head-section tags** carrying machine-readable information about the page."
   },
-  whyItMatters: "Google's search snippet comes from your meta description. Good metadata is free advertising in search results.",
+  whyItMatters: "Google's **search snippet** comes from your meta description. Good metadata is free advertising in search results.",
   realWorldAnalogy: {
     title: "A Library Catalog Card",
-    story: "The card describes the book — title, author, summary — without being the book itself.",
+    story: "The **catalog card** describes the book — title, author, summary — without being the book itself. `<meta>` tags are that card for your page.",
     comparison: [
-      { item: "Catalog card", meaning: "The <meta> tags — describe the page" },
-      { item: "The book", meaning: "The visible page — the actual content" }
+      { item: "The catalog card", meaning: "The **`<meta>`** tags — describe the page" },
+      { item: "The book", meaning: "The **visible page** — the actual content" }
     ]
   },
   syntaxStructure: `<meta name="description" content="...">`,
@@ -951,37 +951,37 @@ export const htmlMetadataContent: LessonContent = {
     { lineOrToken: "name=\"viewport\"", description: "Makes the page scale correctly on phones." }
   ],
   commonMistakes: [
-    { wrong: `<meta name="keywords" content="bread, bakery, best bread, cheap bread, bread">`, correct: `<meta name="description" content="Sunrise Bakery — fresh sourdough baked daily in Lahore.">`, reason: "The keywords meta tag has been ignored by Google for years — a good description is what actually matters." }
+    { wrong: `<meta name="keywords" content="bread, bakery, best bread, cheap bread, bread">`, correct: `<meta name="description" content="Sunrise Bakery — fresh sourdough baked daily in Lahore.">`, reason: "The **keywords** meta tag has been ignored by Google for years — a good description is what actually matters." }
   ],
   tryItYourself: {
     html: `<head>\n  <title>My Page</title>\n</head>`,
     instructions: "Add a meta description: 'Learn HTML with easy lessons.'"
   },
   takeaways: [
-    "<meta> tags describe the page to machines.",
-    "The description meta powers Google's snippet.",
-    "The keywords meta tag is dead — don't bother."
+    "`<meta>` tags **describe** the page to machines.",
+    "The **description** meta powers Google's snippet.",
+    "The **keywords** meta tag is dead — do not bother."
   ],
   quizQuestions: [
-    { id: "html-meta-1", question: "Where do <meta> tags go?", options: ["In the <body>", "In the <head>", "Anywhere", "In a <table>"], correctAnswerIndex: 1, explanation: "Meta tags live in the <head> — they're machine-readable page information." },
-    { id: "html-meta-2", question: "What does the meta description do?", options: ["Shows on the page", "Becomes Google's snippet under your link", "Sets the page title", "Changes fonts"], correctAnswerIndex: 1, explanation: "Search engines display your meta description as the result snippet." }
+    { id: "html-meta-1", question: "Where do <meta> tags go?", options: ["In the <body>", "In the <head>", "Anywhere", "In a <table>"], correctAnswerIndex: 1, explanation: "Correct — meta tags live in the **`<head>`**; they are machine-readable page information." },
+    { id: "html-meta-2", question: "What does the meta description do?", options: ["Shows on the page", "Becomes Google's snippet under your link", "Sets the page title", "Changes fonts"], correctAnswerIndex: 1, explanation: "Right! Search engines display your **meta description** as the result snippet." }
   ]
 };
 
 export const htmlFaviconContent: LessonContent = {
   heroTagline: "The tiny icon in the browser tab.",
-  introduction: "A favicon is the small icon shown in the browser tab next to your page title. You add it with a <link rel=\"icon\"> tag pointing to a small PNG or ICO file.",
+  introduction: "Twenty open tabs, all looking **identical** — how do you spot yours? The **favicon**: that tiny icon in the browser tab. One `<link rel=\"icon\">` tag, one small image file, and your site becomes instantly recognizable.",
   definition: {
     term: "Favicon",
-    explanation: "A small icon representing your site, displayed in browser tabs and bookmarks."
+    explanation: "A **small icon** representing your site, displayed in browser tabs and bookmarks."
   },
-  whyItMatters: "Twenty open tabs all look alike. A favicon helps users spot your site instantly.",
+  whyItMatters: "Twenty open tabs all look alike. A **favicon** helps users spot your site instantly.",
   realWorldAnalogy: {
     title: "A Flag on a Mailbox",
-    story: "A little flag tells the mail carrier exactly which mailbox is yours.",
+    story: "A little **flag** tells the mail carrier exactly which mailbox is yours. The favicon is that flag for your browser tab.",
     comparison: [
-      { item: "Mailbox flag", meaning: "The favicon — identifies your site at a glance" },
-      { item: "The mailbox", meaning: "The browser tab — where the icon appears" }
+      { item: "The mailbox flag", meaning: "The **favicon** — identifies your site at a glance" },
+      { item: "The mailbox", meaning: "The **browser tab** — where the icon appears" }
     ]
   },
   syntaxStructure: `<link rel="icon" href="favicon.png" type="image/png">`,
@@ -993,37 +993,37 @@ export const htmlFaviconContent: LessonContent = {
     { lineOrToken: "rel=\"icon\"", description: "Declares to the browser: 'this file is the site's icon'." }
   ],
   commonMistakes: [
-    { wrong: `<link rel="icon" href="images/huge-photo-2mb.jpg">`, correct: `<link rel="icon" href="images/favicon-32.png" type="image/png">`, reason: "The icon displays at 16 pixels — a huge file wastes bandwidth for zero visual gain. Use a tiny 32×32 icon." }
+    { wrong: `<link rel="icon" href="images/huge-photo-2mb.jpg">`, correct: `<link rel="icon" href="images/favicon-32.png" type="image/png">`, reason: "The icon displays at **16 pixels** — a huge file wastes bandwidth for zero visual gain. Use a tiny 32×32 icon." }
   ],
   tryItYourself: {
     html: `<head>\n  <title>My Site</title>\n</head>`,
     instructions: "Add a favicon link pointing to \"favicon.png\"."
   },
   takeaways: [
-    "Favicons appear in browser tabs and bookmarks.",
-    "Add one with <link rel=\"icon\"> in the <head>.",
-    "Keep the file tiny — 32×32 pixels is plenty."
+    "Favicons appear in **browser tabs** and bookmarks.",
+    "Add one with `<link rel=\"icon\">` in the **`<head>`**.",
+    "Keep the file tiny — **32×32 pixels** is plenty."
   ],
   quizQuestions: [
-    { id: "html-favicon-1", question: "Where does a favicon appear?", options: ["In the page body", "In the browser tab next to the title", "In the footer", "In search results only"], correctAnswerIndex: 1, explanation: "Favicons show in browser tabs, bookmarks, and history next to the page title." },
-    { id: "html-favicon-2", question: "How do you add a favicon?", options: ["<img> tag in the body", "<link rel=\"icon\"> in the <head>", "CSS background", "JavaScript"], correctAnswerIndex: 1, explanation: "A link tag with rel=\"icon\" in the head points to the icon file." }
+    { id: "html-favicon-1", question: "Where does a favicon appear?", options: ["In the page body", "In the browser tab next to the title", "In the footer", "In search results only"], correctAnswerIndex: 1, explanation: "Correct — favicons show in **browser tabs**, bookmarks, and history next to the page title." },
+    { id: "html-favicon-2", question: "How do you add a favicon?", options: ["<img> tag in the body", "<link rel=\"icon\"> in the <head>", "CSS background", "JavaScript"], correctAnswerIndex: 1, explanation: "Right! A link tag with **`rel=\"icon\"`** in the head points to the icon file." }
   ]
 };
 
 export const htmlPageTitleContent: LessonContent = {
   heroTagline: "Name your page for tabs and search results.",
-  introduction: "The <title> tag sets the text in the browser tab and the clickable headline in Google results. Every page needs exactly one, placed inside <head>.",
+  introduction: "It is the **first thing** people see in Google — the clickable blue headline — and the text on your browser tab. The `<title>` tag names your page, and every page needs **exactly one**.",
   definition: {
     term: "<title> Element",
-    explanation: "The page's name — shown in the browser tab, bookmarks, and search results."
+    explanation: "The page's **name** — shown in the browser tab, bookmarks, and search results."
   },
-  whyItMatters: "Your title is the first thing people see in Google. A clear title earns the click; 'Untitled' loses it.",
+  whyItMatters: "Your title is the **first thing** people see in Google. A clear title earns the click; 'Untitled' loses it.",
   realWorldAnalogy: {
     title: "A Nameplate on an Office Door",
-    story: "The nameplate tells visitors exactly whose office they've found.",
+    story: "The **nameplate** tells visitors exactly whose office they have found. The `<title>` is that nameplate for your page.",
     comparison: [
-      { item: "Nameplate", meaning: "The <title> — names the page" },
-      { item: "The office", meaning: "The page itself — the content inside" }
+      { item: "The nameplate", meaning: "The **`<title>`** — names the page" },
+      { item: "The office", meaning: "The **page** itself — the content inside" }
     ]
   },
   syntaxStructure: `<title>Page Name — Site Name</title>`,
@@ -1034,37 +1034,37 @@ export const htmlPageTitleContent: LessonContent = {
     { lineOrToken: "<title>", description: "Exactly one per page, always inside <head>." }
   ],
   commonMistakes: [
-    { wrong: `<body>\n  <title>My Page</title>\n</body>`, correct: `<head>\n  <title>My Page</title>\n</head>`, reason: "A title in the body is invalid HTML — browsers may ignore it and show the URL instead." }
+    { wrong: `<body>\n  <title>My Page</title>\n</body>`, correct: `<head>\n  <title>My Page</title>\n</head>`, reason: "A title in the **body** is invalid HTML — browsers may ignore it and show the URL instead." }
   ],
   tryItYourself: {
     html: `<head>\n</head>`,
     instructions: "Add a <title>: 'About Us — My Bakery'."
   },
   takeaways: [
-    "<title> sets the browser tab text and search headline.",
-    "Exactly one per page, inside <head>.",
-    "Keep it clear and under 60 characters."
+    "`<title>` sets the **browser tab** text and search headline.",
+    "**Exactly one** per page, inside `<head>`.",
+    "Keep it clear and under **60 characters**."
   ],
   quizQuestions: [
-    { id: "html-title-1", question: "Where must the <title> tag go?", options: ["In the <body>", "In the <head>", "In the <footer>", "Anywhere"], correctAnswerIndex: 1, explanation: "<title> belongs in the <head> — exactly one per page." },
-    { id: "html-title-2", question: "Where does the title text appear?", options: ["Only in the page body", "Browser tab, bookmarks, and Google results", "Nowhere visible", "Only in the URL"], correctAnswerIndex: 1, explanation: "The title shows in tabs, bookmarks, history, and as the clickable search headline." }
+    { id: "html-title-1", question: "Where must the <title> tag go?", options: ["In the <body>", "In the <head>", "In the <footer>", "Anywhere"], correctAnswerIndex: 1, explanation: "Correct — `<title>` belongs in the **`<head>`**: exactly one per page." },
+    { id: "html-title-2", question: "Where does the title text appear?", options: ["Only in the page body", "Browser tab, bookmarks, and Google results", "Nowhere visible", "Only in the URL"], correctAnswerIndex: 1, explanation: "Right! The title shows in **tabs, bookmarks, history**, and as the clickable search headline." }
   ]
 };
 
 export const htmlCharacterEncodingContent: LessonContent = {
   heroTagline: "Tell the browser how to read your characters.",
-  introduction: "The charset meta tag tells the browser which character set your page uses. UTF-8 covers nearly every language and symbol — always declare it first in <head>.",
+  introduction: "Without the right decoder, your page's text arrives as **broken � symbols** — especially non-English text and emojis. The **charset** meta tag tells the browser how to decode your characters. **UTF-8** covers nearly every language on Earth.",
   definition: {
     term: "Character Encoding (charset)",
-    explanation: "The declared character set (UTF-8) telling the browser how to decode your page's text."
+    explanation: "The declared **character set** (UTF-8) telling the browser how to decode your page's text."
   },
-  whyItMatters: "Without UTF-8, non-English text, emojis, and accents can render as broken � symbols.",
+  whyItMatters: "Without **UTF-8**, non-English text, emojis, and accents can render as broken � symbols.",
   realWorldAnalogy: {
     title: "A Decoder Ring",
-    story: "A coded message needs the right ring setting to be read correctly.",
+    story: "A **coded message** needs the right ring setting to be read correctly. The charset declaration is that setting; your HTML file's bytes are the coded message.",
     comparison: [
-      { item: "Ring setting", meaning: "The charset declaration — how to decode" },
-      { item: "Coded message", meaning: "Your HTML file's bytes — the raw data" }
+      { item: "The ring setting", meaning: "The **charset declaration** — how to decode" },
+      { item: "The coded message", meaning: "Your HTML file's **bytes** — the raw data" }
     ]
   },
   syntaxStructure: `<meta charset="UTF-8">`,
@@ -1076,37 +1076,37 @@ export const htmlCharacterEncodingContent: LessonContent = {
     { lineOrToken: "<meta charset=\"UTF-8\">", description: "Must be the first tag in <head> so the browser decodes everything correctly." }
   ],
   commonMistakes: [
-    { wrong: `<!-- file saved as Windows-1252, declared as UTF-8 -->`, correct: `<!-- file saved as UTF-8, declared as UTF-8 -->`, reason: "A mismatch between the file's actual encoding and the declared charset garbles every non-English character." }
+    { wrong: `<!-- file saved as Windows-1252, declared as UTF-8 -->`, correct: `<!-- file saved as UTF-8, declared as UTF-8 -->`, reason: "A **mismatch** between the file's actual encoding and the declared charset garbles every non-English character." }
   ],
   tryItYourself: {
     html: `<head>\n  <title>Hi</title>\n</head>`,
     instructions: "Add <meta charset=\"UTF-8\"> as the first tag inside <head>."
   },
   takeaways: [
-    "<meta charset=\"UTF-8\"> declares the character encoding.",
-    "Place it first in <head>.",
-    "Save your files as UTF-8 to match the declaration."
+    "`<meta charset=\"UTF-8\">` declares the **character encoding**.",
+    "Place it **first** in `<head>`.",
+    "Save your files as **UTF-8** to match the declaration."
   ],
   quizQuestions: [
-    { id: "html-charset-1", question: "What does <meta charset=\"UTF-8\"> do?", options: ["Sets the font", "Tells the browser how to decode the page's characters", "Speeds up loading", "Changes the language"], correctAnswerIndex: 1, explanation: "It declares the character encoding so text decodes correctly." },
-    { id: "html-charset-2", question: "Where should the charset meta tag go?", options: ["Last in <body>", "First in <head>", "In the footer", "Inside <title>"], correctAnswerIndex: 1, explanation: "It must come first in <head> so the browser decodes everything that follows correctly." }
+    { id: "html-charset-1", question: "What does <meta charset=\"UTF-8\"> do?", options: ["Sets the font", "Tells the browser how to decode the page's characters", "Speeds up loading", "Changes the language"], correctAnswerIndex: 1, explanation: "Correct — it declares the **character encoding** so text decodes correctly." },
+    { id: "html-charset-2", question: "Where should the charset meta tag go?", options: ["Last in <body>", "First in <head>", "In the footer", "Inside <title>"], correctAnswerIndex: 1, explanation: "Right! It must come **first** in `<head>` so the browser decodes everything that follows correctly." }
   ]
 };
 
 export const htmlResponsiveHtmlContent: LessonContent = {
   heroTagline: "One page that fits every screen.",
-  introduction: "Responsive HTML adapts to phones, tablets, and desktops. It starts with the viewport meta tag, which tells mobile browsers to match the layout to the screen width.",
+  introduction: "Most web traffic is **mobile**. But phones do not magically know your layout is mobile-friendly — the **viewport** meta tag tells them: 'match the layout to the screen width.' Without it, phones render a shrunken desktop site.",
   definition: {
     term: "Responsive HTML",
-    explanation: "Markup (plus CSS) that adapts page layout to any screen size."
+    explanation: "**Markup** (plus CSS) adapting page layout to any screen size."
   },
-  whyItMatters: "Most web traffic is mobile. A page that only works on desktops loses most of its audience.",
+  whyItMatters: "Most web traffic is **mobile**. A page that only works on desktops loses most of its audience.",
   realWorldAnalogy: {
     title: "Water in Different Glasses",
-    story: "Water takes the shape of any glass you pour it into.",
+    story: "**Water** takes the shape of any glass you pour it into. Responsive content is that water; the device screen is the glass.",
     comparison: [
-      { item: "Water", meaning: "Responsive content — adapts to the container" },
-      { item: "The glass", meaning: "The device screen — any size or shape" }
+      { item: "The water", meaning: "**Responsive content** — adapts to the container" },
+      { item: "The glass", meaning: "The **device screen** — any size or shape" }
     ]
   },
   syntaxStructure: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`,
@@ -1119,36 +1119,36 @@ export const htmlResponsiveHtmlContent: LessonContent = {
     { lineOrToken: "initial-scale=1.0", description: "Starts at 100% zoom — no tiny shrunken desktop view on phones." }
   ],
   commonMistakes: [
-    { wrong: `<!-- no viewport tag + fixed 1200px layout -->`, correct: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`, reason: "Without the viewport tag, phones render a shrunken desktop layout that users must pinch and zoom." }
+    { wrong: `<!-- no viewport tag + fixed 1200px layout -->`, correct: `<meta name="viewport" content="width=device-width, initial-scale=1.0">`, reason: "Without the **viewport** tag, phones render a shrunken desktop layout that users must pinch and zoom. One tag fixes it." }
   ],
   tryItYourself: {
     html: `<head>\n  <title>My Page</title>\n</head>`,
     instructions: "Add the viewport meta tag so the page works on phones."
   },
   takeaways: [
-    "The viewport meta tag enables mobile-friendly layouts.",
-    "width=device-width matches the screen width.",
-    "Responsive pages work on phones, tablets, and desktops."
+    "The **viewport** meta tag enables mobile-friendly layouts.",
+    "`width=device-width` matches the **screen width**.",
+    "Responsive pages work on **phones, tablets**, and desktops."
   ],
   quizQuestions: [
-    { id: "html-responsive-1", question: "What does the viewport meta tag do?", options: ["Adds a video player", "Makes the layout match the device screen width", "Changes colors", "Adds a map"], correctAnswerIndex: 1, explanation: "It tells mobile browsers to size the layout to the screen instead of shrinking a desktop view." },
-    { id: "html-responsive-2", question: "What happens without a viewport tag on phones?", options: ["Nothing", "Pages render as tiny shrunken desktop layouts", "Pages load faster", "Images disappear"], correctAnswerIndex: 1, explanation: "Mobile browsers default to a desktop-width layout, forcing pinch-and-zoom." }
+    { id: "html-responsive-1", question: "What does the viewport meta tag do?", options: ["Adds a video player", "Makes the layout match the device screen width", "Changes colors", "Adds a map"], correctAnswerIndex: 1, explanation: "Correct — it tells mobile browsers to **size the layout to the screen** instead of shrinking a desktop view." },
+    { id: "html-responsive-2", question: "What happens without a viewport tag on phones?", options: ["Nothing", "Pages render as tiny shrunken desktop layouts", "Pages load faster", "Images disappear"], correctAnswerIndex: 1, explanation: "Right! Mobile browsers default to a **desktop-width** layout, forcing pinch-and-zoom." }
   ]
 };
 export const htmlSeoFriendlyContent: LessonContent = {
   heroTagline: "Write HTML that search engines love.",
-  introduction: "SEO-friendly HTML uses semantic tags, one clear <h1>, descriptive titles, and meta descriptions so search engines understand and rank your page.",
+  introduction: "The best content in the world is worthless if **nobody finds it**. **SEO-friendly HTML** — semantic tags, one clear `<h1>`, descriptive titles, honest meta descriptions — is how search engines understand and rank your page.",
   definition: {
     term: "SEO-friendly HTML",
-    explanation: "Markup practices — semantic tags, proper headings, titles, alt text — that help search engines rank a page."
+    explanation: "**Markup practices** — semantic tags, proper headings, titles, alt text — helping search engines rank a page."
   },
-  whyItMatters: "The best content is worthless if nobody finds it. Clean semantic HTML is the foundation of every ranking.",
+  whyItMatters: "The best content is worthless if **nobody finds it**. Clean semantic HTML is the foundation of every ranking.",
   realWorldAnalogy: {
     title: "A Well-Organized Shop",
-    story: "Clear signs and labeled shelves help customers find products — and help the owner sell more.",
+    story: "**Clear signs** and labeled shelves help customers find products — and help the owner sell more. Headings are those signs; semantic tags are the labeled shelves.",
     comparison: [
-      { item: "Shop signs", meaning: "Headings and titles — guide search engines" },
-      { item: "Labeled shelves", meaning: "Semantic tags — organize content meaningfully" }
+      { item: "The shop signs", meaning: "**Headings and titles** — guide search engines" },
+      { item: "The labeled shelves", meaning: "**Semantic tags** — organize content meaningfully" }
     ]
   },
   syntaxStructure: `<title>Keywords — Site</title>
@@ -1170,37 +1170,37 @@ export const htmlSeoFriendlyContent: LessonContent = {
     { lineOrToken: "alt", description: "Describes the image with relevant, natural words." }
   ],
   commonMistakes: [
-    { wrong: `<h1>Bread bread cheap bread Lahore bread buy bread</h1>`, correct: `<h1>Fresh Sourdough Bread in Lahore</h1>`, reason: "Keyword stuffing gets penalized — search engines reward natural, helpful markup written for humans." }
+    { wrong: `<h1>Bread bread cheap bread Lahore bread buy bread</h1>`, correct: `<h1>Fresh Sourdough Bread in Lahore</h1>`, reason: "**Keyword stuffing** gets penalized — search engines reward natural, helpful markup written for humans." }
   ],
   tryItYourself: {
     html: `<head>\n  <title>Page</title>\n</head>\n<body>\n  <h1>Hi</h1>\n</body>`,
     instructions: "Rewrite the title and h1 to describe a bakery page naturally with keywords."
   },
   takeaways: [
-    "Use semantic tags, one <h1>, and descriptive titles.",
-    "Write meta descriptions that invite clicks.",
-    "Write for humans — keyword stuffing gets penalized."
+    "Use **semantic tags**, one `<h1>`, and descriptive titles.",
+    "Write **meta descriptions** that invite clicks.",
+    "Write for **humans** — keyword stuffing gets penalized."
   ],
   quizQuestions: [
-    { id: "html-seo-1", question: "Which practice helps SEO?", options: ["Keyword stuffing", "One clear <h1>, descriptive title, and semantic tags", "Hiding text with CSS", "Using only <div> tags"], correctAnswerIndex: 1, explanation: "Clean semantic markup with clear titles helps search engines understand the page." },
-    { id: "html-seo-2", question: "Why is keyword stuffing bad?", options: ["It looks ugly", "Search engines penalize it", "It slows loading", "It breaks HTML"], correctAnswerIndex: 1, explanation: "Search engines detect and penalize unnatural keyword repetition." }
+    { id: "html-seo-1", question: "Which practice helps SEO?", options: ["Keyword stuffing", "One clear <h1>, descriptive title, and semantic tags", "Hiding text with CSS", "Using only <div> tags"], correctAnswerIndex: 1, explanation: "Correct — clean **semantic markup** with clear titles helps search engines understand the page." },
+    { id: "html-seo-2", question: "Why is keyword stuffing bad?", options: ["It looks ugly", "Search engines penalize it", "It slows loading", "It breaks HTML"], correctAnswerIndex: 1, explanation: "Right! Search engines **detect and penalize** unnatural keyword repetition." }
   ]
 };
 
 export const htmlValidationContent: LessonContent = {
   heroTagline: "Check your code for errors like a spell-checker.",
-  introduction: "HTML validators (like validator.w3.org) scan your page and list markup errors — unclosed tags, bad nesting, duplicate ids. Valid code behaves predictably everywhere.",
+  introduction: "'**Looks fine in my browser**' is the most dangerous sentence in web development. Browsers silently **guess** at broken markup — and guess differently from each other. An **HTML validator** scans your code and lists every error, like spell-check for markup.",
   definition: {
     term: "HTML Validation",
-    explanation: "Checking your markup against the HTML standard to find and fix errors."
+    explanation: "Checking your **markup** against the HTML standard to find and fix errors."
   },
-  whyItMatters: "Browsers guess at broken markup differently. Valid code looks the same in every browser.",
+  whyItMatters: "Browsers **guess** at broken markup differently. Valid code looks the same in every browser.",
   realWorldAnalogy: {
     title: "Spell-Check for Code",
-    story: "Spell-check underlines typos you'd never catch on your own.",
+    story: "**Spell-check** underlines typos you would never catch on your own. A validator underlines markup typos — unclosed tags, bad nesting — the same way.",
     comparison: [
-      { item: "Spell-check", meaning: "The validator — finds mistakes automatically" },
-      { item: "Typos", meaning: "Markup errors — unclosed tags, bad nesting" }
+      { item: "The spell-check", meaning: "The **validator** — finds mistakes automatically" },
+      { item: "The typos", meaning: "**Markup errors** — unclosed tags, bad nesting" }
     ]
   },
   syntaxStructure: `https://validator.w3.org/`,
@@ -1215,37 +1215,37 @@ export const htmlValidationContent: LessonContent = {
     { lineOrToken: "<p>First paragraph", description: "Missing </p> — the validator flags this as an error." }
   ],
   commonMistakes: [
-    { wrong: `<!-- "It looks fine in Chrome, so it's valid" -->`, correct: `<!-- validate at validator.w3.org anyway -->`, reason: "Browsers silently repair errors — but different browsers repair them differently. Validation catches what your eyes miss." }
+    { wrong: `<!-- "It looks fine in Chrome, so it's valid" -->`, correct: `<!-- validate at validator.w3.org anyway -->`, reason: "**Browsers silently repair errors** — but different browsers repair them differently. Validation catches what your eyes miss." }
   ],
   tryItYourself: {
     html: `<p>Hello\n<div>World</div>`,
     instructions: "Find and fix the two markup errors (hint: unclosed tag, invalid nesting)."
   },
   takeaways: [
-    "Validators find markup errors automatically.",
-    "Valid code behaves consistently across browsers.",
-    "'Looks fine in my browser' is not proof of validity."
+    "Validators find **markup errors** automatically.",
+    "**Valid code** behaves consistently across browsers.",
+    "'Looks fine in my browser' is **not** proof of validity."
   ],
   quizQuestions: [
-    { id: "html-validation-1", question: "What does an HTML validator check?", options: ["Spelling of text", "Markup errors against the HTML standard", "Internet speed", "Color choices"], correctAnswerIndex: 1, explanation: "Validators scan for unclosed tags, bad nesting, duplicate ids, and other markup errors." },
-    { id: "html-validation-2", question: "Why validate if the page looks fine in your browser?", options: ["No need", "Browsers silently repair errors differently from each other", "It makes pages load faster", "Google requires it"], correctAnswerIndex: 1, explanation: "Each browser guesses differently at broken markup — valid code renders consistently everywhere." }
+    { id: "html-validation-1", question: "What does an HTML validator check?", options: ["Spelling of text", "Markup errors against the HTML standard", "Internet speed", "Color choices"], correctAnswerIndex: 1, explanation: "Correct — validators scan for **unclosed tags**, bad nesting, duplicate ids, and other markup errors." },
+    { id: "html-validation-2", question: "Why validate if the page looks fine in your browser?", options: ["No need", "Browsers silently repair errors differently from each other", "It makes pages load faster", "Google requires it"], correctAnswerIndex: 1, explanation: "Right! Each browser **guesses differently** at broken markup — valid code renders consistently everywhere." }
   ]
 };
 
 export const htmlCleanHtmlStructureContent: LessonContent = {
   heroTagline: "Write code that humans love to read.",
-  introduction: "Clean HTML means consistent indentation, semantic tags instead of div soup, lowercase tags, and comments marking big sections. Future you will thank present you.",
+  introduction: "You **read** code far more than you write it. **Clean HTML** — consistent indentation, semantic tags instead of div soup, lowercase tags, comments marking big sections — turns debugging from archaeology into a quick scan. Future you will thank present you.",
   definition: {
     term: "Clean HTML",
-    explanation: "Well-formatted, semantic, consistent markup that's easy to read and maintain."
+    explanation: "**Well-formatted, semantic, consistent** markup that is easy to read and maintain."
   },
-  whyItMatters: "You read code far more than you write it. Clean structure turns debugging from archaeology into a quick scan.",
+  whyItMatters: "You read code far more than you write it. Clean structure turns **debugging** from archaeology into a quick scan.",
   realWorldAnalogy: {
     title: "A Tidy Desk",
-    story: "On a tidy desk you find anything in seconds; on a messy one, nothing.",
+    story: "On a **tidy desk** you find anything in seconds; on a messy one, nothing. Clean indented markup is the tidy desk; div soup is the mess.",
     comparison: [
-      { item: "Tidy desk", meaning: "Clean indented markup — structure visible at a glance" },
-      { item: "Messy desk", meaning: "Div soup — everything piled together" }
+      { item: "The tidy desk", meaning: "**Clean indented markup** — structure visible at a glance" },
+      { item: "The messy desk", meaning: "**Div soup** — everything piled together" }
     ]
   },
   syntaxStructure: `<body>
@@ -1271,19 +1271,19 @@ export const htmlCleanHtmlStructureContent: LessonContent = {
     { lineOrToken: "<header>, <nav>, <main>", description: "Semantic tags instead of div soup — meaning is clear." }
   ],
   commonMistakes: [
-    { wrong: `<DIV CLASS="Header"><H1>Hi</H1></DIV>`, correct: `<header class="header"><h1>Hi</h1></header>`, reason: "Uppercase tags work but break convention — every codebase and tool expects lowercase, semantic markup." }
+    { wrong: `<DIV CLASS="Header"><H1>Hi</H1></DIV>`, correct: `<header class="header"><h1>Hi</h1></header>`, reason: "**Uppercase tags** work but break convention — every codebase and tool expects lowercase, semantic markup." }
   ],
   tryItYourself: {
     html: `<body><div><h1>Hi</h1><p>Welcome.</p></div></body>`,
     instructions: "Rewrite with clean indentation (2 spaces per level) and lowercase tags."
   },
   takeaways: [
-    "Indent consistently — 2 spaces per nesting level.",
-    "Use lowercase tags and semantic elements.",
-    "Clean code is faster to debug and easier to maintain."
+    "**Indent consistently** — 2 spaces per nesting level.",
+    "Use **lowercase** tags and semantic elements.",
+    "Clean code is **faster to debug** and easier to maintain."
   ],
   quizQuestions: [
-    { id: "html-clean-1", question: "What is NOT part of clean HTML?", options: ["Consistent indentation", "Semantic tags", "UPPERCASE tags everywhere", "Comments marking sections"], correctAnswerIndex: 2, explanation: "Clean HTML uses lowercase tags by convention; uppercase breaks consistency." },
-    { id: "html-clean-2", question: "Why does clean structure matter?", options: ["Browsers require it", "You read code more than you write it — clean code debugs faster", "It makes pages load faster", "It adds SEO keywords"], correctAnswerIndex: 1, explanation: "Readable markup turns debugging from archaeology into a quick scan." }
+    { id: "html-clean-1", question: "What is NOT part of clean HTML?", options: ["Consistent indentation", "Semantic tags", "UPPERCASE tags everywhere", "Comments marking sections"], correctAnswerIndex: 2, explanation: "Correct — clean HTML uses **lowercase tags** by convention; uppercase breaks consistency." },
+    { id: "html-clean-2", question: "Why does clean structure matter?", options: ["Browsers require it", "You read code more than you write it — clean code debugs faster", "It makes pages load faster", "It adds SEO keywords"], correctAnswerIndex: 1, explanation: "Right! Readable markup turns debugging from **archaeology** into a quick scan." }
   ]
 };
