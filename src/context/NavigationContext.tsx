@@ -15,7 +15,8 @@ export type AppRoute =
   | 'dashboard'
   | 'settings'
   | 'tag-reference'
-  | 'tryit';
+  | 'tryit'
+  | 'studio';
 
 interface NavigationParams {
   courseSlug?: string;
@@ -220,6 +221,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         if (parts[1]) {
           setParams({ tagSlug: parts[1] });
         }
+      } else if (section === 'studio') {
+        setCurrentRoute('studio');
       } else {
         setCurrentRoute('home');
       }

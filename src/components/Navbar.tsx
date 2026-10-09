@@ -187,7 +187,8 @@ export const Navbar: React.FC = () => {
             <Search className="w-4 h-4" />
           </button>
 
-          {/* Badges / Student Dashboard Button */}
+          {/* Badges / Student Dashboard Button — hidden on lesson pages (distraction-free learning) */}
+          {currentRoute !== 'lesson' && (
           <button
             onClick={() => navigateTo('profile')}
             className="flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/50 border border-amber-300 dark:border-amber-700/60 font-bold text-xs shadow-xs transition active:scale-95 cursor-pointer"
@@ -199,6 +200,7 @@ export const Navbar: React.FC = () => {
               {unlockedBadgesCount}
             </span>
           </button>
+          )}
 
           {/* AI Mentor Button with Voice & Screenshot Support */}
           <button
