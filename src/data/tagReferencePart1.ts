@@ -1,0 +1,338 @@
+import type { TagReference } from './tagReference';
+
+const yes = 'Yes';
+
+export const tagReferencePart1: TagReference[] = [
+  {
+    tag: 'html',
+    title: 'HTML <html> Tag',
+    definition: 'The <html> tag represents the root of an HTML document. It is the container for all other HTML elements (except for the <!DOCTYPE> declaration). You should always include the lang attribute inside the <html> tag to declare the language of the web page — this assists search engines and screen readers.',
+    example: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <title>Document Title</title>\n</head>\n<body>\n  <h1>My First Heading</h1>\n  <p>My first paragraph.</p>\n</body>\n</html>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [
+      { name: 'lang', value: 'en', description: 'Specifies the language of the document\'s content (e.g. en, ur, ar).' },
+      { name: 'xmlns', value: 'http://www.w3.org/1999/xhtml', description: 'Specifies the XML namespace for the document (required in XHTML documents).' },
+    ],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Right-to-left page (e.g. Urdu or Arabic)',
+        code: `<!DOCTYPE html>\n<html lang="ur" dir="rtl">\n<head>\n  <title>Urdu Page</title>\n</head>\n<body>\n  <p>یہ ایک اردو صفحہ ہے</p>\n</body>\n</html>`,
+      },
+    ],
+    defaultCSS: `html {\n  display: block;\n}\n\nhtml:focus {\n  outline: none;\n}`,
+  },
+  {
+    tag: 'head',
+    title: 'HTML <head> Tag',
+    definition: 'The <head> element is a container for metadata (data about data). It is placed between the <html> tag and the <body> tag. Metadata is not displayed on the page. Metadata typically defines the document title, character set, styles, scripts, and other meta information.',
+    example: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <title>Page Title</title>\n  <meta charset="UTF-8">\n</head>\n<body>\n  <p>The content of the document.</p>\n</body>\n</html>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Head with a stylesheet link',
+        code: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Styled Page</title>\n  <link rel="stylesheet" href="styles.css">\n</head>\n<body>\n  <h1>Styled heading</h1>\n</body>\n</html>`,
+      },
+    ],
+    defaultCSS: `head {\n  display: none;\n}`,
+  },
+  {
+    tag: 'title',
+    title: 'HTML <title> Tag',
+    definition: 'The <title> tag defines the title of the document. The title must be text-only, and it is shown in the browser\'s title bar or in the page\'s tab. The <title> tag is required in HTML documents. The page title is very important for search engine optimization (SEO) — search engines use it as the headline of the page in results.',
+    example: `<!DOCTYPE html>\n<html>\n<head>\n  <title>HTML Title Tag Example</title>\n</head>\n<body>\n  <p>Look at the browser tab to see the page title.</p>\n</body>\n</html>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'An SEO-friendly title',
+        code: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Learn HTML - Free Beginner Tutorials | Coding Vibes</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n</body>\n</html>`,
+      },
+    ],
+    defaultCSS: `title {\n  display: none;\n}`,
+  },
+  {
+    tag: 'body',
+    title: 'HTML <body> Tag',
+    definition: 'The <body> tag defines the document\'s body. It contains all the visible contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc. There can be only one <body> element in a document.',
+    example: `<!DOCTYPE html>\n<html>\n<head>\n  <title>Body Example</title>\n</head>\n<body>\n  <h1>This is a heading</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Run a script when the page loads',
+        code: `<!DOCTYPE html>\n<html>\n<head>\n  <title>onload Example</title>\n</head>\n<body onload="alert('Page loaded!')">\n  <h1>Hello</h1>\n</body>\n</html>`,
+      },
+    ],
+    defaultCSS: `body {\n  display: block;\n  margin: 8px;\n}\n\nbody:focus {\n  outline: none;\n}`,
+  },
+  {
+    tag: 'h1',
+    title: 'HTML <h1> Tag',
+    definition: 'The <h1> tag defines the most important heading in an HTML document. Use only one <h1> per page — it should represent the main heading of the whole page. Search engines use <h1> to understand what the page is about, so keep it descriptive.',
+    example: `<h1>This is heading 1</h1>\n<p>Some text below the main heading.</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'A page with one main heading',
+        code: `<h1>Welcome to Coding Vibes</h1>\n<h2>HTML Tutorials</h2>\n<h2>CSS Tutorials</h2>`,
+      },
+    ],
+    defaultCSS: `h1 {\n  display: block;\n  font-size: 2em;\n  margin-top: 0.67em;\n  margin-bottom: 0.67em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'h2',
+    title: 'HTML <h2> Tag',
+    definition: 'The <h2> tag defines the second most important heading in an HTML document. Use <h2> for the main sections of a page that come directly under the <h1> main heading. Do not skip heading levels — a logical heading order helps screen readers and search engines.',
+    example: `<h1>Main Title</h1>\n<h2>First Section</h2>\n<p>Section content goes here.</p>\n<h2>Second Section</h2>\n<p>More content goes here.</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Sub-sections with h2 and h3',
+        code: `<h1>Guide to HTML</h1>\n<h2>Text Elements</h2>\n<h3>Headings</h3>\n<h3>Paragraphs</h3>`,
+      },
+    ],
+    defaultCSS: `h2 {\n  display: block;\n  font-size: 1.5em;\n  margin-top: 0.83em;\n  margin-bottom: 0.83em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'h3',
+    title: 'HTML <h3> Tag',
+    definition: 'The <h3> tag defines a third-level heading in an HTML document. Use it for sub-sections inside an <h2> section. Keeping a proper heading hierarchy (h1, then h2, then h3) makes your document easy to scan for both people and search engines.',
+    example: `<h1>Course Outline</h1>\n<h2>Module 1: Basics</h2>\n<h3>Lesson 1: What is HTML?</h3>\n<h3>Lesson 2: Your First Page</h3>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'h3 inside an article',
+        code: `<article>\n  <h2>Blog Post Title</h2>\n  <h3>Introduction</h3>\n  <p>Post introduction...</p>\n  <h3>Conclusion</h3>\n  <p>Final thoughts...</p>\n</article>`,
+      },
+    ],
+    defaultCSS: `h3 {\n  display: block;\n  font-size: 1.17em;\n  margin-top: 1em;\n  margin-bottom: 1em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'h4',
+    title: 'HTML <h4> Tag',
+    definition: 'The <h4> tag defines a fourth-level heading in an HTML document. It is used for sub-sections inside an <h3> section. Although it looks smaller than body text in some browsers, it still carries heading meaning for accessibility tools.',
+    example: `<h2>Documentation</h2>\n<h3>Installation</h3>\n<h4>Windows</h4>\n<p>Download the installer...</p>\n<h4>macOS</h4>\n<p>Use the package manager...</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Deep heading structure',
+        code: `<h1>Manual</h1>\n<h2>Chapter 1</h2>\n<h3>Topic A</h3>\n<h4>Detail 1</h4>`,
+      },
+    ],
+    defaultCSS: `h4 {\n  display: block;\n  font-size: 1em;\n  margin-top: 1.33em;\n  margin-bottom: 1.33em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'h5',
+    title: 'HTML <h5> Tag',
+    definition: 'The <h5> tag defines a fifth-level heading in an HTML document. It is rarely needed, but it completes the heading hierarchy for deeply nested documents. Like all headings, it should only be used after an <h4> in the document outline.',
+    example: `<h3>Reference</h3>\n<h4>Attributes</h4>\n<h5>Global Attributes</h5>\n<p>Details about global attributes...</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'h5 with an id for linking',
+        code: `<h5 id="notes">Editor Notes</h5>\n<p>See <a href="#notes">editor notes</a> below.</p>`,
+      },
+    ],
+    defaultCSS: `h5 {\n  display: block;\n  font-size: 0.83em;\n  margin-top: 1.67em;\n  margin-bottom: 1.67em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'h6',
+    title: 'HTML <h6> Tag',
+    definition: 'The <h6> tag defines the least important (sixth-level) heading in an HTML document. It is the smallest heading and is used only in deeply nested document structures. Never use headings just to make text small — use CSS for styling instead.',
+    example: `<h4>Appendix</h4>\n<h5>Glossary Terms</h5>\n<h6>Term: Element</h6>\n<p>An element is...</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'All six heading levels together',
+        code: `<h1>Heading 1</h1>\n<h2>Heading 2</h2>\n<h3>Heading 3</h3>\n<h4>Heading 4</h4>\n<h5>Heading 5</h5>\n<h6>Heading 6</h6>`,
+      },
+    ],
+    defaultCSS: `h6 {\n  display: block;\n  font-size: 0.67em;\n  margin-top: 2.33em;\n  margin-bottom: 2.33em;\n  margin-left: 0;\n  margin-right: 0;\n  font-weight: bold;\n}`,
+  },
+  {
+    tag: 'p',
+    title: 'HTML <p> Tag',
+    definition: 'The <p> tag defines a paragraph. Browsers automatically add a single blank line before and after each <p> element. A paragraph always starts on a new line, and browsers add space (a margin) around it automatically.',
+    example: `<p>This is the first paragraph of text.</p>\n<p>This is the second paragraph of text.</p>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'A poem with line breaks inside a paragraph',
+        code: `<p>Roses are red,<br>\nViolets are blue,<br>\nHTML is fun,<br>\nAnd so are you.</p>`,
+      },
+      {
+        title: 'Paragraphs inside an article',
+        code: `<article>\n  <h2>News Story</h2>\n  <p>First paragraph of the story.</p>\n  <p>Second paragraph of the story.</p>\n</article>`,
+      },
+    ],
+    defaultCSS: `p {\n  display: block;\n  margin-top: 1em;\n  margin-bottom: 1em;\n  margin-left: 0;\n  margin-right: 0;\n}`,
+  },
+  {
+    tag: 'a',
+    title: 'HTML <a> Tag',
+    definition: 'The <a> tag defines a hyperlink, which is used to link from one page to another. The most important attribute of the <a> element is the href attribute, which indicates the link\'s destination. By default, unvisited links appear blue and underlined, while visited links appear purple.',
+    example: `<a href="https://www.example.com">Visit Example.com</a>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [
+      { name: 'href', value: 'URL', description: 'Specifies the URL of the page the link goes to (required for a working link).' },
+      { name: 'target', value: '_blank | _self | _parent | _top', description: 'Specifies where to open the linked document (_blank opens a new tab).' },
+      { name: 'download', value: 'filename', description: 'Prompts the user to download the linked file instead of navigating to it.' },
+      { name: 'rel', value: 'noopener | noreferrer | ...', description: 'Specifies the relationship between the current document and the linked document.' },
+      { name: 'hreflang', value: 'language_code', description: 'Specifies the language of the linked document.' },
+      { name: 'type', value: 'media_type', description: 'Specifies the media type of the linked document.' },
+      { name: 'referrerpolicy', value: 'no-referrer | origin | ...', description: 'Specifies which referrer information to send when the link is followed.' },
+      { name: 'ping', value: 'URL', description: 'Specifies a space-separated list of URLs to notify when the link is followed.' },
+      { name: 'media', value: 'media_query', description: 'Specifies what media or device the linked document is optimized for.' },
+    ],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Open the link in a new tab',
+        code: `<a href="https://www.example.com" target="_blank" rel="noopener">Open in new tab</a>`,
+      },
+      {
+        title: 'Link to an email address',
+        code: `<a href="mailto:hello@example.com">Email us</a>`,
+      },
+      {
+        title: 'Jump to a section on the same page',
+        code: `<a href="#contact">Go to Contact</a>\n<!-- ... -->\n<h2 id="contact">Contact Us</h2>`,
+      },
+    ],
+    defaultCSS: `a:link, a:visited {\n  color: (internal value);\n  text-decoration: underline;\n  cursor: auto;\n}\n\na:link:active, a:visited:active {\n  color: (internal value);\n}`,
+  },
+  {
+    tag: 'img',
+    title: 'HTML <img> Tag',
+    definition: 'The <img> tag is used to embed an image in an HTML page. Images are not technically inserted into a web page; they are linked to web pages. The <img> tag creates a holding space for the referenced image. The <img> tag has two required attributes: src (the image URL) and alt (alternative text shown if the image cannot load).',
+    example: `<img src="https://picsum.photos/300/200" alt="A random placeholder image" width="300" height="200">`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [
+      { name: 'src', value: 'URL', description: 'Specifies the path to the image (required).' },
+      { name: 'alt', value: 'text', description: 'Specifies alternative text for the image (required for accessibility).' },
+      { name: 'width', value: 'pixels', description: 'Specifies the width of the image.' },
+      { name: 'height', value: 'pixels', description: 'Specifies the height of the image.' },
+      { name: 'loading', value: 'eager | lazy', description: 'Specifies whether the browser should load the image immediately or defer it until needed.' },
+      { name: 'srcset', value: 'URL list', description: 'Specifies a list of image files to use in different situations (responsive images).' },
+      { name: 'sizes', value: 'sizes', description: 'Specifies image sizes for different page layouts (used with srcset).' },
+      { name: 'crossorigin', value: 'anonymous | use-credentials', description: 'Allows images from third-party sites to be used with canvas.' },
+      { name: 'ismap', value: 'ismap', description: 'Specifies the image as a server-side image map.' },
+      { name: 'usemap', value: '#mapname', description: 'Specifies the image as a client-side image map.' },
+      { name: 'referrerpolicy', value: 'no-referrer | origin | ...', description: 'Specifies which referrer information to send when fetching the image.' },
+      { name: 'longdesc', value: 'URL', description: 'Specifies a URL to a detailed description of the image.' },
+    ],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Image used as a link',
+        code: `<a href="https://www.example.com">\n  <img src="https://picsum.photos/120/80" alt="Visit Example" width="120" height="80">\n</a>`,
+      },
+      {
+        title: 'Lazy-loaded image',
+        code: `<img src="https://picsum.photos/400/250" alt="Lazy image" loading="lazy" width="400" height="250">`,
+      },
+      {
+        title: 'Responsive image with srcset',
+        code: `<img srcset="small.jpg 480w, large.jpg 1080w"\n     sizes="(max-width: 600px) 480px, 1080px"\n     src="large.jpg" alt="Responsive image">`,
+      },
+    ],
+    defaultCSS: `img {\n  display: inline-block;\n}`,
+  },
+  {
+    tag: 'ul',
+    title: 'HTML <ul> Tag',
+    definition: 'The <ul> tag defines an unordered (bulleted) list. Use the <ul> tag together with the <li> tag to create unordered lists. Each list item is marked with a bullet (typically a small black circle) by default.',
+    example: `<ul>\n  <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ul>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Nested unordered list',
+        code: `<ul>\n  <li>Drinks\n    <ul>\n      <li>Coffee</li>\n      <li>Tea</li>\n    </ul>\n  </li>\n  <li>Snacks</li>\n</ul>`,
+      },
+      {
+        title: 'Navigation menu with a list',
+        code: `<nav>\n  <ul>\n    <li><a href="/">Home</a></li>\n    <li><a href="/about">About</a></li>\n    <li><a href="/contact">Contact</a></li>\n  </ul>\n</nav>`,
+      },
+    ],
+    defaultCSS: `ul {\n  display: block;\n  list-style-type: disc;\n  margin-top: 1em;\n  margin-bottom: 1em;\n  margin-left: 0;\n  margin-right: 0;\n  padding-left: 40px;\n}`,
+  },
+  {
+    tag: 'ol',
+    title: 'HTML <ol> Tag',
+    definition: 'The <ol> tag defines an ordered list. An ordered list can be numerical (1, 2, 3) or alphabetical (a, b, c). Use the <li> tag to define each list item. Use ordered lists when the sequence of items matters, such as steps in a recipe.',
+    example: `<ol>\n  <li>Boil water</li>\n  <li>Add tea leaves</li>\n  <li>Pour and enjoy</li>\n</ol>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [
+      { name: 'type', value: '1 | a | A | i | I', description: 'Specifies the kind of marker to use (numbers, letters, or roman numerals).' },
+      { name: 'start', value: 'number', description: 'Specifies the start value of the first list item.' },
+      { name: 'reversed', value: 'reversed', description: 'Specifies that the list order should be descending (9, 8, 7...).' },
+    ],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Start counting from 50',
+        code: `<ol start="50">\n  <li>Fifty</li>\n  <li>Fifty-one</li>\n  <li>Fifty-two</li>\n</ol>`,
+      },
+      {
+        title: 'Uppercase roman numerals',
+        code: `<ol type="I">\n  <li>Introduction</li>\n  <li>Main Content</li>\n  <li>Conclusion</li>\n</ol>`,
+      },
+    ],
+    defaultCSS: `ol {\n  display: block;\n  list-style-type: decimal;\n  margin-top: 1em;\n  margin-bottom: 1em;\n  margin-left: 0;\n  margin-right: 0;\n  padding-left: 40px;\n}`,
+  },
+  {
+    tag: 'li',
+    title: 'HTML <li> Tag',
+    definition: 'The <li> tag defines a list item. It is used inside ordered lists (<ol>), unordered lists (<ul>), and menu lists (<menu>). In <ul> and <menu> the list items are usually displayed with bullet points; in <ol> they are displayed with numbers or letters.',
+    example: `<ul>\n  <li>First item</li>\n  <li>Second item</li>\n  <li>Third item</li>\n</ul>`,
+    browserSupport: { chrome: yes, edge: yes, firefox: yes, safari: yes, opera: yes },
+    attributes: [
+      { name: 'value', value: 'number', description: 'Specifies the value of a list item (only works inside <ol>; later items continue from this number).' },
+    ],
+    supportsGlobalAttributes: true,
+    supportsEventAttributes: true,
+    moreExamples: [
+      {
+        title: 'Custom numbering with the value attribute',
+        code: `<ol>\n  <li value="100">Item one hundred</li>\n  <li>Item one hundred one</li>\n  <li>Item one hundred two</li>\n</ol>`,
+      },
+    ],
+    defaultCSS: `li {\n  display: list-item;\n}`,
+  },
+];
