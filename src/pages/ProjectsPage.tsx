@@ -4,16 +4,17 @@ import { Project } from '../types';
 import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { TechBadge } from '../components/TechBadge';
+import { getStudioProjects, StudioProject, studioProjectToHtml } from './StudioPage';
 import { Rocket, Clock, CheckCircle2, ArrowRight, Code2 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const { navigateTo } = useNavigation();
+  const { navigateTo, openTryit } = useNavigation();
   const { progress } = useLearning();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   // Collect all projects across all active courses
-  const allProjects: (Project & { courseTitle: string; badgeType: any })[] = [];
+  const allProjects: (Project & { courseTitle: string; badgeType: any; studioProject?: StudioProject })[] = [];
   activeCourses.forEach(c => {
     c.projects?.forEach(p => {
       allProjects.push({
@@ -23,6 +24,27 @@ export const ProjectsPage: React.FC = () => {
       });
     });
   });
+
+  // Append published Developer Studio projects
+  getStudioProjects()
+    .filter(sp => sp.status === 'published')
+    .forEach(sp => {
+      allProjects.push({
+        id: sp.id,
+        title: sp.title,
+        slug: sp.slug,
+        category: 'fullstack',
+        difficulty: sp.level,
+        description: sp.description || 'A Coding Vibes Studio project. Open it in the sandbox to explore and remix the code.',
+        skills: sp.tech.split(/[·,|]/).map(s => s.trim()).filter(Boolean),
+        requirements: Object.keys(sp.files).map(f => 'Explore source file: ' + f),
+        estimatedTime: '1-2 hours',
+        starterFiles: { html: studioProjectToHtml(sp.files) },
+        courseTitle: 'Coding Vibes Studio',
+        badgeType: 'default',
+        studioProject: sp
+      });
+    });
 
   const categories = ['All', 'HTML', 'CSS', 'JavaScript'];
 
@@ -75,12 +97,26 @@ export const ProjectsPage: React.FC = () => {
           return (
             <div
               key={project.id}
-              onClick={() => navigateTo('project-detail', { projectId: project.id })}
+              onClick={() => {
+                if (project.studioProject) {
+                  openTryit(studioProjectToHtml(project.studioProject.files), 'html', project.studioProject.title);
+                } else {
+                  navigateTo('project-detail', { projectId: project.id });
+                }
+              }}
               className="group rounded-2xl bg-[#0d131f] border border-[#1e293b] p-6 flex flex-col justify-between cursor-pointer hover:border-[#22c55e]/50 hover:bg-[#111a2c] transition duration-300 shadow-lg hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <TechBadge type={project.badgeType} size="md" />
+                  {project.studioProject?.thumbnail ? (
+                    <img
+                      src={project.studioProject.thumbnail}
+                      alt=""
+                      className="w-9 h-9 rounded object-cover border border-[#1e293b]"
+                    />
+                  ) : (
+                    <TechBadge type={project.badgeType} size="md" />
+                  )}
                   <div className="flex items-center space-x-2">
                     <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">
                       {project.difficulty}
@@ -125,7 +161,7 @@ export const ProjectsPage: React.FC = () => {
                 </div>
 
                 <button className="w-full py-2.5 bg-[#141d2e] group-hover:bg-[#22c55e] text-gray-200 group-hover:text-black font-semibold text-xs rounded-lg transition flex items-center justify-center space-x-1.5">
-                  <span>{isCompleted ? 'Open Completed Project' : 'Build Project in Sandbox'}</span>
+                  <span>{project.studioProject ? 'Open in Sandbox' : (isCompleted ? 'Open Completed Project' : 'Build Project in Sandbox')}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>

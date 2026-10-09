@@ -34,6 +34,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { TryitPage } from './pages/TryitPage';
 import { TagReferencePage } from './pages/TagReferencePage';
+import { StudioPage } from './pages/StudioPage';
 
 const MainAppContent: React.FC = () => {
   const {
@@ -52,7 +53,6 @@ const MainAppContent: React.FC = () => {
       <div className="h-screen w-screen overflow-hidden bg-white dark:bg-[#0c121e]">
         <TryitPage />
         <AuthModal />
-        <BadgeUnlockToast />
         <KeyboardShortcutsModal />
         <AiMentorModal
           isOpen={isAiMentorOpen}
@@ -98,6 +98,8 @@ const MainAppContent: React.FC = () => {
         return <SettingsPage />;
       case 'tag-reference':
         return <TagReferencePage />;
+      case 'studio':
+        return <StudioPage />;
       default:
         return <HomePage />;
     }
@@ -136,11 +138,11 @@ const MainAppContent: React.FC = () => {
       {/* Global Keyboard Shortcuts Overlay */}
       <KeyboardShortcutsModal />
 
-      {/* Real-time Badge Unlock Notification Toast */}
-      <BadgeUnlockToast />
+      {/* Real-time Badge Unlock Notification Toast — hidden on lesson pages (distraction-free learning) */}
+      {!isLearningRoute && <BadgeUnlockToast />}
 
-      {/* Real-time Bookmark / Saved for Later Toast */}
-      <BookmarkToast />
+      {/* Real-time Bookmark / Saved for Later Toast — hidden on lesson pages (distraction-free learning) */}
+      {!isLearningRoute && <BookmarkToast />}
 
       {/* Global AI Mentor Modal */}
       <AiMentorModal

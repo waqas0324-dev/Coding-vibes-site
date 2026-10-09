@@ -25,6 +25,14 @@ export const Footer: React.FC = () => {
           <p>© {new Date().getFullYear()} Coding Vibes. All rights reserved.</p>
           <span className="hidden sm:inline text-gray-700">•</span>
           <button
+            onClick={() => navigateTo('studio')}
+            className="text-[10px] text-gray-700 hover:text-gray-500 transition cursor-pointer"
+            title="Developer Studio"
+          >
+            Studio
+          </button>
+          <span className="hidden sm:inline text-gray-700">•</span>
+          <button
             onClick={openKeyboardShortcuts}
             className="inline-flex items-center space-x-1.5 text-gray-400 hover:text-white transition cursor-pointer"
             title="Open Keyboard Shortcuts"

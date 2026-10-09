@@ -3,6 +3,7 @@ import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { activeCourses } from '../data/courses';
 import { LiveEditor } from '../components/LiveEditor';
+import { ProjectSourceViewer } from '../components/ProjectSourceViewer';
 import { TechBadge } from '../components/TechBadge';
 import {
   ArrowLeft,
@@ -145,6 +146,14 @@ export const ProjectDetailPage: React.FC = () => {
           })}
         </div>
       </div>
+
+      {/* Complete Project Source (read-only, with live preview + downloads) */}
+      {foundProject.starterFiles && (
+        <ProjectSourceViewer
+          starterFiles={foundProject.starterFiles}
+          projectSlug={foundProject.id}
+        />
+      )}
 
       {/* Interactive Project IDE */}
       <div className="space-y-4">
