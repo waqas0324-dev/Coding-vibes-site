@@ -32,6 +32,8 @@ import {
 } from 'lucide-react';
 
 import { roadmaps } from '../data/roadmaps';
+import { VisualRoadmap } from '../components/VisualRoadmap';
+import { Sprout, Monitor, Server } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   const { navigateTo, openTryit } = useNavigation();
@@ -221,46 +223,68 @@ public class Main {
         </div>
       </section>
 
-      {/* Learning Roadmaps CTA */}
+      {/* Visual Roadmap Journey */}
       <section className="bg-[#0d131f] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1e293b]">
-        <div className="max-w-6xl mx-auto text-center space-y-8">
-          <div className="space-y-3">
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Pick Your <span className="text-[#22c55e]">Roadmap</span>
-            </h2>
-            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
-              A clear, ordered path from zero to job-ready. Every step tells you what to learn,
-              why it matters, and links you straight to the course.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3 text-left">
-            {roadmaps.map(roadmap => (
-              <button
-                key={roadmap.id}
-                onClick={() => navigateTo('roadmap-detail', { roadmapId: roadmap.id })}
-                className="rounded-2xl border border-[#1e293b] bg-[#141d2e] p-5 hover:border-[#22c55e]/60 hover:-translate-y-1 transition-all group"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">
-                    {roadmap.steps.length} steps
-                  </span>
-                  <span className="text-xs font-semibold text-gray-500">{roadmap.totalTime}</span>
-                </div>
-                <h3 className="mt-3 text-lg font-extrabold text-white">{roadmap.title}</h3>
-                <p className="mt-1.5 text-sm text-gray-400 leading-relaxed line-clamp-3">
-                  {roadmap.description}
-                </p>
-                <span className="mt-4 inline-flex items-center text-sm font-bold text-[#22c55e] group-hover:gap-2.5 gap-2 transition-all">
-                  Start the path <ArrowRight className="w-4 h-4" />
-                </span>
-              </button>
-            ))}
-          </div>
+        <div className="max-w-3xl mx-auto text-center space-y-3">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Follow a <span className="text-[#22c55e]">Structured Roadmap</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
+            From beginner to pro, follow step by step roadmaps designed by experts.
+            Tap any checkpoint to open its path.
+          </p>
+        </div>
+        <div className="max-w-3xl mx-auto mt-4">
+          <VisualRoadmap
+            height={600}
+            showFlag
+            nodes={[
+              {
+                label: 'Beginner',
+                sub: (() => {
+                  const r = roadmaps.find(x => x.id === 'beginner');
+                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
+                })(),
+                icon: Sprout,
+                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'beginner' }),
+              },
+              {
+                label: 'Frontend',
+                sub: (() => {
+                  const r = roadmaps.find(x => x.id === 'frontend');
+                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
+                })(),
+                icon: Monitor,
+                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'frontend' }),
+              },
+              {
+                label: 'Backend',
+                sub: (() => {
+                  const r = roadmaps.find(x => x.id === 'backend');
+                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
+                })(),
+                icon: Server,
+                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'backend' }),
+              },
+              {
+                label: 'Full Stack',
+                sub: (() => {
+                  const r = roadmaps.find(x => x.id === 'fullstack');
+                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
+                })(),
+                icon: Layers,
+                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'fullstack' }),
+              },
+            ]}
+          />
+        </div>
+        <div className="text-center mt-2">
           <button
             onClick={() => navigateTo('roadmaps')}
-            className="text-sm font-bold text-gray-300 hover:text-[#22c55e] underline underline-offset-4 transition"
+            className="inline-flex items-center space-x-2 bg-[#22c55e] hover:bg-[#16a34a] text-white font-extrabold text-sm px-7 py-3 rounded-full transition shadow-[0_0_24px_rgba(34,197,94,0.35)]"
           >
-            View all roadmaps with progress tracking
+            <span>Explore Roadmaps</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </section>
