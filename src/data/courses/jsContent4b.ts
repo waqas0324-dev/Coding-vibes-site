@@ -3,18 +3,18 @@ import { LessonContent } from '../../types';
 // LESSON: Objects (module 7 deep dive)
 export const jsObjectsDeepContent: LessonContent = {
   heroTagline: "Working with objects like a pro: keys, values, entries",
-  introduction: "Beyond basics, objects offer Object.keys(), Object.values(), and Object.entries() to inspect them, plus shorthand syntax and the spread operator to build them fast.",
+  introduction: "You've met objects — now the **pro toolkit**. **`Object.keys()`**, **`Object.values()`**, **`Object.entries()`** inspect any object; **shorthand syntax** builds them fast; the **spread operator** copies and merges.\n\n**API responses are objects**. Forms produce objects. Config is objects. These utilities are how you handle them safely.",
   definition: {
     term: "Object utilities",
-    explanation: "Built-in tools for objects: Object.keys/values/entries list parts, shorthand { name } builds from variables, and {...obj} copies or merges."
+    explanation: "**Built-in object utilities**: `Object.keys/values/entries()` **inspect** an object's parts; **shorthand** `{ name }` builds objects from variables fast; **`{...obj}`** (spread) makes a **true copy** or merges objects."
   },
-  whyItMatters: "API responses are objects. Forms produce objects. Config is objects. These utilities are how you inspect, copy, and combine them safely.",
+  whyItMatters: "**API responses are objects**. Forms produce objects. Config is objects. These utilities are how you **inspect, copy, and combine** them safely — daily professional work.",
   realWorldAnalogy: {
-    title: "Understanding Object Utilities",
-    story: "An inventory audit: list all box labels (keys), list all contents (values), or list label-content pairs (entries) — three views of the same warehouse.",
+    title: "The Warehouse Audit",
+    story: "A **warehouse inventory audit**: list all **box labels** (`Object.keys()`), list all **contents** (`Object.values()`), or list **label-content pairs** (`Object.entries()`). Three views, same warehouse. And **`{...obj}`**? That's **photocopying the manifest** before editing — because `=` only copies the **reference** (two people, one manifest — chaos!).",
     comparison: [
-      { item: "Object.keys()", meaning: "The list of labels." },
-      { item: "{...obj}", meaning: "Photocopying the warehouse manifest before editing." }
+      { item: "Object.keys()", meaning: "The list of labels — every box name in the warehouse." },
+      { item: "{...obj}", meaning: "Photocopying the manifest before editing — the original stays pristine." }
     ]
   },
   syntaxStructure: `const user = { name: "Sara", age: 25 };
@@ -37,7 +37,7 @@ console.log(product.price); // 150000 — original safe`,
     {
       wrong: "const copy = product;  // NOT a copy — same object!",
       correct: "const copy = { ...product };",
-      reason: "= copies the reference. Spread creates a real independent copy."
+      reason: "**`=` copies the reference, not the object**! `let b = a` means two names, ONE object — change one, both change. Use **`{...a}`** (spread) for a real independent copy."
     }
   ],
   tryItYourself: {
@@ -49,31 +49,31 @@ document.getElementById("out").textContent =
     instructions: "Add a 'wifi: true' property via spread."
   },
   takeaways: [
-    "Object.keys/values/entries() inspect an object's parts.",
-    "{...obj} makes a true shallow copy.",
-    "Spread merges objects and overrides duplicate keys."
+    "**`Object.keys/values/entries()`** inspect an object's parts.",
+    "**`{...obj}`** makes a true **shallow copy** — photocopy the manifest!",
+    "**Spread merges** objects and overrides duplicate keys."
   ],
   quizQuestions: [
-    { id: "js-objectsdeep-1", question: "What does Object.keys({a:1, b:2}) return?", options: ["[\"a\", \"b\"]", "[1, 2]", "\"ab\"", "2"], correctAnswerIndex: 0, explanation: "keys() returns the property names." },
-    { id: "js-objectsdeep-2", question: "Does const c = obj copy the object?", options: ["No — it copies the reference", "Yes, fully", "Only numbers", "It deletes obj"], correctAnswerIndex: 0, explanation: "Both variables point at the same object; use spread for a real copy." }
+    { id: "js-objectsdeep-1", question: "What does Object.keys({a:1, b:2}) return?", options: ["[\"a\", \"b\"]", "[1, 2]", "\"ab\"", "2"], correctAnswerIndex: 0, explanation: "Correct — **`keys()`** returns the property **names**. The list of labels." },
+    { id: "js-objectsdeep-2", question: "Does const c = obj copy the object?", options: ["No — it copies the reference", "Yes, fully", "Only numbers", "It deletes obj"], correctAnswerIndex: 0, explanation: "Right — both variables point at the **same object**! Use **spread** for a real copy." }
   ]
 };
 
 // LESSON: Object Properties
 export const jsObjectPropertiesContent: LessonContent = {
   heroTagline: "Reading, writing, and choosing dot vs bracket notation",
-  introduction: "Read properties with user.name (dot) or user['name'] (brackets). Brackets win when the key has spaces, comes from a variable, or isn't a valid identifier. You can also add and delete properties anytime.",
+  introduction: "**Dot** or **brackets**? `user.name` is clean and fast — but what if the key has a **space**, or comes from a **variable**?\n\n**Bracket notation** (`user['full name']`, `user[field]`) handles everything dots can't: dynamic keys, spaces, special characters. Know both, use each where it shines.",
   definition: {
     term: "Object property access",
-    explanation: "Getting or setting values on an object: dot notation for simple known keys, bracket notation for dynamic or special keys, delete to remove."
+    explanation: "**Getting or setting** values on an object: **dot notation** (`user.name`) for simple known keys, **bracket notation** (`user['full name']`, `user[field]`) for dynamic or special keys. Assigning a new key **adds** the property; **`delete`** removes it."
   },
-  whyItMatters: "Dynamic keys are everywhere: user[field], translations[lang], settings[theme]. Bracket notation unlocks them.",
+  whyItMatters: "**Dynamic keys are everywhere**: `user[field]`, `translations[lang]`, `settings[theme]`. Bracket notation **unlocks** them — without it, half of real-world object work is impossible.",
   realWorldAnalogy: {
-    title: "Understanding Property Access",
-    story: "Two ways to open a locker: your own key with the number memorized (dot), or reading the number off a slip of paper (brackets).",
+    title: "Two Ways to Open a Locker",
+    story: "**Two ways to open a locker**: your own key with the **number memorized** (dot notation — fast, for known names), or **reading the number off a slip of paper** (brackets — works for any name, even ones you didn't expect). Brackets win when keys are **dynamic** or have **spaces**.",
     comparison: [
-      { item: "user.name", meaning: "Your memorized key — fast, for known names." },
-      { item: "user[key]", meaning: "Reading the slip — works for any name, even surprises." }
+      { item: "user.name", meaning: "Your memorized key — fast, for names you know." },
+      { item: "user[key]", meaning: "Reading the number off a slip of paper — works for any name, even surprises." }
     ]
   },
   syntaxStructure: `const user = { name: "Sara" };
@@ -99,7 +99,7 @@ console.log(profile.city); // Karachi`,
     {
       wrong: "user.first name  // SyntaxError — space in key",
       correct: "user['first name']",
-      reason: "Dot notation needs valid identifiers; brackets handle any string."
+      reason: "**Dot notation needs valid identifiers**! `user.full name` is a syntax error. For spaces, special characters, or variables — **brackets** are mandatory."
     }
   ],
   tryItYourself: {
@@ -113,31 +113,31 @@ document.getElementById("out").textContent += ", English: " + scores.english;`,
     instructions: "Change subject to 'science' and re-run."
   },
   takeaways: [
-    "Dot notation for known, simple keys; brackets for dynamic ones.",
-    "Assigning a new key adds the property.",
-    "delete obj.key removes a property."
+    "**Dot** notation for known, simple keys; **brackets** for dynamic ones.",
+    "**Assigning** a new key adds the property.",
+    "**`delete obj.key`** removes a property."
   ],
   quizQuestions: [
-    { id: "js-objprops-1", question: "When must you use brackets?", options: ["When the key is in a variable or has special characters", "Always", "Never", "Only for numbers"], correctAnswerIndex: 0, explanation: "Brackets evaluate the key expression; dots need literal identifiers." },
-    { id: "js-objprops-2", question: "How do you add a property?", options: ["obj.newKey = value", "obj + newKey", "add(obj, key)", "obj.push(key)"], correctAnswerIndex: 0, explanation: "Assignment creates the property if it doesn't exist." }
+    { id: "js-objprops-1", question: "When must you use brackets?", options: ["When the key is in a variable or has special characters", "Always", "Never", "Only for numbers"], correctAnswerIndex: 0, explanation: "Correct — **brackets evaluate** the key expression; dots need **literal** identifiers." },
+    { id: "js-objprops-2", question: "How do you add a property?", options: ["obj.newKey = value", "obj + newKey", "add(obj, key)", "obj.push(key)"], correctAnswerIndex: 0, explanation: "Right — **assignment creates** the property if it doesn't exist. Lockers appear on demand!" }
   ]
 };
 
 // LESSON: Object Methods
 export const jsObjectMethodsContent: LessonContent = {
   heroTagline: "Functions that live inside objects",
-  introduction: "An object method is a function stored as a property: car.start(). Inside the method, this refers to the object itself — so this.fuel reads the car's own fuel.",
+  introduction: "What if an object could **do things** — not just hold data? `car.start()`. `user.login()`. `cart.checkout()`.\n\nAn **object method** is a function stored as a property. Inside it, **`this`** refers to the object itself — so `this.fuel` reads the car's own fuel. Behavior + data, bundled.",
   definition: {
     term: "Object method",
-    explanation: "A function value assigned to an object's property. Called as obj.method(), it can access the object's other properties via this."
+    explanation: "A **function stored as an object's property**: `car.start()`. Called as `obj.method()`, it can access the object's **other properties** via **`this`** — which refers to the object itself."
   },
-  whyItMatters: "Methods bundle behavior with data: user.login(), cart.checkout(), player.jump(). This is the core idea behind objects in every language.",
+  whyItMatters: "Methods **bundle behavior with data**: `user.login()`, `cart.checkout()`, `player.jump()`. This is the **core idea behind objects** in every language — and the doorway to object-oriented thinking.",
   realWorldAnalogy: {
-    title: "Understanding Object Methods",
-    story: "A remote control: the buttons (methods) operate on the TV (object) itself — volume+ changes this TV, not some other one.",
+    title: "The TV Remote",
+    story: "A **TV remote**: the buttons (**methods**) operate on **the TV itself** — `volumeUp()` changes **this** TV's volume, not some other one. Inside the method, **`this`** means 'the object I belong to'. Press the button, and the paired TV obeys.",
     comparison: [
-      { item: "tv.volumeUp()", meaning: "Pressing the button on this remote." },
-      { item: "this.volume", meaning: "The TV the remote is paired with." }
+      { item: "tv.volumeUp()", meaning: "Pressing the button on this remote — the action." },
+      { item: "this.volume", meaning: "The TV the remote is paired with — whose volume changes." }
     ]
   },
   syntaxStructure: `const car = {
@@ -173,7 +173,7 @@ console.log(bankAccount.withdraw(200)); // Withdrew 200`,
     {
       wrong: "const f = bankAccount.deposit;\nf(500);  // this is undefined — TypeError",
       correct: "bankAccount.deposit(500);",
-      reason: "Detaching a method loses its this. Call it on the object."
+      reason: "**Detaching a method loses its `this`**! `const f = car.drive; f()` — now `this` isn't `car` anymore. Always **call it on the object**: `car.drive()`."
     }
   ],
   tryItYourself: {
@@ -191,31 +191,31 @@ document.getElementById("out").textContent = "Count: " + counter.increment();`,
     instructions: "Add a reset() method that sets count back to 0."
   },
   takeaways: [
-    "Methods are functions stored in objects.",
-    "Inside a method, this is the object itself.",
-    "Call methods on the object: obj.method()."
+    "**Methods** are functions **stored in objects**.",
+    "Inside a method, **`this`** is the object itself.",
+    "**Call methods on the object**: `obj.method()`."
   ],
   quizQuestions: [
-    { id: "js-objmethods-1", question: "What does this refer to inside car.drive()?", options: ["The car object", "The window", "Nothing", "The drive function"], correctAnswerIndex: 0, explanation: "When called as car.drive(), this is car." },
-    { id: "js-objmethods-2", question: "How do you define a method?", options: ["As a function property: drive() { }", "With the method keyword", "Outside the object", "You cannot"], correctAnswerIndex: 0, explanation: "Methods are function-valued properties of the object." }
+    { id: "js-objmethods-1", question: "What does this refer to inside car.drive()?", options: ["The car object", "The window", "Nothing", "The drive function"], correctAnswerIndex: 0, explanation: "Correct — when called as `car.drive()`, **`this`** is `car`. The paired TV." },
+    { id: "js-objmethods-2", question: "How do you define a method?", options: ["As a function property: drive() { }", "With the method keyword", "Outside the object", "You cannot"], correctAnswerIndex: 0, explanation: "Right — methods are **function-valued properties** of the object. Buttons on the remote." }
   ]
 };
 
 // LESSON: Nested Objects
 export const jsNestedObjectsContent: LessonContent = {
   heroTagline: "Objects inside objects — modeling real structures",
-  introduction: "Objects can hold other objects: user.address.city. Real data nests naturally — a company has departments, which have employees. Chain dots (or brackets) to drill down.",
+  introduction: "Real data **nests naturally**: a company has departments, which have employees, who have addresses. **Objects inside objects** model this perfectly.\n\nChain dots to **drill down**: `company.ceo.name`. And when a level might be missing, **`?.`** (optional chaining) stops safely instead of crashing.",
   definition: {
     term: "Nested object",
-    explanation: "An object used as the value of another object's property. Access goes level by level: company.ceo.name."
+    explanation: "An **object used as the value** of another object's property: `user.address.city`. Access goes **level by level**, chaining dots (or brackets). Use **`?.`** (optional chaining) to safely read possibly-missing levels."
   },
-  whyItMatters: "API responses nest deeply: data.user.profile.avatar. Reading nested structures is a daily developer skill.",
+  whyItMatters: "**API responses nest deeply**: `data.user.profile.avatar`. Reading nested structures is a **daily developer skill** — and optional chaining is the safety net pros never skip.",
   realWorldAnalogy: {
-    title: "Understanding Nested Objects",
-    story: "Russian dolls: open the big doll to find a smaller one inside, and another inside that — each level reveals more detail.",
+    title: "The Russian Nesting Dolls",
+    story: "**Russian nesting dolls**: open the big doll to find a smaller one, open that to find another — each level reveals **more detail**. **Nested objects** work the same: `company.ceo.name` opens doll after doll until you reach the value. And **`?.`** is the careful opener that stops safely if a doll is missing.",
     comparison: [
-      { item: "company.ceo", meaning: "Opening the big doll — the CEO object." },
-      { item: "company.ceo.name", meaning: "Opening the next doll — the name inside." }
+      { item: "company.ceo", meaning: "Opening the big doll — the CEO object inside." },
+      { item: "company.ceo.name", meaning: "Opening the next doll — the name inside the CEO." }
     ]
   },
   syntaxStructure: `const company = {
@@ -243,7 +243,7 @@ console.log(order.items[0].title);             // Book`,
     {
       wrong: "console.log(order.customer.phone.number);  // TypeError — phone is undefined!",
       correct: "console.log(order.customer?.phone?.number);  // undefined, no crash",
-      reason: "Drilling into a missing level crashes. ?. (optional chaining) stops safely."
+      reason: "**Drilling into a missing level crashes**! `user.address.city` throws if `address` is `undefined`. Use **`?.`** — `user.address?.city` — to stop safely with `undefined`."
     }
   ],
   tryItYourself: {
@@ -257,13 +257,13 @@ document.getElementById("out").textContent =
     instructions: "Add a science grade and display it."
   },
   takeaways: [
-    "Objects nest inside objects to model real structures.",
-    "Chain dots to drill down: a.b.c.",
-    "Use ?. to safely read possibly-missing levels."
+    "**Objects nest** inside objects to model real structures.",
+    "**Chain dots** to drill down: `a.b.c`.",
+    "Use **`?.`** to safely read possibly-missing levels."
   ],
   quizQuestions: [
-    { id: "js-nestedobj-1", question: "How do you read city in {a: {b: {city: \"X\"}}}?", options: ["obj.a.b.city", "obj.city", "obj[a][b][city]", "obj->a->b->city"], correctAnswerIndex: 0, explanation: "Drill level by level with dots." },
-    { id: "js-nestedobj-2", question: "What does ?. do?", options: ["Stops safely on missing levels instead of crashing", "Deletes the property", "Makes it required", "Nothing"], correctAnswerIndex: 0, explanation: "Optional chaining returns undefined instead of throwing." }
+    { id: "js-nestedobj-1", question: "How do you read city in {a: {b: {city: \"X\"}}}?", options: ["obj.a.b.city", "obj.city", "obj[a][b][city]", "obj->a->b->city"], correctAnswerIndex: 0, explanation: "Correct — **drill level by level** with dots. Open each doll in turn." },
+    { id: "js-nestedobj-2", question: "What does ?. do?", options: ["Stops safely on missing levels instead of crashing", "Deletes the property", "Makes it required", "Nothing"], correctAnswerIndex: 0, explanation: "Right — **optional chaining** returns `undefined` instead of throwing. The careful opener." }
   ]
 };
 
@@ -274,18 +274,18 @@ document.getElementById("out").textContent =
 // LESSON: Selecting Elements
 export const jsSelectingElementsContent: LessonContent = {
   heroTagline: "Grabbing page elements so JavaScript can work with them",
-  introduction: "Before changing anything, you must SELECT it. JavaScript offers getElementById, querySelector, querySelectorAll, and more — each suited to different jobs. This lesson maps the whole toolbox.",
+  introduction: "Before changing **anything**, you must **SELECT** it. Grab the wrong element and your code 'works' — on the wrong thing.\n\nJavaScript offers a **toolbox**: `getElementById`, `querySelector`, `querySelectorAll`, and more. This lesson maps each tool to its job.",
   definition: {
     term: "Element selection",
-    explanation: "Finding HTML elements in the DOM and getting references to them, so your code can read or change them."
+    explanation: "**Finding HTML elements** in the DOM and getting **references** to them, so code can read or change them. JavaScript offers **`getElementById`**, **`querySelector`**, **`querySelectorAll`**, and more — each suited to different jobs."
   },
-  whyItMatters: "Every DOM task starts with selection. Picking the right method — id for one, selector for many — makes code short and fast.",
+  whyItMatters: "**Every DOM task starts with selection**. Picking the right method — id for one, selector for many — makes code **short and fast**. Wrong tool, clumsy code.",
   realWorldAnalogy: {
-    title: "Understanding Selection",
-    story: "Calling roll in class: by student ID (getElementById), by 'everyone in row 2' (querySelectorAll), or 'the first volunteer' (querySelector).",
+    title: "Calling Roll in Class",
+    story: "**Calling roll in class**: by **student ID** (`getElementById` — one exact student), by '**everyone in row 2**' (`querySelectorAll` — the whole group), or '**the first volunteer**' (`querySelector` — first match). **Each method suits a different job** — this lesson maps the whole toolbox.",
     comparison: [
-      { item: "getElementById", meaning: "Calling one student by ID — fastest." },
-      { item: "querySelectorAll", meaning: "Calling a whole group by description." }
+      { item: "getElementById", meaning: "Calling one student by ID — fastest, most precise." },
+      { item: "querySelectorAll", meaning: "Calling a whole group by description — everyone matching." }
     ]
   },
   syntaxStructure: `document.getElementById("title");  // one, by id
@@ -308,7 +308,7 @@ console.log("Found " + paragraphs.length + " paragraphs.");`,
     {
       wrong: "document.getElementById('.title');  // null — no # or . here!",
       correct: "document.getElementById('title');",
-      reason: "getElementById takes the raw id, without # or . prefixes."
+      reason: "`getElementById` takes the **raw id** — `'demo'`, not `'#demo'`! The `#` and `.` prefixes belong to **querySelector** syntax only."
     }
   ],
   tryItYourself: {
@@ -320,31 +320,31 @@ document.querySelector("p").textContent = "First note changed";`,
     instructions: "Select all .note elements and count them."
   },
   takeaways: [
-    "getElementById is fastest for single elements by id.",
-    "querySelector finds the first CSS-selector match.",
-    "querySelectorAll returns all matches as a NodeList."
+    "**`getElementById`** is fastest for single elements by **id**.",
+    "**`querySelector`** finds the **first** CSS-selector match.",
+    "**`querySelectorAll`** returns **all** matches as a NodeList."
   ],
   quizQuestions: [
-    { id: "js-selecting-1", question: "Which gets an element by its id?", options: ["document.getElementById(\"x\")", "document.querySelectorAll(\"x\")", "document.getClass(\"x\")", "document.find(\"x\")"], correctAnswerIndex: 0, explanation: "getElementById looks up the unique id." },
-    { id: "js-selecting-2", question: "What does querySelectorAll return?", options: ["All matching elements", "Only the first", "A boolean", "The HTML text"], correctAnswerIndex: 0, explanation: "It returns a NodeList of every match." }
+    { id: "js-selecting-1", question: "Which gets an element by its id?", options: ["document.getElementById(\"x\")", "document.querySelectorAll(\"x\")", "document.getClass(\"x\")", "document.find(\"x\")"], correctAnswerIndex: 0, explanation: "Correct — `getElementById` looks up the **unique id**. Passport control!" },
+    { id: "js-selecting-2", question: "What does querySelectorAll return?", options: ["All matching elements", "Only the first", "A boolean", "The HTML text"], correctAnswerIndex: 0, explanation: "Right — it returns a **NodeList** of every match. The whole group." }
   ]
 };
 
 // LESSON: getElementById()
 export const jsGetElementByIdContent: LessonContent = {
   heroTagline: "The fastest lookup — one element, one unique id",
-  introduction: "getElementById('demo') finds the single element with id='demo'. IDs must be unique per page, so this always returns exactly one element (or null). It's the oldest and fastest selection method.",
+  introduction: "Need **one specific element** — the login form, the cart total, the search box? If it has an **`id`**, `getElementById('demo')` finds it **instantly**.\n\nIDs are **unique per page**, so this always returns exactly one element (or `null`). It's the **oldest and fastest** selection method.",
   definition: {
     term: "getElementById()",
-    explanation: "A document method that returns the element with the given id attribute, or null if none exists. Pass the id without a # prefix."
+    explanation: "A **document method** returning the element with the given **id attribute** — or **`null`** if none exists. Pass the id **without** a `#` prefix. IDs must be **unique per page**, so this always returns **exactly one** element."
   },
-  whyItMatters: "Unique widgets — #login-form, #cart-total, #search-box — are grabbed by id thousands of times a day. It's the bread-and-butter lookup.",
+  whyItMatters: "**Unique widgets** — `#login-form`, `#cart-total`, `#search-box` — are grabbed by id **thousands of times a day** across the web. It's the bread-and-butter lookup every developer uses constantly.",
   realWorldAnalogy: {
-    title: "Understanding getElementById",
-    story: "A passport number at immigration: unique to one person, instant lookup, no confusion with anyone else.",
+    title: "Passport Control",
+    story: "**Passport control at immigration**: every traveler has a **unique passport number** — no two alike. The officer types it and gets **exactly one person**, instantly. **`getElementById`** is that officer: one unique id, one exact element, zero confusion.",
     comparison: [
-      { item: "The id attribute", meaning: "The passport number — unique per element." },
-      { item: "getElementById", meaning: "The officer typing the number — instant match." }
+      { item: "The id attribute", meaning: "The passport number — unique per element, no duplicates allowed." },
+      { item: "getElementById", meaning: "The officer typing the number — instant, exact match." }
     ]
   },
   syntaxStructure: `const el = document.getElementById("demo");
@@ -365,7 +365,7 @@ if (el) {
     {
       wrong: "document.getElementById('#demo');  // null!",
       correct: "document.getElementById('demo');",
-      reason: "No # prefix — that's querySelector syntax, not getElementById."
+      reason: "**No `#` prefix**! `getElementById('#demo')` finds nothing — the `#` belongs to **querySelector** syntax. Just pass the raw id: `'demo'`."
     }
   ],
   tryItYourself: {
@@ -376,31 +376,31 @@ msg.style.fontWeight = "bold";`,
     instructions: "Change the id in both HTML and JS to your own name."
   },
   takeaways: [
-    "IDs must be unique — one element per id.",
-    "Pass the id without #.",
-    "Returns null if missing — check before using."
+    "**IDs must be unique** — one element per id, like passport numbers.",
+    "Pass the id **without `#`**.",
+    "Returns **`null`** if missing — check before using!"
   ],
   quizQuestions: [
-    { id: "js-getid-1", question: "What does getElementById(\"demo\") return?", options: ["The element with id=\"demo\"", "All elements", "The first div", "A string"], correctAnswerIndex: 0, explanation: "It returns the single matching element or null." },
-    { id: "js-getid-2", question: "Why is getElementById(\"#demo\") wrong?", options: ["No # prefix is used with getElementById", "# is required", "IDs can't have letters", "It works fine"], correctAnswerIndex: 0, explanation: "Pass the raw id; # belongs to querySelector." }
+    { id: "js-getid-1", question: "What does getElementById(\"demo\") return?", options: ["The element with id=\"demo\"", "All elements", "The first div", "A string"], correctAnswerIndex: 0, explanation: "Correct — it returns the **single matching element**, or `null` if missing." },
+    { id: "js-getid-2", question: "Why is getElementById(\"#demo\") wrong?", options: ["No # prefix is used with getElementById", "# is required", "IDs can't have letters", "It works fine"], correctAnswerIndex: 0, explanation: "Right — pass the **raw id**; `#` belongs to `querySelector`, not here." }
   ]
 };
 
 // LESSON: querySelector()
 export const jsQuerySelectorContent: LessonContent = {
   heroTagline: "CSS selectors meet JavaScript — find anything",
-  introduction: "querySelector('.card') finds the FIRST element matching any CSS selector — classes, ids, tags, attributes, even 'ul li a'. If you know CSS selectors, you already know this method.",
+  introduction: "**`querySelector('.card')`** finds the **FIRST** element matching any CSS selector — classes, ids, tags, attributes, even `'ul li a'`.\n\nHere's the beautiful part: **if you know CSS selectors, you already know this method**. Same language, new superpower.",
   definition: {
     term: "querySelector()",
-    explanation: "A document/element method returning the first element matching a CSS selector string, or null. Accepts any valid CSS selector."
+    explanation: "A **document/element method** returning the **first** element matching a **CSS selector** string — or `null`. Accepts **any valid CSS selector**: classes, ids, tags, attributes, even `'ul li a'`."
   },
-  whyItMatters: "Real pages need flexible lookups: 'the submit button inside this form', 'the first error message'. querySelector speaks the CSS you already know.",
+  whyItMatters: "Real pages need **flexible lookups**: 'the submit button inside this form', 'the first error message'. `querySelector` **speaks the CSS you already know** — zero new syntax to learn.",
   realWorldAnalogy: {
-    title: "Understanding querySelector",
-    story: "Asking a librarian: 'the first red book on shelf 3' — a description that pinpoints exactly one item.",
+    title: "Asking the Librarian",
+    story: "Asking a **librarian**: 'the **first red book** on shelf 3' — a **description** that pinpoints exactly one item. **`querySelector`** takes any **CSS selector** as that description and returns the **first match**. If you know CSS selectors, you already know this method.",
     comparison: [
-      { item: "'.card'", meaning: "'The first book with a red cover.'" },
-      { item: "'#menu a'", meaning: "'The first link inside the menu.'" }
+      { item: "'.card'", meaning: "'The first book with a red cover' — a description pinpointing one item." },
+      { item: "'#menu a'", meaning: "'The first link inside the menu' — a description with a location." }
     ]
   },
   syntaxStructure: `document.querySelector(".btn");     // first .btn
@@ -421,7 +421,7 @@ if (errorMsg) {
     {
       wrong: "document.querySelector('btn');  // null — missing dot!",
       correct: "document.querySelector('.btn');",
-      reason: "querySelector uses real CSS syntax: . for class, # for id."
+      reason: "`querySelector` uses **real CSS syntax**: `.` for class, `#` for id! `querySelector('card')` looks for a `<card>` tag — you probably meant `'.card'`."
     }
   ],
   tryItYourself: {
@@ -432,31 +432,31 @@ first.textContent = "I am the FIRST card";`,
     instructions: "Notice only the first card changed — that's querySelector."
   },
   takeaways: [
-    "querySelector takes any CSS selector.",
-    "It returns only the FIRST match (or null).",
-    "Remember . for classes and # for ids."
+    "**`querySelector`** takes **any CSS selector**.",
+    "It returns only the **FIRST** match (or `null`).",
+    "Remember **`.`** for classes and **`#`** for ids."
   ],
   quizQuestions: [
-    { id: "js-qs-1", question: "What does querySelector(\".item\") return?", options: ["The first element with class item", "All items", "The last item", "A number"], correctAnswerIndex: 0, explanation: "querySelector returns the first match only." },
-    { id: "js-qs-2", question: "Which selects the first link inside #nav?", options: ["querySelector(\"#nav a\")", "querySelector(\"nav\")", "getElementById(\"a\")", "querySelector(\"a#nav\")"], correctAnswerIndex: 0, explanation: "'#nav a' is the CSS descendant selector." }
+    { id: "js-qs-1", question: "What does querySelector(\".item\") return?", options: ["The first element with class item", "All items", "The last item", "A number"], correctAnswerIndex: 0, explanation: "Correct — `querySelector` returns the **first match only**. The first red book, not all of them." },
+    { id: "js-qs-2", question: "Which selects the first link inside #nav?", options: ["querySelector(\"#nav a\")", "querySelector(\"nav\")", "getElementById(\"a\")", "querySelector(\"a#nav\")"], correctAnswerIndex: 0, explanation: "Right — `'#nav a'` is the **CSS descendant selector**: links inside #nav." }
   ]
 };
 
 // LESSON: querySelectorAll()
 export const jsQuerySelectorAllContent: LessonContent = {
   heroTagline: "Grab EVERY match and loop over them",
-  introduction: "querySelectorAll('li') returns ALL matching elements as a NodeList — a list you can loop with forEach or for...of. It's how you style every card, validate every input, or attach handlers to every button.",
+  introduction: "Need to style **every** card? Validate **every** input? Attach handlers to **every** button? Selecting one-by-one is madness.\n\n**`querySelectorAll('li')`** returns **ALL** matches as a **NodeList** — then loop it with `forEach` or `for...of`. Bulk operations in two lines.",
   definition: {
     term: "querySelectorAll()",
-    explanation: "Returns a static NodeList of all elements matching a CSS selector. Loop over it with forEach, for...of, or convert to an array."
+    explanation: "Returns a **static NodeList** of **all** elements matching a CSS selector: `querySelectorAll('li')`. **Loop** over it with `forEach`, `for...of`, or **spread** it into a real array for `map`/`filter`."
   },
-  whyItMatters: "Bulk operations define real UIs: highlight all errors, disable all buttons, count all items. querySelectorAll + a loop does them in two lines.",
+  whyItMatters: "**Bulk operations** define real UIs: highlight all errors, disable all buttons, count all items. `querySelectorAll` + a loop does them in **two lines** — it's the backbone of dynamic pages.",
   realWorldAnalogy: {
-    title: "Understanding querySelectorAll",
-    story: "The teacher says 'everyone wearing blue, stand up' — the whole matching group acts at once.",
+    title: "Everyone Wearing Blue, Stand Up",
+    story: "The teacher says '**everyone wearing blue, stand up**' — the **whole matching group** acts at once. **`querySelectorAll`** is that announcement: it grabs **EVERY** match as a **NodeList**, and then you loop them with `forEach` — each one standing up in turn.",
     comparison: [
-      { item: "querySelectorAll('.blue')", meaning: "Identifying everyone wearing blue." },
-      { item: ".forEach(...)", meaning: "Each of them standing up in turn." }
+      { item: "querySelectorAll('.blue')", meaning: "Identifying everyone wearing blue — the whole group." },
+      { item: ".forEach(...)", meaning: "Each of them standing up in turn — bulk action, one by one." }
     ]
   },
   syntaxStructure: `const items = document.querySelectorAll(".todo");
@@ -477,7 +477,7 @@ buttons.forEach((btn, index) => {
     {
       wrong: "const list = document.querySelectorAll('li');\nlist.push('x');  // TypeError",
       correct: "const arr = [...document.querySelectorAll('li')];",
-      reason: "A NodeList is not a real array — no push/map. Spread it into one first."
+      reason: "A **NodeList is NOT a real array** — no `push`, no `map`! Spread it first: `[...document.querySelectorAll('li')]` — then the array methods work."
     }
   ],
   tryItYourself: {
@@ -489,31 +489,31 @@ paras.forEach((p, i) => {
     instructions: "Give every paragraph a different background color in the loop."
   },
   takeaways: [
-    "querySelectorAll returns every match as a NodeList.",
-    "Loop it with forEach or for...of.",
-    "It's not a real array — spread it if you need array methods."
+    "**`querySelectorAll`** returns **every** match as a NodeList.",
+    "**Loop** it with `forEach` or `for...of`.",
+    "It's **not a real array** — spread it if you need array methods."
   ],
   quizQuestions: [
-    { id: "js-qsa-1", question: "What does querySelectorAll return?", options: ["A NodeList of all matches", "One element", "A string", "A boolean"], correctAnswerIndex: 0, explanation: "Every match is collected into a NodeList." },
-    { id: "js-qsa-2", question: "Can you call .map() directly on a NodeList?", options: ["No — convert to an array first", "Yes", "Only in Chrome", "Only with one item"], correctAnswerIndex: 0, explanation: "NodeLists lack array methods; spread [...] to convert." }
+    { id: "js-qsa-1", question: "What does querySelectorAll return?", options: ["A NodeList of all matches", "One element", "A string", "A boolean"], correctAnswerIndex: 0, explanation: "Correct — **every match** is collected into a NodeList. The whole blue-shirt group." },
+    { id: "js-qsa-2", question: "Can you call .map() directly on a NodeList?", options: ["No — convert to an array first", "Yes", "Only in Chrome", "Only with one item"], correctAnswerIndex: 0, explanation: "Right — NodeLists **lack array methods**; spread `[...]` to convert." }
   ]
 };
 
 // LESSON: Changing Text
 export const jsChangingTextContent: LessonContent = {
   heroTagline: "Update words on the page with textContent",
-  introduction: "textContent sets an element's plain text: el.textContent = 'Hello'. It's safe (no HTML is parsed) and fast — the standard way to update labels, counters, messages, and results.",
+  introduction: "Live counters, form feedback, chat messages, scores — most dynamic pages are just **text updates** happening constantly.\n\n**`textContent`** sets an element's **plain text**: `el.textContent = 'Hello'`. It's **safe** (no HTML is parsed) and **fast** — the standard way to update words on a page.",
   definition: {
     term: "textContent",
-    explanation: "A property that gets or sets the text inside an element. Assigned text is treated as plain characters — tags are not interpreted."
+    explanation: "A **property** that gets or sets an element's **plain text**: `el.textContent = 'Hello'`. Assigned text is treated as **pure characters** — tags are **not** parsed, which makes it **safe** for user content."
   },
-  whyItMatters: "Live counters, form feedback, chat messages, scores — most dynamic pages are just textContent updates happening constantly.",
+  whyItMatters: "**Live counters**, form feedback, chat messages, scores — most dynamic pages are just `textContent` updates happening **constantly**. It's the workhorse behind live UIs.",
   realWorldAnalogy: {
-    title: "Understanding textContent",
-    story: "A scoreboard operator typing the new score: the digits change, but the board's wiring stays untouched.",
+    title: "The Scoreboard Operator",
+    story: "A **scoreboard operator**: when the score changes, she types the **new digits** — the board's wiring stays untouched. **`textContent`** is that operator: it updates the **words** without touching the **structure**. Safe, fast, and exactly what most updates need.",
     comparison: [
-      { item: "textContent =", meaning: "Typing new digits on the board." },
-      { item: "innerHTML =", meaning: "Rewiring the board — powerful but risky." }
+      { item: "textContent =", meaning: "Typing new digits on the board — the wiring stays untouched." },
+      { item: "innerHTML =", meaning: "Rewiring the board — powerful, but risky with strangers' input." }
     ]
   },
   syntaxStructure: `const el = document.getElementById("msg");
@@ -535,7 +535,7 @@ likeBtn.addEventListener("click", () => {
     {
       wrong: "el.textContent = '<b>Hi</b>';  // shows literally as <b>Hi</b>",
       correct: "el.innerHTML = '<b>Hi</b>';  // renders bold",
-      reason: "textContent never parses HTML. That's its safety feature — use innerHTML only for trusted markup."
+      reason: "`textContent` **never parses HTML** — `<b>Hi</b>` shows literally as text. That's not a bug, it's the **safety feature**! For real markup, use `innerHTML` (with trusted content only)."
     }
   ],
   tryItYourself: {
@@ -548,31 +548,31 @@ document.getElementById("btn").addEventListener("click", () => {
     instructions: "Click the button several times and watch the text update."
   },
   takeaways: [
-    "textContent sets plain text — tags are not parsed.",
-    "It's the safe default for user-provided content.",
-    "Read it back to get an element's current text."
+    "**`textContent`** sets plain text — tags are **not** parsed.",
+    "It's the **safe default** for user-provided content.",
+    "**Read it back** to get an element's current text."
   ],
   quizQuestions: [
-    { id: "js-changetext-1", question: "What does el.textContent = \"<b>Hi</b>\" display?", options: ["The literal text <b>Hi</b>", "Bold Hi", "Nothing", "An error"], correctAnswerIndex: 0, explanation: "textContent treats everything as plain text." },
-    { id: "js-changetext-2", question: "Why prefer textContent for user input?", options: ["It can't inject HTML/scripts", "It's slower", "It looks better", "No reason"], correctAnswerIndex: 0, explanation: "Unparsed text prevents XSS injection attacks." }
+    { id: "js-changetext-1", question: "What does el.textContent = \"<b>Hi</b>\" display?", options: ["The literal text <b>Hi</b>", "Bold Hi", "Nothing", "An error"], correctAnswerIndex: 0, explanation: "Correct — `textContent` treats **everything as plain text**. Tags show literally." },
+    { id: "js-changetext-2", question: "Why prefer textContent for user input?", options: ["It can't inject HTML/scripts", "It's slower", "It looks better", "No reason"], correctAnswerIndex: 0, explanation: "Right — **unparsed text** can't smuggle in scripts, which prevents **XSS** injection attacks." }
   ]
 };
 
 // LESSON: Changing HTML
 export const jsChangingHtmlContent: LessonContent = {
   heroTagline: "Rewrite an element's inner markup with innerHTML",
-  introduction: "innerHTML gets or sets the HTML inside an element: el.innerHTML = '<b>Hi</b>' renders bold text. It's powerful for templates and lists — but never use it with untrusted user input.",
+  introduction: "Need to render a **whole list** of products? A set of cards? Rebuilding them with `createElement` one by one is tedious.\n\n**`innerHTML`** lets you set an element's **entire inner markup** in one line: `el.innerHTML = '<b>Hi</b>'` renders real HTML. Powerful — but **never** use it with untrusted user input.",
   definition: {
     term: "innerHTML",
-    explanation: "A property that gets or sets an element's inner HTML markup. Assigned strings are parsed as HTML, creating real elements."
+    explanation: "A property that **gets or sets** an element's **inner HTML markup**: `el.innerHTML = '<b>Hi</b>'` renders real bold text. Assigned strings are **parsed as HTML**, creating live elements — powerful for templates, dangerous with untrusted input."
   },
-  whyItMatters: "Rendering lists, cards, and search results means building HTML from data. innerHTML turns a template string into live page content in one line.",
+  whyItMatters: "Rendering **lists, cards, and search results** means building HTML from data. `innerHTML` turns a template string into **live page content** in one line — it's how dynamic pages get built fast.",
   realWorldAnalogy: {
-    title: "Understanding innerHTML",
-    story: "Replacing a shop window display: you don't just change the price tags (textContent) — you rebuild the whole arrangement.",
+    title: "Redesigning the Shop Window",
+    story: "A **shop window display**: `textContent` just swaps the **price tags** (text only). **`innerHTML`** rebuilds the **entire arrangement** — new shelves, new signs, new everything. Total creative power — but you'd never let a **stranger** rearrange your shop (untrusted input = XSS risk).",
     comparison: [
-      { item: "textContent", meaning: "Changing price tags — text only." },
-      { item: "innerHTML", meaning: "Redesigning the whole window — full markup." }
+      { item: "textContent", meaning: "Changing price tags — text only, safe and simple." },
+      { item: "innerHTML", meaning: "Redesigning the whole window — full markup, powerful but risky." }
     ]
   },
   syntaxStructure: `const list = document.getElementById("list");
@@ -593,7 +593,7 @@ listEl.innerHTML = html; // one update — efficient!`,
     {
       wrong: "list.innerHTML = userComment;  // XSS danger!",
       correct: "Use textContent for user input; innerHTML only for your own trusted templates.",
-      reason: "Parsed HTML from users can inject malicious scripts."
+      reason: "**Parsed HTML from users can inject malicious scripts** (XSS)! `innerHTML` is for **your** templates only — user content goes through the safe `textContent`."
     }
   ],
   tryItYourself: {
@@ -607,31 +607,31 @@ document.getElementById("list").innerHTML = html;`,
     instructions: "Add a fourth fruit to the array."
   },
   takeaways: [
-    "innerHTML parses strings as real HTML.",
-    "Build the full string, then assign once for performance.",
-    "Never put untrusted user input into innerHTML."
+    "**`innerHTML`** parses strings as **real HTML** — full redesign power.",
+    "**Build the full string**, then assign once — better performance.",
+    "**Never** put untrusted user input into `innerHTML`."
   ],
   quizQuestions: [
-    { id: "js-changehtml-1", question: "What does innerHTML do with \"<b>Hi</b>\"?", options: ["Renders bold Hi", "Shows literal text", "Deletes the element", "Nothing"], correctAnswerIndex: 0, explanation: "innerHTML parses the string as markup." },
-    { id: "js-changehtml-2", question: "Why avoid innerHTML with user input?", options: ["XSS — injected scripts could run", "It's too slow", "It doesn't work", "It deletes data"], correctAnswerIndex: 0, explanation: "Parsed user HTML can contain malicious scripts." }
+    { id: "js-changehtml-1", question: "What does innerHTML do with \"<b>Hi</b>\"?", options: ["Renders bold Hi", "Shows literal text", "Deletes the element", "Nothing"], correctAnswerIndex: 0, explanation: "Correct — `innerHTML` **parses** the string as real markup. Tags become elements." },
+    { id: "js-changehtml-2", question: "Why avoid innerHTML with user input?", options: ["XSS — injected scripts could run", "It's too slow", "It doesn't work", "It deletes data"], correctAnswerIndex: 0, explanation: "Right — **parsed user HTML** can contain malicious scripts. That's XSS — never do it." }
   ]
 };
 
 // LESSON: Changing Styles
 export const jsChangingStylesContent: LessonContent = {
   heroTagline: "Restyle elements live with the style property",
-  introduction: "element.style.color = 'red' changes CSS directly from JavaScript. Style names become camelCase (backgroundColor, fontSize). It's perfect for instant visual feedback — validation errors, hover effects, themes.",
+  introduction: "Want a field's border to turn **red** the instant input is invalid? Toggle **dark mode** with one click? That's **`element.style`** — CSS controlled directly from JavaScript.\n\nStyle names become **camelCase** (`backgroundColor`), and it's perfect for **instant visual feedback**.",
   definition: {
     term: "style property",
-    explanation: "An object on every element mirroring inline CSS. Setting element.style.color applies that CSS rule directly to the element."
+    explanation: "An **object on every element** mirroring inline CSS: setting `element.style.color` applies that rule **directly**. Hyphenated CSS becomes **camelCase** (`backgroundColor`, `fontSize`) — and **units are required** (`'20px'`, not `20`)."
   },
-  whyItMatters: "Interactive feedback is visual: red borders on bad input, green on success, dark mode toggles. The style property wires logic to looks.",
+  whyItMatters: "**Interactive feedback is visual**: red borders on bad input, green on success, dark mode toggles. The `style` property **wires logic to looks** — it's how code paints.",
   realWorldAnalogy: {
-    title: "Understanding the style Property",
-    story: "A painter with a remote brush: code says 'wall, turn blue' and the wall repaints instantly — no ladder needed.",
+    title: "The Painter's Remote Brush",
+    story: "A **painter with a remote brush**: your code says 'wall, turn blue' and the wall **repaints instantly** — no ladder, no rollers. That's `element.style`: **direct orders** from JavaScript to CSS. (For bigger makeovers, `classList` theme-swaps are tidier.)",
     comparison: [
-      { item: "el.style.color", meaning: "Pointing the remote brush at the wall's paint." },
-      { item: "classList", meaning: "Swapping the whole room's theme instead (often cleaner)." }
+      { item: "el.style.color", meaning: "Pointing the remote brush at the wall's paint — direct and instant." },
+      { item: "classList", meaning: "Swapping the whole room's theme instead — often cleaner for big changes." }
     ]
   },
   syntaxStructure: `el.style.color = "red";
@@ -657,7 +657,7 @@ if (!input.value.includes("@")) {
     {
       wrong: "el.style.background-color = 'red';  // SyntaxError",
       correct: "el.style.backgroundColor = 'red';",
-      reason: "Hyphenated CSS names become camelCase in JavaScript."
+      reason: "**Hyphenated CSS becomes camelCase** in JavaScript! `background-color` becomes `backgroundColor`. And include **units**: `'20px'`, not bare `20`."
     }
   ],
   tryItYourself: {
@@ -671,31 +671,31 @@ if (!input.value.includes("@")) {
     instructions: "Click Paint, then change the colors."
   },
   takeaways: [
-    "element.style applies CSS directly from JS.",
-    "Hyphenated CSS becomes camelCase: backgroundColor.",
-    "Include units: '20px', not 20."
+    "**`element.style`** applies CSS directly from JS — the remote brush.",
+    "**Hyphenated** CSS becomes **camelCase**: `backgroundColor`.",
+    "Include **units**: `'20px'`, not `20`."
   ],
   quizQuestions: [
-    { id: "js-changestyle-1", question: "How do you set background-color in JS?", options: ["el.style.backgroundColor", "el.style.background-color", "el.backgroundColor", "el.css.color"], correctAnswerIndex: 0, explanation: "CSS names become camelCase on the style object." },
-    { id: "js-changestyle-2", question: "What unit issue should you watch?", options: ["Sizes need units like px", "Colors need units", "No units ever", "Only % works"], correctAnswerIndex: 0, explanation: "fontSize = '20px' — a bare 20 won't apply." }
+    { id: "js-changestyle-1", question: "How do you set background-color in JS?", options: ["el.style.backgroundColor", "el.style.background-color", "el.backgroundColor", "el.css.color"], correctAnswerIndex: 0, explanation: "Correct — CSS names become **camelCase** on the style object. `font-size` becomes `fontSize`." },
+    { id: "js-changestyle-2", question: "What unit issue should you watch?", options: ["Sizes need units like px", "Colors need units", "No units ever", "Only % works"], correctAnswerIndex: 0, explanation: "Right — `fontSize = '20px'`. A bare `20` has no units, so **nothing applies**." }
   ]
 };
 
 // LESSON: Creating Elements
 export const jsCreatingElementsContent: LessonContent = {
   heroTagline: "Build brand-new HTML from JavaScript",
-  introduction: "document.createElement('li') builds a new element in memory. Set its text and attributes, then attach it with appendChild(). This is how chats, comments, and feeds add content without reloading.",
+  introduction: "Chats, comments, feeds, todo lists — dynamic apps **create content on the fly** without reloading.\n\nThe safe pattern has **two steps**: **`createElement`** builds the node in memory, **`appendChild`** attaches it to the page. Build it, configure it, then place it.",
   definition: {
     term: "createElement() / appendChild()",
-    explanation: "createElement(tag) constructs a new element node; appendChild(node) inserts it as the last child of a parent. Together they add content dynamically."
+    explanation: "**`document.createElement('li')`** builds a **new element in memory** — invisible until attached. Set its text and attributes, then **`appendChild()`** inserts it as the parent's **last child**. The safe two-step way to add content."
   },
-  whyItMatters: "Dynamic apps create content on the fly — new chat messages, todo items, search results. This two-step pattern is the safe way to do it.",
+  whyItMatters: "Dynamic apps **create content on the fly** — new chat messages, todo items, search results. This two-step pattern is the **safe** way to do it (unlike `innerHTML`, no parsing risks).",
   realWorldAnalogy: {
-    title: "Understanding Element Creation",
-    story: "Building furniture then placing it: you assemble the chair (createElement), then put it in the room (appendChild).",
+    title: "Assemble, Then Place",
+    story: "**Building furniture, then placing it**: you **assemble the chair** in the workshop (`createElement` — it exists in memory), then **carry it into the room** (`appendChild` — now it's on the page). Skip the second step and you've built invisible furniture!",
     comparison: [
-      { item: "createElement", meaning: "Assembling the chair in the workshop." },
-      { item: "appendChild", meaning: "Carrying it into the room." }
+      { item: "createElement", meaning: "Assembling the chair in the workshop — it exists, but nobody can sit on it yet." },
+      { item: "appendChild", meaning: "Carrying it into the room — now it's part of the house." }
     ]
   },
   syntaxStructure: `const li = document.createElement("li"); // build
@@ -718,7 +718,7 @@ for (const t of tasks) {
     {
       wrong: "const li = document.createElement('li');\nli.textContent = 'Hi';\n// forgot appendChild — nothing appears!",
       correct: "Always appendChild (or prepend/append) after creating.",
-      reason: "A created element lives in memory until attached to the document."
+      reason: "A created element lives in **memory only** until attached! Forgetting `appendChild` is the number-one 'why is nothing showing?!' bug — you built the chair but left it in the workshop."
     }
   ],
   tryItYourself: {
@@ -732,31 +732,31 @@ document.getElementById("add").addEventListener("click", () => {
     instructions: "Click Add item several times."
   },
   takeaways: [
-    "createElement builds a node in memory.",
-    "Configure it (text, classes) before attaching.",
-    "appendChild places it as the parent's last child."
+    "**`createElement`** builds a node in **memory** — invisible at first.",
+    "**Configure it** (text, classes) before attaching.",
+    "**`appendChild`** places it as the parent's **last child**."
   ],
   quizQuestions: [
-    { id: "js-createel-1", question: "What does document.createElement(\"p\") do?", options: ["Builds a new <p> in memory", "Adds it to the page", "Deletes paragraphs", "Finds paragraphs"], correctAnswerIndex: 0, explanation: "It constructs the node; you must attach it separately." },
-    { id: "js-createel-2", question: "How do you make a created element visible?", options: ["appendChild() it to a parent", "It appears automatically", "Call show()", "Refresh the page"], correctAnswerIndex: 0, explanation: "Attachment inserts it into the live document." }
+    { id: "js-createel-1", question: "What does document.createElement(\"p\") do?", options: ["Builds a new <p> in memory", "Adds it to the page", "Deletes paragraphs", "Finds paragraphs"], correctAnswerIndex: 0, explanation: "Correct — it **constructs the node**; you must **attach it separately**. Workshop, then room." },
+    { id: "js-createel-2", question: "How do you make a created element visible?", options: ["appendChild() it to a parent", "It appears automatically", "Call show()", "Refresh the page"], correctAnswerIndex: 0, explanation: "Right — **attachment** inserts it into the **live document**. Now it's visible!" }
   ]
 };
 
 // LESSON: Removing Elements
 export const jsRemovingElementsContent: LessonContent = {
   heroTagline: "Delete elements with remove()",
-  introduction: "element.remove() deletes an element from the page instantly — no parent needed. It's how todo apps delete tasks, modals close, and notifications dismiss.",
+  introduction: "Completed todos, closed popups, dismissed notifications — UIs **constantly discard** things.\n\n**`element.remove()`** deletes an element from the page **instantly** — no parent reference needed. One line, gone. (Its children go with it.)",
   definition: {
     term: "remove()",
-    explanation: "A method on any element that detaches it from the DOM, deleting it from the page along with its children."
+    explanation: "A **method on any element** that **detaches it from the DOM** — deleting it from the page along with **its children**. The modern one-liner: `element.remove()`. (The variable still exists; it's just detached.)"
   },
-  whyItMatters: "UIs constantly discard things: completed todos, closed popups, old alerts. remove() is the one-line delete.",
+  whyItMatters: "UIs **constantly discard** things: completed todos, closed popups, old alerts. `remove()` is the **one-line delete** — simple, clean, everywhere.",
   realWorldAnalogy: {
-    title: "Understanding remove()",
-    story: "Tearing a page from a notebook: the page (and everything written on it) is gone in one motion.",
+    title: "Tearing a Page From the Notebook",
+    story: "**Tearing a page from a notebook**: the page — and **everything written on it** — is gone in one motion. **`element.remove()`** works the same: the element and **all its children** vanish from the page instantly. No parent needed, no ceremony.",
     comparison: [
-      { item: "el.remove()", meaning: "Tearing out the page." },
-      { item: "Its children", meaning: "The writing on the page — goes with it." }
+      { item: "el.remove()", meaning: "Tearing out the page — one motion, gone." },
+      { item: "Its children", meaning: "The writing on the page — goes with it, automatically." }
     ]
   },
   syntaxStructure: `const banner = document.getElementById("promo");
@@ -776,7 +776,7 @@ list.addEventListener("click", (event) => {
     {
       wrong: "banner.remove();\nbanner.textContent = 'hi';  // no error, but invisible!",
       correct: "Remember: removed elements are detached — changes won't show.",
-      reason: "remove() doesn't destroy the variable; it just detaches the node."
+      reason: "`remove()` **doesn't destroy the variable** — it just detaches the node! The element still exists in memory; it's simply not on the page anymore."
     }
   ],
   tryItYourself: {
@@ -787,31 +787,31 @@ list.addEventListener("click", (event) => {
     instructions: "Click X to dismiss the card."
   },
   takeaways: [
-    "element.remove() deletes it from the page.",
-    "Children are removed along with it.",
-    "The variable still exists — it's just detached."
+    "**`element.remove()`** deletes it from the page — torn out.",
+    "**Children** are removed along with it.",
+    "The **variable still exists** — it's just detached."
   ],
   quizQuestions: [
-    { id: "js-removeel-1", question: "What does el.remove() do?", options: ["Deletes the element from the page", "Hides it temporarily", "Empties its text", "Disables it"], correctAnswerIndex: 0, explanation: "remove detaches the node from the DOM." },
-    { id: "js-removeel-2", question: "Do you need the parent to remove a child?", options: ["No — el.remove() works directly", "Yes, always", "Only for divs", "Only in forms"], correctAnswerIndex: 0, explanation: "Modern remove() needs no parent reference." }
+    { id: "js-removeel-1", question: "What does el.remove() do?", options: ["Deletes the element from the page", "Hides it temporarily", "Empties its text", "Disables it"], correctAnswerIndex: 0, explanation: "Correct — `remove` **detaches the node** from the DOM. Page torn out." },
+    { id: "js-removeel-2", question: "Do you need the parent to remove a child?", options: ["No — el.remove() works directly", "Yes, always", "Only for divs", "Only in forms"], correctAnswerIndex: 0, explanation: "Right — modern `remove()` needs **no parent reference**. One line, done." }
   ]
 };
 
 // LESSON: Classes
 export const jsClassesContent: LessonContent = {
   heroTagline: "Toggle CSS classes with classList",
-  introduction: "element.classList.add('active'), .remove('active'), and .toggle('active') manage CSS classes from JS. This is cleaner than inline styles — design stays in CSS, logic just switches classes.",
+  introduction: "Active tabs, open menus, dark mode, error states — all are **class switches**. Instead of writing raw styles from JS, the pro move is **`classList`**.\n\n**`add`**, **`remove`**, **`toggle`** — design stays in **CSS**, logic just flips switches. Clean separation, happy developers.",
   definition: {
     term: "classList",
-    explanation: "An object on every element for managing its CSS classes: add, remove, toggle, and contains methods."
+    explanation: "An **object on every element** for managing its **CSS classes**: `classList.add('active')`, `.remove('active')`, `.toggle('active')`, `.contains('active')`. The **professional** way to change appearance — design stays in CSS, JS only flips switches."
   },
-  whyItMatters: "Active tabs, open menus, dark mode, error states — all are class switches. classList is the professional way to change appearance.",
+  whyItMatters: "**Active tabs**, open menus, **dark mode**, error states — all are class switches. `classList` is the **professional** way to change appearance, and it's in every modern codebase.",
   realWorldAnalogy: {
-    title: "Understanding classList",
-    story: "Light switches for room moods: flip 'party' on, 'work' off — the wiring (CSS) stays, only switches change.",
+    title: "Switches for Room Moods",
+    story: "**Light switches for room moods**: flip '**party**' on, '**work**' off — the **wiring** (CSS) stays exactly as it was; only the **switches** change. **`classList`** is that switch panel: `add`, `remove`, `toggle` — design stays in CSS, logic just flips switches.",
     comparison: [
-      { item: "classList.toggle('dark')", meaning: "Flipping the dark-mode switch." },
-      { item: "Inline styles", meaning: "Rewiring the room by hand each time." }
+      { item: "classList.toggle('dark')", meaning: "Flipping the dark-mode switch — one move, whole theme changes." },
+      { item: "Inline styles", meaning: "Rewiring the room by hand each time — tedious and messy." }
     ]
   },
   syntaxStructure: `el.classList.add("active");    // add
@@ -834,7 +834,7 @@ btn.addEventListener("click", () => {
     {
       wrong: "el.classList.add('.active');  // no dot!",
       correct: "el.classList.add('active');",
-      reason: "classList takes the raw class name — dots are querySelector syntax."
+      reason: "`classList` takes the **raw class name** — `'active'`, not `'.active'`! Dots are **querySelector** syntax; `classList` wants the plain name."
     }
   ],
   tryItYourself: {
@@ -845,31 +845,31 @@ btn.addEventListener("click", () => {
     instructions: "Click Toggle style on and off."
   },
   takeaways: [
-    "classList.add/remove/toggle manage CSS classes.",
-    "Keep design in CSS; let JS only switch classes.",
-    "No dots in class names passed to classList."
+    "**`classList.add/remove/toggle`** manage CSS classes — the switch panel.",
+    "Keep **design in CSS**; let JS only **switch classes**.",
+    "**No dots** in class names passed to `classList`."
   ],
   quizQuestions: [
-    { id: "js-classes-1", question: "What does classList.toggle(\"open\") do?", options: ["Adds it if missing, removes it if present", "Always adds", "Always removes", "Deletes the element"], correctAnswerIndex: 0, explanation: "toggle flips the class state." },
-    { id: "js-classes-2", question: "Why prefer classList over inline styles?", options: ["Design stays in CSS; JS only switches state", "It's faster to type", "Inline styles don't work", "No reason"], correctAnswerIndex: 0, explanation: "Separation of concerns: CSS owns looks, JS owns logic." }
+    { id: "js-classes-1", question: "What does classList.toggle(\"open\") do?", options: ["Adds it if missing, removes it if present", "Always adds", "Always removes", "Deletes the element"], correctAnswerIndex: 0, explanation: "Correct — **`toggle`** flips the class state. On becomes off, off becomes on." },
+    { id: "js-classes-2", question: "Why prefer classList over inline styles?", options: ["Design stays in CSS; JS only switches state", "It's faster to type", "Inline styles don't work", "No reason"], correctAnswerIndex: 0, explanation: "Right — **separation of concerns**: CSS owns looks, JS owns logic. `classList` is the bridge." }
   ]
 };
 
 // LESSON: Attributes
 export const jsAttributesContent: LessonContent = {
   heroTagline: "Read and change HTML attributes with get/setAttribute",
-  introduction: "getAttribute('src') reads an attribute; setAttribute('src', 'new.png') changes it; removeAttribute('disabled') deletes it. Attributes control images, links, inputs, and custom data-* values.",
+  introduction: "Every HTML element wears **name tags** — `src` on images, `href` on links, `disabled` on buttons. JavaScript can **read** them, **rewrite** them, and **peel them off**.\n\n**`getAttribute`** reads, **`setAttribute`** writes, **`removeAttribute`** deletes. It's the control panel of HTML.",
   definition: {
     term: "Attribute methods",
-    explanation: "getAttribute(name) reads, setAttribute(name, value) writes, removeAttribute(name) deletes, and hasAttribute(name) checks an element's HTML attributes."
+    explanation: "**Reading and writing HTML attributes**: `getAttribute(name)` reads, `setAttribute(name, value)` writes, `removeAttribute(name)` deletes, `hasAttribute(name)` checks. Attributes are the **control panel** of elements — images, links, inputs, `data-*`."
   },
-  whyItMatters: "Swapping images, enabling buttons, updating links, storing data-* values — attributes are the control panel of HTML elements.",
+  whyItMatters: "**Swapping images**, enabling buttons, updating links, storing `data-*` values — attributes are the **control panel** of HTML elements. Dynamic UIs constantly tweak them.",
   realWorldAnalogy: {
-    title: "Understanding Attributes",
-    story: "Name tags at a conference: read someone's tag (get), write a new one (set), peel one off (remove).",
+    title: "Conference Name Tags",
+    story: "**Conference name tags**: read someone's tag (`get`), write a new one (`set`), peel one off (`remove`). **Attributes** are an element's name tags — `src`, `href`, `disabled`, `data-*` — and JavaScript can read, rewrite, or peel them at will.",
     comparison: [
-      { item: "getAttribute('src')", meaning: "Reading the name tag." },
-      { item: "setAttribute('src', ...)", meaning: "Writing a new name tag." }
+      { item: "getAttribute('src')", meaning: "Reading the name tag — 'who are you?'" },
+      { item: "setAttribute('src', ...)", meaning: "Writing a new name tag — 'you are now this.'" }
     ]
   },
   syntaxStructure: `img.setAttribute("src", "cat.png");
@@ -893,7 +893,7 @@ console.log(link.getAttribute("href"));`,
     {
       wrong: "img.src = 'x.png'; vs img.setAttribute('src', 'x.png');  // confused?",
       correct: "Both work for standard attributes; properties (img.src) are usually simpler.",
-      reason: "Attributes are the HTML; properties are the live JS object. For data-*, use dataset or attributes."
+      reason: "**Attributes** are the HTML markup; **properties** are the live JS object. They're usually synced — but for `data-*`, use `dataset` or the attribute methods."
     }
   ],
   tryItYourself: {
@@ -906,13 +906,13 @@ console.log(link.getAttribute("href"));`,
     instructions: "Click to rewrite the link's destination."
   },
   takeaways: [
-    "getAttribute reads, setAttribute writes, removeAttribute deletes.",
-    "Use them for src, href, disabled, and data-* attributes.",
-    "Standard attributes also have simpler property shortcuts (img.src)."
+    "**`getAttribute`** reads, **`setAttribute`** writes, **`removeAttribute`** deletes.",
+    "Use them for **`src`**, **`href`**, **`disabled`**, and **`data-*`** attributes.",
+    "Standard attributes also have simpler **property shortcuts** (`img.src`)."
   ],
   quizQuestions: [
-    { id: "js-attrs-1", question: "How do you change an image's source?", options: ["img.setAttribute(\"src\", \"new.png\")", "img.change(\"src\")", "img.srcAttribute = \"new.png\"", "setSrc(img)"], correctAnswerIndex: 0, explanation: "setAttribute writes the attribute value." },
-    { id: "js-attrs-2", question: "What does removeAttribute(\"disabled\") do?", options: ["Enables the element", "Deletes the element", "Hides it", "Nothing"], correctAnswerIndex: 0, explanation: "Removing disabled re-enables the control." }
+    { id: "js-attrs-1", question: "How do you change an image's source?", options: ["img.setAttribute(\"src\", \"new.png\")", "img.change(\"src\")", "img.srcAttribute = \"new.png\"", "setSrc(img)"], correctAnswerIndex: 0, explanation: "Correct — `setAttribute` **writes** the attribute value. New name tag, written." },
+    { id: "js-attrs-2", question: "What does removeAttribute(\"disabled\") do?", options: ["Enables the element", "Deletes the element", "Hides it", "Nothing"], correctAnswerIndex: 0, explanation: "Right — removing **`disabled`** re-enables the control. Tag peeled off!" }
   ]
 };
 
@@ -923,19 +923,19 @@ console.log(link.getAttribute("href"));`,
 // LESSON: What are Events?
 export const jsEventsWhatContent: LessonContent = {
   heroTagline: "Things that happen — clicks, keys, loads — and how code hears them",
-  introduction: "An event is something that happens: a click, a keypress, a page load, a form submit. JavaScript 'listens' for events and runs your function when they occur — this is what makes pages interactive.",
+  introduction: "Something **happens**: a click, a keypress, a page load, a form submit. JavaScript **listens** for these moments and runs your function when they occur.\n\nThese somethings are called **events** — and they are the **entire reason** JavaScript exists in the browser. No events, no interactivity.",
   definition: {
     term: "Event",
-    explanation: "A signal that something happened in the browser — user actions (click, input) or browser actions (load, resize). Code reacts by listening for them."
+    explanation: "A **signal that something happened** in the browser — user actions (**click**, **input**, keypress) or browser actions (**load**, **resize**). Code **reacts** by listening with `addEventListener(eventName, handler)`."
   },
-  whyItMatters: "Without events, pages would be static posters. Events are the entire reason JavaScript exists in the browser.",
+  whyItMatters: "Without events, pages would be **static posters**. Events are the **entire reason** JavaScript exists in the browser — every interactive thing you've ever loved started as an event.",
   realWorldAnalogy: {
-    title: "Understanding Events",
-    story: "A doorbell: the press (event) rings the bell, and you (the listener) come to the door (the handler runs).",
+    title: "The Doorbell System",
+    story: "A **doorbell**: the press (**event**) rings the bell, **you** (the listener, set up with `addEventListener`) hear it, and **walking to the door** (the handler) is your response. Three parts, one beautiful system — and it's what makes pages **interactive** instead of static posters.",
     comparison: [
-      { item: "The event", meaning: "Someone pressing the doorbell." },
-      { item: "The listener", meaning: "You, waiting to hear it." },
-      { item: "The handler", meaning: "Walking to the door — your response." }
+      { item: "The event", meaning: "Someone pressing the doorbell — the signal." },
+      { item: "The listener", meaning: "You, waiting to hear it — addEventListener." },
+      { item: "The handler", meaning: "Walking to the door — your response function running." }
     ]
   },
   syntaxStructure: `button.addEventListener("click", () => {
@@ -957,7 +957,7 @@ document.addEventListener("keydown", (event) => {
     {
       wrong: "button.addEventListener('onclick', handler);  // never fires!",
       correct: "button.addEventListener('click', handler);",
-      reason: "Event names have no 'on' prefix in addEventListener — it's 'click', not 'onclick'."
+      reason: "Event names have **no 'on' prefix** in `addEventListener`! It's **`'click'`**, not `'onclick'`. The 'on' belongs to old HTML attributes only."
     }
   ],
   tryItYourself: {
@@ -971,31 +971,31 @@ document.addEventListener("keydown", (e) => {
     instructions: "Click the button, then press any key."
   },
   takeaways: [
-    "Events signal that something happened.",
-    "addEventListener(eventName, handler) listens for them.",
-    "Event names have no 'on' prefix: 'click', not 'onclick'."
+    "**Events** signal that something happened — the doorbell press.",
+    "**`addEventListener(eventName, handler)`** listens for them.",
+    "Event names have **no 'on' prefix**: `'click'`, not `'onclick'`."
   ],
   quizQuestions: [
-    { id: "js-eventswhat-1", question: "What is an event?", options: ["A signal that something happened", "A type of variable", "An HTML tag", "A CSS rule"], correctAnswerIndex: 0, explanation: "Events notify code about clicks, keys, loads, and more." },
-    { id: "js-eventswhat-2", question: "What is wrong with addEventListener(\"onclick\", ...)?", options: ["The name should be \"click\"", "Nothing", "Missing handler", "Wrong quotes"], correctAnswerIndex: 0, explanation: "addEventListener uses bare names without the 'on' prefix." }
+    { id: "js-eventswhat-1", question: "What is an event?", options: ["A signal that something happened", "A type of variable", "An HTML tag", "A CSS rule"], correctAnswerIndex: 0, explanation: "Correct — events **notify code** about clicks, keys, loads, and more. The doorbell ringing." },
+    { id: "js-eventswhat-2", question: "What is wrong with addEventListener(\"onclick\", ...)?", options: ["The name should be \"click\"", "Nothing", "Missing handler", "Wrong quotes"], correctAnswerIndex: 0, explanation: "Right — `addEventListener` uses **bare names** without the 'on' prefix: `'click'`, not `'onclick'`." }
   ]
 };
 
 // LESSON: Click Event
 export const jsClickEventContent: LessonContent = {
   heroTagline: "The most-used event: responding to clicks",
-  introduction: "The click event fires when a user clicks (or taps) an element. Attach it with addEventListener('click', ...) to buttons, cards, and menu items — it's the backbone of interactivity.",
+  introduction: "The **most-used event** in all of web development: the **click**. Buttons, tabs, likes, carts, modals — nearly every interaction starts with a press.\n\nAttach it with **`addEventListener('click', ...)`** and your function runs **once per click**. Master this and you can build most UI behavior.",
   definition: {
     term: "click event",
-    explanation: "An event fired when the user presses and releases the pointer on an element. The handler runs once per click."
+    explanation: "The **event fired** when a user **clicks** (or taps) an element — one handler run per **press-and-release**. Attached with `addEventListener('click', ...)`, it's the **backbone of interactivity**."
   },
-  whyItMatters: "Buttons, tabs, likes, carts, modals — nearly every interaction starts with a click. Master it and you can build most UI behavior.",
+  whyItMatters: "**Buttons, tabs, likes, carts, modals** — nearly every interaction starts with a click. Master it and you can build **most UI behavior** there is. This one event carries the whole interactive web.",
   realWorldAnalogy: {
-    title: "Understanding Click Events",
-    story: "An elevator button: press it, the system reacts — the press itself does nothing until the wiring (handler) responds.",
+    title: "The Elevator Button",
+    story: "An **elevator button**: pressing it does nothing by itself — the magic is the **wiring** (handler) that brings the elevator. The **click event** is the press; **your function** is the elevator arriving. Buttons, likes, carts, modals — nearly every interaction starts here.",
     comparison: [
-      { item: "The press", meaning: "The physical click." },
-      { item: "The handler", meaning: "The elevator arriving — your coded response." }
+      { item: "The press", meaning: "The physical click — the signal." },
+      { item: "The handler", meaning: "The elevator arriving — your coded response to the signal." }
     ]
   },
   syntaxStructure: `const btn = document.getElementById("btn");
@@ -1019,7 +1019,7 @@ btn.addEventListener("click", () => {
     {
       wrong: "btn.addEventListener('click', doSomething());  // runs immediately!",
       correct: "btn.addEventListener('click', doSomething);",
-      reason: "Parentheses call the function now. Pass the reference so it runs on click."
+      reason: "**Parentheses call NOW** — `handleClick()` runs immediately! Pass the **reference** (`handleClick`, no parentheses) so it runs **on click**."
     }
   ],
   tryItYourself: {
@@ -1032,31 +1032,31 @@ document.getElementById("btn").addEventListener("click", () => {
     instructions: "Click rapidly and watch the counter climb."
   },
   takeaways: [
-    "click fires once per press-and-release.",
-    "Pass the handler reference — no parentheses.",
-    "Update data first, then reflect it in the UI."
+    "**`click`** fires once per **press-and-release**.",
+    "Pass the **handler reference** — no parentheses!",
+    "**Update data first**, then reflect it in the UI."
   ],
   quizQuestions: [
-    { id: "js-click-1", question: "When does a click handler run?", options: ["Once per user click", "Continuously", "On page load", "Never"], correctAnswerIndex: 0, explanation: "Each click triggers one handler execution." },
-    { id: "js-click-2", question: "Why is addEventListener(\"click\", fn()) wrong?", options: ["It calls fn immediately instead of on click", "Nothing is wrong", "fn is undefined", "Clicks are banned"], correctAnswerIndex: 0, explanation: "() invokes now; the reference defers until the event." }
+    { id: "js-click-1", question: "When does a click handler run?", options: ["Once per user click", "Continuously", "On page load", "Never"], correctAnswerIndex: 0, explanation: "Correct — **each click** triggers exactly **one** handler execution." },
+    { id: "js-click-2", question: "Why is addEventListener(\"click\", fn()) wrong?", options: ["It calls fn immediately instead of on click", "Nothing is wrong", "fn is undefined", "Clicks are banned"], correctAnswerIndex: 0, explanation: "Right — `()` invokes **now**; the bare reference **defers** until the event fires." }
   ]
 };
 
 // LESSON: Input Event
 export const jsInputEventContent: LessonContent = {
   heroTagline: "React to every keystroke as the user types",
-  introduction: "The input event fires on EVERY change to a field — each keystroke, paste, or deletion. Read event.target.value to get the current text. It's the engine behind live search and character counters.",
+  introduction: "Want **live search** suggestions as the user types? A **password strength meter** that updates per letter? A **character counter**?\n\nThe **`input`** event fires on **every single change** — each keystroke, paste, deletion. Read `event.target.value` and react instantly.",
   definition: {
     term: "input event",
-    explanation: "An event fired whenever an <input> or <textarea> value changes. The handler can read the fresh value immediately."
+    explanation: "An event fired on **EVERY change** to a field — each **keystroke**, paste, or deletion. The handler reads the fresh value via **`event.target.value`**. The engine behind **live search** and character counters."
   },
-  whyItMatters: "Live search suggestions, password strength meters, and character counters all need per-keystroke updates — that's the input event.",
+  whyItMatters: "**Live search suggestions**, password strength meters, and character counters all need **per-keystroke updates** — that's the `input` event. It's what makes forms feel alive.",
   realWorldAnalogy: {
-    title: "Understanding the Input Event",
-    story: "A live scoreboard at a match: every goal updates the display instantly — no waiting for halftime.",
+    title: "The Live Scoreboard",
+    story: "A **live scoreboard** at a match: every goal updates the display **instantly** — nobody waits for halftime. The **`input`** event is that scoreboard: **every keystroke**, every paste, every deletion fires it immediately. Read `event.target.value` for the fresh text.",
     comparison: [
-      { item: "Each keystroke", meaning: "Each goal scored." },
-      { item: "The handler", meaning: "The scoreboard updating live." }
+      { item: "Each keystroke", meaning: "Each goal scored — the moment it happens." },
+      { item: "The handler", meaning: "The scoreboard updating live — no waiting for halftime." }
     ]
   },
   syntaxStructure: `input.addEventListener("input", (event) => {
@@ -1079,7 +1079,7 @@ searchBox.addEventListener("input", (event) => {
     {
       wrong: "Using 'change' for live search — updates only on blur!",
       correct: "Use 'input' for per-keystroke reactions.",
-      reason: "change fires when the field loses focus; input fires on every change."
+      reason: "**`change` fires on blur** (when the field loses focus); **`input` fires on every change**. For live feedback you want `input` — `change` will feel broken and laggy."
     }
   ],
   tryItYourself: {
@@ -1092,31 +1092,31 @@ searchBox.addEventListener("input", (event) => {
     instructions: "Type your name and watch the live greeting."
   },
   takeaways: [
-    "input fires on every keystroke, paste, and deletion.",
-    "event.target.value holds the current text.",
-    "Use input for live feedback; change for on-blur."
+    "**`input`** fires on **every** keystroke, paste, and deletion.",
+    "**`event.target.value`** holds the current text.",
+    "Use **`input`** for live feedback; **`change`** for on-blur."
   ],
   quizQuestions: [
-    { id: "js-input-1", question: "When does the input event fire?", options: ["On every value change", "Only on blur", "On page load", "Once per session"], correctAnswerIndex: 0, explanation: "Every keystroke, paste, or cut triggers it." },
-    { id: "js-input-2", question: "How do you read the typed text?", options: ["event.target.value", "event.text", "input.text", "event.key always"], correctAnswerIndex: 0, explanation: "target is the field; value is its current content." }
+    { id: "js-input-1", question: "When does the input event fire?", options: ["On every value change", "Only on blur", "On page load", "Once per session"], correctAnswerIndex: 0, explanation: "Correct — **every keystroke**, paste, or cut triggers it. The scoreboard never sleeps." },
+    { id: "js-input-2", question: "How do you read the typed text?", options: ["event.target.value", "event.text", "input.text", "event.key always"], correctAnswerIndex: 0, explanation: "Right — **`target`** is the field; **`value`** is its current content. The dynamic duo." }
   ]
 };
 
 // LESSON: Change Event
 export const jsChangeEventContent: LessonContent = {
   heroTagline: "React when the user finishes and moves on",
-  introduction: "The change event fires when a field's value is committed — text inputs on blur, selects and checkboxes immediately on choice. It's for 'final answer' reactions, not per-keystroke ones.",
+  introduction: "Not every change deserves a **live** reaction. Sometimes you want the **final answer** — the committed choice.\n\nThe **`change`** event fires when a value is **committed**: text inputs on blur, dropdowns and checkboxes the moment you pick. 'Done deciding? Now react.'",
   definition: {
     term: "change event",
-    explanation: "An event fired when a form control's value changes AND is committed: text fields on blur, dropdowns/checkboxes/radios on selection."
+    explanation: "An event fired when a form control's value is **committed**: text fields on **blur** (leaving the field), dropdowns/checkboxes/radios **immediately** on selection. It's for '**final answer**' reactions — not per-keystroke ones."
   },
-  whyItMatters: "Shipping options, quantity selectors, theme pickers, file uploads — change is the right event for discrete choices.",
+  whyItMatters: "**Shipping options**, quantity selectors, theme pickers, file uploads — `change` is the right event for **discrete choices**. Using `input` here would fire wastefully on every keystroke.",
   realWorldAnalogy: {
-    title: "Understanding the Change Event",
-    story: "Submitting a ballot vs thinking aloud: input is thinking aloud (every word), change is dropping the ballot in the box (final).",
+    title: "Thinking Aloud vs the Ballot Box",
+    story: "**Thinking aloud vs submitting a ballot**: `input` is thinking aloud — every word, live. **`change`** is dropping the **ballot in the box** — the final, committed choice. Text inputs commit on **blur**; dropdowns and checkboxes commit **the moment** you pick.",
     comparison: [
-      { item: "input", meaning: "Thinking aloud — every keystroke." },
-      { item: "change", meaning: "The ballot dropped — committed choice." }
+      { item: "input", meaning: "Thinking aloud — every keystroke, live." },
+      { item: "change", meaning: "Dropping the ballot in the box — the committed, final choice." }
     ]
   },
   syntaxStructure: `select.addEventListener("change", (event) => {
@@ -1138,7 +1138,7 @@ sizeSelect.addEventListener("change", (event) => {
     {
       wrong: "Expecting change on every keystroke in a text input.",
       correct: "Text inputs fire change on blur (leaving the field).",
-      reason: "change means 'committed', not 'typed'."
+      reason: "`change` means '**committed**', not 'typed'! For per-keystroke reactions use **`input`**; for final-choice reactions use **`change`**."
     }
   ],
   tryItYourself: {
@@ -1151,31 +1151,31 @@ sizeSelect.addEventListener("change", (event) => {
     instructions: "Pick different colors from the dropdown."
   },
   takeaways: [
-    "change fires on committed values, not keystrokes.",
-    "Dropdowns, checkboxes, and radios fire it on selection.",
-    "Text inputs fire it when the field loses focus."
+    "**`change`** fires on **committed** values, not keystrokes.",
+    "**Dropdowns**, **checkboxes**, and **radios** fire it on selection.",
+    "**Text inputs** fire it when the field **loses focus**."
   ],
   quizQuestions: [
-    { id: "js-change-1", question: "When does change fire on a text input?", options: ["When it loses focus after editing", "On every keystroke", "On page load", "Never"], correctAnswerIndex: 0, explanation: "change = committed value, which for text means blur." },
-    { id: "js-change-2", question: "Which control fires change immediately on choice?", options: ["A <select> dropdown", "A text input per keystroke", "A div", "A paragraph"], correctAnswerIndex: 0, explanation: "Selects commit the moment an option is picked." }
+    { id: "js-change-1", question: "When does change fire on a text input?", options: ["When it loses focus after editing", "On every keystroke", "On page load", "Never"], correctAnswerIndex: 0, explanation: "Correct — `change` = **committed value**, which for text means **blur**." },
+    { id: "js-change-2", question: "Which control fires change immediately on choice?", options: ["A <select> dropdown", "A text input per keystroke", "A div", "A paragraph"], correctAnswerIndex: 0, explanation: "Right — **selects** commit the moment an option is picked. Ballot dropped!" }
   ]
 };
 
 // LESSON: Submit Event
 export const jsSubmitEventContent: LessonContent = {
   heroTagline: "Intercepting form submission before the page reloads",
-  introduction: "The submit event fires when a form is submitted. Calling event.preventDefault() stops the page reload so JavaScript can validate, process, and send the data itself — the foundation of modern forms.",
+  introduction: "Logins, signups, checkouts, contact forms — every important form needs **JS validation before sending**.\n\nThe **`submit`** event fires on form submission, and **`event.preventDefault()`** stops the **page reload** — so your code can validate, give feedback, and send data itself. The foundation of modern forms.",
   definition: {
     term: "submit event",
-    explanation: "An event fired on a <form> when submitted (button click or Enter). preventDefault() cancels the browser's default reload behavior."
+    explanation: "An event fired on a **`<form>`** when submitted (button click or **Enter**). **`event.preventDefault()`** cancels the browser's default **reload** behavior — letting JavaScript validate and send the data itself."
   },
-  whyItMatters: "Logins, signups, checkouts, and contact forms all need JS validation before sending. submit + preventDefault makes that possible.",
+  whyItMatters: "**Logins, signups, checkouts, contact forms** — all need JS validation before sending. `submit` + `preventDefault` makes that possible. It's the foundation **every modern form** stands on.",
   realWorldAnalogy: {
-    title: "Understanding Submit",
-    story: "A mailroom checkpoint: every outgoing letter (submit) is inspected (validated) before posting — bad ones are returned to sender.",
+    title: "The Mailroom Checkpoint",
+    story: "A **mailroom checkpoint**: every outgoing letter (**submit**) is **inspected** (validated) before posting — bad ones return to sender. **`event.preventDefault()`** is the inspector holding the letter: it **stops the page reload** so JavaScript can validate, process, and send the data itself.",
     comparison: [
-      { item: "The submit", meaning: "Dropping the letter in the outgoing box." },
-      { item: "preventDefault()", meaning: "Holding the letter for inspection first." }
+      { item: "The submit", meaning: "Dropping the letter in the outgoing box — it's leaving!" },
+      { item: "preventDefault()", meaning: "Holding the letter for inspection first — validation before posting." }
     ]
   },
   syntaxStructure: `form.addEventListener("submit", (event) => {
@@ -1205,7 +1205,7 @@ form.addEventListener("submit", (event) => {
     {
       wrong: "Forgetting preventDefault — the page reloads and your JS result vanishes!",
       correct: "Always call event.preventDefault() first in submit handlers.",
-      reason: "The browser's default is a full page reload, wiping your work."
+      reason: "The browser's **default** is a **full page reload** — wiping your JavaScript state! Forget `preventDefault()` and your lovingly-built validation vanishes with the refresh."
     }
   ],
   tryItYourself: {
@@ -1219,31 +1219,31 @@ form.addEventListener("submit", (event) => {
     instructions: "Try valid and invalid emails — the page never reloads."
   },
   takeaways: [
-    "submit fires on form submission.",
-    "preventDefault() stops the page reload.",
-    "Validate, give feedback, then process the data."
+    "**`submit`** fires on form submission.",
+    "**`preventDefault()`** stops the page reload.",
+    "**Validate**, give feedback, then process the data."
   ],
   quizQuestions: [
-    { id: "js-submit-1", question: "What does event.preventDefault() do in a submit handler?", options: ["Stops the page reload", "Submits twice", "Clears the form", "Closes the browser"], correctAnswerIndex: 0, explanation: "It cancels the browser's default form submission." },
-    { id: "js-submit-2", question: "What happens if you forget preventDefault?", options: ["The page reloads, wiping your JS updates", "Nothing", "The form breaks", "An error throws"], correctAnswerIndex: 0, explanation: "Default submission reloads the page." }
+    { id: "js-submit-1", question: "What does event.preventDefault() do in a submit handler?", options: ["Stops the page reload", "Submits twice", "Clears the form", "Closes the browser"], correctAnswerIndex: 0, explanation: "Correct — it **cancels** the browser's default form submission. Letter held for inspection!" },
+    { id: "js-submit-2", question: "What happens if you forget preventDefault?", options: ["The page reloads, wiping your JS updates", "Nothing", "The form breaks", "An error throws"], correctAnswerIndex: 0, explanation: "Right — **default submission reloads the page**. That's why we intercept it." }
   ]
 };
 
 // LESSON: Keyboard Events
 export const jsKeyboardEventsContent: LessonContent = {
   heroTagline: "Hearing every key: keydown, keyup, and keypress",
-  introduction: "Keyboard events fire on keydown (pressed), keyup (released), and keypress (character typed). event.key tells you WHICH key — 'Enter', 'Escape', 'a'. They power shortcuts, games, and search-on-Enter.",
+  introduction: "**Enter** to submit. **Escape** to close. **Arrow keys** to move. **Ctrl+S** to save. Keyboard shortcuts make apps feel **professional**.\n\nKeyboard events fire on **keydown** (pressed) and **keyup** (released), and **`event.key`** tells you WHICH key — `'Enter'`, `'Escape'`, `'a'`.",
   definition: {
     term: "Keyboard events",
-    explanation: "Events fired for keyboard activity: keydown when pressed, keyup when released. event.key identifies the key; event.code identifies the physical key."
+    explanation: "**Events for keyboard activity**: **`keydown`** when pressed, **`keyup`** when released. **`event.key`** identifies the key (`'Enter'`, `'Escape'`); `event.code` identifies the **physical** key. Avoid the deprecated `keyCode`."
   },
-  whyItMatters: "Enter-to-submit, Escape-to-close, arrow-key games, Ctrl+S shortcuts — keyboard handling makes apps feel professional.",
+  whyItMatters: "**Enter-to-submit**, Escape-to-close, arrow-key games, Ctrl+S shortcuts — **keyboard handling** makes apps feel professional. Power users (and gamers) will love you.",
   realWorldAnalogy: {
-    title: "Understanding Keyboard Events",
-    story: "A piano: pressing a key (keydown) makes the note, releasing (keyup) stops it — and you always know WHICH key was touched.",
+    title: "The Piano Keys",
+    story: "A **piano**: pressing a key (**keydown**) makes the note, releasing it (**keyup**) stops it — and you always know **WHICH** key was touched. Keyboard events work the same: **`event.key`** names the key (`'Enter'`, `'Escape'`, `'a'`), so your code can play the right note.",
     comparison: [
       { item: "keydown", meaning: "The hammer striking — the press moment." },
-      { item: "event.key", meaning: "Which piano key — 'Enter', 'a', 'Escape'." }
+      { item: "event.key", meaning: "Which piano key was touched — 'Enter', 'a', 'Escape'." }
     ]
   },
   syntaxStructure: `document.addEventListener("keydown", (event) => {
@@ -1271,7 +1271,7 @@ input.addEventListener("keydown", (event) => {
     {
       wrong: "if (event.keyCode === 13)  // deprecated!",
       correct: "if (event.key === 'Enter')",
-      reason: "keyCode is deprecated. event.key ('Enter', 'a', 'Escape') is the modern way."
+      reason: "**`keyCode` is deprecated** — those magic numbers (13, 27) are unreadable! Use **`event.key`** (`'Enter'`, `'a'`, `'Escape'`) — the modern, readable way."
     }
   ],
   tryItYourself: {
@@ -1283,32 +1283,32 @@ input.addEventListener("keydown", (event) => {
     instructions: "Press letters, Enter, and Escape."
   },
   takeaways: [
-    "keydown fires on press; keyup on release.",
-    "event.key names the key: 'Enter', 'Escape', 'a'.",
-    "Avoid deprecated keyCode — use event.key."
+    "**`keydown`** fires on press; **`keyup`** on release.",
+    "**`event.key`** names the key: `'Enter'`, `'Escape'`, `'a'`.",
+    "Avoid deprecated **`keyCode`** — use `event.key`."
   ],
   quizQuestions: [
-    { id: "js-keyboard-1", question: "How do you detect the Enter key?", options: ["event.key === \"Enter\"", "event.key === 13", "event.enter", "keyCode.Enter"], correctAnswerIndex: 0, explanation: "event.key gives the key's name as a string." },
-    { id: "js-keyboard-2", question: "What is the difference between keydown and keyup?", options: ["keydown = pressed, keyup = released", "No difference", "keyup = pressed", "keydown never fires"], correctAnswerIndex: 0, explanation: "They mark the two moments of a key press." }
+    { id: "js-keyboard-1", question: "How do you detect the Enter key?", options: ["event.key === \"Enter\"", "event.key === 13", "event.enter", "keyCode.Enter"], correctAnswerIndex: 0, explanation: "Correct — **`event.key`** gives the key's name as a **string**: `'Enter'`, `'a'`, `'Escape'`." },
+    { id: "js-keyboard-2", question: "What is the difference between keydown and keyup?", options: ["keydown = pressed, keyup = released", "No difference", "keyup = pressed", "keydown never fires"], correctAnswerIndex: 0, explanation: "Right — they mark the **two moments** of a key press: down and up." }
   ]
 };
 
 // LESSON: Mouse Events
 export const jsMouseEventsContent: LessonContent = {
   heroTagline: "Beyond clicks: hover, move, and right-click",
-  introduction: "The mouse fires many events: mouseover/mouseout (enter/leave), mousemove (position), mousedown/mouseup (press/release), dblclick, and contextmenu (right-click). Together they build tooltips, drag-and-drop, and drawing apps.",
+  introduction: "Clicks are just the beginning. The mouse also **hovers**, **moves**, **presses**, **double-clicks**, and **right-clicks** — and JavaScript hears them all.\n\nThese events build **tooltips**, **drag-and-drop**, **drawing apps**, and **custom right-click menus**. Time to go beyond the click.",
   definition: {
     term: "Mouse events",
-    explanation: "Events for pointer activity: mouseover/out for hovering, mousemove for tracking, mousedown/up for press states, dblclick, and contextmenu."
+    explanation: "**Events for pointer activity**: **`mouseover`/`mouseout`** for entering/leaving, **`mousemove`** for tracking position, **`mousedown`/`mouseup`** for press states, plus **`dblclick`** and **`contextmenu`** (right-click)."
   },
-  whyItMatters: "Hover previews, drag sliders, drawing canvases, custom right-click menus — rich interfaces live on mouse events.",
+  whyItMatters: "**Hover previews**, drag sliders, drawing canvases, custom right-click menus — **rich interfaces** live on mouse events. This is what separates basic pages from delightful ones.",
   realWorldAnalogy: {
-    title: "Understanding Mouse Events",
-    story: "A motion-sensor porch light: approaching (mouseover) turns it on, leaving (mouseout) turns it off, walking around (mousemove) is tracked.",
+    title: "The Motion-Sensor Porch Light",
+    story: "A **motion-sensor porch light**: approaching (**mouseover**) turns it on, leaving (**mouseout**) turns it off, walking around (**mousemove**) keeps it tracking. The mouse fires a whole **family** of events — hover, move, press, double-click, right-click — each a different sensor.",
     comparison: [
-      { item: "mouseover", meaning: "Stepping onto the porch." },
-      { item: "mouseout", meaning: "Stepping off the porch." },
-      { item: "mousemove", meaning: "Pacing on the porch — constant updates." }
+      { item: "mouseover", meaning: "Stepping onto the porch — the light turns on." },
+      { item: "mouseout", meaning: "Stepping off the porch — the light turns off." },
+      { item: "mousemove", meaning: "Pacing on the porch — constant tracking updates." }
     ]
   },
   syntaxStructure: `card.addEventListener("mouseover", () => { /* hover on */ });
@@ -1337,7 +1337,7 @@ card.addEventListener("dblclick", () => {
     {
       wrong: "Heavy work inside mousemove — fires dozens of times per second!",
       correct: "Keep mousemove handlers tiny, or throttle them.",
-      reason: "mousemove floods the handler; expensive work causes lag."
+      reason: "**`mousemove` floods your handler** — dozens of events per second! Expensive work there causes **lag and jank**. Keep `mousemove` handlers feather-light."
     }
   ],
   tryItYourself: {
@@ -1355,31 +1355,31 @@ pad.addEventListener("mousemove", (e) => {
     instructions: "Hover in and out, then move the mouse inside."
   },
   takeaways: [
-    "mouseover/out track entering and leaving.",
-    "mousemove fires constantly — keep handlers light.",
-    "dblclick and contextmenu cover double-click and right-click."
+    "**`mouseover`/`out`** track entering and leaving.",
+    "**`mousemove`** fires constantly — keep handlers **light**.",
+    "**`dblclick`** and **`contextmenu`** cover double-click and right-click."
   ],
   quizQuestions: [
-    { id: "js-mouse-1", question: "Which event fires when the pointer enters an element?", options: ["mouseover", "mouseout", "mouseclick", "mouseleave-up"], correctAnswerIndex: 0, explanation: "mouseover fires on entry; mouseout on exit." },
-    { id: "js-mouse-2", question: "Why keep mousemove handlers tiny?", options: ["It fires very frequently", "It never fires", "It's deprecated", "No reason"], correctAnswerIndex: 0, explanation: "Dozens of events per second — heavy work causes jank." }
+    { id: "js-mouse-1", question: "Which event fires when the pointer enters an element?", options: ["mouseover", "mouseout", "mouseclick", "mouseleave-up"], correctAnswerIndex: 0, explanation: "Correct — **`mouseover`** fires on entry; **`mouseout`** on exit. On the porch, off the porch." },
+    { id: "js-mouse-2", question: "Why keep mousemove handlers tiny?", options: ["It fires very frequently", "It never fires", "It's deprecated", "No reason"], correctAnswerIndex: 0, explanation: "Right — **dozens of events per second**! Heavy work in there causes jank." }
   ]
 };
 
 // LESSON: Event Listeners
 export const jsEventListenersContent: LessonContent = {
   heroTagline: "addEventListener done right: options, removal, and the event object",
-  introduction: "addEventListener(type, handler) is the modern way to listen — it allows MULTIPLE handlers on one element,unlike onclick which overwrites. You can also remove listeners and read the event object for details.",
+  introduction: "`onclick = myFunc` works — but it allows only **ONE** handler. Assign another and the first is **silently deleted**.\n\n**`addEventListener`** is the modern way: **multiple handlers** per element, **removable** listeners, and access to the **event object**. Libraries, analytics, and your code can all listen peacefully.",
   definition: {
     term: "addEventListener()",
-    explanation: "The standard method to attach event handlers. Multiple listeners can coexist on one element/event, and removeEventListener detaches them."
+    explanation: "The **standard method** to attach event handlers: `addEventListener(type, handler)`. **Multiple listeners** can coexist on one element and event; **`removeEventListener`** detaches them (needs the **same function reference**)."
   },
-  whyItMatters: "Libraries, analytics, and your own code all listen to the same buttons. addEventListener lets everyone coexist; onclick would clobber the others.",
+  whyItMatters: "**Libraries, analytics, and your own code** all listen to the same buttons. `addEventListener` lets everyone **coexist**; `onclick` would clobber the others. It's the teamwork-friendly choice.",
   realWorldAnalogy: {
-    title: "Understanding Event Listeners",
-    story: "A conference PA system: many people can listen to the same announcement — nobody's earpiece deletes anyone else's.",
+    title: "The Conference PA System",
+    story: "A **conference PA system**: the announcement plays, and **everyone** with an earpiece hears it. `addEventListener` hands out **unlimited earpieces** — many handlers, one event, nobody deleted. But `onclick =` is **one shared earpiece** — the last grabber wins and earlier listeners go silent.",
     comparison: [
-      { item: "addEventListener", meaning: "Handing out another earpiece — everyone hears." },
-      { item: "onclick =", meaning: "One shared earpiece — the last grabber wins." }
+      { item: "addEventListener", meaning: "Handing out another earpiece — everyone hears the announcement." },
+      { item: "onclick =", meaning: "One shared earpiece — the last grabber wins, others go silent." }
     ]
   },
   syntaxStructure: `el.addEventListener("click", handler);       // add
@@ -1404,7 +1404,7 @@ btn.removeEventListener("click", trackClick);`,
     {
       wrong: "el.addEventListener('click', () => {...});\nel.removeEventListener('click', () => {...});  // fails!",
       correct: "Store the function in a variable to remove it later.",
-      reason: "removeEventListener needs the identical function object — anonymous arrows can't be matched."
+      reason: "`removeEventListener` needs the **identical function object**! Anonymous arrows (`() => {...}`) can't be matched later — **name your function** if you plan to remove it."
     }
   ],
   tryItYourself: {
@@ -1418,31 +1418,31 @@ btn.addEventListener("click", handlerB);`,
     instructions: "Click and see both A and B. Then remove handlerB."
   },
   takeaways: [
-    "addEventListener allows multiple handlers per event.",
-    "onclick assignment allows only one — it overwrites.",
-    "removeEventListener needs the same function reference."
+    "**`addEventListener`** allows **multiple handlers** per event.",
+    "**`onclick`** assignment allows only **one** — it overwrites.",
+    "**`removeEventListener`** needs the same function reference."
   ],
   quizQuestions: [
-    { id: "js-listeners-1", question: "How is addEventListener better than onclick?", options: ["Multiple handlers can coexist", "It's shorter", "It works without JS", "No difference"], correctAnswerIndex: 0, explanation: "onclick assignment replaces; addEventListener stacks." },
-    { id: "js-listeners-2", question: "What does removeEventListener need?", options: ["The exact same function reference", "Only the event name", "The element id", "Nothing"], correctAnswerIndex: 0, explanation: "It matches by function identity." }
+    { id: "js-listeners-1", question: "How is addEventListener better than onclick?", options: ["Multiple handlers can coexist", "It's shorter", "It works without JS", "No difference"], correctAnswerIndex: 0, explanation: "Correct — `onclick` assignment **replaces**; `addEventListener` **stacks**. PA system vs shared earpiece." },
+    { id: "js-listeners-2", question: "What does removeEventListener need?", options: ["The exact same function reference", "Only the event name", "The element id", "Nothing"], correctAnswerIndex: 0, explanation: "Right — it matches by **function identity**. Same object in, same object out." }
   ]
 };
 
 // LESSON: Form Validation
 export const jsFormValidationContent: LessonContent = {
   heroTagline: "Checking user input before it ever leaves the page",
-  introduction: "Form validation checks inputs against rules — required fields, email format, password length, matching passwords — and shows clear errors. Validate on input for feedback and on submit as the final gate.",
+  introduction: "Nothing frustrates users like a form that **silently fails** — or accepts garbage that breaks everything later.\n\n**Form validation** checks inputs against rules — required fields, email format, password length — and shows **clear, specific errors**. Validate **live on input** for feedback, and **on submit** as the final gate.",
   definition: {
     term: "Form validation",
-    explanation: "Testing user-entered data against rules before accepting it. Client-side validation gives instant feedback; servers must always re-validate."
+    explanation: "**Testing user-entered data against rules** before accepting it: required fields, email format, password length, matching passwords. **Client-side** validation gives **instant feedback**; the **server must always re-validate** (client checks are bypassable)."
   },
-  whyItMatters: "Bad data breaks apps and frustrates users. Instant, specific errors ('password needs 8+ characters') convert far better than a silent failure.",
+  whyItMatters: "**Bad data breaks apps** and frustrates users. Instant, specific errors ('password needs 8+ characters') **convert far better** than silent failures — validation directly impacts signups and sales.",
   realWorldAnalogy: {
-    title: "Understanding Form Validation",
-    story: "A bouncer with a checklist: ID present? On the list? Dress code ok? Each failure gets a specific reason, not just 'no'.",
+    title: "The Bouncer's Checklist",
+    story: "A **bouncer with a checklist**: ID present? On the list? Dress code OK? Each failure gets a **specific reason** — 'you need ID' — not just a grunt. **Form validation** is that bouncer: every rule checked, every failure explained clearly.",
     comparison: [
-      { item: "Per-field checks", meaning: "Checking each checklist item." },
-      { item: "Specific messages", meaning: "Telling them exactly what's wrong." }
+      { item: "Per-field checks", meaning: "Checking each checklist item — ID, list, dress code." },
+      { item: "Specific messages", meaning: "Telling them exactly what's wrong — not just 'no'." }
     ]
   },
   syntaxStructure: `if (password.length < 8) {
@@ -1466,7 +1466,7 @@ console.log(problems.length + " problems found");`,
     {
       wrong: "Relying ONLY on JS validation — attackers bypass it!",
       correct: "JS validation is for UX; always re-validate on the server.",
-      reason: "Client code can be skipped. Server validation is the real security."
+      reason: "**Client validation is UX, not security** — anyone can bypass it! The **server must re-validate everything**. Client checks are the friendly bouncer; the server is the vault door."
     }
   ],
   tryItYourself: {
@@ -1482,31 +1482,31 @@ console.log(problems.length + " problems found");`,
     instructions: "Try short, mismatched, and valid passwords."
   },
   takeaways: [
-    "Validate each rule and show specific error messages.",
-    "Check live on input AND finally on submit.",
-    "Client validation is UX; server validation is security."
+    "**Validate each rule** and show **specific** error messages.",
+    "Check **live on input** AND finally **on submit**.",
+    "**Client validation is UX**; **server validation is security**."
   ],
   quizQuestions: [
-    { id: "js-validation-1", question: "Why show specific error messages?", options: ["Users can fix exactly what's wrong", "It looks fancy", "It's required by HTML", "No reason"], correctAnswerIndex: 0, explanation: "Specific guidance converts better than generic failure." },
-    { id: "js-validation-2", question: "Is client-side validation enough for security?", options: ["No — always re-validate on the server", "Yes", "Only for emails", "Only with HTTPS"], correctAnswerIndex: 0, explanation: "Client checks are bypassable; the server is the real gate." }
+    { id: "js-validation-1", question: "Why show specific error messages?", options: ["Users can fix exactly what's wrong", "It looks fancy", "It's required by HTML", "No reason"], correctAnswerIndex: 0, explanation: "Correct — **specific guidance** ('password needs 8+ characters') converts far better than a generic 'error'." },
+    { id: "js-validation-2", question: "Is client-side validation enough for security?", options: ["No — always re-validate on the server", "Yes", "Only for emails", "Only with HTTPS"], correctAnswerIndex: 0, explanation: "Right — **client checks are bypassable**; the server is the **real gate**. Always re-validate there." }
   ]
 };
 
 // LESSON: Interactive Forms
 export const jsInteractiveFormsContent: LessonContent = {
   heroTagline: "Putting it all together: a live, validated, dynamic form",
-  introduction: "Interactive forms combine everything: live input feedback, change-driven options, submit interception, and dynamic fields. This lesson builds a complete signup form the way real apps do.",
+  introduction: "This is the **capstone**: a form that **validates live**, shows/hides fields based on choices, and intercepts submit — the way **real apps** do it.\n\n**Interactive forms** combine everything you've learned: `input` for live feedback, `change` for choices, `submit` for the final gate. Build one end-to-end and you've proven you can ship real features.",
   definition: {
     term: "Interactive form",
-    explanation: "A form that responds as the user types — live validation, conditional fields, dynamic summaries — instead of waiting for submission."
+    explanation: "A **form that responds as the user types** — live validation, conditional fields, dynamic summaries — instead of waiting for submission. It combines **`input`** (live), **`change`** (choices), and **`submit`** (final gate)."
   },
-  whyItMatters: "This is the capstone skill: every signup, checkout, and settings page works this way. Building one end-to-end proves you can ship real features.",
+  whyItMatters: "This is the **capstone skill**: every signup, checkout, and settings page works this way. Building one **end-to-end** proves you can ship real features — it's portfolio gold.",
   realWorldAnalogy: {
-    title: "Understanding Interactive Forms",
-    story: "A helpful bank clerk watching you fill a form: 'that field needs a number', 'since you chose business, here's the tax ID box' — guidance in real time.",
+    title: "The Helpful Bank Clerk",
+    story: "A **helpful bank clerk** watching you fill a form: 'that field needs a number', 'since you chose business, here's the tax ID box', 'all good — sign here'. **Interactive forms** are that clerk: **live validation**, **conditional fields**, **dynamic summaries** — guidance in real time, not a rejection at the end.",
     comparison: [
-      { item: "Live validation", meaning: "The clerk checking each line as you write." },
-      { item: "Conditional fields", meaning: "Handing you extra pages only when relevant." }
+      { item: "Live validation", meaning: "The clerk checking each line as you write — instant corrections." },
+      { item: "Conditional fields", meaning: "Handing you extra pages only when relevant — 'since you chose business, here's the tax ID box.'" }
     ]
   },
   syntaxStructure: `// 1. input -> live feedback
@@ -1533,7 +1533,7 @@ document.getElementById("pw").addEventListener("input", (e) => {
     {
       wrong: "Validating only on submit — users discover 5 errors at once!",
       correct: "Validate live per field, then re-check everything on submit.",
-      reason: "Early feedback prevents the frustrating error pile-up."
+      reason: "**Early feedback prevents the frustrating error pile-up**! Validating only on submit means users face 10 errors at once. Guide them live — it's kinder and converts better."
     }
   ],
   tryItYourself: {
@@ -1552,12 +1552,12 @@ document.getElementById("go").addEventListener("click", () => {
     instructions: "Type a short name, then a valid one, then click Continue."
   },
   takeaways: [
-    "Combine input (live), change (choices), submit (final gate).",
-    "Show/hide fields based on user choices.",
-    "Live feedback plus submit validation = great UX."
+    "Combine **`input`** (live), **`change`** (choices), **`submit`** (final gate).",
+    "**Show/hide fields** based on user choices.",
+    "**Live feedback** plus submit validation = great UX."
   ],
   quizQuestions: [
-    { id: "js-interactiveforms-1", question: "Which events power an interactive form?", options: ["input, change, and submit together", "Only submit", "Only click", "Only load"], correctAnswerIndex: 0, explanation: "Each handles a different interaction moment." },
-    { id: "js-interactiveforms-2", question: "Why validate live AND on submit?", options: ["Live guides; submit catches anything missed", "It's required", "Double validation is faster", "No reason"], correctAnswerIndex: 0, explanation: "Live feedback helps; the submit check is the final safety net." }
+    { id: "js-interactiveforms-1", question: "Which events power an interactive form?", options: ["input, change, and submit together", "Only submit", "Only click", "Only load"], correctAnswerIndex: 0, explanation: "Correct — **each event handles a different moment**: `input` (live), `change` (choices), `submit` (final gate)." },
+    { id: "js-interactiveforms-2", question: "Why validate live AND on submit?", options: ["Live guides; submit catches anything missed", "It's required", "Double validation is faster", "No reason"], correctAnswerIndex: 0, explanation: "Right — **live feedback helps** users fix as they go; the **submit check** is the final safety net." }
   ]
 };
