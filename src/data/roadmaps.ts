@@ -12,10 +12,12 @@ export interface RoadmapStep {
   courseSlug?: string;      // slug used to navigate to the course detail page
   skills: string[];         // key skills in this step
   projectIds?: string[];    // linked project IDs
+  customRoute?: string;     // app route to open instead of a course (e.g. 'setup-guide')
+  customRouteLabel?: string;// label for the custom route button
 }
 
 export interface Roadmap {
-  id: string;               // 'frontend' | 'backend' | 'fullstack'
+  id: string;               // 'beginner' | 'frontend' | 'backend' | 'fullstack'
   title: string;
   description: string;
   icon: string;             // lucide icon name
@@ -27,6 +29,60 @@ export interface Roadmap {
 export const roadmapStorageKey = (roadmapId: string): string => `cv-roadmap-${roadmapId}`;
 
 export const roadmaps: Roadmap[] = [
+  {
+    id: 'beginner',
+    title: 'Beginner Path',
+    description: 'Your first steps into coding: set up your tools, learn the absolute basics of HTML and CSS, and build your very first webpage.',
+    icon: 'Sprout',
+    color: '#22c55e',
+    totalTime: '3-4 weeks',
+    steps: [
+      {
+        id: 'bg-1',
+        stepNumber: 1,
+        title: 'Set Up Your Tools',
+        description: 'Install VS Code, add the must-have extensions, and open your first project folder. This is your coding workspace for everything ahead.',
+        whyItMatters: 'Pros spend 90% of their time in their editor. Setting it up right on day one saves you hours of confusion later.',
+        estimatedTime: '1 day',
+        skills: ['VS Code', 'Live Server', 'Extensions', 'Project folders'],
+        customRoute: 'setup-guide',
+        customRouteLabel: 'Open Setup Guide',
+      },
+      {
+        id: 'bg-2',
+        stepNumber: 2,
+        title: 'HTML Basics',
+        description: 'Learn the tags that structure every webpage: headings, paragraphs, links, images, and lists. Write your first lines of real HTML.',
+        whyItMatters: 'HTML is the skeleton of the web. Every page you will ever build starts with these tags.',
+        estimatedTime: '1 week',
+        courseId: 'course-html',
+        courseSlug: 'html',
+        skills: ['Tags & elements', 'Headings', 'Links', 'Images', 'Lists'],
+      },
+      {
+        id: 'bg-3',
+        stepNumber: 3,
+        title: 'CSS Basics',
+        description: 'Add color, fonts, and spacing to your HTML. Learn selectors, the box model, and how to make a plain page look beautiful.',
+        whyItMatters: 'CSS is what turns a boring document into a designed page. This is where your creativity kicks in.',
+        estimatedTime: '1 week',
+        courseId: 'course-css',
+        courseSlug: 'css',
+        skills: ['Colors & fonts', 'Selectors', 'Box model', 'Spacing'],
+      },
+      {
+        id: 'bg-4',
+        stepNumber: 4,
+        title: 'Build Your First Webpage',
+        description: 'Combine HTML and CSS to build a complete personal profile page from scratch. Then pick a starter project and make it your own.',
+        whyItMatters: 'Finishing one real page proves you can build, not just follow along. This is your first portfolio piece.',
+        estimatedTime: '3-4 days',
+        skills: ['Complete page', 'Practice project', 'Portfolio start'],
+        customRoute: 'projects',
+        customRouteLabel: 'Browse Starter Projects',
+      },
+    ],
+  },
   {
     id: 'frontend',
     title: 'Frontend Developer',
