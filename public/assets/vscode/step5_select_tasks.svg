@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="winShadow5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="560" fill="#0f172a"/>
+
+  <!-- Setup Wizard Dialog Box -->
+  <g transform="translate(150, 20)" filter="url(#winShadow5)">
+    <rect width="600" height="470" rx="8" fill="#f0f0f0" stroke="#999999" stroke-width="1"/>
+
+    <!-- Windows Title Bar -->
+    <rect width="600" height="32" rx="8" fill="#ffffff"/>
+    <rect y="16" width="600" height="16" fill="#ffffff"/>
+    <line x1="0" y1="32" x2="600" y2="32" stroke="#d4d4d4"/>
+    <text x="14" y="21" fill="#1f2937" font-size="12" font-weight="600">Setup - Visual Studio Code</text>
+    <rect x="560" y="0" width="40" height="32" rx="0" fill="#e81123"/>
+    <path d="M575 11L585 21M585 11L575 21" stroke="#ffffff" stroke-width="1.5"/>
+
+    <!-- Header Area -->
+    <rect y="32" width="600" height="65" fill="#ffffff"/>
+    <line x1="0" y1="97" x2="600" y2="97" stroke="#d4d4d4"/>
+    <text x="24" y="58" fill="#000000" font-size="13" font-weight="bold">Select Additional Tasks</text>
+    <text x="36" y="78" fill="#4b5563" font-size="11">Which additional tasks should be performed?</text>
+    <g transform="translate(540, 42)">
+      <rect width="36" height="36" rx="4" fill="#007acc"/>
+      <path d="M12 24L18 18L12 12" stroke="#ffffff" stroke-width="2" fill="none"/>
+    </g>
+
+    <!-- Subtitle instruction -->
+    <text x="24" y="118" fill="#1f2937" font-size="11">Select the additional tasks you would like Setup to perform while installing Visual Studio Code, then click Next.</text>
+
+    <!-- Checkboxes Container -->
+    <g transform="translate(24, 140)">
+      <text x="0" y="15" fill="#111827" font-size="12" font-weight="bold">Additional icons:</text>
+
+      <!-- Checkbox 1: Create a desktop icon -->
+      <g transform="translate(16, 26)">
+        <rect width="14" height="14" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 7L6 10L11 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="22" y="11" fill="#000000" font-size="11" font-weight="bold">Create a desktop icon</text>
+        <rect x="180" y="-2" width="90" height="18" rx="3" fill="#04AA6D"/>
+        <text x="186" y="11" fill="#ffffff" font-size="9" font-weight="bold">✓ RECOMMENDED</text>
+      </g>
+
+      <text x="0" y="70" fill="#111827" font-size="12" font-weight="bold">Other:</text>
+
+      <!-- Checkbox 2: Open with Code (File) -->
+      <g transform="translate(16, 82)">
+        <rect width="14" height="14" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 7L6 10L11 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="22" y="11" fill="#000000" font-size="11" font-weight="bold">Add "Open with Code" action to Windows Explorer file context menu</text>
+      </g>
+
+      <!-- Checkbox 3: Open with Code (Directory) -->
+      <g transform="translate(16, 110)">
+        <rect width="14" height="14" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 7L6 10L11 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="22" y="11" fill="#000000" font-size="11" font-weight="bold">Add "Open with Code" action to Windows Explorer directory context menu</text>
+      </g>
+
+      <!-- Checkbox 4: Register Code as editor -->
+      <g transform="translate(16, 138)">
+        <rect width="14" height="14" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 7L6 10L11 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="22" y="11" fill="#000000" font-size="11">Register Code as an editor for supported file types</text>
+      </g>
+
+      <!-- Checkbox 5: Add to PATH -->
+      <g transform="translate(16, 166)">
+        <rect width="14" height="14" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 7L6 10L11 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="22" y="11" fill="#000000" font-size="11" font-weight="bold">Add to PATH (requires shell restart)</text>
+      </g>
+    </g>
+
+    <!-- Callout Box highlighting why these tasks matter -->
+    <g transform="translate(24, 340)">
+      <rect width="552" height="55" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+      <text x="14" y="20" fill="#1e40af" font-size="11" font-weight="bold">💡 Pro Tip for Web Learners:</text>
+      <text x="14" y="38" fill="#1e3a8a" font-size="11">Checking both "Open with Code" boxes lets you right-click any HTML file or folder to edit it instantly!</text>
+    </g>
+
+    <line x1="0" y1="410" x2="600" y2="410" stroke="#d4d4d4"/>
+
+    <!-- Bottom Buttons -->
+    <g transform="translate(24, 425)">
+      <rect x="270" y="0" width="80" height="26" rx="3" fill="#ffffff" stroke="#ababab"/>
+      <text x="310" y="17" fill="#1f2937" font-size="11" text-anchor="middle">&lt; Back</text>
+
+      <rect x="360" y="0" width="85" height="26" rx="3" fill="#0078d4" stroke="#005a9e" stroke-width="1.5"/>
+      <text x="402" y="17" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Next &gt;</text>
+
+      <rect x="460" y="0" width="80" height="26" rx="3" fill="#ffffff" stroke="#ababab"/>
+      <text x="500" y="17" fill="#1f2937" font-size="11" text-anchor="middle">Cancel</text>
+    </g>
+  </g>
+
+  <!-- Step Footer Banner -->
+  <g transform="translate(40, 505)">
+    <rect width="820" height="38" rx="6" fill="#04AA6D"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">STEP 5: Check all recommended boxes (especially "Create desktop icon" and "Open with Code") &amp; click "Next &gt;"</text>
+  </g>
+</svg>

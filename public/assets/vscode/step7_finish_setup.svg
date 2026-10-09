@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="winShadow7" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="560" fill="#0f172a"/>
+
+  <!-- Setup Wizard Finish Dialog Box -->
+  <g transform="translate(150, 20)" filter="url(#winShadow7)">
+    <rect width="600" height="470" rx="8" fill="#f0f0f0" stroke="#999999" stroke-width="1"/>
+
+    <!-- Windows Title Bar -->
+    <rect width="600" height="32" rx="8" fill="#ffffff"/>
+    <rect y="16" width="600" height="16" fill="#ffffff"/>
+    <line x1="0" y1="32" x2="600" y2="32" stroke="#d4d4d4"/>
+    <text x="14" y="21" fill="#1f2937" font-size="12" font-weight="600">Setup - Visual Studio Code</text>
+    <rect x="560" y="0" width="40" height="32" rx="0" fill="#e81123"/>
+    <path d="M575 11L585 21M585 11L575 21" stroke="#ffffff" stroke-width="1.5"/>
+
+    <!-- Left Graphic Panel (Authentic Windows Setup Wizard Left Banner) -->
+    <g transform="translate(0, 32)">
+      <rect width="180" height="378" fill="#182234"/>
+      <!-- Watermark VS Code Logo -->
+      <g transform="translate(45, 120)">
+        <path d="M50 0L20 30L0 20L0 25L15 35L0 45L0 50L20 40L50 70L70 60V10L50 0ZM50 18L30 35L50 52V18Z" fill="#007acc" opacity="0.85"/>
+      </g>
+      <text x="90" y="240" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">Visual Studio</text>
+      <text x="90" y="260" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">Code</text>
+    </g>
+
+    <!-- Right Content Area -->
+    <g transform="translate(200, 50)">
+      <text x="0" y="30" fill="#000000" font-size="18" font-weight="bold" letter-spacing="-0.5">Completing the Visual Studio</text>
+      <text x="0" y="55" fill="#000000" font-size="18" font-weight="bold" letter-spacing="-0.5">Code Setup Wizard</text>
+
+      <text x="0" y="110" fill="#374151" font-size="12">Setup has finished installing Visual Studio Code on</text>
+      <text x="0" y="130" fill="#374151" font-size="12">your computer. The application may be launched</text>
+      <text x="0" y="150" fill="#374151" font-size="12">by selecting the installed shortcuts.</text>
+
+      <text x="0" y="195" fill="#374151" font-size="12">Click Finish to exit Setup.</text>
+
+      <!-- Launch Checkbox (Checked by default) -->
+      <g transform="translate(0, 240)">
+        <rect width="16" height="16" rx="2" fill="#0078d4" stroke="#005a9e"/>
+        <path d="M3 8L7 12L13 4" stroke="#ffffff" stroke-width="2" fill="none"/>
+        <text x="26" y="13" fill="#000000" font-size="12" font-weight="bold">Launch Visual Studio Code</text>
+        <rect x="210" y="-1" width="70" height="18" rx="3" fill="#04AA6D"/>
+        <text x="216" y="12" fill="#ffffff" font-size="9" font-weight="bold">✓ KEEP ON</text>
+      </g>
+    </g>
+
+    <line x1="0" y1="410" x2="600" y2="410" stroke="#d4d4d4"/>
+
+    <!-- Bottom Button: Finish -->
+    <g transform="translate(24, 425)">
+      <rect x="460" y="0" width="85" height="26" rx="3" fill="#0078d4" stroke="#005a9e" stroke-width="1.5"/>
+      <text x="502" y="17" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Finish</text>
+    </g>
+  </g>
+
+  <!-- Step Footer Banner -->
+  <g transform="translate(40, 505)">
+    <rect width="820" height="38" rx="6" fill="#04AA6D"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">STEP 7: Keep "[✓] Launch Visual Studio Code" checked and click "Finish"</text>
+  </g>
+</svg>

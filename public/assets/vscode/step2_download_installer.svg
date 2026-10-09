@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow2" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect x="10" y="10" width="880" height="500" rx="10" fill="#0b111e" filter="url(#shadow2)"/>
+  
+  <!-- Browser Chrome Bar -->
+  <rect x="10" y="10" width="880" height="42" rx="10" fill="#2d2d2d"/>
+  <rect x="10" y="32" width="880" height="20" fill="#2d2d2d"/>
+  <circle cx="34" cy="30" r="6" fill="#ff5f56"/>
+  <circle cx="54" cy="30" r="6" fill="#ffbd2e"/>
+  <circle cx="74" cy="30" r="6" fill="#27c93f"/>
+  <rect x="110" y="18" width="680" height="26" rx="6" fill="#1e1e1e" stroke="#404040" stroke-width="1"/>
+  <text x="130" y="35" fill="#ffffff" font-size="12" font-weight="600">https://code.visualstudio.com/Download</text>
+
+  <!-- Page Header -->
+  <text x="450" y="95" fill="#ffffff" font-size="28" font-weight="bold" text-anchor="middle">Download Visual Studio Code</text>
+  <text x="450" y="122" fill="#94a3b8" font-size="14" text-anchor="middle">Free and built on open source. Integrated Git, debugging and extensions.</text>
+
+  <!-- 3 OS Cards Grid -->
+  <!-- 1. Windows Card (Selected / Primary) -->
+  <g transform="translate(60, 150)">
+    <rect x="0" y="0" width="240" height="280" rx="12" fill="#1e293b" stroke="#0078d4" stroke-width="3"/>
+    <rect x="0" y="0" width="240" height="32" rx="12" fill="#0078d4"/>
+    <rect x="0" y="16" width="240" height="16" fill="#0078d4"/>
+    <text x="120" y="22" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">RECOMMENDED FOR YOU</text>
+    
+    <!-- Windows Icon -->
+    <g transform="translate(96, 45)">
+      <path d="M0 6L20 3V20H0V6ZM0 23H20V40L0 37V23ZM23 2.5L48 0V20H23V2.5ZM23 23H48V43.5L23 40.5V23Z" fill="#0078d4"/>
+    </g>
+    <text x="120" y="115" fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle">Windows</text>
+    <text x="120" y="135" fill="#94a3b8" font-size="12" text-anchor="middle">Windows 11, 10</text>
+
+    <!-- User Installer Button (The highlighted one) -->
+    <g transform="translate(20, 155)">
+      <rect x="0" y="0" width="200" height="42" rx="6" fill="#0078d4"/>
+      <text x="100" y="26" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">User Installer (64 bit)</text>
+    </g>
+
+    <!-- Other Windows options -->
+    <text x="120" y="225" fill="#64748b" font-size="11" text-anchor="middle">User Installer: <tspan fill="#38bdf8">x64</tspan> | <tspan fill="#38bdf8">ARM64</tspan></text>
+    <text x="120" y="245" fill="#64748b" font-size="11" text-anchor="middle">System Installer: <tspan fill="#38bdf8">x64</tspan></text>
+    <text x="120" y="265" fill="#64748b" font-size="11" text-anchor="middle">Zip Archive: <tspan fill="#38bdf8">x64</tspan></text>
+  </g>
+
+  <!-- 2. Linux Card -->
+  <g transform="translate(330, 150)">
+    <rect x="0" y="0" width="240" height="280" rx="12" fill="#182234" stroke="#334155" stroke-width="1"/>
+    <!-- Penguin / Linux Icon -->
+    <circle cx="120" cy="65" r="22" fill="#334155"/>
+    <text x="120" y="73" fill="#ffffff" font-size="24" text-anchor="middle">🐧</text>
+    <text x="120" y="115" fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle">Linux</text>
+    <text x="120" y="135" fill="#94a3b8" font-size="12" text-anchor="middle">Debian, Ubuntu, Red Hat</text>
+
+    <g transform="translate(20, 155)">
+      <rect x="0" y="0" width="95" height="42" rx="6" fill="#26354d"/>
+      <text x="47" y="26" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">.deb</text>
+    </g>
+    <g transform="translate(125, 155)">
+      <rect x="0" y="0" width="95" height="42" rx="6" fill="#26354d"/>
+      <text x="47" y="26" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">.rpm</text>
+    </g>
+    <text x="120" y="235" fill="#64748b" font-size="11" text-anchor="middle">snap store | tar.gz</text>
+  </g>
+
+  <!-- 3. macOS Card -->
+  <g transform="translate(600, 150)">
+    <rect x="0" y="0" width="240" height="280" rx="12" fill="#182234" stroke="#334155" stroke-width="1"/>
+    <circle cx="120" cy="65" r="22" fill="#334155"/>
+    <text x="120" y="73" fill="#ffffff" font-size="24" text-anchor="middle">🍎</text>
+    <text x="120" y="115" fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle">Mac</text>
+    <text x="120" y="135" fill="#94a3b8" font-size="12" text-anchor="middle">macOS 10.15+</text>
+
+    <g transform="translate(20, 155)">
+      <rect x="0" y="0" width="200" height="42" rx="6" fill="#26354d"/>
+      <text x="100" y="26" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">Universal</text>
+    </g>
+    <text x="120" y="235" fill="#64748b" font-size="11" text-anchor="middle">Apple Silicon | Intel Chip</text>
+  </g>
+
+  <!-- Step Instruction Footer -->
+  <g transform="translate(40, 460)">
+    <rect x="0" y="0" width="820" height="34" rx="6" fill="#04AA6D"/>
+    <text x="20" y="22" fill="#ffffff" font-size="13" font-weight="bold">STEP 2: Choose your Operating System - For Windows 10/11, click "User Installer (64 bit)"</text>
+  </g>
+</svg>

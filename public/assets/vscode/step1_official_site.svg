@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b111e"/>
+      <stop offset="100%" stop-color="#151d30"/>
+    </linearGradient>
+    <linearGradient id="blueBtn" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Browser Window Frame -->
+  <rect x="10" y="10" width="880" height="500" rx="10" fill="#1e1e1e" filter="url(#shadow)"/>
+  
+  <!-- Browser Chrome / Top Bar -->
+  <rect x="10" y="10" width="880" height="42" rx="10" fill="#2d2d2d"/>
+  <rect x="10" y="32" width="880" height="20" fill="#2d2d2d"/>
+  <!-- Window Controls -->
+  <circle cx="34" cy="30" r="6" fill="#ff5f56"/>
+  <circle cx="54" cy="30" r="6" fill="#ffbd2e"/>
+  <circle cx="74" cy="30" r="6" fill="#27c93f"/>
+
+  <!-- URL Address Bar -->
+  <rect x="110" y="18" width="680" height="26" rx="6" fill="#1e1e1e" stroke="#404040" stroke-width="1"/>
+  <g transform="translate(122, 23)">
+    <!-- Lock Icon -->
+    <path d="M4 6V4a3 3 0 0 1 6 0v2h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2zm2-2a1 1 0 0 0-2 0v2h2V4z" fill="#04AA6D"/>
+    <text x="22" y="12" fill="#ffffff" font-size="12" font-weight="600">https://code.visualstudio.com</text>
+  </g>
+
+  <!-- Website Body -->
+  <rect x="10" y="52" width="880" height="458" fill="url(#bg)"/>
+
+  <!-- VS Code Web Navbar -->
+  <rect x="10" y="52" width="880" height="52" fill="#182234" stroke-bottom="#26354d"/>
+  <g transform="translate(36, 66)">
+    <!-- VS Code Logo -->
+    <path d="M17.5 1.5L6.5 12.5L1.5 8L0 9.5L5 14.5L0 19.5L1.5 21L6.5 16.5L17.5 27.5L24 24V5L17.5 1.5ZM17.5 7.5L8.5 14.5L17.5 21.5V7.5Z" fill="#007acc"/>
+    <text x="32" y="19" fill="#ffffff" font-size="16" font-weight="bold" letter-spacing="-0.5">Visual Studio Code</text>
+    <text x="210" y="19" fill="#9ca3af" font-size="13">Docs</text>
+    <text x="260" y="19" fill="#9ca3af" font-size="13">Updates</text>
+    <text x="330" y="19" fill="#9ca3af" font-size="13">Blog</text>
+    <text x="380" y="19" fill="#9ca3af" font-size="13">API</text>
+    <text x="420" y="19" fill="#9ca3af" font-size="13">Extensions</text>
+    <text x="510" y="19" fill="#9ca3af" font-size="13">FAQ</text>
+  </g>
+
+  <!-- Hero Content -->
+  <g transform="translate(60, 160)">
+    <!-- Version Tag -->
+    <rect x="0" y="0" width="130" height="24" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="12" y="16" fill="#38bdf8" font-size="11" font-weight="bold">Version 1.95 is now out!</text>
+
+    <!-- Main Headline -->
+    <text x="0" y="65" fill="#ffffff" font-size="40" font-weight="800" letter-spacing="-1">Code editing.</text>
+    <text x="0" y="112" fill="#38bdf8" font-size="40" font-weight="800" letter-spacing="-1">Redefined.</text>
+
+    <text x="0" y="150" fill="#94a3b8" font-size="15">Free. Built on open source. Runs everywhere.</text>
+
+    <!-- Prominent Download Button (Target of Step 1) -->
+    <g transform="translate(0, 180)" cursor="pointer">
+      <rect x="0" y="0" width="280" height="56" rx="8" fill="url(#blueBtn)" stroke="#38bdf8" stroke-width="2"/>
+      <!-- Windows Logo inside button -->
+      <g transform="translate(18, 16)">
+        <path d="M0 3.2L9.6 1.8V10.8H0V3.2ZM0 12.2H9.6V21.2L0 19.8V12.2ZM11 1.6L24 0V10.8H11V1.6ZM11 12.2H24V23L11 21.4V12.2Z" fill="#ffffff"/>
+      </g>
+      <text x="54" y="27" fill="#ffffff" font-size="16" font-weight="bold">Download for Windows</text>
+      <text x="54" y="44" fill="#bae6fd" font-size="11">Stable Build • Free</text>
+      <!-- Down arrow -->
+      <path d="M255 26L262 33L269 26" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Other OS Links -->
+    <text x="295" y="214" fill="#64748b" font-size="12">or download for <tspan fill="#38bdf8" text-decoration="underline">macOS</tspan>, <tspan fill="#38bdf8" text-decoration="underline">Linux</tspan></text>
+  </g>
+
+  <!-- Right Graphic: VS Code Editor Silhouette -->
+  <g transform="translate(480, 150)">
+    <rect x="0" y="0" width="370" height="280" rx="10" fill="#1e1e1e" stroke="#334155" stroke-width="1"/>
+    <!-- Activity bar -->
+    <rect x="0" y="0" width="40" height="280" rx="10" fill="#252526"/>
+    <rect x="35" y="0" width="5" height="280" fill="#252526"/>
+    <!-- Sidebar -->
+    <rect x="40" y="0" width="90" height="280" fill="#181818"/>
+    <!-- Code Editor Canvas -->
+    <rect x="130" y="0" width="240" height="280" fill="#1e1e1e"/>
+    <!-- Colored code lines simulation -->
+    <rect x="145" y="30" width="90" height="8" rx="4" fill="#e06c75"/>
+    <rect x="145" y="48" width="140" height="8" rx="4" fill="#61afef"/>
+    <rect x="160" y="66" width="180" height="8" rx="4" fill="#98c379"/>
+    <rect x="160" y="84" width="120" height="8" rx="4" fill="#d19a66"/>
+    <rect x="145" y="102" width="60" height="8" rx="4" fill="#e06c75"/>
+    <!-- Step 1 Highlighter Circle pointing to Download Button -->
+  </g>
+
+  <!-- Step Indicator Badge -->
+  <g transform="translate(40, 460)">
+    <rect x="0" y="0" width="820" height="34" rx="6" fill="#04AA6D" opacity="0.95"/>
+    <text x="20" y="22" fill="#ffffff" font-size="13" font-weight="bold">STEP 1: Open browser &amp; go to code.visualstudio.com - Click the big blue "Download for Windows" button</text>
+  </g>
+</svg>

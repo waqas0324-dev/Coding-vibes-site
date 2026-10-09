@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow3" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Windows Desktop / Browser Background -->
+  <rect x="10" y="10" width="880" height="500" rx="10" fill="#1e293b"/>
+
+  <!-- Browser Chrome Top -->
+  <rect x="10" y="10" width="880" height="42" rx="10" fill="#0f172a"/>
+  <circle cx="34" cy="30" r="6" fill="#ff5f56"/>
+  <circle cx="54" cy="30" r="6" fill="#ffbd2e"/>
+  <circle cx="74" cy="30" r="6" fill="#27c93f"/>
+
+  <!-- Browser Download Icon Active in Top Right -->
+  <circle cx="830" cy="30" r="14" fill="#0078d4"/>
+  <path d="M830 22V34M825 29L830 34L835 29" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Dimmed Webpage background -->
+  <rect x="10" y="52" width="880" height="458" fill="#0f172a" opacity="0.85"/>
+  <text x="60" y="140" fill="#64748b" font-size="28" font-weight="bold">Thanks for downloading VS Code for Windows!</text>
+
+  <!-- Browser Floating Downloads Flyout (Realistic Chrome/Edge Download Manager) -->
+  <g transform="translate(480, 50)" filter="url(#shadow3)">
+    <!-- Flyout Container -->
+    <rect x="0" y="0" width="380" height="360" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    
+    <!-- Flyout Header -->
+    <rect x="0" y="0" width="380" height="46" rx="10" fill="#f8fafc"/>
+    <rect x="0" y="30" width="380" height="16" fill="#f8fafc"/>
+    <line x1="0" y1="46" x2="380" y2="46" stroke="#e2e8f0"/>
+    <text x="20" y="30" fill="#0f172a" font-size="15" font-weight="bold">Downloads</text>
+    <text x="310" y="30" fill="#0078d4" font-size="12" font-weight="600">See all</text>
+
+    <!-- File Item Card (Active download finished) -->
+    <g transform="translate(16, 60)">
+      <rect x="0" y="0" width="348" height="110" rx="8" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+      
+      <!-- VS Code File Icon -->
+      <rect x="14" y="16" width="36" height="44" rx="4" fill="#007acc"/>
+      <path d="M26 28L21 33L18 30M32 38L21 44V26L32 32Z" fill="#ffffff"/>
+      
+      <!-- File Info -->
+      <text x="62" y="32" fill="#0f172a" font-size="14" font-weight="bold">VSCodeUserSetup-x64-1.95.0.exe</text>
+      <text x="62" y="50" fill="#04AA6D" font-size="12" font-weight="bold">✓ 95.4 MB • Download complete</text>
+      <text x="62" y="66" fill="#64748b" font-size="11">code.visualstudio.com</text>
+
+      <!-- Action Buttons -->
+      <g transform="translate(62, 75)">
+        <rect x="0" y="0" width="105" height="26" rx="4" fill="#0078d4"/>
+        <text x="52" y="17" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">Open file</text>
+      </g>
+      <g transform="translate(175, 75)">
+        <rect x="0" y="0" width="115" height="26" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+        <text x="57" y="17" fill="#475569" font-size="12" font-weight="600" text-anchor="middle">Show in folder</text>
+      </g>
+    </g>
+
+    <!-- Notice / Security info -->
+    <g transform="translate(20, 195)">
+      <rect x="0" y="0" width="340" height="60" rx="6" fill="#fefce8" stroke="#fef08a"/>
+      <text x="14" y="24" fill="#854d0e" font-size="12" font-weight="bold">Windows SmartScreen Verified</text>
+      <text x="14" y="44" fill="#a16207" font-size="11">Signed by Microsoft Corporation. Safe to execute.</text>
+    </g>
+
+    <!-- Step Pointer Callout -->
+    <g transform="translate(20, 275)">
+      <rect x="0" y="0" width="340" height="65" rx="6" fill="#04AA6D"/>
+      <text x="16" y="26" fill="#ffffff" font-size="13" font-weight="bold">Click "Open file" or double-click the .exe</text>
+      <text x="16" y="46" fill="#dcfce7" font-size="11">The file is saved inside your PC's Downloads folder.</text>
+    </g>
+  </g>
+
+  <!-- Footer Step Banner -->
+  <g transform="translate(40, 460)">
+    <rect x="0" y="0" width="820" height="34" rx="6" fill="#04AA6D"/>
+    <text x="20" y="22" fill="#ffffff" font-size="13" font-weight="bold">STEP 3: Browser Download completes (VSCodeUserSetup-x64.exe) - Click "Open file" to start the Setup Wizard</text>
+  </g>
+</svg>

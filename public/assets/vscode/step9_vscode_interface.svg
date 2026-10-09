@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="vscodeShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="540" fill="#0b0f19"/>
+
+  <!-- VS Code Window Frame (Authentic Dark Modern Theme #1e1e1e) -->
+  <g transform="translate(20, 15)" filter="url(#vscodeShadow)">
+    <rect width="860" height="465" rx="8" fill="#1e1e1e" stroke="#333333" stroke-width="1"/>
+
+    <!-- 1. VS Code Custom Title Bar -->
+    <rect width="860" height="34" rx="8" fill="#181818"/>
+    <rect y="20" width="860" height="14" fill="#181818"/>
+    <line x1="0" y1="34" x2="860" y2="34" stroke="#2b2b2b"/>
+
+    <!-- Small VS Code Icon + Menu -->
+    <g transform="translate(10, 8)">
+      <path d="M12 1L5 8L1 5L0 6L3 9L0 12L1 13L5 10L12 17L16 15V3L12 1ZM12 5L7 9L12 13V5Z" fill="#007acc"/>
+      <text x="24" y="13" fill="#cccccc" font-size="12">File</text>
+      <text x="56" y="13" fill="#cccccc" font-size="12">Edit</text>
+      <text x="88" y="13" fill="#cccccc" font-size="12">Selection</text>
+      <text x="146" y="13" fill="#cccccc" font-size="12">View</text>
+      <text x="180" y="13" fill="#cccccc" font-size="12">Go</text>
+      <text x="206" y="13" fill="#cccccc" font-size="12">Run</text>
+      <text x="236" y="13" fill="#cccccc" font-size="12">Terminal</text>
+      <text x="290" y="13" fill="#cccccc" font-size="12">Help</text>
+    </g>
+
+    <!-- Top Center Search / Command Palette Bar -->
+    <rect x="360" y="6" width="220" height="22" rx="4" fill="#252526" stroke="#3c3c3c"/>
+    <text x="470" y="21" fill="#8c8c8c" font-size="11" text-anchor="middle">coding-vibes - Visual Studio Code</text>
+
+    <!-- Window controls -->
+    <g transform="translate(800, 10)">
+      <text x="0" y="12" fill="#cccccc" font-size="11">—</text>
+      <text x="20" y="12" fill="#cccccc" font-size="11">□</text>
+      <text x="40" y="12" fill="#cccccc" font-size="11">✕</text>
+    </g>
+
+    <!-- 2. Left Activity Bar (Icons: Explorer, Search, Source Control, Run, Extensions) -->
+    <rect y="34" width="48" height="409" fill="#181818" stroke-right="#2b2b2b"/>
+    <g transform="translate(14, 50)" fill="#ffffff">
+      <!-- Active Explorer Icon (white + left blue strip) -->
+      <rect x="-14" y="-5" width="2" height="26" fill="#0078d4"/>
+      <!-- Files icon -->
+      <path d="M2 3H14V17H2V3ZM4 5V15H12V5H4Z" fill="#ffffff"/>
+      <!-- Search icon -->
+      <circle cx="9" cy="45" r="5" fill="none" stroke="#858585" stroke-width="1.5"/>
+      <line x1="13" y1="49" x2="17" y2="53" stroke="#858585" stroke-width="1.5"/>
+      <!-- Source Control -->
+      <circle cx="6" cy="80" r="3" fill="#858585"/>
+      <circle cx="14" cy="88" r="3" fill="#858585"/>
+      <line x1="6" y1="83" x2="14" y2="85" stroke="#858585" stroke-width="1.5"/>
+      <!-- Extensions icon -->
+      <rect x="2" y="115" width="6" height="6" fill="#858585"/>
+      <rect x="10" y="115" width="6" height="6" fill="#858585"/>
+      <rect x="2" y="123" width="6" height="6" fill="#858585"/>
+      <rect x="10" y="123" width="6" height="6" fill="#858585"/>
+      <!-- Settings gear at bottom -->
+      <circle cx="9" cy="365" r="6" fill="none" stroke="#858585" stroke-width="1.5"/>
+    </g>
+
+    <!-- 3. Primary Sidebar (Explorer View) -->
+    <rect x="48" y="34" width="170" height="409" fill="#181818"/>
+    <text x="64" y="56" fill="#bbbbbb" font-size="11" font-weight="bold" letter-spacing="0.5">EXPLORER</text>
+    <text x="64" y="90" fill="#999999" font-size="11" font-weight="bold">NO FOLDER OPENED</text>
+    <text x="64" y="110" fill="#777777" font-size="10">You have not yet opened a</text>
+    <text x="64" y="124" fill="#777777" font-size="10">folder to start working.</text>
+
+    <!-- Open Folder Button -->
+    <rect x="64" y="140" width="138" height="26" rx="3" fill="#0078d4"/>
+    <text x="133" y="157" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Open Folder</text>
+
+    <!-- 4. Editor Tab Bar -->
+    <rect x="218" y="34" width="642" height="35" fill="#181818"/>
+    <!-- Active Welcome Tab -->
+    <rect x="218" y="34" width="130" height="35" fill="#1e1e1e"/>
+    <rect x="218" y="34" width="130" height="1.5" fill="#0078d4"/>
+    <text x="238" y="56" fill="#ffffff" font-size="12">Get Started</text>
+    <text x="330" y="56" fill="#888888" font-size="11">✕</text>
+
+    <!-- 5. Main Welcome Canvas Body -->
+    <rect x="218" y="69" width="642" height="374" fill="#1e1e1e"/>
+    
+    <!-- Welcome Header -->
+    <g transform="translate(250, 95)">
+      <text x="0" y="30" fill="#ffffff" font-size="24" font-weight="bold">Visual Studio Code</text>
+      <text x="0" y="52" fill="#858585" font-size="13">Editing evolved</text>
+      
+      <!-- Start Column -->
+      <text x="0" y="95" fill="#ffffff" font-size="13" font-weight="bold">Start</text>
+      <text x="0" y="120" fill="#3794ff" font-size="12">New File...</text>
+      <text x="0" y="145" fill="#3794ff" font-size="12">Open File...</text>
+      <text x="0" y="170" fill="#3794ff" font-size="12">Open Folder...</text>
+      <text x="0" y="195" fill="#3794ff" font-size="12">Clone Git Repository...</text>
+
+      <!-- Recent Column -->
+      <g transform="translate(260, 95)">
+        <text x="0" y="0" fill="#ffffff" font-size="13" font-weight="bold">Recent</text>
+        <text x="0" y="25" fill="#858585" font-size="12">No recent folders</text>
+      </g>
+
+      <!-- Walkthroughs Card -->
+      <g transform="translate(0, 225)">
+        <rect width="360" height="50" rx="4" fill="#252526" stroke="#333333"/>
+        <text x="16" y="22" fill="#ffffff" font-size="12" font-weight="bold">Get Started with VS Code</text>
+        <text x="16" y="38" fill="#858585" font-size="11">Discover the best customizations and settings</text>
+      </g>
+    </g>
+
+    <!-- 6. Bottom Blue Status Bar -->
+    <rect y="443" width="860" height="22" rx="0" fill="#007acc"/>
+    <text x="14" y="458" fill="#ffffff" font-size="11">Ready</text>
+    <text x="750" y="458" fill="#ffffff" font-size="11">UTF-8  •  HTML  •  Spaces: 2</text>
+  </g>
+
+  <!-- Step Footer Banner -->
+  <g transform="translate(40, 490)">
+    <rect width="820" height="38" rx="6" fill="#04AA6D"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">STEP 9: Visual Studio Code is installed and running! You are now ready to create and edit HTML files</text>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+{
+  "name": "Coding Vibes",
+  "description": "The complete online coding-learning platform to learn web development, practice coding, solve challenges, take quizzes, and build real-world projects step by step.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

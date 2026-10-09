@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="winShadow6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="560" fill="#0f172a"/>
+
+  <!-- Setup Wizard Dialog Box -->
+  <g transform="translate(150, 20)" filter="url(#winShadow6)">
+    <rect width="600" height="470" rx="8" fill="#f0f0f0" stroke="#999999" stroke-width="1"/>
+
+    <!-- Windows Title Bar -->
+    <rect width="600" height="32" rx="8" fill="#ffffff"/>
+    <rect y="16" width="600" height="16" fill="#ffffff"/>
+    <line x1="0" y1="32" x2="600" y2="32" stroke="#d4d4d4"/>
+    <text x="14" y="21" fill="#1f2937" font-size="12" font-weight="600">Setup - Visual Studio Code</text>
+    <rect x="560" y="0" width="40" height="32" rx="0" fill="#e81123"/>
+    <path d="M575 11L585 21M585 11L575 21" stroke="#ffffff" stroke-width="1.5"/>
+
+    <!-- Header Area -->
+    <rect y="32" width="600" height="65" fill="#ffffff"/>
+    <line x1="0" y1="97" x2="600" y2="97" stroke="#d4d4d4"/>
+    <text x="24" y="58" fill="#000000" font-size="13" font-weight="bold">Ready to Install</text>
+    <text x="36" y="78" fill="#4b5563" font-size="11">Setup is now ready to begin installing Visual Studio Code on your computer.</text>
+    <g transform="translate(540, 42)">
+      <rect width="36" height="36" rx="4" fill="#007acc"/>
+      <path d="M12 24L18 18L12 12" stroke="#ffffff" stroke-width="2" fill="none"/>
+    </g>
+
+    <!-- Content instructions -->
+    <text x="24" y="118" fill="#1f2937" font-size="11">Click Install to continue with the installation, or click Back if you want to review or change any settings.</text>
+
+    <!-- Summary Box -->
+    <g transform="translate(24, 130)">
+      <rect width="552" height="250" fill="#ffffff" stroke="#7a7a7a" stroke-width="1"/>
+      
+      <text x="16" y="25" fill="#111827" font-size="11" font-weight="bold">Destination location:</text>
+      <text x="30" y="42" fill="#4b5563" font-size="11" font-family="monospace">C:\Users\User\AppData\Local\Programs\Microsoft VS Code</text>
+
+      <text x="16" y="75" fill="#111827" font-size="11" font-weight="bold">Start Menu folder:</text>
+      <text x="30" y="92" fill="#4b5563" font-size="11">Visual Studio Code</text>
+
+      <text x="16" y="125" fill="#111827" font-size="11" font-weight="bold">Additional tasks:</text>
+      <text x="30" y="145" fill="#4b5563" font-size="11">Additional icons:</text>
+      <text x="45" y="162" fill="#374151" font-size="11">• Create a desktop icon</text>
+      
+      <text x="30" y="185" fill="#4b5563" font-size="11">Other:</text>
+      <text x="45" y="202" fill="#374151" font-size="11">• Add "Open with Code" action to Windows Explorer context menu</text>
+      <text x="45" y="219" fill="#374151" font-size="11">• Register Code as an editor for supported file types</text>
+      <text x="45" y="236" fill="#374151" font-size="11">• Add to PATH (requires shell restart)</text>
+
+      <rect x="536" y="0" width="16" height="250" fill="#f1f1f1"/>
+      <rect x="538" y="4" width="12" height="70" rx="2" fill="#c1c1c1"/>
+    </g>
+
+    <line x1="0" y1="410" x2="600" y2="410" stroke="#d4d4d4"/>
+
+    <!-- Bottom Buttons -->
+    <g transform="translate(24, 425)">
+      <rect x="270" y="0" width="80" height="26" rx="3" fill="#ffffff" stroke="#ababab"/>
+      <text x="310" y="17" fill="#1f2937" font-size="11" text-anchor="middle">&lt; Back</text>
+
+      <!-- INSTALL BUTTON (Highlighted in Blue) -->
+      <rect x="360" y="0" width="85" height="26" rx="3" fill="#0078d4" stroke="#005a9e" stroke-width="1.5"/>
+      <text x="402" y="17" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">Install</text>
+
+      <rect x="460" y="0" width="80" height="26" rx="3" fill="#ffffff" stroke="#ababab"/>
+      <text x="500" y="17" fill="#1f2937" font-size="11" text-anchor="middle">Cancel</text>
+    </g>
+  </g>
+
+  <!-- Step Footer Banner -->
+  <g transform="translate(40, 505)">
+    <rect width="820" height="38" rx="6" fill="#04AA6D"/>
+    <text x="20" y="24" fill="#ffffff" font-size="13" font-weight="bold">STEP 6: Review the installation summary and click the blue "Install" button to proceed</text>
+  </g>
+</svg>

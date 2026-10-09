@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="win11bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#19488f"/>
+      <stop offset="50%" stop-color="#0b2447"/>
+      <stop offset="100%" stop-color="#040d1a"/>
+    </linearGradient>
+    <filter id="uacShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Windows 11 Desktop Background -->
+  <rect width="900" height="520" fill="url(#win11bg)"/>
+
+  <!-- Left: Desktop Icons -->
+  <!-- 1. Recycle Bin -->
+  <g transform="translate(40, 30)">
+    <rect width="42" height="42" rx="4" fill="#3b82f6" opacity="0.1"/>
+    <text x="21" y="28" font-size="24" text-anchor="middle">🗑️</text>
+    <text x="21" y="56" fill="#ffffff" font-size="11" text-anchor="middle" filter="drop-shadow(0 1px 2px #000)">Recycle Bin</text>
+  </g>
+
+  <!-- 2. VS Code Shortcut Icon on Desktop (Highlighted) -->
+  <g transform="translate(40, 110)">
+    <rect width="64" height="64" rx="8" fill="#ffffff" opacity="0.15" stroke="#38bdf8" stroke-width="1.5"/>
+    <g transform="translate(14, 8)">
+      <!-- VS Code Icon -->
+      <path d="M26 2L10 18L2 12L0 14L7 21L0 28L2 30L10 24L26 40L36 35V7L26 2ZM26 11L13 21L26 31V11Z" fill="#007acc"/>
+      <!-- Shortcut arrow badge -->
+      <rect x="-2" y="24" width="12" height="12" rx="2" fill="#ffffff"/>
+      <path d="M1 32L6 26L4 26L4 29L8 29" stroke="#007acc" stroke-width="1.5" fill="none"/>
+    </g>
+    <text x="32" y="80" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" filter="drop-shadow(0 1px 2px #000)">Visual Studio</text>
+    <text x="32" y="94" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle" filter="drop-shadow(0 1px 2px #000)">Code</text>
+  </g>
+
+  <!-- Right: Windows Security Prompt (UAC Dialog) -->
+  <g transform="translate(200, 50)" filter="url(#uacShadow)">
+    <rect width="520" height="340" rx="8" fill="#ffffff" stroke="#999999" stroke-width="1"/>
+
+    <!-- UAC Header -->
+    <rect width="520" height="42" rx="8" fill="#004e8c"/>
+    <rect y="24" width="520" height="18" fill="#004e8c"/>
+    <text x="20" y="27" fill="#ffffff" font-size="13" font-weight="bold">User Account Control</text>
+
+    <!-- UAC Shield Icon & Question -->
+    <g transform="translate(30, 65)">
+      <circle cx="20" cy="20" r="18" fill="#0078d4"/>
+      <path d="M12 20L18 26L28 14" stroke="#ffffff" stroke-width="3" fill="none"/>
+      
+      <text x="50" y="16" fill="#111827" font-size="15" font-weight="bold">Do you want to allow this app to make</text>
+      <text x="50" y="38" fill="#111827" font-size="15" font-weight="bold">changes to your device?</text>
+    </g>
+
+    <!-- App Details Box -->
+    <g transform="translate(80, 130)">
+      <text x="0" y="18" fill="#000000" font-size="15" font-weight="bold">Visual Studio Code</text>
+      <text x="0" y="42" fill="#4b5563" font-size="12">Verified publisher: <tspan font-weight="bold" fill="#111827">Microsoft Corporation</tspan></text>
+      <text x="0" y="64" fill="#4b5563" font-size="12">File origin: <tspan font-weight="bold" fill="#111827">Hard drive on this computer</tspan></text>
+      <text x="0" y="90" fill="#0078d4" font-size="11">Show more details</text>
+    </g>
+
+    <!-- UAC Action Buttons -->
+    <g transform="translate(80, 260)">
+      <!-- YES Button (Highlighted) -->
+      <rect width="170" height="36" rx="4" fill="#0078d4"/>
+      <text x="85" y="23" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">Yes</text>
+      <rect x="180" y="0" width="170" height="36" rx="4" fill="#e5e7eb" stroke="#d1d5db"/>
+      <text x="265" y="23" fill="#1f2937" font-size="14" font-weight="semibold" text-anchor="middle">No</text>
+    </g>
+  </g>
+
+  <!-- Windows 11 Taskbar -->
+  <rect y="475" width="900" height="45" fill="#182234" opacity="0.95"/>
+  <!-- Centered taskbar icons -->
+  <g transform="translate(420, 485)">
+    <!-- Windows Start -->
+    <rect width="24" height="24" rx="4" fill="#0078d4"/>
+    <g transform="translate(36, 0)">
+      <!-- Search -->
+      <circle cx="12" cy="12" r="8" fill="#334155"/>
+    </g>
+    <g transform="translate(72, 0)">
+      <!-- VS Code Pinned -->
+      <rect width="24" height="24" rx="4" fill="#007acc"/>
+      <line x1="6" y1="26" x2="18" y2="26" stroke="#38bdf8" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Step Footer Banner -->
+  <g transform="translate(40, 425)">
+    <rect width="820" height="36" rx="6" fill="#04AA6D"/>
+    <text x="20" y="23" fill="#ffffff" font-size="13" font-weight="bold">STEP 8: Double-click the Visual Studio Code desktop shortcut and click "Yes" on the security prompt</text>
+  </g>
+</svg>
