@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Course, Lesson } from '../../types';
 import { executeCode, CodeExecutionResult } from '../../utils/codeRunner';
+import { highlightCode } from '../../utils/prismHighlighter';
 import { getInlineExerciseForLesson, InlineLessonExercise } from '../../data/courses/lessonExerciseMatcher';
 import { useLearning } from '../../context/LearningContext';
 import { useNavigation } from '../../context/NavigationContext';
@@ -95,6 +96,21 @@ export const InlineLessonWorkbench: React.FC<InlineLessonWorkbenchProps> = ({
   const [quizChecked, setQuizChecked] = useState<Record<number, boolean>>({});
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const highlightRef = useRef<HTMLPreElement>(null);
+
+  // Syntax-highlighted HTML for the code overlay (PrismJS)
+  const highlightedCodeHtml = useMemo(() => {
+    return highlightCode(code, course.slug);
+  }, [code, course.slug]);
+
+  // Keep the highlight layer scroll in sync with the textarea
+  const handleEditorScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+    const { scrollTop, scrollLeft } = e.currentTarget;
+    if (highlightRef.current) {
+      highlightRef.current.scrollTop = scrollTop;
+      highlightRef.current.scrollLeft = scrollLeft;
+    }
+  };
 
   // Update exercise and starter code whenever lesson changes
   useEffect(() => {
@@ -492,16 +508,28 @@ export const InlineLessonWorkbench: React.FC<InlineLessonWorkbenchProps> = ({
                   ))}
                 </div>
 
-                {/* Textarea */}
-                <textarea
-                  ref={textareaRef}
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  spellCheck={false}
-                  className="flex-1 w-full h-full min-h-[380px] p-3 bg-transparent text-emerald-300 font-mono text-xs sm:text-sm leading-5 resize-none outline-none focus:ring-1 focus:ring-emerald-500/50"
-                  placeholder="Write or edit code here..."
-                />
+                {/* Code editor with syntax highlighting overlay */}
+                <div className="relative flex-1 w-full h-full min-h-[380px]">
+                  {/* Highlight layer (behind textarea) */}
+                  <pre
+                    ref={highlightRef}
+                    aria-hidden="true"
+                    className="absolute inset-0 m-0 p-3 font-mono text-xs sm:text-sm leading-5 overflow-hidden pointer-events-none select-none whitespace-pre"
+                    dangerouslySetInnerHTML={{ __html: highlightedCodeHtml + '\n' }}
+                  />
+                  {/* Transparent textarea (on top, captures input) */}
+                  <textarea
+                    ref={textareaRef}
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onScroll={handleEditorScroll}
+                    spellCheck={false}
+                    className="absolute inset-0 w-full h-full p-3 bg-transparent font-mono text-xs sm:text-sm leading-5 resize-none outline-none focus:ring-1 focus:ring-emerald-500/50 overflow-auto whitespace-pre placeholder:text-gray-600"
+                    style={{ color: 'transparent', caretColor: '#34d399' }}
+                    placeholder="Write or edit code here..."
+                  />
+                </div>
               </div>
 
               {/* Editor bottom bar */}
