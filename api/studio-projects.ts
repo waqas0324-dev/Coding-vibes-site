@@ -1,16 +1,17 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+type ApiRequest = { method?: string; headers: Record<string, string | string[] | undefined>; body?: any };
+type ApiResponse = { setHeader: (name: string, value: string) => void; status: (code: number) => ApiResponse; json: (body: unknown) => void };
 
 const OWNER = 'waqas0324-dev';
 const REPO = 'Coding-vibes-site';
 const FILE_PATH = 'public/data/studio-projects.json';
 const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`;
 
-function send(res: VercelResponse, status: number, body: unknown) {
+function send(res: ApiResponse, status: number, body: unknown) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
   return res.status(status).json(body);
 }
 
-function passwordFrom(req: VercelRequest): string {
+function passwordFrom(req: ApiRequest): string {
   const value = req.headers['x-studio-password'];
   return Array.isArray(value) ? value[0] || '' : value || '';
 }
@@ -31,7 +32,7 @@ async function readStoredProjects(token?: string): Promise<{ projects: any[]; sh
   return { projects, sha: file.sha };
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   const providedPassword = passwordFrom(req);
   const configuredPassword = process.env.STUDIO_ADMIN_PASSWORD;
   const token = process.env.GITHUB_TOKEN;
