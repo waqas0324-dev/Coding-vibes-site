@@ -426,7 +426,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 1.1 */}
             <div className="flex space-x-4">
               <StepNumber n={1} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Visit the official download page</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Open your browser and go to{' '}
@@ -448,7 +448,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 1.2 */}
             <div className="flex space-x-4">
               <StepNumber n={2} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Click Download for your OS</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Click the big <strong className="text-white">Download</strong> button. The installer
@@ -477,7 +477,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 1.3 */}
             <div className="flex space-x-4">
               <StepNumber n={3} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Run the installer</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Open the downloaded file and follow the setup wizard. Accept the license agreement
@@ -512,7 +512,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 2.1 */}
             <div className="flex space-x-4">
               <StepNumber n={1} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Open the Extensions panel</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   In VS Code, press <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">Ctrl</kbd>
@@ -534,7 +534,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 2.2 */}
             <div className="flex space-x-4">
               <StepNumber n={2} />
-              <div className="space-y-3 flex-1">
+              <div className="space-y-3 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Install Live Server</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Search for <strong className="text-white">“Live Server”</strong> and install the one
@@ -558,7 +558,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 2.3 */}
             <div className="flex space-x-4">
               <StepNumber n={3} />
-              <div className="space-y-3 flex-1">
+              <div className="space-y-3 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Install Prettier</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Search for <strong className="text-white">“Prettier”</strong> and install
@@ -589,7 +589,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 2.4 */}
             <div className="flex space-x-4">
               <StepNumber n={4} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Pick a color theme</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Go to <strong className="text-white">File → Preferences → Color Theme</strong> (or press
@@ -624,7 +624,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.1 */}
             <div className="flex space-x-4">
               <StepNumber n={1} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Create a folder on your computer</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Make a new folder anywhere — for example on your Desktop or in Documents — and name
@@ -637,7 +637,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.2 */}
             <div className="flex space-x-4">
               <StepNumber n={2} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Open the folder in VS Code</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   In VS Code, go to <strong className="text-white">File → Open Folder</strong>, select
@@ -652,7 +652,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.3 */}
             <div className="flex space-x-4">
               <StepNumber n={3} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">
                   Create <code className="text-[#4ade80] font-mono text-sm">index.html</code>
                 </h3>
@@ -675,7 +675,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.4 */}
             <div className="flex space-x-4">
               <StepNumber n={4} />
-              <div className="space-y-3 flex-1">
+              <div className="space-y-3 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Write the basic HTML boilerplate</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   Paste this code into <strong className="text-white">index.html</strong> and save with
@@ -690,7 +690,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.5 */}
             <div className="flex space-x-4">
               <StepNumber n={5} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">Open it with Live Server</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   <strong className="text-white">Right-click</strong> anywhere in the editor and choose
@@ -712,7 +712,7 @@ export const SetupGuidePage: React.FC = () => {
             {/* Step 3.6 */}
             <div className="flex space-x-4">
               <StepNumber n={6} />
-              <div className="space-y-2 flex-1">
+              <div className="space-y-2 flex-1 min-w-0">
                 <h3 className="text-base font-bold text-white">See it in the browser</h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
                   You should now see <strong className="text-white">“Hello, World!”</strong> in your browser.

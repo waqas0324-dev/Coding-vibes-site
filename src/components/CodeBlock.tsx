@@ -179,12 +179,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       </div>
 
       {/* Code lines container with internal horizontal scroll only */}
-      <div className="p-4 overflow-x-auto font-mono text-xs sm:text-sm leading-relaxed text-gray-200">
-        <pre className="flex flex-col min-w-0">
+      <div className="p-3 sm:p-4 overflow-x-auto font-mono text-xs sm:text-sm leading-relaxed text-gray-200 [-webkit-overflow-scrolling:touch]">
+        <pre className="flex flex-col min-w-max">
           {lines.map((line, idx) => (
             <div key={idx} className="flex hover:bg-white/5 rounded px-1 -mx-1">
               {showLineNumbers && (
-                <span className="w-8 select-none text-right pr-4 text-gray-600 shrink-0 text-xs leading-6 font-mono">
+                <span className="w-7 sm:w-8 select-none text-right pr-3 sm:pr-4 text-gray-600 shrink-0 text-xs leading-6 font-mono">
                   {idx + 1}
                 </span>
               )}
