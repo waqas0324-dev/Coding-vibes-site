@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import JSZip from 'jszip';
 import { useNavigation } from '../context/NavigationContext';
 import {
@@ -38,8 +38,6 @@ export interface StudioProject {
 }
 
 const PROJECTS_KEY = 'cv-studio-projects';
-const AUTH_KEY = 'cv-studio-auth';
-const PASSWORD = 'codingvibes2026';
 
 export function slugify(value: string): string {
   return value
@@ -96,24 +94,27 @@ const ACCEPTED_EXT = /\.(html?|css|js|jsx|ts|tsx|json|md|txt)$/i;
 
 export const StudioPage: React.FC = () => {
   const { navigateTo } = useNavigation();
+  const [authed, setAuthed] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
-  const [authed, setAuthed] = useState(() => {
-    try {
-      return localStorage.getItem(AUTH_KEY) === 'true';
-    } catch {
-      return false;
-    }
-  });
+  useEffect(() => {
+    let active = true;
+    fetch('/api/admin-auth', { credentials: 'same-origin', cache: 'no-store' })
+      .then(response => response.ok ? response.json() : { authenticated: false })
+      .then(data => { if (active) setAuthed(data.authenticated === true); })
+      .catch(() => { if (active) setAuthed(false); })
+      .finally(() => { if (active) setCheckingAuth(false); });
+    return () => { active = false; };
+  }, []);
 
-  /* ---------------- login ---------------- */
-  if (!authed) {
-    return <StudioLogin onLogin={() => setAuthed(true)} />;
+  if (checkingAuth) {
+    return <div className="min-h-[60vh] flex items-center justify-center text-sm text-gray-400">Checking secure studio session…</div>;
   }
 
-  return <StudioShell onSignOut={() => {
-    try {
-      localStorage.removeItem(AUTH_KEY);
-    } catch {}
+  if (!authed) return <StudioLogin onLogin={() => setAuthed(true)} />;
+
+  return <StudioShell onSignOut={async () => {
+    try { await fetch('/api/admin-auth', { method: 'DELETE', credentials: 'same-origin' }); } catch {}
     setAuthed(false);
   }} navigateTo={navigateTo} />;
 };
@@ -122,16 +123,29 @@ const StudioLogin: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   const { navigateTo } = useNavigation();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === PASSWORD) {
-      try {
-        localStorage.setItem(AUTH_KEY, 'true');
-      } catch {}
+    setError('');
+    setSubmitting(true);
+    try {
+      const response = await fetch('/api/admin-auth', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        setError(result.error || 'Sign-in failed. Check the studio configuration.');
+        return;
+      }
       onLogin();
-    } else {
-      setError('Wrong password. Try again.');
+    } catch {
+      setError('Could not connect to the secure sign-in service.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -174,9 +188,10 @@ const StudioLogin: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
           )}
           <button
             type="submit"
-            className="w-full py-2.5 bg-[#22c55e] hover:bg-[#16a34a] text-black font-semibold text-sm rounded-lg transition flex items-center justify-center space-x-2"
+            disabled={submitting}
+            className="w-full py-2.5 bg-[#22c55e] hover:bg-[#16a34a] disabled:opacity-60 text-black font-semibold text-sm rounded-lg transition flex items-center justify-center space-x-2"
           >
-            <span>Sign in</span>
+            <span>{submitting ? "Signing in…" : "Sign in"}</span>
             <LogIn className="w-4 h-4" />
           </button>
         </form>
@@ -201,15 +216,63 @@ const StudioShell: React.FC<{
   navigateTo: (route: any, params?: any) => void;
 }> = ({ onSignOut, navigateTo }) => {
   const [tab, setTab] = useState<Tab>('overview');
-  const [projects, setProjects] = useState<StudioProject[]>(getStudioProjects);
+  const [projects, setProjects] = useState<StudioProject[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formResetKey, setFormResetKey] = useState(0);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [saveError, setSaveError] = useState('');
 
-  const persist = (next: StudioProject[]) => {
-    setProjects(next);
+  useEffect(() => {
+    let active = true;
+    fetch('/api/projects', { credentials: 'same-origin', cache: 'no-store' })
+      .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Could not load projects.');
+        return Array.isArray(data.projects) ? data.projects as StudioProject[] : [];
+      })
+      .then(remoteProjects => {
+        if (!active) return;
+        setProjects(remoteProjects);
+        try { localStorage.setItem(PROJECTS_KEY, JSON.stringify(remoteProjects)); } catch {}
+        setSaveError('');
+      })
+      .catch(error => { if (active) setSaveError(error instanceof Error ? error.message : 'Could not load the project database.'); })
+      .finally(() => { if (active) setLoadingProjects(false); });
+    return () => { active = false; };
+  }, []);
+
+  const persist = async (next: StudioProject[]): Promise<boolean> => {
     try {
-      localStorage.setItem(PROJECTS_KEY, JSON.stringify(next));
-    } catch {}
+      const previousById = new Map(projects.map(project => [project.id, project]));
+      const nextIds = new Set(next.map(project => project.id));
+      const changed = next.filter(project => JSON.stringify(previousById.get(project.id)) !== JSON.stringify(project));
+      for (const project of changed) {
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ project }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Project could not be saved.');
+      }
+      for (const oldProject of projects) {
+        if (nextIds.has(oldProject.id)) continue;
+        const response = await fetch('/api/projects?id=' + encodeURIComponent(oldProject.id), {
+          method: 'DELETE',
+          credentials: 'same-origin',
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Project could not be deleted.');
+      }
+      setProjects(next);
+      try { localStorage.setItem(PROJECTS_KEY, JSON.stringify(next)); } catch {}
+      setSaveError('');
+      return true;
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Could not save changes to the project database.');
+      return false;
+    }
   };
 
   const published = projects.filter(p => p.status === 'published').length;
@@ -229,11 +292,11 @@ const StudioShell: React.FC<{
 
   const deleteProject = (id: string) => {
     if (!window.confirm('Delete this project? This cannot be undone.')) return;
-    persist(projects.filter(p => p.id !== id));
+    void persist(projects.filter(p => p.id !== id));
   };
 
   const toggleStatus = (id: string) => {
-    persist(
+    void persist(
       projects.map(p =>
         p.id === id
           ? { ...p, status: p.status === 'published' ? 'draft' : 'published', updatedAt: new Date().toISOString() }
@@ -260,6 +323,9 @@ const StudioShell: React.FC<{
           <span>Sign out</span>
         </button>
       </div>
+
+      {saveError && <div role="alert" className="rounded-xl border border-amber-700/50 bg-amber-950/30 px-4 py-3 text-sm text-amber-200">{saveError}<div className="mt-1 text-xs text-amber-300/80">Check the server environment and database migration before publishing.</div></div>}
+      {loadingProjects && <div className="rounded-xl border border-[#1e293b] bg-[#0d131f] px-4 py-3 text-sm text-gray-400">Loading projects from the shared database…</div>}
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-2">
@@ -386,7 +452,7 @@ const ProjectsTab: React.FC<{
     <div className="flex items-center justify-between">
       <div>
         <h2 className="text-lg font-bold text-white">Project library</h2>
-        <p className="text-xs text-gray-400 mt-1">{projects.length} project(s) stored in this browser</p>
+        <p className="text-xs text-gray-400 mt-1">{projects.length} project(s) in the shared project database</p>
       </div>
       <button
         onClick={onCreate}
@@ -477,7 +543,7 @@ const ProjectsTab: React.FC<{
 
 const CreateProjectForm: React.FC<{
   editing: StudioProject | null;
-  onSaved: (projects: StudioProject[]) => void;
+  onSaved: (projects: StudioProject[]) => Promise<boolean>;
   allProjects: StudioProject[];
 }> = ({ editing, onSaved, allProjects }) => {
   const [title, setTitle] = useState(editing?.title || '');
@@ -579,9 +645,13 @@ const CreateProjectForm: React.FC<{
     setStatus('Form cleared.');
   };
 
-  const save = (publish: boolean) => {
+  const save = async (publish: boolean) => {
     if (!title.trim()) {
       setStatus('Project title is required.');
+      return;
+    }
+    if (!Object.keys(fileMap).length) {
+      setStatus('Add at least one project file before saving.');
       return;
     }
     const slugValue = slugify(slug || title) || 'project-' + Date.now();
@@ -601,8 +671,11 @@ const CreateProjectForm: React.FC<{
       updatedAt: now,
     };
     const next = [project, ...allProjects.filter(p => p.id !== id)];
-    onSaved(next);
-    setStatus(publish ? 'Project published. It is now live on the Projects page.' : 'Draft saved.');
+    setStatus('Saving to the shared project database…');
+    const saved = await onSaved(next);
+    setStatus(saved
+      ? (publish ? 'Project published successfully. It is now available on the Projects page.' : 'Draft saved successfully to the shared database.')
+      : 'Save failed. Review the database/configuration error shown above and try again.');
   };
 
   const inputClass =
@@ -787,14 +860,14 @@ const CreateProjectForm: React.FC<{
         {/* Actions */}
         <div className="flex flex-wrap gap-2.5 pt-1">
           <button
-            onClick={() => save(false)}
+            onClick={() => { void save(false); }}
             className="flex items-center space-x-2 px-5 py-2.5 bg-[#141d2e] border border-[#1e293b] text-gray-200 hover:text-white hover:border-gray-600 font-semibold text-sm rounded-lg transition"
           >
             <Check className="w-4 h-4" />
             <span>Save Draft</span>
           </button>
           <button
-            onClick={() => save(true)}
+            onClick={() => { void save(true); }}
             className="flex items-center space-x-2 px-5 py-2.5 bg-[#22c55e] hover:bg-[#16a34a] text-black font-semibold text-sm rounded-lg transition"
           >
             <Upload className="w-4 h-4" />
