@@ -1,4 +1,4 @@
-import { isAdminRequest } from './_lib/admin';
+import { isAdminRequest } from './_lib/admin.js';
 
 const TABLE = 'codingvibes_projects';
 
