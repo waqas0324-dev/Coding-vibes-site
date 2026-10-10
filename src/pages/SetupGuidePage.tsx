@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigation } from '../context/NavigationContext';
 import { CodeBlock } from '../components/CodeBlock';
+import { setupGuideImages } from '../data/setupGuideImages';
 import {
   Download,
   Settings,
@@ -191,7 +192,7 @@ interface VisualStep {
 const VISUAL_STEPS: VisualStep[] = [
   {
     n: 1,
-    img: '/images/setup-guide/step-01.jpg',
+    img: setupGuideImages[0],
     title: 'Open the VS Code website',
     body: (
       <>
@@ -202,7 +203,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 2,
-    img: '/images/setup-guide/step-02.jpg',
+    img: setupGuideImages[1],
     title: 'Download for your operating system',
     body: (
       <>
@@ -214,7 +215,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 3,
-    img: '/images/setup-guide/step-03.jpg',
+    img: setupGuideImages[2],
     title: 'Double-click the downloaded file',
     body: (
       <>
@@ -226,7 +227,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 4,
-    img: '/images/setup-guide/step-04.jpg',
+    img: setupGuideImages[3],
     title: 'Accept the license and click Next',
     body: (
       <>
@@ -237,7 +238,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 5,
-    img: '/images/setup-guide/step-05.jpg',
+    img: setupGuideImages[4],
     title: 'Tick the options and click Install',
     body: (
       <>
@@ -249,7 +250,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 6,
-    img: '/images/setup-guide/step-06.jpg',
+    img: setupGuideImages[5],
     title: 'Open VS Code',
     body: (
       <>
@@ -260,7 +261,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 7,
-    img: '/images/setup-guide/step-07.jpg',
+    img: setupGuideImages[6],
     title: 'Create a new file and save it as index.html',
     body: (
       <>
@@ -275,7 +276,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 8,
-    img: '/images/setup-guide/step-08.jpg',
+    img: setupGuideImages[7],
     title: 'Write your first HTML code',
     body: (
       <>
@@ -290,7 +291,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 9,
-    img: '/images/setup-guide/step-09.jpg',
+    img: setupGuideImages[8],
     title: 'Click the Extensions icon',
     body: (
       <>
@@ -306,7 +307,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 10,
-    img: '/images/setup-guide/step-10.jpg',
+    img: setupGuideImages[9],
     title: 'Install Live Server',
     body: (
       <>
@@ -319,7 +320,7 @@ const VISUAL_STEPS: VisualStep[] = [
   },
   {
     n: 11,
-    img: '/images/setup-guide/step-11.jpg',
+    img: setupGuideImages[10],
     title: 'Click Go Live and see your website',
     body: (
       <>
