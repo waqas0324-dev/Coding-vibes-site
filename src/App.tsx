@@ -35,6 +35,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import { TryitPage } from './pages/TryitPage';
 import { TagReferencePage } from './pages/TagReferencePage';
 import { StudioPage } from './pages/StudioPage';
+import { StudioCloudPage } from './pages/StudioCloudPage';
 import { RoadmapsPage } from './pages/RoadmapsPage';
 import { RoadmapDetailPage } from './pages/RoadmapDetailPage';
 import { SetupGuidePage } from './pages/SetupGuidePage';
@@ -102,7 +103,7 @@ const MainAppContent: React.FC = () => {
       case 'tag-reference':
         return <TagReferencePage />;
       case 'studio':
-        return <StudioPage />;
+        return <StudioCloudPage />;
       case 'setup-guide':
         return <SetupGuidePage />;
       case 'roadmaps':

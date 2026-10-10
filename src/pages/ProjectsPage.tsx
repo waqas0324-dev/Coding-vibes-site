@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { activeCourses } from '../data/courses';
 import { Project } from '../types';
 import { useNavigation } from '../context/NavigationContext';
@@ -12,6 +12,16 @@ export const ProjectsPage: React.FC = () => {
   const { progress } = useLearning();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [sharedProjects, setSharedProjects] = useState<StudioProject[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/data/studio-projects.json', { cache: 'no-store' })
+      .then(response => response.ok ? response.json() : [])
+      .then(data => { if (!cancelled && Array.isArray(data)) setSharedProjects(data.filter((p: StudioProject) => p.status === 'published')); })
+      .catch(() => { if (!cancelled) setSharedProjects([]); });
+    return () => { cancelled = true; };
+  }, []);
 
   // Collect all projects across all active courses
   const allProjects: (Project & { courseTitle: string; badgeType: any; studioProject?: StudioProject })[] = [];
@@ -25,8 +35,9 @@ export const ProjectsPage: React.FC = () => {
     });
   });
 
-  // Append published Developer Studio projects
-  getStudioProjects()
+  // Append shared projects published through the private Studio API, plus legacy local projects.
+  [...sharedProjects, ...getStudioProjects().filter(sp => sp.status === 'published')]
+    .filter((sp, index, list) => list.findIndex(item => item.id === sp.id) === index)
     .filter(sp => sp.status === 'published')
     .forEach(sp => {
       allProjects.push({
