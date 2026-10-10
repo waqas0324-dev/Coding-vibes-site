@@ -654,6 +654,10 @@ const CreateProjectForm: React.FC<{
       setStatus('Add at least one project file before saving.');
       return;
     }
+    if (publish && !thumbnail) {
+      setStatus('Upload a project thumbnail before publishing. You can save a draft without one.');
+      return;
+    }
     const slugValue = slugify(slug || title) || 'project-' + Date.now();
     const id = editing?.id || slugValue;
     const now = new Date().toISOString();
