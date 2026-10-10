@@ -8,7 +8,7 @@ import { StudioProject, studioProjectToHtml } from './StudioPage';
 import { Rocket, Clock, CheckCircle2, ArrowRight, Code2 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const { navigateTo, openTryit } = useNavigation();
+  const { navigateTo } = useNavigation();
   const { progress } = useLearning();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -64,7 +64,8 @@ export const ProjectsPage: React.FC = () => {
 
   const filtered = allProjects.filter(p => {
     if (selectedCategory === 'All') return true;
-    return p.courseTitle.toLowerCase().includes(selectedCategory.toLowerCase());
+    const needle = selectedCategory.toLowerCase();
+    return p.courseTitle.toLowerCase().includes(needle) || p.skills.some(skill => skill.toLowerCase().includes(needle));
   });
 
   return (
@@ -177,7 +178,7 @@ export const ProjectsPage: React.FC = () => {
                 </div>
 
                 <button className="w-full py-2.5 bg-[#141d2e] group-hover:bg-[#22c55e] text-gray-200 group-hover:text-black font-semibold text-xs rounded-lg transition flex items-center justify-center space-x-1.5">
-                  <span>{project.studioProject ? 'Open in Sandbox' : (isCompleted ? 'Open Completed Project' : 'Build Project in Sandbox')}</span>
+                  <span>{project.studioProject ? 'View Project' : (isCompleted ? 'Open Completed Project' : 'Build Project in Sandbox')}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>
