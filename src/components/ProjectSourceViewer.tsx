@@ -24,26 +24,35 @@ interface ProjectSourceViewerProps {
     js?: string;
   } | null;
   projectSlug: string;
+  projectFiles?: Record<string, string>;
+  projectPreview?: string;
 }
 
 export const ProjectSourceViewer: React.FC<ProjectSourceViewerProps> = ({
   starterFiles,
-  projectSlug
+  projectSlug,
+  projectFiles,
+  projectPreview
 }) => {
   const files: SourceFile[] = useMemo(() => {
+    if (projectFiles && Object.keys(projectFiles).length) {
+      return Object.entries(projectFiles).map(([filename, code]) => {
+        const extension = filename.split('.').pop()?.toLowerCase() || '';
+        const language = /^(html|htm)$/.test(extension) ? 'markup'
+          : extension === 'css' ? 'css'
+          : /^(js|jsx|ts|tsx)$/.test(extension) ? 'javascript'
+          : extension === 'json' ? 'json'
+          : 'none';
+        return { key: filename, filename, language, code };
+      });
+    }
     if (!starterFiles) return [];
     const list: SourceFile[] = [];
-    if (starterFiles.html) {
-      list.push({ key: 'html', filename: 'index.html', language: 'markup', code: starterFiles.html });
-    }
-    if (starterFiles.css) {
-      list.push({ key: 'css', filename: 'styles.css', language: 'css', code: starterFiles.css });
-    }
-    if (starterFiles.js) {
-      list.push({ key: 'js', filename: 'app.js', language: 'javascript', code: starterFiles.js });
-    }
+    if (starterFiles.html) list.push({ key: 'html', filename: 'index.html', language: 'markup', code: starterFiles.html });
+    if (starterFiles.css) list.push({ key: 'css', filename: 'styles.css', language: 'css', code: starterFiles.css });
+    if (starterFiles.js) list.push({ key: 'js', filename: 'app.js', language: 'javascript', code: starterFiles.js });
     return list;
-  }, [starterFiles]);
+  }, [starterFiles, projectFiles]);
 
   const [activeKey, setActiveKey] = useState<string>('html');
   const [copied, setCopied] = useState(false);
@@ -61,6 +70,7 @@ export const ProjectSourceViewer: React.FC<ProjectSourceViewerProps> = ({
   }, [activeFile]);
 
   const previewSrcDoc = useMemo(() => {
+    if (projectPreview) return projectPreview;
     const html = starterFiles?.html || '';
     const css = starterFiles?.css || '';
     const js = starterFiles?.js || '';
@@ -76,7 +86,7 @@ ${html}
 <script>${js}</script>
 </body>
 </html>`;
-  }, [starterFiles]);
+  }, [starterFiles, projectPreview]);
 
   const handleCopy = async () => {
     try {
