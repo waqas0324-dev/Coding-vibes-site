@@ -115,7 +115,7 @@ export const ProjectsPage: React.FC = () => {
               key={project.id}
               onClick={() => {
                 if (project.studioProject) {
-                  openTryit(studioProjectToHtml(project.studioProject.files), 'html', project.studioProject.title);
+                  navigateTo('project-detail', { projectId: project.studioProject.id });
                 } else {
                   navigateTo('project-detail', { projectId: project.id });
                 }
