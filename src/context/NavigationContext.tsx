@@ -167,7 +167,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     // On fresh startup / reload, if hash is not tryit, ensure we start on home
     const initialHash = window.location.hash.replace(/^#\/?/, '');
     const baseInitialHash = initialHash.split('?')[0].replace(/^\/|\/$/g, '');
-    if (baseInitialHash && baseInitialHash !== 'tryit' && baseInitialHash !== 'studio') {
+    const preserveDeepLink = baseInitialHash === 'tryit' || baseInitialHash === 'studio' || baseInitialHash.startsWith('projects/');
+    if (baseInitialHash && !preserveDeepLink) {
       try {
         history.replaceState(null, '', window.location.pathname);
       } catch {}
