@@ -178,6 +178,194 @@ const ProjectFlowIllustration: React.FC = () => (
 );
 
 /* ------------------------------------------------------------------ */
+/* Visual step-by-step guide (screenshot slides)                       */
+/* ------------------------------------------------------------------ */
+
+interface VisualStep {
+  n: number;
+  img: string;
+  title: string;
+  body: React.ReactNode;
+}
+
+const VISUAL_STEPS: VisualStep[] = [
+  {
+    n: 1,
+    img: '/images/setup-guide/step-01.jpg',
+    title: 'Open the VS Code website',
+    body: (
+      <>
+        Open Google and go to <strong className="text-white">code.visualstudio.com</strong> — the official
+        Visual Studio Code website. This is the only safe place to download it from.
+      </>
+    ),
+  },
+  {
+    n: 2,
+    img: '/images/setup-guide/step-02.jpg',
+    title: 'Download for your operating system',
+    body: (
+      <>
+        Click the <strong className="text-white">Download</strong> button for your system —
+        <strong className="text-white"> Windows</strong>, <strong className="text-white">macOS</strong>, or{' '}
+        <strong className="text-white">Linux</strong>. The site detects your OS automatically.
+      </>
+    ),
+  },
+  {
+    n: 3,
+    img: '/images/setup-guide/step-03.jpg',
+    title: 'Double-click the downloaded file',
+    body: (
+      <>
+        When the download finishes, open your <strong className="text-white">Downloads</strong> folder and{' '}
+        <strong className="text-white">double-click</strong> the installer file
+        (<code className="text-[#4ade80] font-mono text-xs">VSCodeUserSetup.exe</code> on Windows) to start setup.
+      </>
+    ),
+  },
+  {
+    n: 4,
+    img: '/images/setup-guide/step-04.jpg',
+    title: 'Accept the license and click Next',
+    body: (
+      <>
+        Select <strong className="text-white">“I accept the agreement”</strong> and click{' '}
+        <strong className="text-white">Next</strong>. This is the standard software license — you must accept it to continue.
+      </>
+    ),
+  },
+  {
+    n: 5,
+    img: '/images/setup-guide/step-05.jpg',
+    title: 'Tick the options and click Install',
+    body: (
+      <>
+        Check <strong className="text-white">“Add to PATH”</strong> (recommended) so you can open VS Code from the
+        terminal later. Click <strong className="text-white">Install</strong>, wait for it to finish, then click{' '}
+        <strong className="text-white">Finish</strong>.
+      </>
+    ),
+  },
+  {
+    n: 6,
+    img: '/images/setup-guide/step-06.jpg',
+    title: 'Open VS Code',
+    body: (
+      <>
+        Open the <strong className="text-white">Start menu</strong>, type{' '}
+        <strong className="text-white">Visual Studio Code</strong>, and click the app to launch it for the first time.
+      </>
+    ),
+  },
+  {
+    n: 7,
+    img: '/images/setup-guide/step-07.jpg',
+    title: 'Create a new file and save it as index.html',
+    body: (
+      <>
+        Go to <strong className="text-white">File → New Text File</strong>, then press{' '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">Ctrl</kbd>
+        {' + '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">S</kbd>{' '}
+        and save it as <strong className="text-white">index.html</strong>. Browsers always look for{' '}
+        <strong className="text-white">index.html</strong> first.
+      </>
+    ),
+  },
+  {
+    n: 8,
+    img: '/images/setup-guide/step-08.jpg',
+    title: 'Write your first HTML code',
+    body: (
+      <>
+        Type the basic HTML structure into the editor — <strong className="text-white">10 lines</strong> that make a
+        complete webpage. Then press{' '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">Ctrl</kbd>
+        {' + '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">S</kbd>{' '}
+        to save.
+      </>
+    ),
+  },
+  {
+    n: 9,
+    img: '/images/setup-guide/step-09.jpg',
+    title: 'Click the Extensions icon',
+    body: (
+      <>
+        Click the <strong className="text-white">Extensions icon</strong> in the left sidebar (or press{' '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">Ctrl</kbd>
+        {' + '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">Shift</kbd>
+        {' + '}
+        <kbd className="px-1.5 py-0.5 rounded bg-[#141d2e] border border-[#1e293b] font-mono text-xs text-white">X</kbd>).
+        This opens the Extensions panel.
+      </>
+    ),
+  },
+  {
+    n: 10,
+    img: '/images/setup-guide/step-10.jpg',
+    title: 'Install Live Server',
+    body: (
+      <>
+        Search for <strong className="text-white">“Live Server”</strong> and click{' '}
+        <strong className="text-white">Install</strong> on the one by{' '}
+        <strong className="text-white">Ritwick Dey</strong>. It opens your pages in the browser and reloads
+        automatically on every save.
+      </>
+    ),
+  },
+  {
+    n: 11,
+    img: '/images/setup-guide/step-11.jpg',
+    title: 'Click Go Live and see your website',
+    body: (
+      <>
+        Click the <strong className="text-white">Go Live</strong> button in the bottom-right corner of VS Code.
+        Your browser opens automatically at <code className="text-[#4ade80] font-mono text-xs">127.0.0.1:5500</code>{' '}
+        showing <strong className="text-white">“Hello, World!”</strong> — your first website is live.
+      </>
+    ),
+  },
+];
+
+const VisualStepGuide: React.FC = () => (
+  <SectionShell
+    kicker="Visual Guide"
+    icon={<Monitor className="w-5 h-5" />}
+    title="Step-by-Step with Pictures"
+    blurb="Follow these 11 visual steps from start to finish — download, install, write code, and see your first website live in the browser."
+  >
+    <div className="space-y-10">
+      {VISUAL_STEPS.map((s, i) => (
+        <div
+          key={s.n}
+          className={`grid gap-6 items-center lg:grid-cols-2 ${i % 2 === 1 ? '' : ''}`}
+        >
+          <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+            <img
+              src={s.img}
+              alt={`Step ${s.n}: ${s.title}`}
+              loading="lazy"
+              className="w-full rounded-2xl border border-[#1e293b] shadow-lg shadow-black/40"
+            />
+          </div>
+          <div className={`space-y-3 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div className="flex items-center space-x-3">
+              <StepNumber n={s.n} />
+              <h3 className="text-lg font-extrabold text-white">{s.title}</h3>
+            </div>
+            <p className="text-sm text-gray-400 leading-relaxed">{s.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </SectionShell>
+);
+
+/* ------------------------------------------------------------------ */
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -217,6 +405,11 @@ export const SetupGuidePage: React.FC = () => {
           follow along and you will see your first webpage in the browser.
         </p>
       </div>
+
+      {/* ============================================================ */}
+      {/* VISUAL STEP-BY-STEP GUIDE                                  */}
+      {/* ============================================================ */}
+      <VisualStepGuide />
 
       {/* ============================================================ */}
       {/* SECTION 1 — DOWNLOAD VS CODE                                   */}
