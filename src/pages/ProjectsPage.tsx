@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { activeCourses } from '../data/courses';
 import { Project } from '../types';
 import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { TechBadge } from '../components/TechBadge';
-import { getStudioProjects, StudioProject, studioProjectToHtml } from './StudioPage';
+import { StudioProject, studioProjectToHtml } from './StudioPage';
 import { Rocket, Clock, CheckCircle2, ArrowRight, Code2 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
@@ -12,6 +12,22 @@ export const ProjectsPage: React.FC = () => {
   const { progress } = useLearning();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [studioProjects, setStudioProjects] = useState<StudioProject[]>([]);
+  const [studioProjectsLoading, setStudioProjectsLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    fetch('/api/projects', { cache: 'no-store' })
+      .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || 'Could not load published projects.');
+        return Array.isArray(data.projects) ? data.projects as StudioProject[] : [];
+      })
+      .then(remoteProjects => { if (active) setStudioProjects(remoteProjects.filter(project => project.status === 'published')); })
+      .catch(() => { if (active) setStudioProjects([]); })
+      .finally(() => { if (active) setStudioProjectsLoading(false); });
+    return () => { active = false; };
+  }, []);
 
   // Collect all projects across all active courses
   const allProjects: (Project & { courseTitle: string; badgeType: any; studioProject?: StudioProject })[] = [];
@@ -25,26 +41,24 @@ export const ProjectsPage: React.FC = () => {
     });
   });
 
-  // Append published Developer Studio projects
-  getStudioProjects()
-    .filter(sp => sp.status === 'published')
-    .forEach(sp => {
-      allProjects.push({
-        id: sp.id,
-        title: sp.title,
-        slug: sp.slug,
-        category: 'fullstack',
-        difficulty: sp.level,
-        description: sp.description || 'A Coding Vibes Studio project. Open it in the sandbox to explore and remix the code.',
-        skills: sp.tech.split(/[·,|]/).map(s => s.trim()).filter(Boolean),
-        requirements: Object.keys(sp.files).map(f => 'Explore source file: ' + f),
-        estimatedTime: '1-2 hours',
-        starterFiles: { html: studioProjectToHtml(sp.files) },
-        courseTitle: 'Coding Vibes Studio',
-        badgeType: 'default',
-        studioProject: sp
-      });
+  // Append projects published through the private Developer Studio API
+  studioProjects.forEach(sp => {
+    allProjects.push({
+      id: sp.id,
+      title: sp.title,
+      slug: sp.slug,
+      category: 'fullstack',
+      difficulty: sp.level,
+      description: sp.description || 'A Coding Vibes Studio project. Open it in the sandbox to explore and remix the code.',
+      skills: sp.tech.split(/[·,|]/).map(s => s.trim()).filter(Boolean),
+      requirements: Object.keys(sp.files).map(f => 'Explore source file: ' + f),
+      estimatedTime: '1-2 hours',
+      starterFiles: { html: studioProjectToHtml(sp.files) },
+      courseTitle: 'Coding Vibes Studio',
+      badgeType: 'default',
+      studioProject: sp
     });
+  });
 
   const categories = ['All', 'HTML', 'CSS', 'JavaScript'];
 
@@ -88,6 +102,8 @@ export const ProjectsPage: React.FC = () => {
           </button>
         ))}
       </div>
+
+      {studioProjectsLoading && <p className="text-xs text-gray-500" role="status">Loading published community projects…</p>}
 
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
