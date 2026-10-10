@@ -1,4 +1,4 @@
-import { clearAdminCookie, constantTimeEquals, createAdminCookie, isAdminRequest } from './_lib/admin';
+import { clearAdminCookie, constantTimeEquals, createAdminCookie, isAdminRequest } from './_lib/admin.js';
 
 export default function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
