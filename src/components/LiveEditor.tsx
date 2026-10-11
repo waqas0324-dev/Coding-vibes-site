@@ -1448,13 +1448,15 @@ export const LiveEditor: React.FC<LiveEditorProps> = ({
                 <pre
                   ref={highlightRef}
                   aria-hidden="true"
-                  className="absolute inset-0 m-0 p-3 font-mono text-sm leading-[21px] overflow-hidden pointer-events-none select-none border-0"
+                  className="absolute inset-0 m-0 p-3 font-mono text-sm leading-[21px] overflow-auto pointer-events-none select-none border-0"
                   style={{
                     fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
                     tabSize: 2,
                     whiteSpace: 'pre',
                     wordWrap: 'normal',
                     color: activeTheme.colors.fg,
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
                   }}
                   dangerouslySetInnerHTML={{ __html: highlightedCodeHtml + '\n' }}
                 />

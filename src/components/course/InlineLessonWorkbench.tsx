@@ -514,7 +514,8 @@ export const InlineLessonWorkbench: React.FC<InlineLessonWorkbenchProps> = ({
                   <pre
                     ref={highlightRef}
                     aria-hidden="true"
-                    className="absolute inset-0 m-0 p-3 font-mono text-xs sm:text-sm leading-5 overflow-hidden pointer-events-none select-none whitespace-pre"
+                    className="absolute inset-0 m-0 p-3 font-mono text-xs sm:text-sm leading-5 overflow-auto pointer-events-none select-none whitespace-pre"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     dangerouslySetInnerHTML={{ __html: highlightedCodeHtml + '\n' }}
                   />
                   {/* Transparent textarea (on top, captures input) */}
