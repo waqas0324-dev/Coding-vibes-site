@@ -343,7 +343,7 @@ const OverviewTab: React.FC<{
         <h2 className="text-lg font-bold text-white mb-2">Publish a project in minutes</h2>
         <p className="text-sm text-gray-400 mb-6 max-w-2xl leading-relaxed">
           Give the project a title and description, upload a thumbnail, import a ZIP or add
-          files directly in the editor, then publish it live to the Projects page.
+          files directly in the editor, then save it to your personal Projects page (stored in this browser).
         </p>
         <div className="flex flex-wrap gap-3">
           <button
