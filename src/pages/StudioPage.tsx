@@ -43,6 +43,7 @@ export interface StudioProject {
   description: string;
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   tech: string;
+  category?: 'html' | 'css' | 'javascript' | 'fullstack';
   thumbnail?: string; // data URL
   files: Record<string, string>; // filename -> code
   status: 'draft' | 'published';
@@ -51,6 +52,16 @@ export interface StudioProject {
 }
 
 const PROJECTS_KEY = 'cv-studio-projects';
+
+export function inferProjectCategory(title: string, tech: string, existing?: string): 'html' | 'css' | 'javascript' | 'fullstack' {
+  if (existing === 'html' || existing === 'css' || existing === 'javascript' || existing === 'fullstack') return existing;
+  const titleText = title.toLowerCase();
+  const text = (title + ' ' + tech).toLowerCase();
+  if (/full.?stack|node|express|rest api|auth|capstone|backend|server|database/.test(text)) return 'fullstack';
+  if (/\bcss\b|layout|styling/.test(titleText) && !/html/.test(titleText)) return 'css';
+  if (/\bhtml\b|semantic|form|table|markup/.test(titleText)) return 'html';
+  return 'javascript';
+}
 
 export function slugify(value: string): string {
   return value
@@ -114,6 +125,7 @@ function mapDbProjectToStudio(project: any, files: any[]): StudioProject {
     id: project.id,
     title: project.title,
     slug: project.slug,
+    category: inferProjectCategory(project.title, (project.technologies || []).join(' · '), project.category),
     description: project.full_description || project.short_description || '',
     level: project.difficulty === 'advanced' ? 'Advanced' : project.difficulty === 'intermediate' ? 'Intermediate' : 'Beginner',
     tech: Array.isArray(project.technologies) && project.technologies.length ? project.technologies.join(' · ') : 'HTML · CSS · JavaScript',
@@ -260,7 +272,8 @@ const StudioShell: React.FC<{
       const rows = await getAllAdminProjects();
       const cloudProjects = await Promise.all(rows.map(async row => mapDbProjectToStudio(row, await getProjectFiles(row.id))));
       const cached = getStudioProjects();
-      const merged = [...cloudProjects, ...cached.filter(item => !cloudProjects.some(cloud => cloud.slug === item.slug))];
+      const normalizedCache = cached.map(item => ({ ...item, category: inferProjectCategory(item.title, item.tech, item.category) }));
+      const merged = [...cloudProjects, ...normalizedCache.filter(item => !cloudProjects.some(cloud => cloud.slug === item.slug))];
       if (!active) return;
       setProjects(merged);
       localStorage.setItem(PROJECTS_KEY, JSON.stringify(merged));
@@ -293,7 +306,7 @@ const StudioShell: React.FC<{
           slug: item.slug,
           short_description: item.description || item.title,
           full_description: item.description || item.title,
-          category: 'fullstack',
+          category: inferProjectCategory(item.title, item.tech, item.category),
           difficulty: item.level.toLowerCase() as 'beginner' | 'intermediate' | 'advanced',
           technologies: item.tech.split(/[·,|]/).map(value => value.trim()).filter(Boolean),
           thumbnail_url: item.thumbnail || null,
@@ -591,6 +604,7 @@ const CreateProjectForm: React.FC<{
   const [slugTouched, setSlugTouched] = useState(!!editing);
   const [description, setDescription] = useState(editing?.description || '');
   const [level, setLevel] = useState<'Beginner' | 'Intermediate' | 'Advanced'>(editing?.level || 'Beginner');
+  const [category, setCategory] = useState<'html' | 'css' | 'javascript' | 'fullstack'>(inferProjectCategory(editing?.title || '', editing?.tech || '', editing?.category));
   const [tech, setTech] = useState(editing?.tech || 'HTML · CSS · JavaScript');
   const [thumbnail, setThumbnail] = useState<string>(editing?.thumbnail || '');
   const [fileMap, setFileMap] = useState<Record<string, string>>(
@@ -708,6 +722,7 @@ const CreateProjectForm: React.FC<{
       slug: slugValue,
       description: description.trim(),
       level,
+      category,
       tech: tech.trim() || 'HTML · CSS · JavaScript',
       thumbnail: thumbnail || undefined,
       files: fileMap,
@@ -781,6 +796,15 @@ const CreateProjectForm: React.FC<{
               <option>Beginner</option>
               <option>Intermediate</option>
               <option>Advanced</option>
+            </select>
+          </label>
+          <label className="block">
+            <span className={labelClass}>Project category</span>
+            <select value={category} onChange={e => setCategory(e.target.value as 'html' | 'css' | 'javascript' | 'fullstack')} className={inputClass}>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+              <option value="fullstack">Full Stack</option>
             </select>
           </label>
           <label className="block">
