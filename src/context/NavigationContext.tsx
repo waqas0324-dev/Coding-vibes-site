@@ -229,8 +229,21 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         setCurrentRoute('studio');
       } else if (section === 'setup-guide') {
         setCurrentRoute('setup-guide');
+        setParams({});
+      } else if (section === 'roadmaps') {
+        if (parts[1]) {
+          setCurrentRoute('roadmap-detail');
+          setParams({ roadmapId: parts[1] });
+        } else {
+          setCurrentRoute('roadmaps');
+          setParams({});
+        }
+      } else if (section === 'roadmap-detail') {
+        setCurrentRoute('roadmap-detail');
+        setParams(parts[1] ? { roadmapId: parts[1] } : {});
       } else {
         setCurrentRoute('home');
+        setParams({});
       }
     };
 
@@ -280,6 +293,10 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       window.location.hash = `/projects/${newParams.projectId}`;
     } else if (route === 'search' && newParams.searchQuery) {
       window.location.hash = `/search/${encodeURIComponent(newParams.searchQuery)}`;
+    } else if (route === 'roadmaps') {
+      window.location.hash = '/roadmaps';
+    } else if (route === 'roadmap-detail' && newParams.roadmapId) {
+      window.location.hash = `/roadmaps/${encodeURIComponent(newParams.roadmapId)}`;
     } else if (route === 'tag-reference') {
       window.location.hash = newParams.tagSlug ? `/tag-reference/${newParams.tagSlug}` : '/tag-reference';
     } else {
