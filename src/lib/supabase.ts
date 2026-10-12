@@ -157,3 +157,10 @@ export async function isDeveloperUser(userId:string){
   if(error) throw error;
   return Boolean(data);
 }
+
+export async function getProjectById(id:string){
+  if(!supabase) return null;
+  const {data,error}=await supabase.from('projects').select('*').eq('id',id).maybeSingle();
+  if(error) throw error;
+  return data as DbProject|null;
+}
