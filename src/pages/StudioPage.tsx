@@ -696,6 +696,7 @@ const CreateProjectForm: React.FC<{
     setSlugTouched(false);
     setDescription('');
     setLevel('Beginner');
+    setCategory('html');
     setTech('HTML · CSS · JavaScript');
     setThumbnail('');
     setFileMap({ ...STARTER_FILES });
