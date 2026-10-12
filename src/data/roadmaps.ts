@@ -134,7 +134,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['DOM manipulation', 'Events', 'Fetch & APIs', 'ES6+ syntax', 'Local storage'],
       },
       {
-        id: 'fe-4',
+        id: 'fe-responsive',
         stepNumber: 4,
         title: 'Responsive Design',
         description: 'Adapt layouts to phones, tablets, and desktops with fluid sizing, media queries, responsive images, and mobile-first breakpoints.',
@@ -145,7 +145,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Mobile-first CSS', 'Media queries', 'Fluid layouts', 'Responsive images'],
       },
       {
-        id: 'fe-5',
+        id: 'fe-dom',
         stepNumber: 5,
         title: 'DOM & Browser APIs',
         description: 'Select and update elements, handle events, use forms and browser storage, and understand how JavaScript interacts with the page.',
@@ -156,7 +156,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['DOM selection', 'Events', 'Form handling', 'Local storage'],
       },
       {
-        id: 'fe-6',
+        id: 'fe-git',
         stepNumber: 6,
         title: 'Git & GitHub',
         description: 'Track changes with Git, commit meaningful updates, push to GitHub, and use branches to protect working code.',
@@ -167,7 +167,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Git basics', 'Commits', 'Remote repositories', 'Branches'],
       },
       {
-        id: 'fe-7',
+        id: 'fe-api',
         stepNumber: 7,
         title: 'APIs & Fetch',
         description: 'Request JSON from an API, handle loading and error states, and render the returned data without breaking the page.',
@@ -178,7 +178,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['HTTP requests', 'Fetch', 'JSON', 'Loading and error states'],
       },
       {
-        id: 'fe-8',
+        id: 'fe-test',
         stepNumber: 8,
         title: 'Frontend Testing',
         description: 'Test core user flows, form validation, responsive states, keyboard navigation, and common failure cases before release.',
@@ -187,7 +187,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Test cases', 'Accessibility checks', 'Browser testing', 'Regression checks'],
       },
       {
-        id: 'fe-9',
+        id: 'fe-4',
         stepNumber: 9,
         title: 'React & Components',
         description: 'Build component-based UIs with React: components, props, state, hooks (useState, useEffect), conditional rendering, and fetching data into your UI.',
@@ -198,7 +198,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Components & props', 'State & hooks', 'useEffect', 'Forms handling', 'Routing basics'],
       },
       {
-        id: 'fe-10',
+        id: 'fe-deploy',
         stepNumber: 10,
         title: 'Deployment',
         description: 'Build for production, deploy to a hosting platform, connect a repository, and verify that routes, assets, and mobile layouts work on the live site.',
@@ -207,7 +207,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Production builds', 'Hosting', 'Environment settings', 'Live verification'],
       },
       {
-        id: 'fe-11',
+        id: 'fe-5',
         stepNumber: 11,
         title: 'Portfolio Projects',
         description: 'Prove your skills by building 3 real projects: a personal portfolio site, a multi-page business website, and a React task manager with local storage.',
@@ -247,7 +247,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['HTTP', 'Request/response', 'Middleware', 'Environment config'],
       },
       {
-        id: 'be-3',
+        id: 'be-express',
         stepNumber: 3,
         title: 'Express & Routing',
         description: 'Create an Express server, organize routes, use middleware, validate input, and return consistent JSON responses.',
@@ -256,7 +256,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Express app', 'Routes', 'Middleware', 'Validation'],
       },
       {
-        id: 'be-4',
+        id: 'be-3',
         stepNumber: 4,
         title: 'Databases with SQL',
         description: 'Design tables and relationships, query with SELECT and JOIN, and perform safe CRUD operations.',
@@ -268,7 +268,7 @@ export const roadmaps: Roadmap[] = [
         projectIds: ['proj-sql-store'],
       },
       {
-        id: 'be-5',
+        id: 'be-rest',
         stepNumber: 5,
         title: 'REST APIs',
         description: 'Design resource-based endpoints, choose HTTP methods and status codes, document request/response shapes, and handle errors.',
@@ -277,7 +277,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['REST design', 'HTTP methods', 'Status codes', 'API docs'],
       },
       {
-        id: 'be-6',
+        id: 'be-auth',
         stepNumber: 6,
         title: 'Authentication & Security',
         description: 'Understand sessions and tokens, hash passwords, validate user input, protect private routes, and keep secrets server-side.',
@@ -286,7 +286,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Sessions', 'Authorization', 'Input validation', 'Secrets'],
       },
       {
-        id: 'be-7',
+        id: 'be-test',
         stepNumber: 7,
         title: 'Testing & Error Handling',
         description: 'Test successful and failed requests, invalid inputs, missing resources, database failures, and authentication boundaries.',
@@ -295,7 +295,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['API tests', 'Error responses', 'Edge cases', 'Logging'],
       },
       {
-        id: 'be-8',
+        id: 'be-deploy',
         stepNumber: 8,
         title: 'Deployment',
         description: 'Configure production environment variables, deploy the API, connect the database, and verify live endpoints.',
@@ -304,7 +304,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Hosting', 'Environment variables', 'Production checks', 'Monitoring'],
       },
       {
-        id: 'be-9',
+        id: 'be-4',
         stepNumber: 9,
         title: 'Build an API Project',
         description: 'Build a task or products API with CRUD, validation, authentication, database persistence, and clear documentation.',
@@ -355,7 +355,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['DOM & events', 'Fetch', 'ES6+', 'Async patterns'],
       },
       {
-        id: 'fs-4',
+        id: 'fs-git',
         stepNumber: 4,
         title: 'Git & GitHub',
         description: 'Track changes, commit work, push repositories, create branches, and keep a clear project history.',
@@ -366,7 +366,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Git', 'GitHub', 'Commits', 'Branches'],
       },
       {
-        id: 'fs-5',
+        id: 'fs-4',
         stepNumber: 5,
         title: 'React Frontend',
         description: 'Build component-based interfaces with props, state, hooks, forms, routing, and API data fetching.',
@@ -377,7 +377,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Components', 'Props & state', 'Hooks', 'Routing', 'Forms'],
       },
       {
-        id: 'fs-6',
+        id: 'fs-5',
         stepNumber: 6,
         title: 'Node.js & Express',
         description: 'Create a server, define API routes, use middleware, validate input, and return structured responses.',
@@ -386,7 +386,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Node.js', 'Express', 'HTTP', 'Middleware'],
       },
       {
-        id: 'fs-7',
+        id: 'fs-6',
         stepNumber: 7,
         title: 'Database Design',
         description: 'Model relational data, use SQL queries and joins, and implement create, read, update, and delete operations.',
@@ -398,7 +398,7 @@ export const roadmaps: Roadmap[] = [
         projectIds: ['proj-sql-store'],
       },
       {
-        id: 'fs-8',
+        id: 'fs-api',
         stepNumber: 8,
         title: 'REST APIs',
         description: 'Connect the frontend to backend endpoints, handle JSON, loading states, errors, validation, and API documentation.',
@@ -407,7 +407,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['REST', 'Fetch', 'JSON', 'Error handling'],
       },
       {
-        id: 'fs-9',
+        id: 'fs-auth',
         stepNumber: 9,
         title: 'Authentication & Authorization',
         description: 'Add secure sign-in, protected routes, session/token handling, role checks, and server-side secret management.',
@@ -416,7 +416,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Auth flows', 'Sessions/tokens', 'Roles', 'Security'],
       },
       {
-        id: 'fs-10',
+        id: 'fs-test',
         stepNumber: 10,
         title: 'Testing & Quality',
         description: 'Check core user flows, API edge cases, accessibility, responsive layouts, and regressions before release.',
@@ -425,7 +425,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Functional testing', 'API testing', 'Accessibility', 'Regression checks'],
       },
       {
-        id: 'fs-11',
+        id: 'fs-deploy',
         stepNumber: 11,
         title: 'Deployment & Hosting',
         description: 'Configure production environment variables, deploy the frontend and API, connect the database, and verify the live app.',
@@ -434,7 +434,7 @@ export const roadmaps: Roadmap[] = [
         skills: ['Builds', 'Hosting', 'Environment config', 'Live checks'],
       },
       {
-        id: 'fs-12',
+        id: 'fs-7',
         stepNumber: 12,
         title: 'Real-World Capstone',
         description: 'Build and publish one complete app with a responsive frontend, API, persistent database, authentication, and project documentation.',
