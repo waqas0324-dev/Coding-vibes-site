@@ -106,7 +106,8 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   });
 
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('codingvibes_theme') === 'dark';
+    const savedTheme = localStorage.getItem('codingvibes_theme');
+    return savedTheme ? savedTheme === 'dark' : true;
   });
 
   const [isAiMentorOpen, setIsAiMentorOpen] = useState(false);
