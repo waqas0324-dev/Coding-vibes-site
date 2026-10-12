@@ -39,7 +39,7 @@ export const roadmaps: Roadmap[] = [
     steps: [
       {
         id: 'bg-0',
-        stepNumber: 2,
+        stepNumber: 1,
         title: 'Computer & Web Basics',
         description: 'Understand files and folders, browsers, websites versus web apps, URLs, and how a browser requests and displays a webpage.',
         whyItMatters: 'Knowing the environment around the code removes beginner confusion and makes the first HTML lesson much easier to follow.',
