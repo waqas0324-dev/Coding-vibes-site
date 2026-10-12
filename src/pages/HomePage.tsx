@@ -3,7 +3,7 @@ import { useNavigation } from '../context/NavigationContext';
 import { activeCourses } from '../data/courses';
 import {
   ArrowRight, BookOpen, Braces, Code2, Compass, GraduationCap,
-  Layers3, MonitorSmartphone, Rocket, Search, ShieldCheck, Sparkles,
+  Layers3, MonitorSmartphone, Rocket, Search, ShieldCheck,
   Terminal, Zap
 } from 'lucide-react';
 
