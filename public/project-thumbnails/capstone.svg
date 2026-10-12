@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+ <title id="title">Coding Vibes Capstone — Coding Vibes project thumbnail</title><desc id="desc">Premium dark developer project preview for Coding Vibes Capstone.</desc>
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061015"/><stop offset=".55" stop-color="#0A1820"/><stop offset="1" stop-color="#07110F"/></linearGradient><radialGradient id="glow"><stop stop-color="#34D399" stop-opacity=".28"/><stop offset="1" stop-color="#34D399" stop-opacity="0"/></radialGradient><filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="25" flood-color="#000" flood-opacity=".42"/></filter></defs>
+ <rect width="1200" height="675" rx="32" fill="url(#bg)"/><circle cx="980" cy="50" r="300" fill="url(#glow)"/><circle cx="160" cy="650" r="220" fill="url(#glow)" opacity=".45"/>
+ <rect x="52" y="48" width="1096" height="579" rx="28" fill="#08151B" stroke="#17363D" stroke-width="2"/>
+ <rect x="52" y="48" width="1096" height="68" rx="28" fill="#0B1C23"/><circle cx="82" cy="82" r="7" fill="#FF6B6B"/><circle cx="105" cy="82" r="7" fill="#FACC15"/><circle cx="128" cy="82" r="7" fill="#34D399"/>
+ <text x="160" y="89" fill="#78909A" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="2">CODING VIBES / ORIGINAL BUILD</text>
+ <text x="84" y="172" fill="#F1FFF7" font-family="Arial,sans-serif" font-size="43" font-weight="800">Coding Vibes Capstone</text>
+ <text x="84" y="207" fill="#34D399" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="1.5">React • Node.js • DB</text>
+ <rect x="84" y="245" width="1010" height="300" rx="20" fill="#061116" stroke="#16343B"/>
+ <rect x="112" y="278" width="250" height="232" rx="16" fill="#0A1B21" stroke="#17363D"/>
+ <text x="140" y="316" fill="#34D399" font-family="Arial,sans-serif" font-size="12" font-weight="800" letter-spacing="2">CAPSTONE</text>
+ <text x="140" y="365" fill="#F2FFF8" font-family="Arial,sans-serif" font-size="25" font-weight="800">LEARN  •  BUILD  •  SHIP</text>
+ <text x="140" y="400" fill="#8298A1" font-family="Arial,sans-serif" font-size="14">Full Stack Platform</text>
+ <rect x="140" y="438" width="150" height="8" rx="4" fill="#17343B"/><rect x="140" y="438" width="106" height="8" rx="4" fill="#34D399"/>
+ <rect x="392" y="278" width="325" height="232" rx="16" fill="#0A1B21" stroke="#17363D"/>
+ <path d="M425 455 C470 420 490 440 525 390 S590 415 625 355 S670 385 690 325" fill="none" stroke="#34D399" stroke-width="5" stroke-linecap="round"/>
+ <path d="M425 470 C480 455 510 470 550 438 S620 450 690 420" fill="none" stroke="#2A4B53" stroke-width="2"/>
+ <line x1="425" y1="330" x2="690" y2="330" stroke="#17343B"/><line x1="425" y1="385" x2="690" y2="385" stroke="#17343B"/><line x1="425" y1="440" x2="690" y2="440" stroke="#17343B"/>
+ <rect x="747" y="278" width="315" height="106" rx="16" fill="#0A1B21" stroke="#17363D"/><rect x="747" y="404" width="315" height="106" rx="16" fill="#0A1B21" stroke="#17363D"/>
+ <text x="775" y="315" fill="#6F858E" font-family="Arial,sans-serif" font-size="11" font-weight="800">SOURCE</text><text x="775" y="350" fill="#E8FFF2" font-family="Arial,sans-serif" font-size="17" font-weight="700">Editable files</text>
+ <text x="775" y="441" fill="#6F858E" font-family="Arial,sans-serif" font-size="11" font-weight="800">PREVIEW</text><text x="775" y="476" fill="#34D399" font-family="Arial,sans-serif" font-size="17" font-weight="700">Live sandbox</text>
+ <text x="84" y="585" fill="#5F747D" font-family="Arial,sans-serif" font-size="13" font-weight="700">SOURCE • PREVIEW • COPY • DOWNLOAD</text>
+ </svg>
