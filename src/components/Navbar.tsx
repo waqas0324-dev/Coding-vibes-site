@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '../context/NavigationContext';
 import { useAuth } from '../context/AuthContext';
-import { Code2, Search, Sun, Moon, Menu, X, LogIn, UserRound, LogOut, BookOpen, Route, FolderGit2, Library, ChevronRight } from 'lucide-react';
+import { Code2, Search, Sun, Moon, Menu, X, UserRound, LogOut, BookOpen, Route, FolderGit2, Library, ChevronRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { currentRoute, navigateTo, isDarkMode, toggleDarkMode } = useNavigation();
