@@ -36,7 +36,7 @@ export const ProjectDetailPage: React.FC = () => {
   }
 
   const [remoteProject, setRemoteProject] = useState<any>(null);
-  const [cloudLoading, setCloudLoading] = useState(false);
+  const [cloudLoading, setCloudLoading] = useState(() => dbConfigured());
 
   useEffect(() => {
     let active = true;
@@ -46,6 +46,7 @@ export const ProjectDetailPage: React.FC = () => {
       return () => { active = false; };
     }
     if (!dbConfigured()) return () => { active = false; };
+    setRemoteProject(null);
     setCloudLoading(true);
     (async () => {
       const row = await getProjectById(projectId);
