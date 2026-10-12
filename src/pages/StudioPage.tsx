@@ -695,6 +695,10 @@ const CreateProjectForm: React.FC<{
       setStatus('Project title is required.');
       return;
     }
+    if (publish && !thumbnail) {
+      setStatus('Upload a project thumbnail before publishing. You can still save this project as a draft.');
+      return;
+    }
     const slugValue = slugify(slug || title) || 'project-' + Date.now();
     const id = editing?.id || slugValue;
     const now = new Date().toISOString();
@@ -713,7 +717,7 @@ const CreateProjectForm: React.FC<{
     };
     const next = [project, ...allProjects.filter(p => p.id !== id)];
     onSaved(next);
-    setStatus(publish ? 'Project published. It is now live on the Projects page.' : 'Draft saved.');
+    setStatus(publish ? 'Publishing to the shared project library…' : 'Saving draft to the shared project library…');
   };
 
   const inputClass =
