@@ -4,7 +4,7 @@ import { Project } from '../types';
 import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { TechBadge } from '../components/TechBadge';
-import { getStudioProjects, StudioProject, studioProjectToHtml } from './StudioPage';
+import { getStudioProjects, StudioProject, studioProjectToHtml, inferProjectCategory } from './StudioPage';
 import { dbConfigured, getPublishedProjects, getProjectFiles } from '../lib/supabase';
 import { Rocket, Clock, CheckCircle2, ArrowRight, Code2 } from 'lucide-react';
 
@@ -26,6 +26,7 @@ export const ProjectsPage: React.FC = () => {
           id: row.id,
           title: row.title,
           slug: row.slug,
+          category: inferProjectCategory(row.title, (row.technologies || []).join(' · '), row.category),
           description: row.full_description || row.short_description || '',
           level: row.difficulty === 'advanced' ? 'Advanced' as const : row.difficulty === 'intermediate' ? 'Intermediate' as const : 'Beginner' as const,
           tech: (row.technologies || []).join(' · ') || 'HTML · CSS · JavaScript',
@@ -80,8 +81,8 @@ export const ProjectsPage: React.FC = () => {
     const html = Object.entries(sp.files).find(([name]) => /\.html?$/i.test(name))?.[1] || '<main><h1>' + sp.title + '</h1></main>';
     const css = Object.entries(sp.files).find(([name]) => /\.css$/i.test(name))?.[1];
     const js = Object.entries(sp.files).find(([name]) => /\.js$/i.test(name))?.[1];
-    const category = /css/i.test(sp.tech) && !/html/i.test(sp.tech) ? 'css' : /javascript|react|node/i.test(sp.tech) ? 'javascript' : 'fullstack';
-    const categoryTitle = category === 'css' ? 'CSS' : category === 'javascript' ? 'JavaScript' : 'HTML';
+    const category = inferProjectCategory(sp.title, sp.tech, sp.category);
+    const categoryTitle = category === 'css' ? 'CSS' : category === 'javascript' ? 'JavaScript' : category === 'fullstack' ? 'Full Stack' : 'HTML';
     allProjects.push({
       id: sp.id,
       title: sp.title,
@@ -99,7 +100,7 @@ export const ProjectsPage: React.FC = () => {
     });
   });
 
-  const categories = ['All', 'HTML', 'CSS', 'JavaScript'];
+  const categories = ['All', 'HTML', 'CSS', 'JavaScript', 'Full Stack'];
 
   const filtered = allProjects.filter(p => {
     if (selectedCategory === 'All') return true;
