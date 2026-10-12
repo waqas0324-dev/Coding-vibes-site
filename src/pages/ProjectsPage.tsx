@@ -76,7 +76,7 @@ export const ProjectsPage: React.FC = () => {
 
   // Include projects published from the cloud-backed Developer Studio.
   cloudProjects.forEach(sp => {
-    if (allProjects.some(existing => existing.slug === sp.slug || existing.id === sp.id)) return;
+    if (allProjects.some(existing => existing.slug === sp.slug || existing.id === sp.id || existing.title.trim().toLowerCase() === sp.title.trim().toLowerCase())) return;
     const html = Object.entries(sp.files).find(([name]) => /\.html?$/i.test(name))?.[1] || '<main><h1>' + sp.title + '</h1></main>';
     const css = Object.entries(sp.files).find(([name]) => /\.css$/i.test(name))?.[1];
     const js = Object.entries(sp.files).find(([name]) => /\.js$/i.test(name))?.[1];
