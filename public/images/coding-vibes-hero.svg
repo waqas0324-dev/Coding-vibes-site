@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="650" viewBox="0 0 760 650" fill="none">
+<defs>
+ <linearGradient id="bg" x1="88" y1="36" x2="670" y2="610" gradientUnits="userSpaceOnUse"><stop stop-color="#132B24"/><stop offset=".52" stop-color="#101D2A"/><stop offset="1" stop-color="#0A111D"/></linearGradient>
+ <linearGradient id="hoodie" x1="270" y1="280" x2="498" y2="520" gradientUnits="userSpaceOnUse"><stop stop-color="#34D399"/><stop offset=".48" stop-color="#15803D"/><stop offset="1" stop-color="#064E3B"/></linearGradient>
+ <linearGradient id="skin" x1="333" y1="149" x2="438" y2="294" gradientUnits="userSpaceOnUse"><stop stop-color="#E9B995"/><stop offset="1" stop-color="#B87554"/></linearGradient>
+ <linearGradient id="screen" x1="255" y1="380" x2="510" y2="535" gradientUnits="userSpaceOnUse"><stop stop-color="#162536"/><stop offset="1" stop-color="#0A101A"/></linearGradient>
+ <linearGradient id="laptop" x1="195" y1="510" x2="561" y2="582" gradientUnits="userSpaceOnUse"><stop stop-color="#D1E3E8"/><stop offset=".5" stop-color="#607887"/><stop offset="1" stop-color="#243747"/></linearGradient>
+ <filter id="shadow" x="74" y="12" width="620" height="620" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="24"/></filter>
+ <filter id="cardShadow" x="0" y="0" width="1" height="1" filterUnits="objectBoundingBox"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<ellipse cx="382" cy="330" rx="250" ry="250" fill="#10B981" fill-opacity=".12" filter="url(#shadow)"/>
+<rect x="80" y="32" width="600" height="570" rx="34" fill="url(#bg)" stroke="#2A4944" stroke-opacity=".8"/>
+<circle cx="112" cy="63" r="4" fill="#FB7185"/><circle cx="128" cy="63" r="4" fill="#FBBF24"/><circle cx="144" cy="63" r="4" fill="#34D399"/>
+<path d="M116 102H644" stroke="#FFFFFF" stroke-opacity=".08"/>
+<circle cx="608" cy="134" r="46" fill="#0D1A27" stroke="#254A45"/><text x="608" y="143" fill="#67E8F9" font-family="Arial,sans-serif" font-size="28" font-weight="700" text-anchor="middle">&lt;/&gt;</text>
+<circle cx="153" cy="236" r="37" fill="#0D1A27" stroke="#254A45"/><text x="153" y="244" fill="#FBBF24" font-family="Arial,sans-serif" font-size="23" font-weight="700" text-anchor="middle">JS</text>
+<rect x="518" y="205" width="104" height="62" rx="15" fill="#0B1521" stroke="#254A45"/><text x="570" y="243" fill="#A78BFA" font-family="Arial,sans-serif" font-size="22" font-weight="700" text-anchor="middle">React</text>
+<rect x="114" y="373" width="110" height="60" rx="15" fill="#0B1521" stroke="#254A45"/><text x="169" y="410" fill="#38BDF8" font-family="Arial,sans-serif" font-size="21" font-weight="700" text-anchor="middle">CSS</text>
+<rect x="545" y="366" width="94" height="60" rx="15" fill="#0B1521" stroke="#254A45"/><text x="592" y="403" fill="#86EFAC" font-family="Arial,sans-serif" font-size="19" font-weight="700" text-anchor="middle">Node</text>
+<!-- student hair and face -->
+<path d="M299 183C297 126 331 105 383 106C434 106 467 141 462 196L449 240H309L299 183Z" fill="#171A20"/>
+<path d="M322 166C323 135 348 119 383 121C420 121 441 143 440 177L434 230C430 266 409 289 381 289C351 289 330 265 326 230L322 166Z" fill="url(#skin)"/>
+<path d="M318 180C310 139 338 103 385 104C431 105 456 130 460 171C442 159 432 144 428 131C402 155 363 164 326 162L318 180Z" fill="#171A20"/>
+<path d="M339 202C348 194 359 194 367 201" stroke="#3D2B25" stroke-width="5" stroke-linecap="round"/><path d="M397 201C405 194 417 195 424 202" stroke="#3D2B25" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="355" cy="211" rx="4.5" ry="6" fill="#1F2937"/><ellipse cx="409" cy="211" rx="4.5" ry="6" fill="#1F2937"/>
+<path d="M380 215L374 237L384 239" stroke="#A86649" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M361 254C373 264 392 264 404 252" stroke="#8D493C" stroke-width="4" stroke-linecap="round"/>
+<path d="M352 283L350 305L411 306L409 281" fill="url(#skin)"/>
+<!-- hoodie torso and arms -->
+<path d="M300 303C316 289 339 286 352 285L382 319L412 285C433 290 455 299 469 315L510 429L470 465L446 409L457 530H299L312 409L282 465L244 438L278 333C283 320 290 310 300 303Z" fill="url(#hoodie)" stroke="#43D99A" stroke-opacity=".55" stroke-width="2"/>
+<path d="M352 287L382 320L412 286" stroke="#B7F7D6" stroke-opacity=".6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M380 322L380 404" stroke="#D1FAE5" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/><path d="M366 321L361 352M397 321L403 352" stroke="#D1FAE5" stroke-opacity=".7" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="348" y="365" width="69" height="39" rx="10" fill="#052E24" fill-opacity=".65" stroke="#A7F3D0" stroke-opacity=".35"/><text x="382" y="390" fill="#D1FAE5" font-family="Arial,sans-serif" font-size="14" font-weight="700" text-anchor="middle">CV</text>
+<!-- hands resting on laptop -->
+<path d="M287 431C304 417 323 418 337 432L359 455C366 463 361 475 350 477L318 468C302 464 290 451 287 431Z" fill="url(#skin)"/>
+<path d="M476 431C460 417 442 420 428 434L408 456C400 464 405 475 416 477L447 468C463 463 474 451 476 431Z" fill="url(#skin)"/>
+<!-- laptop -->
+<path d="M250 373Q250 362 263 362H499Q511 362 511 375V515H250V373Z" fill="#263B4A" stroke="#8DA7B4" stroke-width="2"/>
+<rect x="262" y="374" width="237" height="127" rx="7" fill="url(#screen)"/>
+<path d="M280 395H330M280 410H370M280 425H342M280 440H391M280 455H356M280 470H376" stroke="#7DD3FC" stroke-width="4" stroke-linecap="round" stroke-opacity=".8"/>
+<path d="M337 395H395M380 410H452M352 425H422M403 440H468M368 455H420M390 470H450" stroke="#34D399" stroke-width="4" stroke-linecap="round" stroke-opacity=".85"/>
+<path d="M211 516H550L575 547Q578 553 566 556H194Q182 553 187 547L211 516Z" fill="url(#laptop)" stroke="#C2D7DE" stroke-opacity=".7"/>
+<path d="M330 526H431L420 540H341L330 526Z" fill="#253847" fill-opacity=".8"/>
+<!-- floating completion chip -->
+<rect x="451" y="115" width="130" height="48" rx="13" fill="#0A171E" stroke="#2B5B4A"/><circle cx="470" cy="139" r="9" fill="#16A34A"/><path d="M466 139L469 142L475 135" stroke="#ECFDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="487" y="136" fill="#ECFDF5" font-family="Arial,sans-serif" font-size="10" font-weight="700">BUILDING SKILLS</text><text x="487" y="148" fill="#8BA4B0" font-family="Arial,sans-serif" font-size="8">One step at a time</text>
+<circle cx="600" cy="500" r="3" fill="#34D399"/><circle cx="168" cy="155" r="3" fill="#67E8F9"/><path d="M603 297L609 309L622 311L612 320L614 333L603 327L592 333L594 320L584 311L597 309L603 297Z" fill="#34D399" fill-opacity=".7"/>
+<text x="380" y="588" fill="#CDEFE0" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="3" text-anchor="middle">LEARN • BUILD • GROW</text>
+</svg>

@@ -1,709 +1,150 @@
 import React, { useState } from 'react';
 import { useNavigation } from '../context/NavigationContext';
-import { LiveEditor, buildWebDocument } from '../components/LiveEditor';
-import { DashboardWidget } from '../components/DashboardWidget';
-import { StreakTracker } from '../components/StreakTracker';
+import { activeCourses } from '../data/courses';
 import {
-  Search,
-  ArrowRight,
-  Code2,
-  CheckCircle2,
-  Play,
-  HelpCircle,
-  Laptop,
-  Award,
-  BookOpen,
-  Sparkles,
-  ExternalLink,
-  ChevronRight,
-  Layers,
-  Check,
-  X,
-  Zap,
-  Globe,
-  Database,
-  Terminal,
-  Cpu,
-  Palette,
-  Sliders,
-  Maximize2,
-  Eye,
-  Rocket
+  ArrowRight, BookOpen, Braces, Code2, Compass, GraduationCap,
+  Layers3, MonitorSmartphone, Rocket, Search, ShieldCheck,
+  Terminal, Zap
 } from 'lucide-react';
 
-import { roadmaps } from '../data/roadmaps';
-import { VisualRoadmap } from '../components/VisualRoadmap';
-import { Sprout, Monitor, Server } from 'lucide-react';
+const learningPaths = [
+  { title: 'HTML', slug: 'html', icon: Code2, tone: 'text-orange-300', glow: 'from-orange-400/20 to-transparent', description: 'Build accessible page structure with semantic HTML, links, media, tables, and forms.', tags: ['Structure', 'Semantics'], active: true },
+  { title: 'CSS', slug: 'css', icon: PaletteIcon, tone: 'text-sky-300', glow: 'from-sky-400/20 to-transparent', description: 'Create responsive layouts, polished interfaces, animations, and modern design systems.', tags: ['Responsive', 'Layout'], active: true },
+  { title: 'JavaScript', slug: 'javascript', icon: Braces, tone: 'text-amber-300', glow: 'from-amber-400/20 to-transparent', description: 'Make pages interactive with logic, functions, DOM events, APIs, and real data.', tags: ['Logic', 'Interaction'], active: true },
+  { title: 'React', slug: 'react-js', icon: Layers3, tone: 'text-cyan-300', glow: 'from-cyan-400/20 to-transparent', description: 'Build reusable components and modern interfaces with state, props, and hooks.', tags: ['Components', 'Hooks'], active: true },
+  { title: 'Node.js', slug: 'node-js', icon: Terminal, tone: 'text-emerald-300', glow: 'from-emerald-400/20 to-transparent', description: 'Learn server-side JavaScript, APIs, routing, and backend fundamentals.', tags: ['Backend', 'APIs'], active: false },
+  { title: 'Full Stack', slug: 'full-stack-development', icon: Rocket, tone: 'text-violet-300', glow: 'from-violet-400/20 to-transparent', description: 'Connect frontend, backend, databases, authentication, and deployment into one product.', tags: ['End to end', 'Projects'], active: false },
+];
+
+function PaletteIcon(props: React.ComponentProps<typeof Code2>) {
+  return <MonitorSmartphone {...props} />;
+}
 
 export const HomePage: React.FC = () => {
-  const { navigateTo, openTryit } = useNavigation();
+  const { navigateTo } = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeSandbox, setActiveSandbox] = useState<string | null>(null);
 
-  // Light Bulb Demo State (W3Schools Iconic JavaScript example)
-  const [isLightOn, setIsLightOn] = useState(true);
-
-  // CSS Live Customizer State
-  const [cssTheme, setCssTheme] = useState<'emerald' | 'sky' | 'purple'>('emerald');
-  const [cssBorderRadius, setCssBorderRadius] = useState<'sm' | 'md' | 'full'>('md');
-
-  // Interactive Quiz State
-  const [quizSelected, setQuizSelected] = useState<number | null>(null);
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
-
-  // Interactive "How To" Tab State
-  const [activeHowToTab, setActiveHowToTab] = useState<'accordion' | 'modal' | 'tabs'>('accordion');
-  const [isAccordionOpen, setIsAccordionOpen] = useState(true);
-  const [isHowToModalOpen, setIsHowToModalOpen] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0);
-
-  // Color Picker State
-  const [selectedColor, setSelectedColor] = useState('#04AA6D');
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigateTo('search', { searchQuery: searchQuery.trim() });
-    }
+  const submitSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (searchQuery.trim()) navigateTo('search', { searchQuery: searchQuery.trim() });
   };
 
-  const sampleJsRunnerHtml = `<button onclick="document.getElementById('demo').innerHTML = Date()" style="padding: 10px 20px; background: #04AA6D; color: #fff; font-weight: bold; border-radius: 4px; border: none; cursor: pointer;">Show Current Time</button>
-<p id="demo" style="margin-top: 16px; font-size: 18px; color: #000; font-family: sans-serif;">Click the button to show the date and time.</p>`;
-
-  const samplePythonRunnerHtml = `<div style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 8px;">
-  <div style="color: #6a9955; margin-bottom: 8px;"># Python 3 Execution Simulation</div>
-  <div style="color: #9cdcfe;">fruits = [<span style="color: #ce9178;">"apple"</span>, <span style="color: #ce9178;">"banana"</span>, <span style="color: #ce9178;">"cherry"</span>]</div>
-  <div style="color: #c586c0;">for</span> <span style="color: #9cdcfe;">x</span> <span style="color: #c586c0;">in</span> fruits:</div>
-  <div style="padding-left: 16px; color: #dcdcaa;">print</span>(<span style="color: #9cdcfe;">x</span>)</div>
-  <div style="margin-top: 14px; padding: 10px; background: #252526; border-left: 3px solid #04AA6D; border-radius: 4px; font-size: 13px;">
-    <strong style="color: #04AA6D;">Terminal Output:</strong><br>
-    apple<br>banana<br>cherry
-  </div>
-</div>`;
-
-  const sampleSqlRunnerHtml = `<div style="font-family: sans-serif; padding: 16px; background: #ffffff; color: #282A35; border-radius: 8px;">
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-    <span style="font-size: 12px; font-weight: bold; color: #04AA6D; font-family: monospace;">QUERY: SELECT * FROM Customers WHERE Country='Germany';</span>
-    <span style="font-size: 11px; background: #d9eee1; color: #04AA6D; font-weight: bold; padding: 2px 8px; border-radius: 9999px;">2 rows in set</span>
-  </div>
-  <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%; font-size: 12px; border-color: #e5e7eb;">
-    <tr style="background: #f3f4f6; text-align: left;">
-      <th>CustomerID</th><th>CustomerName</th><th>City</th><th>Country</th>
-    </tr>
-    <tr>
-      <td>1</td><td style="font-weight: bold;">Alfreds Futterkiste</td><td>Berlin</td><td style="color: #04AA6D; font-weight: bold;">Germany</td>
-    </tr>
-    <tr style="background: #fafafa;">
-      <td>2</td><td style="font-weight: bold;">Königlich Essen</td><td>Brandenburg</td><td style="color: #04AA6D; font-weight: bold;">Germany</td>
-    </tr>
-  </table>
-</div>`;
-
-  const sampleReactRunnerHtml = `<div style="font-family: sans-serif; padding: 20px; background: #ffffff; color: #1e293b; border-radius: 8px; text-align: center;">
-  <div style="display: inline-block; padding: 4px 12px; background: #e0f2fe; color: #0284c7; border-radius: 9999px; font-size: 12px; font-weight: bold; margin-bottom: 12px;">React Live Counter Demo</div>
-  <h2 id="count" style="font-size: 36px; margin: 8px 0; color: #04AA6D; font-weight: 800;">0</h2>
-  <div style="display: flex; gap: 8px; justify-content: center;">
-    <button onclick="let el = document.getElementById('count'); el.innerText = parseInt(el.innerText) + 1;" style="padding: 8px 20px; background: #04AA6D; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Increment +</button>
-    <button onclick="document.getElementById('count').innerText = 0;" style="padding: 8px 16px; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: bold; cursor: pointer;">Reset</button>
-  </div>
-</div>`;
-
-  const sampleJavaRunnerHtml = `<div style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 8px;">
-  <div style="color: #6a9955; margin-bottom: 8px;">// Java Output Simulation</div>
-  <div style="color: #569cd6;">public class <span style="color: #4ec9b0;">Main</span> {</div>
-  <div style="padding-left: 16px; color: #569cd6;">public static void <span style="color: #dcdcaa;">main</span>(<span style="color: #4ec9b0;">String</span>[] args) {</div>
-  <div style="padding-left: 32px;"><span style="color: #4ec9b0;">System</span>.out.<span style="color: #dcdcaa;">println</span>(<span style="color: #ce9178;">"Hello World from Java!"</span>);</div>
-  <div style="padding-left: 16px;">}</div>
-  <div>}</div>
-  <div style="margin-top: 14px; padding: 10px; background: #252526; border-left: 3px solid #04AA6D; border-radius: 4px; font-size: 13px;">
-    <strong style="color: #04AA6D;">Program Output:</strong><br>
-    Hello World from Java!
-  </div>
-</div>`;
-
-  const sampleHtmlCode = `<!DOCTYPE html>
-<html>
-<head>
-<title>HTML Tutorial</title>
-</head>
-<body>
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-<button class="btn">Click Me</button>
-
-</body>
-</html>`;
-
-  const sampleCssCode = `body {
-  background-color: #f1f1f1;
-  font-family: Arial, sans-serif;
-  color: #282A35;
-  text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  color: ${cssTheme === 'emerald' ? '#04AA6D' : cssTheme === 'sky' ? '#0ea5e9' : '#a855f7'};
-  font-size: 26px;
-}
-
-.card {
-  border-radius: ${cssBorderRadius === 'sm' ? '4px' : cssBorderRadius === 'md' ? '12px' : '9999px'};
-  background: #ffffff;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}`;
-
-  const samplePythonCode = `# Python 3 Example
-fruits = ["apple", "banana", "cherry"]
-for x in fruits:
-  print(x)
-
-# Function in Python
-def my_function(fname):
-  print(fname + " Refsnes")
-
-my_function("Emil")`;
-
-  const sampleSqlCode = `-- SQL Query Example
-SELECT CustomerName, City, Country
-FROM Customers
-WHERE Country = 'Germany';`;
-
-  const sampleJavaCode = `// Java Example
-public class Main {
-  public static void main(String[] args) {
-    System.out.println("Hello World");
-  }
-}`;
+  const openPath = (path: typeof learningPaths[number]) => {
+    if (path.title === 'Full Stack') {
+      navigateTo('roadmap-detail', { roadmapId: 'fullstack' });
+      return;
+    }
+    if (path.active) {
+      navigateTo('course-detail', { courseSlug: path.slug });
+      return;
+    }
+    navigateTo('courses');
+  };
 
   return (
-    <div className="w-full bg-white dark:bg-[#080d14] text-gray-900 dark:text-gray-100 overflow-x-hidden transition-colors">
-      {/* 1. W3SCHOOLS HERO BANNER (Authentic Charcoal #282A35 Background) */}
-      <section className="bg-[#282A35] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-            Learn to Code
-          </h1>
-          <p className="text-lg sm:text-2xl text-[#FFF4A3] font-bold tracking-wide">
-            Learn HTML, CSS & JavaScript step by step.
-          </p>
-
-          {/* Big Rounded Search Bar with Green #04AA6D Button */}
-          <form onSubmit={handleSearch} className="max-w-xl mx-auto pt-4">
-            <div className="flex items-center bg-white rounded-full overflow-hidden shadow-2xl p-1 border-2 border-transparent focus-within:border-[#04AA6D] transition">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search our tutorials, e.g. HTML"
-                className="flex-1 px-5 py-3 text-sm sm:text-base text-gray-900 placeholder-gray-500 focus:outline-none bg-transparent"
-              />
-              <button
-                type="submit"
-                className="bg-[#04AA6D] hover:bg-[#03945f] text-white font-extrabold px-6 sm:px-8 py-3 rounded-full flex items-center space-x-2 transition shrink-0 shadow-sm"
-                aria-label="Search"
-              >
-                <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-                <span className="hidden sm:inline text-sm font-bold">Search</span>
-              </button>
+    <div className="min-h-screen overflow-hidden bg-[#080d14] text-white">
+      <section className="relative isolate border-b border-white/[0.06]">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_12%,rgba(22,163,74,0.16),transparent_42%),radial-gradient(ellipse_at_85%_42%,rgba(34,211,238,0.08),transparent_35%)]" />
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-14 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:grid-cols-[1.02fr_0.98fr] lg:gap-5 lg:px-8 lg:pb-24 lg:pt-20">
+          <div className="relative z-10 max-w-2xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/[0.08] px-3.5 py-2 text-[11px] font-bold tracking-[0.18em] text-emerald-300 sm:text-xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
+              LEARN <span className="text-white/35">•</span> PRACTICE <span className="text-white/35">•</span> BUILD <span className="text-white/35">•</span> GROW
             </div>
-          </form>
-
-          <div className="pt-3">
-            <button
-              onClick={() => navigateTo('roadmaps')}
-              className="text-sm font-bold text-white hover:text-[#04AA6D] underline underline-offset-4 transition inline-flex items-center space-x-1"
-            >
-              <span>Not Sure Where To Begin? Follow a Step-by-Step Roadmap</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Visual Roadmap Journey */}
-      <section className="bg-[#0d131f] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#1e293b]">
-        <div className="max-w-3xl mx-auto text-center space-y-3">
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-            Follow a <span className="text-[#22c55e]">Structured Roadmap</span>
-          </h2>
-          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
-            From beginner to pro, follow step by step roadmaps designed by experts.
-            Tap any checkpoint to open its path.
-          </p>
-        </div>
-        <div className="max-w-3xl mx-auto mt-4">
-          <VisualRoadmap
-            height={600}
-            showFlag
-            nodes={[
-              {
-                label: 'Beginner',
-                sub: (() => {
-                  const r = roadmaps.find(x => x.id === 'beginner');
-                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
-                })(),
-                icon: Sprout,
-                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'beginner' }),
-              },
-              {
-                label: 'Frontend',
-                sub: (() => {
-                  const r = roadmaps.find(x => x.id === 'frontend');
-                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
-                })(),
-                icon: Monitor,
-                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'frontend' }),
-              },
-              {
-                label: 'Backend',
-                sub: (() => {
-                  const r = roadmaps.find(x => x.id === 'backend');
-                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
-                })(),
-                icon: Server,
-                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'backend' }),
-              },
-              {
-                label: 'Full Stack',
-                sub: (() => {
-                  const r = roadmaps.find(x => x.id === 'fullstack');
-                  return r ? `${r.steps.length} steps · ${r.totalTime}` : undefined;
-                })(),
-                icon: Layers,
-                onClick: () => navigateTo('roadmap-detail', { roadmapId: 'fullstack' }),
-              },
-            ]}
-          />
-        </div>
-        <div className="text-center mt-2">
-          <button
-            onClick={() => navigateTo('roadmaps')}
-            className="inline-flex items-center space-x-2 bg-[#22c55e] hover:bg-[#16a34a] text-white font-extrabold text-sm px-7 py-3 rounded-full transition shadow-[0_0_24px_rgba(34,197,94,0.35)]"
-          >
-            <span>Explore Roadmaps</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </section>
-
-      {/* 1.5 GETTING STARTED BANNER — VS Code setup guide */}
-      <section className="bg-white dark:bg-[#0c121e] px-4 sm:px-6 lg:px-8 pt-8">
-        <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => navigateTo('setup-guide')}
-            className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#062419] to-[#0d131f] border-2 border-[#04AA6D]/50 hover:border-[#04AA6D] transition group text-left shadow-sm"
-          >
-            <div className="flex items-start space-x-4">
-              <span className="w-11 h-11 rounded-xl bg-[#04AA6D] flex items-center justify-center text-white shrink-0">
-                <Rocket className="w-5 h-5" />
-              </span>
-              <div className="space-y-1">
-                <p className="text-sm sm:text-base font-extrabold text-[#282A35] dark:text-white">
-                  New here? Start with the Setup Guide
-                </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Install VS Code, set it up in minutes, and open your first project — step by step.
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex items-center space-x-2 bg-[#04AA6D] group-hover:bg-[#03945f] text-white font-extrabold text-xs px-5 py-2.5 rounded-full transition shrink-0">
-              <span>Open Guide</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </span>
-          </button>
-        </div>
-      </section>
-
-      {/* 2. BEGINNER'S ROADMAP (Where To Start) */}
-      <section className="bg-white dark:bg-[#0c121e] border-b border-gray-200 dark:border-[#1e293b] py-14 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-full bg-[#D9EEE1] text-[#04AA6D] dark:bg-[#062419] dark:text-[#4ade80] text-xs font-extrabold uppercase tracking-wider">
-              Beginner Learning Roadmap
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#282A35] dark:text-white tracking-tight">
-              Where To Start?
-            </h2>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-              To become a modern web developer, follow these core topics in the recommended order:
+            <h1 className="max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[4.25rem]">
+              Start Your <span className="text-emerald-400">Coding</span> Journey Today
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+              Learn step by step, practise with real code, and build projects that turn new skills into confidence.
             </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button onClick={() => navigateTo('courses')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-bold text-[#03120a] shadow-[0_10px_32px_rgba(16,185,129,.22)] transition hover:-translate-y-0.5 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-[#080d14]">
+                Start Learning <ArrowRight className="h-4 w-4" />
+              </button>
+              <button onClick={() => navigateTo('roadmaps')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.035] px-6 py-3 text-sm font-semibold text-white transition hover:border-emerald-400/50 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                <Compass className="h-4 w-4 text-emerald-300" /> Explore Roadmaps
+              </button>
+            </div>
+            <form onSubmit={submitSearch} className="mt-8 flex max-w-lg items-center gap-3 rounded-xl border border-white/10 bg-[#101824]/90 p-2 pl-4 shadow-xl shadow-black/20 focus-within:border-emerald-400/50">
+              <Search className="h-4 w-4 shrink-0 text-slate-400" />
+              <input value={searchQuery} onChange={event => setSearchQuery(event.target.value)} placeholder="Search HTML, CSS, JavaScript..." className="min-w-0 flex-1 bg-transparent py-2 text-sm text-white outline-none placeholder:text-slate-500" aria-label="Search learning content" />
+              <button type="submit" className="rounded-lg bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100 transition hover:bg-emerald-500 hover:text-black">Search</button>
+            </form>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm text-slate-400">
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-emerald-400" /> Beginner-friendly lessons</span>
+              <span className="inline-flex items-center gap-2"><Zap className="h-4 w-4 text-emerald-400" /> Learn by building</span>
+            </div>
           </div>
+          <div className="relative mx-auto w-full max-w-[620px]">
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/15 blur-[85px]" />
+            <img src="/images/coding-vibes-hero.svg" alt="Coding Vibes learner in an emerald hoodie building a project on a laptop, surrounded by web development icons" className="relative z-10 mx-auto w-full drop-shadow-[0_26px_55px_rgba(0,0,0,.45)]" />
+            <div className="absolute bottom-4 left-0 z-20 hidden items-center gap-3 rounded-2xl border border-white/10 bg-[#0e1722]/95 p-3 shadow-2xl backdrop-blur sm:flex">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-300"><Code2 className="h-5 w-5" /></div>
+              <div><p className="text-xs font-bold text-white">Your next skill starts here</p><p className="mt-1 text-[11px] text-slate-400">Read · Try · Build</p></div>
+            </div>
+          </div>
+        </div>
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-3 px-4 pb-10 sm:grid-cols-3 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 text-center"><p className="text-2xl font-extrabold text-white">{activeCourses.length}</p><p className="mt-1 text-xs text-slate-400">Learning courses</p></div>
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 text-center"><p className="text-2xl font-extrabold text-white">100<span className="text-emerald-400">+</span></p><p className="mt-1 text-xs text-slate-400">Lessons and practice topics</p></div>
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 text-center"><p className="text-2xl font-extrabold text-white">Build<span className="text-emerald-400">.</span></p><p className="mt-1 text-xs text-slate-400">Portfolio-ready projects</p></div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* Step 1: HTML */}
-            <div className="p-6 rounded-2xl bg-[#D9EEE1]/50 dark:bg-[#081e14] border-2 border-[#04AA6D]/40 space-y-4 flex flex-col justify-between shadow-xs hover:border-[#04AA6D] transition">
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="w-8 h-8 rounded-full bg-[#04AA6D] text-white font-black text-sm flex items-center justify-center shadow-xs">
-                    1
-                  </span>
-                  <span className="text-[11px] font-mono font-bold uppercase text-[#04AA6D] dark:text-[#4ade80]">
-                    Structure
-                  </span>
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="mb-9 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-bold tracking-[0.2em] text-emerald-400">CHOOSE YOUR PATH</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Learning Paths</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base">Follow a clear route from the first line of code to building complete applications.</p>
+          </div>
+          <button onClick={() => navigateTo('courses')} className="inline-flex items-center gap-2 self-start text-sm font-semibold text-emerald-300 transition hover:text-emerald-200 sm:self-auto">Browse all courses <ArrowRight className="h-4 w-4" /></button>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {learningPaths.map(path => {
+            const Icon = path.icon;
+            return <button key={path.title} onClick={() => openPath(path)} className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d1520] p-5 text-left transition duration-200 hover:-translate-y-1 hover:border-emerald-400/35 hover:bg-[#101b28] focus:outline-none focus:ring-2 focus:ring-emerald-400">
+              <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${path.glow} opacity-70`} />
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-black/20 ${path.tone}`}><Icon className="h-6 w-6" /></div>
+                  <span className={`rounded-full border px-2.5 py-1 text-[10px] font-bold ${path.active ? 'border-emerald-400/25 bg-emerald-400/10 text-emerald-300' : 'border-white/10 bg-white/[0.04] text-slate-400'}`}>{path.active ? 'AVAILABLE' : 'ROADMAP'}</span>
                 </div>
-                <h3 className="text-2xl font-extrabold text-[#282A35] dark:text-white">HTML</h3>
-                <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
-                  The foundational language for building web page skeleton, text, links, and forms.
-                </p>
+                <h3 className="mt-5 text-xl font-bold text-white">{path.title}</h3>
+                <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-400">{path.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">{path.tags.map(tag => <span key={tag} className="rounded-md border border-white/[0.07] bg-black/20 px-2 py-1 text-[10px] font-medium text-slate-300">{tag}</span>)}</div>
+                <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-300">Explore path <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></div>
               </div>
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'html', lessonSlug: 'introduction-to-html' })}
-                className="w-full py-2.5 px-4 rounded-full bg-[#04AA6D] hover:bg-[#03945f] text-white font-extrabold text-xs transition shadow-xs flex items-center justify-center space-x-1.5"
-              >
-                <span>Start HTML</span>
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </button>
-            </div>
-
-            {/* Step 2: CSS */}
-            <div className="p-6 rounded-2xl bg-[#FFF4A3]/40 dark:bg-[#201c05] border-2 border-amber-400/40 space-y-4 flex flex-col justify-between shadow-xs hover:border-amber-400 transition">
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="w-8 h-8 rounded-full bg-amber-500 text-white font-black text-sm flex items-center justify-center shadow-xs">
-                    2
-                  </span>
-                  <span className="text-[11px] font-mono font-bold uppercase text-amber-700 dark:text-amber-400">
-                    Styling
-                  </span>
-                </div>
-                <h3 className="text-2xl font-extrabold text-[#282A35] dark:text-white">CSS</h3>
-                <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
-                  The design language to format colors, typography, layout grids, and responsiveness.
-                </p>
-              </div>
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'css', lessonSlug: 'css-syntax' })}
-                className="w-full py-2.5 px-4 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs transition shadow-xs flex items-center justify-center space-x-1.5"
-              >
-                <span>Start CSS</span>
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </button>
-            </div>
-
-            {/* Step 3: JavaScript */}
-            <div className="p-6 rounded-2xl bg-stone-100 dark:bg-[#141926] border-2 border-gray-300 dark:border-[#1e293b] space-y-4 flex flex-col justify-between shadow-xs hover:border-gray-400 transition">
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="w-8 h-8 rounded-full bg-yellow-400 text-black font-black text-sm flex items-center justify-center shadow-xs">
-                    3
-                  </span>
-                  <span className="text-[11px] font-mono font-bold uppercase text-yellow-700 dark:text-yellow-400">
-                    Logic &amp; DOM
-                  </span>
-                </div>
-                <h3 className="text-2xl font-extrabold text-[#282A35] dark:text-white">JavaScript</h3>
-                <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
-                  The programming language to make web pages dynamic, interactive, and responsive.
-                </p>
-              </div>
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'javascript', lessonSlug: 'js-variables' })}
-                className="w-full py-2.5 px-4 rounded-full bg-[#282A35] dark:bg-yellow-400 hover:bg-black text-white dark:text-black font-extrabold text-xs transition shadow-xs flex items-center justify-center space-x-1.5"
-              >
-                <span>Start JavaScript</span>
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </button>
-            </div>
-
-          </div>
+            </button>;
+          })}
         </div>
       </section>
 
-      {/* 2.5. LEARNING PROGRESS & VELOCITY DASHBOARD (Recharts Widget) */}
-      <section className="bg-gray-50 dark:bg-[#070b12] py-10 px-4 sm:px-6 lg:px-8 border-b border-gray-200 dark:border-[#1e293b]">
-        <div className="max-w-6xl mx-auto space-y-6">
-          <StreakTracker />
-          <DashboardWidget />
-        </div>
-      </section>
-
-      {/* 3. W3SCHOOLS ICONIC HTML SECTION (#D9EEE1 Signature Pastel Mint) */}
-      <section className="bg-[#D9EEE1] text-[#282A35] py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column */}
-          <div className="lg:col-span-5 space-y-5 text-center lg:text-left">
-            <h2 className="text-5xl sm:text-7xl font-extrabold tracking-tight">
-              HTML
-            </h2>
-            <p className="text-base sm:text-lg text-gray-800 font-medium leading-relaxed">
-              The language for building web pages
-            </p>
-
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 max-w-xs mx-auto lg:mx-0">
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'html', lessonSlug: 'introduction-to-html' })}
-                className="w-full py-3 px-6 rounded-full bg-[#04AA6D] hover:bg-[#03945f] text-white font-extrabold text-sm sm:text-base transition shadow-sm text-center flex items-center justify-center space-x-2"
-              >
-                <span>Learn HTML</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-              <button
-                onClick={() => navigateTo('tutorials')}
-                className="w-full py-3 px-6 rounded-full bg-[#FFF4A3] hover:bg-[#ffe866] text-black font-extrabold text-sm transition text-center shadow-xs"
-              >
-                Video Tutorial
-              </button>
-              <button
-                onClick={() => navigateTo('resources')}
-                className="w-full py-3 px-6 rounded-full bg-[#282A35] hover:bg-[#1a1b22] text-white font-semibold text-sm transition text-center shadow-xs"
-              >
-                HTML Reference
-              </button>
-              <button
-                onClick={() => navigateTo('courses')}
-                className="w-full py-3 px-6 rounded-full bg-[#FFC0C7] hover:bg-[#ffabb6] text-black font-extrabold text-sm transition text-center shadow-xs"
-              >
-                Get Certified
-              </button>
-            </div>
+      <section className="border-y border-white/[0.06] bg-[#0b121b]">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:px-8 lg:py-20">
+          <div>
+            <p className="text-xs font-bold tracking-[0.2em] text-emerald-400">WHY CODING VIBES</p>
+            <h2 className="mt-3 max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">Learn a concept. Practise it. Build something real.</h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">No disconnected snippets or copy-paste learning. Every step is designed to help you understand the idea, see it in code, and use it in a practical project.</p>
+            <button onClick={() => navigateTo('projects')} className="mt-7 inline-flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-400/[0.08] px-4 py-3 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-400/[0.14]">Explore projects <ArrowRight className="h-4 w-4" /></button>
           </div>
-
-          {/* Right Column: Authentic W3Schools Code Example Card with White Box */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="bg-[#E7E9EB] rounded-2xl p-6 sm:p-7 shadow-lg space-y-4 border border-gray-300">
-              <h3 className="text-base font-extrabold text-[#282A35] tracking-wide">
-                HTML Example:
-              </h3>
-
-              {/* White Code Window with Green Left Border */}
-              <div className="p-4 rounded-lg bg-white border-l-4 border-[#04AA6D] font-mono text-xs sm:text-sm text-gray-800 overflow-x-auto shadow-xs leading-relaxed whitespace-pre">
-                {sampleHtmlCode}
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() => openTryit(sampleHtmlCode, 'html', 'HTML Tryit Editor')}
-                  className="px-6 py-3 rounded-full bg-[#04AA6D] hover:bg-[#03945f] active:scale-95 text-white font-extrabold text-sm transition shadow-sm flex items-center space-x-2 cursor-pointer"
-                  title="Try it Yourself in Tryit Editor"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Try it Yourself »</span>
-                </button>
-                <span className="text-xs text-gray-600 font-semibold">Interactive Code Editor</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. W3SCHOOLS ICONIC CSS SECTION (#FFF4A3 Signature Soft Yellow) */}
-      <section className="bg-[#FFF4A3] text-[#282A35] py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column */}
-          <div className="lg:col-span-5 space-y-5 text-center lg:text-left">
-            <h2 className="text-5xl sm:text-7xl font-extrabold tracking-tight">
-              CSS
-            </h2>
-            <p className="text-base sm:text-lg text-gray-800 font-medium leading-relaxed">
-              The language for styling web pages
-            </p>
-
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 max-w-xs mx-auto lg:mx-0">
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'css', lessonSlug: 'css-syntax' })}
-                className="w-full py-3 px-6 rounded-full bg-[#04AA6D] hover:bg-[#03945f] text-white font-extrabold text-sm sm:text-base transition shadow-sm text-center flex items-center justify-center space-x-2"
-              >
-                <span>Learn CSS</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-              <button
-                onClick={() => navigateTo('resources')}
-                className="w-full py-3 px-6 rounded-full bg-[#282A35] hover:bg-[#1a1b22] text-white font-semibold text-sm transition text-center shadow-xs"
-              >
-                CSS Reference
-              </button>
-              <button
-                onClick={() => navigateTo('courses')}
-                className="w-full py-3 px-6 rounded-full bg-[#FFC0C7] hover:bg-[#ffabb6] text-black font-extrabold text-sm transition text-center shadow-xs"
-              >
-                Get Certified
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column: Code Example Card + Interactive Visual Styler */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="bg-[#E7E9EB] rounded-2xl p-6 sm:p-7 shadow-lg space-y-4 border border-gray-300">
-              <h3 className="text-base font-extrabold text-[#282A35] tracking-wide">
-                CSS Example:
-              </h3>
-
-              <div className="p-4 rounded-lg bg-white border-l-4 border-[#04AA6D] font-mono text-xs sm:text-sm text-gray-800 overflow-x-auto shadow-xs leading-relaxed whitespace-pre">
-                {sampleCssCode}
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() =>
-                    openTryit(
-                      "<div class='card'>\n  <h1>Styled Web Component</h1>\n  <p>Live CSS styling from Coding Vibes</p>\n</div>",
-                      'css',
-                      'CSS Tryit Editor'
-                    )
-                  }
-                  className="px-6 py-3 rounded-full bg-[#04AA6D] hover:bg-[#03945f] active:scale-95 text-white font-extrabold text-sm transition shadow-sm flex items-center space-x-2 cursor-pointer"
-                  title="Try it Yourself in Tryit Editor"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Try it Yourself »</span>
-                </button>
-                <span className="text-xs text-gray-600 font-semibold">Live CSS Styling</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. W3SCHOOLS JAVASCRIPT SECTION (#282A35 Dark Slate with Iconic Lightbulb) */}
-      <section className="bg-[#282A35] text-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column */}
-          <div className="lg:col-span-5 space-y-5 text-center lg:text-left">
-            <h2 className="text-5xl sm:text-7xl font-extrabold tracking-tight">
-              JavaScript
-            </h2>
-            <p className="text-base sm:text-lg text-amber-200 font-medium leading-relaxed">
-              The language for programming web pages
-            </p>
-
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 max-w-xs mx-auto lg:mx-0">
-              <button
-                onClick={() => navigateTo('lesson', { courseSlug: 'javascript', lessonSlug: 'js-variables' })}
-                className="w-full py-3 px-6 rounded-full bg-[#04AA6D] hover:bg-[#03945f] text-white font-extrabold text-sm sm:text-base transition shadow-sm text-center flex items-center justify-center space-x-2"
-              >
-                <span>Learn JavaScript</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-              <button
-                onClick={() => navigateTo('resources')}
-                className="w-full py-3 px-6 rounded-full bg-[#FFF4A3] hover:bg-[#ffe866] text-black font-semibold text-sm transition text-center shadow-xs"
-              >
-                JavaScript Reference
-              </button>
-              <button
-                onClick={() => navigateTo('courses')}
-                className="w-full py-3 px-6 rounded-full bg-[#FFC0C7] hover:bg-[#ffabb6] text-black font-extrabold text-sm transition text-center shadow-xs"
-              >
-                Get Certified
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column: Code Example Card + Iconic Lightbulb Interactive Demo */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="bg-[#1f202a] rounded-2xl p-6 sm:p-7 shadow-2xl space-y-4 border border-[#3a3d4a]">
-              <h3 className="text-base font-extrabold text-white tracking-wide">
-                JavaScript Example:
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <pre className="p-4 rounded-lg bg-[#14151b] border border-[#3a3d4a] font-mono text-xs text-amber-200 overflow-x-auto leading-relaxed whitespace-pre">
-{`<button onclick="light(1)">
-  Turn on the light
-</button>
-
-<img id="myImage" src="pic_bulbon.gif">
-
-<button onclick="light(0)">
-  Turn off the light
-</button>`}
-                </pre>
-
-                {/* The Classic W3Schools Light Bulb Simulator */}
-                <div className="rounded-lg bg-[#14151b] border border-[#3a3d4a] p-4 flex flex-col items-center justify-center space-y-3 text-center">
-                  <span className="text-xs text-amber-300 font-bold">JavaScript Changes HTML</span>
-
-                  <div className="py-2">
-                    <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isLightOn
-                          ? 'bg-amber-400 text-amber-950 shadow-[0_0_40px_rgba(251,191,36,0.9)] scale-105'
-                          : 'bg-gray-700 text-gray-400 shadow-none scale-95'
-                      }`}
-                    >
-                      <Zap className={`w-8 h-8 ${isLightOn ? 'fill-amber-900' : ''}`} />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => setIsLightOn(true)}
-                      className={`px-3 py-1.5 rounded text-xs font-bold transition ${
-                        isLightOn ? 'bg-amber-400 text-black' : 'bg-gray-800 text-gray-300 hover:text-white'
-                      }`}
-                    >
-                      Turn on
-                    </button>
-                    <button
-                      onClick={() => setIsLightOn(false)}
-                      className={`px-3 py-1.5 rounded text-xs font-bold transition ${
-                        !isLightOn ? 'bg-gray-600 text-white' : 'bg-gray-800 text-gray-300 hover:text-white'
-                      }`}
-                    >
-                      Turn off
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-                <button
-                  onClick={() => openTryit(sampleJsRunnerHtml, 'javascript', 'JavaScript Tryit Editor')}
-                  className="px-6 py-3 rounded-full bg-[#04AA6D] hover:bg-[#03945f] active:scale-95 text-white font-extrabold text-sm transition shadow-sm flex items-center space-x-2 cursor-pointer"
-                  title="Try it Yourself in Tryit Editor"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Try it Yourself »</span>
-                </button>
-                <span className="text-xs text-gray-400 font-mono">Live JavaScript Sandbox</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. W3SCHOOLS COLOR PICKER TOOL */}
-      <section className="bg-gray-50 dark:bg-[#050912] border-t border-gray-200 dark:border-[#1e293b] py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-5">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#282A35] dark:text-white">
-            Color Picker
-          </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Click on any color to inspect its HEX and RGB value for your CSS stylesheets.
-          </p>
-
-          {/* Palette Swatches */}
-          <div className="flex flex-wrap items-center justify-center gap-2 max-w-xl mx-auto pt-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {[
-              '#04AA6D', '#22c55e', '#10b981', '#06b6d4', '#0ea5e9', '#3b82f6',
-              '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899', '#f43f5e',
-              '#ef4444', '#f97316', '#f59e0b', '#eab308', '#282A35'
-            ].map(col => (
-              <button
-                key={col}
-                onClick={() => setSelectedColor(col)}
-                style={{ backgroundColor: col }}
-                className={`w-9 h-9 rounded-lg transition transform hover:scale-110 shadow-xs ${
-                  selectedColor === col ? 'ring-4 ring-[#04AA6D]' : ''
-                }`}
-                aria-label={`Select color ${col}`}
-              />
-            ))}
+              { icon: BookOpen, title: 'Clear explanations', text: 'Topic-by-topic lessons with definitions, examples, common mistakes, and summaries.' },
+              { icon: Terminal, title: 'Practice as you learn', text: 'Use code examples, browser previews, exercises, and quick knowledge checks.' },
+              { icon: Compass, title: 'Structured roadmaps', text: 'Know what to learn next and how each skill connects to the bigger picture.' },
+              { icon: GraduationCap, title: 'Projects that teach', text: 'Use starter code and build checklists to turn concepts into practical experience.' },
+            ].map(item => { const Icon = item.icon; return <div key={item.title} className="rounded-2xl border border-white/[0.07] bg-[#0e1722] p-5"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-400/10 text-emerald-300"><Icon className="h-5 w-5" /></div><h3 className="mt-4 text-sm font-bold text-white">{item.title}</h3><p className="mt-2 text-xs leading-6 text-slate-400">{item.text}</p></div>; })}
           </div>
+        </div>
+      </section>
 
-          {/* Color Display Card */}
-          <div className="inline-flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-[#0e1626] border border-gray-200 dark:border-[#1e293b] shadow-sm">
-            <div
-              className="w-10 h-10 rounded-lg shadow-inner border border-black/10"
-              style={{ backgroundColor: selectedColor }}
-            />
-            <div className="text-left font-mono text-xs space-y-0.5">
-              <div className="text-gray-900 dark:text-white font-bold">HEX: {selectedColor.toUpperCase()}</div>
-              <div className="text-gray-500">Ready to use in CSS</div>
-            </div>
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-[#10241d] via-[#0c171b] to-[#0c1220] px-6 py-10 sm:px-10 sm:py-14">
+          <div className="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-emerald-400/10 blur-3xl" />
+          <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div><p className="text-xs font-bold tracking-[0.2em] text-emerald-300">YOUR NEXT CHAPTER</p><h2 className="mt-3 max-w-2xl text-2xl font-extrabold sm:text-3xl">Turn curiosity into code you can be proud of.</h2><p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">Choose your first lesson, follow the path, and keep building one skill at a time.</p></div>
+            <button onClick={() => navigateTo('courses')} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-[#03120a] transition hover:bg-emerald-400">Start now <ArrowRight className="h-4 w-4" /></button>
           </div>
         </div>
       </section>

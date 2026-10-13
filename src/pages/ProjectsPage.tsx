@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { activeCourses } from '../data/courses';
 import { Project } from '../types';
 import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { TechBadge } from '../components/TechBadge';
-import { getStudioProjects, StudioProject, studioProjectToHtml } from './StudioPage';
+import { getStudioProjects, StudioProject, studioProjectToHtml, inferProjectCategory } from './StudioPage';
+import { dbConfigured, getPublishedProjects, getProjectFiles } from '../lib/supabase';
 import { Rocket, Clock, CheckCircle2, ArrowRight, Code2 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
@@ -12,6 +13,34 @@ export const ProjectsPage: React.FC = () => {
   const { progress } = useLearning();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [cloudProjects, setCloudProjects] = useState<StudioProject[]>([]);
+
+  useEffect(() => {
+    if (!dbConfigured()) return;
+    let active = true;
+    (async () => {
+      const rows = await getPublishedProjects();
+      const mapped = await Promise.all(rows.map(async row => {
+        const files = await getProjectFiles(row.id);
+        return {
+          id: row.id,
+          title: row.title,
+          slug: row.slug,
+          category: inferProjectCategory(row.title, (row.technologies || []).join(' · '), row.category),
+          description: row.full_description || row.short_description || '',
+          level: row.difficulty === 'advanced' ? 'Advanced' as const : row.difficulty === 'intermediate' ? 'Intermediate' as const : 'Beginner' as const,
+          tech: (row.technologies || []).join(' · ') || 'HTML · CSS · JavaScript',
+          thumbnail: row.thumbnail_url || undefined,
+          files: Object.fromEntries(files.map(file => [file.file_name, file.content])),
+          status: 'published' as const,
+          createdAt: row.created_at,
+          updatedAt: row.updated_at,
+        } satisfies StudioProject;
+      }));
+      if (active) setCloudProjects(mapped);
+    })().catch(error => console.error('Unable to load published Coding Vibes projects:', error));
+    return () => { active = false; };
+  }, []);
 
   // Collect all projects across all active courses
   const allProjects: (Project & { courseTitle: string; badgeType: any; studioProject?: StudioProject })[] = [];
@@ -46,7 +75,32 @@ export const ProjectsPage: React.FC = () => {
       });
     });
 
-  const categories = ['All', 'HTML', 'CSS', 'JavaScript'];
+  // Include projects published from the cloud-backed Developer Studio.
+  cloudProjects.forEach(sp => {
+    if (allProjects.some(existing => existing.slug === sp.slug || existing.id === sp.id || existing.title.trim().toLowerCase() === sp.title.trim().toLowerCase())) return;
+    const html = Object.entries(sp.files).find(([name]) => /\.html?$/i.test(name))?.[1] || '<main><h1>' + sp.title + '</h1></main>';
+    const css = Object.entries(sp.files).find(([name]) => /\.css$/i.test(name))?.[1];
+    const js = Object.entries(sp.files).find(([name]) => /\.js$/i.test(name))?.[1];
+    const category = inferProjectCategory(sp.title, sp.tech, sp.category);
+    const categoryTitle = category === 'css' ? 'CSS' : category === 'javascript' ? 'JavaScript' : category === 'fullstack' ? 'Full Stack' : 'HTML';
+    allProjects.push({
+      id: sp.id,
+      title: sp.title,
+      slug: sp.slug,
+      category,
+      difficulty: sp.level,
+      description: sp.description || 'A Coding Vibes project. Explore the starter code and build your own version.',
+      skills: sp.tech.split(/[·,|]/).map(value => value.trim()).filter(Boolean),
+      requirements: Object.keys(sp.files).map(file => 'Explore source file: ' + file),
+      estimatedTime: '1–2 hours',
+      starterFiles: { html: studioProjectToHtml(sp.files), ...(css ? { css } : {}), ...(js ? { js } : {}) },
+      courseTitle: categoryTitle + ' · Coding Vibes Studio',
+      badgeType: 'default',
+      studioProject: sp
+    });
+  });
+
+  const categories = ['All', 'HTML', 'CSS', 'JavaScript', 'Full Stack'];
 
   const filtered = allProjects.filter(p => {
     if (selectedCategory === 'All') return true;

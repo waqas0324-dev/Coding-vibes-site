@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import JSZip from 'jszip';
 import { useNavigation } from '../context/NavigationContext';
 import {
@@ -18,6 +18,19 @@ import {
   Upload,
   X,
 } from 'lucide-react';
+import {
+  dbConfigured,
+  getAllAdminProjects,
+  getProjectFiles,
+  saveProject as saveDbProject,
+  saveProjectFiles as saveDbProjectFiles,
+  deleteProject as deleteDbProject,
+  signInAdmin,
+  getSessionUser,
+  signOutAdmin,
+  isDeveloperUser,
+  uploadProjectAsset,
+} from '../lib/supabase';
 
 /* ------------------------------------------------------------------ */
 /* Data model + storage helpers (shared with ProjectsPage)            */
@@ -30,6 +43,7 @@ export interface StudioProject {
   description: string;
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   tech: string;
+  category?: 'html' | 'css' | 'javascript' | 'fullstack';
   thumbnail?: string; // data URL
   files: Record<string, string>; // filename -> code
   status: 'draft' | 'published';
@@ -38,8 +52,16 @@ export interface StudioProject {
 }
 
 const PROJECTS_KEY = 'cv-studio-projects';
-const AUTH_KEY = 'cv-studio-auth';
-const PASSWORD = 'codingvibes2026';
+
+export function inferProjectCategory(title: string, tech: string, existing?: string): 'html' | 'css' | 'javascript' | 'fullstack' {
+  if (existing === 'html' || existing === 'css' || existing === 'javascript' || existing === 'fullstack') return existing;
+  const titleText = title.toLowerCase();
+  const text = (title + ' ' + tech).toLowerCase();
+  if (/full.?stack|node|express|rest api|auth|capstone|backend|server|database/.test(text)) return 'fullstack';
+  if (/\bcss\b|layout|styling/.test(titleText) && !/html/.test(titleText)) return 'css';
+  if (/\bhtml\b|semantic|form|table|markup/.test(titleText)) return 'html';
+  return 'javascript';
+}
 
 export function slugify(value: string): string {
   return value
@@ -94,45 +116,104 @@ const ACCEPTED_EXT = /\.(html?|css|js|jsx|ts|tsx|json|md|txt)$/i;
 /* Studio page                                                         */
 /* ------------------------------------------------------------------ */
 
+function isUuid(value: string): boolean {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+}
+
+function mapDbProjectToStudio(project: any, files: any[]): StudioProject {
+  return {
+    id: project.id,
+    title: project.title,
+    slug: project.slug,
+    category: inferProjectCategory(project.title, (project.technologies || []).join(' · '), project.category),
+    description: project.full_description || project.short_description || '',
+    level: project.difficulty === 'advanced' ? 'Advanced' : project.difficulty === 'intermediate' ? 'Intermediate' : 'Beginner',
+    tech: Array.isArray(project.technologies) && project.technologies.length ? project.technologies.join(' · ') : 'HTML · CSS · JavaScript',
+    thumbnail: project.thumbnail_url || undefined,
+    files: Object.fromEntries(files.map(file => [file.file_name, file.content])),
+    status: project.status === 'published' ? 'published' : 'draft',
+    createdAt: project.created_at || new Date().toISOString(),
+    updatedAt: project.updated_at || new Date().toISOString(),
+  };
+}
+
 export const StudioPage: React.FC = () => {
   const { navigateTo } = useNavigation();
+  const [authState, setAuthState] = useState<'checking' | 'signed-out' | 'signed-in'>('checking');
+  const [authError, setAuthError] = useState('');
 
-  const [authed, setAuthed] = useState(() => {
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      if (!dbConfigured()) {
+        if (active) setAuthState('signed-out');
+        return;
+      }
+      try {
+        const user = await getSessionUser();
+        const authorized = user ? await isDeveloperUser(user.id) : false;
+        if (!authorized && user) await signOutAdmin();
+        if (active) setAuthState(authorized ? 'signed-in' : 'signed-out');
+      } catch {
+        if (active) setAuthState('signed-out');
+      }
+    })();
+    return () => { active = false; };
+  }, []);
+
+  const handleLogin = async (email: string, password: string) => {
+    setAuthError('');
     try {
-      return localStorage.getItem(AUTH_KEY) === 'true';
-    } catch {
-      return false;
+      await signInAdmin(email, password);
+      setAuthState('signed-in');
+    } catch (error) {
+      setAuthError(error instanceof Error ? error.message : 'Sign-in failed. Check your authorized admin account.');
     }
-  });
+  };
 
-  /* ---------------- login ---------------- */
-  if (!authed) {
-    return <StudioLogin onLogin={() => setAuthed(true)} />;
+  if (authState === 'checking') {
+    return <div className="min-h-[60vh] flex items-center justify-center text-sm text-gray-400">Checking secure Developer Studio access…</div>;
+  }
+  if (!dbConfigured()) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-12">
+        <div className="max-w-xl rounded-2xl border border-amber-500/30 bg-[#0d131f] p-6">
+          <h1 className="text-xl font-bold text-white">Developer Studio needs configuration</h1>
+          <p className="mt-2 text-sm leading-6 text-gray-300">Connect the Supabase project using VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY before admin access can be enabled. The old shared password has been removed.</p>
+          <button onClick={() => navigateTo('home')} className="mt-5 rounded-lg bg-[#22c55e] px-4 py-2 text-sm font-semibold text-black">Back to Coding Vibes</button>
+        </div>
+      </div>
+    );
+  }
+  if (authState !== 'signed-in') {
+    return <StudioLogin onLogin={handleLogin} externalError={authError} />;
   }
 
-  return <StudioShell onSignOut={() => {
-    try {
-      localStorage.removeItem(AUTH_KEY);
-    } catch {}
-    setAuthed(false);
-  }} navigateTo={navigateTo} />;
+  return (
+    <StudioShell
+      onSignOut={async () => { await signOutAdmin(); setAuthState('signed-out'); }}
+      navigateTo={navigateTo}
+    />
+  );
 };
 
-const StudioLogin: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
+const StudioLogin: React.FC<{
+  onLogin: (email: string, password: string) => Promise<void>;
+  externalError: string;
+}> = ({ onLogin, externalError }) => {
   const { navigateTo } = useNavigation();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === PASSWORD) {
-      try {
-        localStorage.setItem(AUTH_KEY, 'true');
-      } catch {}
-      onLogin();
-    } else {
-      setError('Wrong password. Try again.');
-    }
+    setError('');
+    setBusy(true);
+    try { await onLogin(email.trim(), password); }
+    catch (err) { setError(err instanceof Error ? err.message : 'Sign-in failed.'); }
+    finally { setBusy(false); }
   };
 
   return (
@@ -145,48 +226,27 @@ const StudioLogin: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
             <span className="font-bold text-sm tracking-wider text-[#22c55e]">VIBES</span>
           </div>
         </div>
-        <span className="text-xs font-mono font-bold text-[#22c55e] uppercase tracking-wider">
-          Developer Studio
-        </span>
+        <span className="text-xs font-mono font-bold text-[#22c55e] uppercase tracking-wider">Developer Studio</span>
         <h1 className="text-2xl font-extrabold text-white mt-2 mb-2">Private project workspace.</h1>
-        <p className="text-sm text-gray-400 mb-6">
-          Enter the studio password to create, edit and publish projects.
-        </p>
+        <p className="text-sm text-gray-400 mb-6">Sign in with the authorized Developer Studio account. Public visitors cannot access project management.</p>
         <form onSubmit={submit} className="space-y-4">
+          <label className="block">
+            <span className="text-xs font-semibold text-gray-300 mb-1.5 block">Admin email</span>
+            <input type="email" required autoComplete="username" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@example.com" className="w-full bg-[#141d2e] border border-[#1e293b] rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#22c55e]" />
+          </label>
           <label className="block">
             <span className="text-xs font-semibold text-gray-300 mb-1.5 block">Password</span>
             <div className="relative">
               <Lock className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="Studio password"
-                autoFocus
-                className="w-full bg-[#141d2e] border border-[#1e293b] rounded-lg pl-10 pr-3 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#22c55e]"
-              />
+              <input type="password" required autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Admin account password" className="w-full bg-[#141d2e] border border-[#1e293b] rounded-lg pl-10 pr-3 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#22c55e]" />
             </div>
           </label>
-          {error && (
-            <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">
-              {error}
-            </p>
-          )}
-          <button
-            type="submit"
-            className="w-full py-2.5 bg-[#22c55e] hover:bg-[#16a34a] text-black font-semibold text-sm rounded-lg transition flex items-center justify-center space-x-2"
-          >
-            <span>Sign in</span>
-            <LogIn className="w-4 h-4" />
+          {(error || externalError) && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">{error || externalError}</p>}
+          <button type="submit" disabled={busy} className="w-full py-2.5 bg-[#22c55e] hover:bg-[#16a34a] disabled:opacity-60 text-black font-semibold text-sm rounded-lg transition flex items-center justify-center space-x-2">
+            <span>{busy ? 'Signing in…' : 'Sign in securely'}</span><LogIn className="w-4 h-4" />
           </button>
         </form>
-        <button
-          onClick={() => navigateTo('home')}
-          className="mt-6 text-xs text-gray-500 hover:text-white transition flex items-center space-x-1"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Coding Vibes</span>
-        </button>
+        <button onClick={() => navigateTo('home')} className="mt-6 text-xs text-gray-500 hover:text-white transition flex items-center space-x-1"><ArrowLeft className="w-3.5 h-3.5" /><span>Back to Coding Vibes</span></button>
       </div>
     </div>
   );
@@ -204,12 +264,69 @@ const StudioShell: React.FC<{
   const [projects, setProjects] = useState<StudioProject[]>(getStudioProjects);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formResetKey, setFormResetKey] = useState(0);
+  const [syncStatus, setSyncStatus] = useState('Loading projects from cloud…');
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const rows = await getAllAdminProjects();
+      const cloudProjects = await Promise.all(rows.map(async row => mapDbProjectToStudio(row, await getProjectFiles(row.id))));
+      const cached = getStudioProjects();
+      const normalizedCache = cached.map(item => ({ ...item, category: inferProjectCategory(item.title, item.tech, item.category) }));
+      const merged = [...cloudProjects, ...normalizedCache.filter(item => !cloudProjects.some(cloud => cloud.slug === item.slug))];
+      if (!active) return;
+      setProjects(merged);
+      localStorage.setItem(PROJECTS_KEY, JSON.stringify(merged));
+      setSyncStatus('Cloud database connected · changes sync across devices.');
+    })().catch(error => {
+      if (active) setSyncStatus('Cloud sync failed: ' + (error instanceof Error ? error.message : 'Check Supabase configuration and access policies.'));
+    });
+    return () => { active = false; };
+  }, []);
 
   const persist = (next: StudioProject[]) => {
+    const previous = projects;
     setProjects(next);
-    try {
-      localStorage.setItem(PROJECTS_KEY, JSON.stringify(next));
-    } catch {}
+    try { localStorage.setItem(PROJECTS_KEY, JSON.stringify(next)); } catch {}
+    setSyncStatus('Saving changes to cloud…');
+    void (async () => {
+      const removed = previous.filter(item => !next.some(candidate => candidate.id === item.id));
+      for (const item of removed) {
+        if (isUuid(item.id)) await deleteDbProject(item.id);
+      }
+      let resolved = [...next];
+      const changed = next.filter(item => {
+        const before = previous.find(candidate => candidate.id === item.id);
+        return !before || JSON.stringify(before) !== JSON.stringify(item);
+      });
+      for (const item of changed) {
+        const saved = await saveDbProject({
+          ...(isUuid(item.id) ? { id: item.id } : {}),
+          title: item.title,
+          slug: item.slug,
+          short_description: item.description || item.title,
+          full_description: item.description || item.title,
+          category: inferProjectCategory(item.title, item.tech, item.category),
+          difficulty: item.level.toLowerCase() as 'beginner' | 'intermediate' | 'advanced',
+          technologies: item.tech.split(/[·,|]/).map(value => value.trim()).filter(Boolean),
+          thumbnail_url: item.thumbnail || null,
+          status: item.status,
+          featured: false,
+        });
+        await saveDbProjectFiles(saved.id, Object.entries(item.files).map(([file_name, content], index) => ({
+          file_name,
+          language: /\.css$/i.test(file_name) ? 'css' : /\.js$/i.test(file_name) ? 'javascript' : /\.tsx?$/i.test(file_name) ? 'typescript' : /\.json$/i.test(file_name) ? 'json' : 'html',
+          content,
+          sort_order: index,
+        })));
+        if (saved.id !== item.id) resolved = resolved.map(candidate => candidate.id === item.id ? { ...candidate, id: saved.id, thumbnail: saved.thumbnail_url || candidate.thumbnail } : candidate);
+      }
+      setProjects(resolved);
+      try { localStorage.setItem(PROJECTS_KEY, JSON.stringify(resolved)); } catch {}
+      setSyncStatus('Saved to cloud database.');
+    })().catch(error => {
+      setSyncStatus('Cloud save failed: ' + (error instanceof Error ? error.message : 'Please retry; local edits remain on this device.'));
+    });
   };
 
   const published = projects.filter(p => p.status === 'published').length;
@@ -278,6 +395,8 @@ const StudioShell: React.FC<{
           </button>
         ))}
       </div>
+
+      <p className="text-xs text-gray-400 rounded-lg border border-[#1e293b] bg-[#0d131f] px-3 py-2" role="status">{syncStatus}</p>
 
       {tab === 'overview' && (
         <OverviewTab
@@ -485,6 +604,7 @@ const CreateProjectForm: React.FC<{
   const [slugTouched, setSlugTouched] = useState(!!editing);
   const [description, setDescription] = useState(editing?.description || '');
   const [level, setLevel] = useState<'Beginner' | 'Intermediate' | 'Advanced'>(editing?.level || 'Beginner');
+  const [category, setCategory] = useState<'html' | 'css' | 'javascript' | 'fullstack'>(inferProjectCategory(editing?.title || '', editing?.tech || '', editing?.category));
   const [tech, setTech] = useState(editing?.tech || 'HTML · CSS · JavaScript');
   const [thumbnail, setThumbnail] = useState<string>(editing?.thumbnail || '');
   const [fileMap, setFileMap] = useState<Record<string, string>>(
@@ -499,11 +619,16 @@ const CreateProjectForm: React.FC<{
   const previewDoc = useMemo(() => studioProjectToHtml(fileMap), [fileMap]);
   const fileNames = Object.keys(fileMap);
 
-  const handleThumbnail = (file: File | null) => {
+  const handleThumbnail = async (file: File | null) => {
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => setThumbnail(String(reader.result || ''));
-    reader.readAsDataURL(file);
+    setStatus('Uploading thumbnail to cloud storage…');
+    try {
+      const url = await uploadProjectAsset(file, slugify(slug || title) || 'project', 'thumbnail');
+      setThumbnail(url);
+      setStatus('Thumbnail uploaded and ready to save.');
+    } catch (error) {
+      setStatus('Thumbnail upload failed: ' + (error instanceof Error ? error.message : 'Check storage permissions.'));
+    }
   };
 
   const handleFiles = (list: FileList | null) => {
@@ -571,6 +696,7 @@ const CreateProjectForm: React.FC<{
     setSlugTouched(false);
     setDescription('');
     setLevel('Beginner');
+    setCategory('html');
     setTech('HTML · CSS · JavaScript');
     setThumbnail('');
     setFileMap({ ...STARTER_FILES });
@@ -584,6 +710,10 @@ const CreateProjectForm: React.FC<{
       setStatus('Project title is required.');
       return;
     }
+    if (publish && !thumbnail) {
+      setStatus('Upload a project thumbnail before publishing. You can still save this project as a draft.');
+      return;
+    }
     const slugValue = slugify(slug || title) || 'project-' + Date.now();
     const id = editing?.id || slugValue;
     const now = new Date().toISOString();
@@ -593,6 +723,7 @@ const CreateProjectForm: React.FC<{
       slug: slugValue,
       description: description.trim(),
       level,
+      category,
       tech: tech.trim() || 'HTML · CSS · JavaScript',
       thumbnail: thumbnail || undefined,
       files: fileMap,
@@ -602,7 +733,7 @@ const CreateProjectForm: React.FC<{
     };
     const next = [project, ...allProjects.filter(p => p.id !== id)];
     onSaved(next);
-    setStatus(publish ? 'Project published. It is now live on the Projects page.' : 'Draft saved.');
+    setStatus(publish ? 'Publishing to the shared project library…' : 'Saving draft to the shared project library…');
   };
 
   const inputClass =
@@ -666,6 +797,15 @@ const CreateProjectForm: React.FC<{
               <option>Beginner</option>
               <option>Intermediate</option>
               <option>Advanced</option>
+            </select>
+          </label>
+          <label className="block">
+            <span className={labelClass}>Project category</span>
+            <select value={category} onChange={e => setCategory(e.target.value as 'html' | 'css' | 'javascript' | 'fullstack')} className={inputClass}>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+              <option value="fullstack">Full Stack</option>
             </select>
           </label>
           <label className="block">

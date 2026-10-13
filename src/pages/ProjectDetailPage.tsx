@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '../context/NavigationContext';
 import { useLearning } from '../context/LearningContext';
 import { activeCourses } from '../data/courses';
 import { LiveEditor } from '../components/LiveEditor';
 import { ProjectSourceViewer } from '../components/ProjectSourceViewer';
 import { TechBadge } from '../components/TechBadge';
+import { dbConfigured, getProjectById, getProjectFiles } from '../lib/supabase';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -34,9 +35,62 @@ export const ProjectDetailPage: React.FC = () => {
     }
   }
 
+  const [remoteProject, setRemoteProject] = useState<any>(null);
+  const [cloudLoading, setCloudLoading] = useState(() => dbConfigured());
+
+  useEffect(() => {
+    let active = true;
+    if (foundProject) {
+      setRemoteProject(null);
+      setCloudLoading(false);
+      return () => { active = false; };
+    }
+    if (!dbConfigured()) return () => { active = false; };
+    setRemoteProject(null);
+    setCloudLoading(true);
+    (async () => {
+      const row = await getProjectById(projectId);
+      if (!row || row.status !== 'published') {
+        if (active) { setRemoteProject(null); setCloudLoading(false); }
+        return;
+      }
+      const files = await getProjectFiles(row.id);
+      const fileMap = Object.fromEntries(files.map(file => [file.file_name, file.content])) as Record<string, string>;
+      const html = Object.entries(fileMap).find(([name]) => /\.html?$/i.test(name))?.[1] || '<main><h1>' + row.title + '</h1></main>';
+      const css = Object.entries(fileMap).find(([name]) => /\.css$/i.test(name))?.[1];
+      const js = Object.entries(fileMap).find(([name]) => /\.js$/i.test(name))?.[1];
+      const category = row.category === 'html' || row.category === 'css' || row.category === 'javascript' ? row.category : 'fullstack';
+      const project = {
+        id: row.id,
+        title: row.title,
+        slug: row.slug,
+        category,
+        difficulty: row.difficulty === 'advanced' ? 'Advanced' : row.difficulty === 'intermediate' ? 'Intermediate' : 'Beginner',
+        description: row.full_description || row.short_description || '',
+        skills: row.technologies || [],
+        requirements: [...(row.what_you_will_learn || []), ...(row.challenges || [])],
+        estimatedTime: '1–2 hours',
+        starterFiles: { html, ...(css ? { css } : {}), ...(js ? { js } : {}) },
+        starterCode: { html, ...(css ? { css } : {}), ...(js ? { js } : {}) },
+      };
+      if (active) {
+        setRemoteProject({ project, course: { title: 'Coding Vibes Studio', badgeType: 'default' }, thumbnail: row.thumbnail_url });
+        setCloudLoading(false);
+      }
+    })().catch(error => {
+      console.error('Unable to load cloud project details:', error);
+      if (active) { setRemoteProject(null); setCloudLoading(false); }
+    });
+    return () => { active = false; };
+  }, [projectId, foundProject]);
+
+  const projectToShow = foundProject || remoteProject?.project || null;
+  const courseToShow = foundCourse || remoteProject?.course || null;
+
   const [checkedRequirements, setCheckedRequirements] = useState<Record<number, boolean>>({});
 
-  if (!foundProject || !foundCourse) {
+  if (!projectToShow || !courseToShow) {
+    if (cloudLoading) return <div className="min-h-[40vh] flex items-center justify-center text-sm text-gray-400">Loading published project…</div>;
     return (
       <div className="py-16 text-center space-y-4 max-w-md mx-auto">
         <h2 className="text-2xl font-bold text-white">Project Not Found</h2>
@@ -51,7 +105,7 @@ export const ProjectDetailPage: React.FC = () => {
     );
   }
 
-  const isCompleted = progress.completedProjects.includes(foundProject.id);
+  const isCompleted = progress.completedProjects.includes(projectToShow.id);
 
   const toggleReq = (idx: number) => {
     setCheckedRequirements(prev => ({
@@ -75,21 +129,22 @@ export const ProjectDetailPage: React.FC = () => {
       <div className="rounded-2xl bg-[#0d131f] border border-[#1e293b] p-6 sm:p-8 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-start space-x-4">
-            <TechBadge type={foundCourse.badgeType} size="lg" />
+            <TechBadge type={courseToShow.badgeType} size="lg" />
+            {remoteProject?.thumbnail && <img src={remoteProject.thumbnail} alt={projectToShow.title + ' project thumbnail'} className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover border border-[#1e293b] shrink-0" />}
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#22c55e]/15 text-[#22c55e] border border-[#22c55e]/30">
-                  {foundCourse.title} Project
+                  {courseToShow.title} Project
                 </span>
                 <span className="text-xs text-gray-400 font-medium">
-                  {foundProject.difficulty}
+                  {projectToShow.difficulty}
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-                {foundProject.title}
+                {projectToShow.title}
               </h1>
               <p className="text-xs sm:text-sm text-gray-400 max-w-2xl leading-relaxed">
-                {foundProject.description}
+                {projectToShow.description}
               </p>
             </div>
           </div>
@@ -97,11 +152,11 @@ export const ProjectDetailPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row md:flex-col items-start md:items-end gap-3 shrink-0">
             <div className="flex items-center space-x-1.5 text-xs text-gray-400">
               <Clock className="w-3.5 h-3.5 text-gray-500" />
-              <span>Est. {foundProject.estimatedTime}</span>
+              <span>Est. {projectToShow.estimatedTime}</span>
             </div>
 
             <button
-              onClick={() => markProjectComplete(foundProject.id)}
+              onClick={() => markProjectComplete(projectToShow.id)}
               className={`flex items-center space-x-2 px-5 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
                 isCompleted
                   ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800'
@@ -123,7 +178,7 @@ export const ProjectDetailPage: React.FC = () => {
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {foundProject.requirements.map((req, idx) => {
+          {projectToShow.requirements.map((req, idx) => {
             const isChecked = !!checkedRequirements[idx];
             return (
               <div
@@ -148,10 +203,10 @@ export const ProjectDetailPage: React.FC = () => {
       </div>
 
       {/* Complete Project Source (read-only, with live preview + downloads) */}
-      {foundProject.starterFiles && (
+      {projectToShow.starterFiles && (
         <ProjectSourceViewer
-          starterFiles={foundProject.starterFiles}
-          projectSlug={foundProject.id}
+          starterFiles={projectToShow.starterFiles}
+          projectSlug={projectToShow.id}
         />
       )}
 
@@ -163,10 +218,10 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
 
         <LiveEditor
-          title={foundProject.title}
-          initialHtml={foundProject.starterCode?.html || '<h1>' + foundProject.title + '</h1>'}
-          initialCss={foundProject.starterCode?.css || 'body { font-family: sans-serif; padding: 20px; background: #0b1120; color: #fff; }'}
-          initialJs={foundProject.starterCode?.js || ''}
+          title={projectToShow.title}
+          initialHtml={projectToShow.starterCode?.html || '<h1>' + projectToShow.title + '</h1>'}
+          initialCss={projectToShow.starterCode?.css || 'body { font-family: sans-serif; padding: 20px; background: #0b1120; color: #fff; }'}
+          initialJs={projectToShow.starterCode?.js || ''}
           instructions="Implement the requirements above using standard HTML, CSS, and JS."
         />
       </div>
